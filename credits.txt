@@ -19,6 +19,12 @@ https://holizna.com/product/forager/
 
 #
 
-Nature Kit (2.1) is a free and CC0 object pack, made by Kenney (www.kenney.nl)
+Hexagon Kit is a free and CC0 object pack, made by Kenney (www.kenney.nl)
 
-https://kenney.nl/assets/nature-kit
+https://kenney.nl/assets/hexagon-kit
+
+#
+
+UniRx (Reactive Extensions for Unity) is a free and MIT license reimplementation of the .NET Reactive Extensions, made by Yoshifumi Kawai (neuecc)
+
+https://github.com/neuecc/UniRx
