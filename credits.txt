@@ -1,1 +1,16 @@
-!
+"money trees"
+
+game by Dima Vesnin & Stas Volkov
+november 2022
+
+made for GitHub Game Off 2022, https://itch.io/jam/game-off-2022
+
+# CREDITS
+
+Monogram is a free and Creative Commons Zero pixel font, made by Vinícius Menézio (@vmenezio).
+
+https://datagoblin.itch.io/monogram
+
+Forager is a free and Creative Commons Zero sample pack, made by Luke Holizna.
+
+https://holizna.com/product/forager/
