@@ -1,9 +1,11 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.ClicheSpeech.UI;
+using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject
+namespace NovemberProject.ClicheSpeech
 {
     public class ShowClicheBubble : MonoBehaviour
     {

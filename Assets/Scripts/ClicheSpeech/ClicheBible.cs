@@ -1,8 +1,10 @@
 ﻿#nullable enable
+using System;
 using System.IO;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-namespace NovemberProject
+namespace NovemberProject.ClicheSpeech
 {
     public class ClicheBible
     {
@@ -16,7 +18,7 @@ namespace NovemberProject
                 throw new FileLoadException($"Could not load resource file {clicheBibleFile}");
             }
 
-            _cliches = asset.text.Split(System.Environment.NewLine);
+            _cliches = asset.text.Split(Environment.NewLine);
         }
 
         public string GetCliche()

@@ -1,10 +1,11 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.ClicheSpeech;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace NovemberProject
+namespace NovemberProject.Pops
 {
     public class PopBehaviour : MonoBehaviour
     {
@@ -19,6 +20,7 @@ namespace NovemberProject
         [SerializeField]
         private Vector2 _cooldown;
 
+        // TODO (Stas): Most of this stuff belongs to ShowClicheBubble
         private void Start()
         {
             float warmupTime = Random.Range(_warmUp.x, _warmUp.y);
