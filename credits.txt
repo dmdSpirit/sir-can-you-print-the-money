@@ -28,9 +28,3 @@ https://kenney.nl/assets/hexagon-kit
 UniRx (Reactive Extensions for Unity) is a free and MIT license reimplementation of the .NET Reactive Extensions, made by Yoshifumi Kawai (neuecc)
 
 https://github.com/neuecc/UniRx
-
-#
-
-"The Celestial Map- Northern Hemisphere" is a free and Open Access license woodcut print by Albrecht Dürer, taken from MET archive
-
-https://www.metmuseum.org/art/collection/search/358366
