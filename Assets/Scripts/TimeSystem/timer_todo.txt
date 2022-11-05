@@ -1,0 +1,3 @@
+- Finish round
+- Pause
+- Speed up time

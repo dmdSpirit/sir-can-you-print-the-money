@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NovemberProject
+namespace NovemberProject.ClicheSpeech.UI
 {
     [RequireComponent(typeof(ContentSizeFitter))]
     public class SpeechBubble : MonoBehaviour
@@ -40,6 +40,7 @@ namespace NovemberProject
             }
 
             _contentSizeFitter.enabled = false;
+            // ReSharper disable once Unity.InefficientPropertyAccess
             _contentSizeFitter.enabled = true;
         }
     }
