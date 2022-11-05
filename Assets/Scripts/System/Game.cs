@@ -25,6 +25,7 @@ namespace NovemberProject.System
         public RoundSystem RoundSystem { get; private set; } = null!;
         public TimeSystem.TimeSystem TimeSystem { get; private set; } = null!;
         public InputSystem InputSystem { get; private set; } = null!;
+        public MessageBroker MessageBroker { get; private set; } = null!;
 
         public IObservable<Unit> OnInitialized => _onInitialized;
 
@@ -69,6 +70,7 @@ namespace NovemberProject.System
         private void Initialize()
         {
             ClicheBible = new ClicheBible(CLICHE_BIBLE_FILE);
+            MessageBroker = new MessageBroker();
             TimeSystem.Initialize();
             InputSystem.Initialize();
             _onInitialized.OnNext(Unit.Default);

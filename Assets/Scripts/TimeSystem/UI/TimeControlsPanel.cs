@@ -2,20 +2,17 @@
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace NovemberProject.TimeSystem.UI
 {
     public class TimeControlsPanel : MonoBehaviour
     {
-        [SerializeField]
-        private Toggle _pauseButton = null!;
+        private const int PAUSE_BUTTON_INDEX = 0;
+        private const int PLAY_BUTTON_INDEX = 1;
+        private const int SPEED_UP_BUTTON_INDEX = 2;
 
         [SerializeField]
-        private Toggle _playButton = null!;
-
-        [SerializeField]
-        private Toggle _speedUpButton = null!;
+        private RadioButtonGroup _buttonsGroup = null!;
 
         private void OnEnable()
         {
@@ -27,18 +24,9 @@ namespace NovemberProject.TimeSystem.UI
             Game.Instance.TimeSystem.Status
                 .TakeUntilDisable(this)
                 .Subscribe(OnTimeSystemStatusChanged);
-            _pauseButton.OnValueChangedAsObservable()
+            _buttonsGroup.OnButtonClicked
                 .TakeUntilDisable(this)
-                .Where(value => value)
-                .Subscribe(PauseButtonHandler);
-            _playButton.OnValueChangedAsObservable()
-                .TakeUntilDisable(this)
-                .Where(value => value)
-                .Subscribe(PlayButtonHandler);
-            _speedUpButton.OnValueChangedAsObservable()
-                .TakeUntilDisable(this)
-                .Where(value => value)
-                .Subscribe(SpeedUpButtonHandler);
+                .Subscribe(OnButtonClicked);
         }
 
         private void OnTimeSystemStatusChanged(TimeSystemStatus status)
@@ -46,40 +34,31 @@ namespace NovemberProject.TimeSystem.UI
             switch (status)
             {
                 case TimeSystemStatus.Play:
-                    TurnToggleOn(_playButton);
+                    _buttonsGroup.SetClickedButtonSilently(PLAY_BUTTON_INDEX);
                     break;
                 case TimeSystemStatus.Pause:
-                    TurnToggleOn(_pauseButton);
+                    _buttonsGroup.SetClickedButtonSilently(PAUSE_BUTTON_INDEX);
                     break;
                 case TimeSystemStatus.SpedUp:
-                    TurnToggleOn(_speedUpButton);
+                    _buttonsGroup.SetClickedButtonSilently(SPEED_UP_BUTTON_INDEX);
                     break;
             }
         }
 
-        private void TurnToggleOn(Toggle toggle)
+        private void OnButtonClicked(int buttonIndex)
         {
-            if (toggle.isOn)
+            switch (buttonIndex)
             {
-                return;
+                case PAUSE_BUTTON_INDEX:
+                    Game.Instance.TimeSystem.PauseTime();
+                    break;
+                case PLAY_BUTTON_INDEX:
+                    Game.Instance.TimeSystem.ResetTimeScale();
+                    break;
+                case SPEED_UP_BUTTON_INDEX:
+                    Game.Instance.TimeSystem.SpeedUp();
+                    break;
             }
-
-            toggle.isOn = true;
-        }
-
-        private void PauseButtonHandler(bool _)
-        {
-            Game.Instance.TimeSystem.PauseTime();
-        }
-
-        private void PlayButtonHandler(bool _)
-        {
-            Game.Instance.TimeSystem.ResetTimeScale();
-        }
-
-        private void SpeedUpButtonHandler(bool _)
-        {
-            Game.Instance.TimeSystem.SpeedUp();
         }
     }
 }

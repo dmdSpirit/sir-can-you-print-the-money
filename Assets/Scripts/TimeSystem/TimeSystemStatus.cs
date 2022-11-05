@@ -4,9 +4,9 @@ namespace NovemberProject.TimeSystem
 {
     public enum TimeSystemStatus
     {
-        None,
-        Play,
-        Pause,
-        SpedUp
+        None = 0,
+        Play = 1,
+        Pause = 2,
+        SpedUp = 3
     }
 }
