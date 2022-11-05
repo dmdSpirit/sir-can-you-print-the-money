@@ -5,12 +5,20 @@ november 2022
 
 made for GitHub Game Off 2022, https://itch.io/jam/game-off-2022
 
-# CREDITS
+### CREDITS
 
-Monogram is a free and Creative Commons Zero pixel font, made by Vinícius Menézio (@vmenezio).
+Monogram is a free and CC0 pixel font, made by Vinícius Menézio (@vmenezio).
 
 https://datagoblin.itch.io/monogram
 
-Forager is a free and Creative Commons Zero sample pack, made by Luke Holizna.
+#
+
+Forager is a free and CC0 sample pack, made by Luke Holizna.
 
 https://holizna.com/product/forager/
+
+#
+
+Nature Kit (2.1) is a free and CC0 object pack, made by Kenney (www.kenney.nl)
+
+https://kenney.nl/assets/nature-kit
