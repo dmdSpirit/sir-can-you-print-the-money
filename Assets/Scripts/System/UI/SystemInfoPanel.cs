@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Globalization;
+using NovemberProject.CommonUIStuff;
 using TMPro;
 using UniRx;
 using UnityEngine;

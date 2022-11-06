@@ -1,8 +1,9 @@
 ﻿#nullable enable
+using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject.System.UI
+namespace NovemberProject.CommonUIStuff
 {
     public abstract class InitializableBehaviour : MonoBehaviour
     {

@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using NovemberProject.System.UI;
 using UniRx;

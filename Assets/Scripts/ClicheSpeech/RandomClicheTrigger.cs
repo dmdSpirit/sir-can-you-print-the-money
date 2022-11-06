@@ -1,12 +1,11 @@
 ﻿#nullable enable
-using NovemberProject.ClicheSpeech;
+using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
-using NovemberProject.System.UI;
 using NovemberProject.TimeSystem;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject.Pops
+namespace NovemberProject.ClicheSpeech
 {
     public class RandomClicheTrigger : InitializableBehaviour
     {
