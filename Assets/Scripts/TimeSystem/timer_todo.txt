@@ -1,5 +1,10 @@
 - Finish round
-- Pause
-- Speed up time
 
--123 keys
++ Pause
++ Speed up time
++ 123 keys
+
++ initializable monobehaviour
++ rework bubbles using Timers from TimeSystem
+- hook animation to time system (also should be scaled and unscaled)
+- finish round system

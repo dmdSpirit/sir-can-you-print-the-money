@@ -1,12 +1,13 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.System;
+using NovemberProject.System.UI;
 using UniRx;
 using UnityEngine;
 
 namespace NovemberProject.Pops
 {
-    public class Wobble : MonoBehaviour
+    public class Wobble : InitializableBehaviour
     {
         private const float TOLERANCE = 0.001f;
 
@@ -21,14 +22,7 @@ namespace NovemberProject.Pops
         [SerializeField]
         private float _maxValue;
 
-        private void OnEnable()
-        {
-            Game.Instance.OnInitialized
-                .TakeUntilDisable(this)
-                .Subscribe(_ => Initialize());
-        }
-
-        private void Initialize()
+        protected override void Initialize()
         {
             Game.Instance.TimeSystem.OnUpdate
                 .Where(deltaTime => deltaTime != 0)

@@ -9,6 +9,7 @@ namespace NovemberProject.TimeSystem
     {
         private readonly Subject<Timer> _onTimerFinished = new();
         private readonly Subject<Timer> _onTimerCanceled = new();
+        private readonly Action<Timer>? _callback;
 
         public readonly float Duration;
 
@@ -18,9 +19,10 @@ namespace NovemberProject.TimeSystem
         public IObservable<Timer> OnTimerFinished => _onTimerFinished;
         public IObservable<Timer> OnTimerCanceled => _onTimerCanceled;
 
-        public Timer(float duration)
+        public Timer(float duration, Action<Timer>? callback = null)
         {
             Duration = duration;
+            _callback = callback;
         }
 
         public void Start()
@@ -41,7 +43,7 @@ namespace NovemberProject.TimeSystem
 
         public void AddProgress(float progress)
         {
-            Assert.IsTrue(progress > 0);
+            Assert.IsTrue(progress >= 0);
             Progress += progress;
             if (Progress >= Duration)
             {
@@ -51,6 +53,7 @@ namespace NovemberProject.TimeSystem
 
         private void OnFinished()
         {
+            _callback?.Invoke(this);
             _onTimerFinished.OnNext(this);
         }
     }
