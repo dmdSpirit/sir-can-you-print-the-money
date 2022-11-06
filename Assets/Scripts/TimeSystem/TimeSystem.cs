@@ -1,13 +1,15 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using NovemberProject.CommonUIStuff;
+using NovemberProject.System.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NovemberProject.TimeSystem
 {
-    public class TimeSystem : MonoBehaviour
+    public class TimeSystem : InitializableBehaviour
     {
         private const float DEFAULT_TIME_SCALE = 1f;
         private const float PAUSED_TIME_SCALE = 0f;
@@ -22,40 +24,42 @@ namespace NovemberProject.TimeSystem
         private TimeSystemStatus _statusBeforePause;
 
         [SerializeField]
-        private float _speedUpScale = 2f;
+        private float _speedUpScale = 8f;
 
         public IReadOnlyReactiveProperty<float> TimeScale => _timeScale;
         public IReadOnlyReactiveProperty<TimeSystemStatus> Status => _status;
         public IObservable<float> OnUpdate => _onUpdate;
 
-        public void Initialize()
+        protected override void Initialize()
         {
             ResetTimeScale();
         }
 
         private void Update()
         {
+            AddProgressToTimers(_unscaledTimers.ToArray(), Time.deltaTime);
             float deltaTime = Time.deltaTime * _timeScale.Value;
-            foreach (var timer in _timers)
+            if (deltaTime == 0)
             {
-                if (!timer.IsActive)
-                {
-                    continue;
-                }
-
-                timer.AddProgress(deltaTime);
+                return;
             }
 
-            foreach (var timer in _unscaledTimers)
-            {
-                if (!timer.IsActive)
-                {
-                    continue;
-                }
+            AddProgressToTimers(_timers.ToArray(), deltaTime);
 
-                timer.AddProgress(Time.deltaTime);
-            }
             _onUpdate.OnNext(deltaTime);
+        }
+
+        private void AddProgressToTimers(Timer[] timers, float deltaTime)
+        {
+            for (var index = 0; index < timers.Length; index++)
+            {
+                if (!timers[index].IsActive)
+                {
+                    continue;
+                }
+
+                timers[index].AddProgress(deltaTime);
+            }
         }
 
         private void OnDestroy()
@@ -94,9 +98,9 @@ namespace NovemberProject.TimeSystem
             }
         }
 
-        public Timer CreateTimer(float duration)
+        public Timer CreateTimer(float duration, Action<Timer>? callback = null)
         {
-            var timer = new Timer(duration);
+            var timer = new Timer(duration, callback);
             timer.OnTimerCanceled.Subscribe(RemoveTimer).AddTo(_timerSubs);
             timer.OnTimerFinished.Subscribe(RemoveTimer).AddTo(_timerSubs);
             _timers.Add(timer);
@@ -120,7 +124,6 @@ namespace NovemberProject.TimeSystem
 
         private void RemoveTimer(Timer timer)
         {
-            Assert.IsTrue(_timers.Contains(timer) || _unscaledTimers.Contains(timer));
             if (_timers.Contains(timer))
             {
                 _timers.Remove(timer);

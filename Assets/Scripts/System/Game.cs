@@ -8,9 +8,6 @@ using UnityEngine;
 
 namespace NovemberProject.System
 {
-    [RequireComponent(typeof(RoundSystem))]
-    [RequireComponent(typeof(TimeSystem.TimeSystem))]
-    [RequireComponent(typeof(InputSystem))]
     public class Game : MonoBehaviour
     {
         private const string CLICHE_BIBLE_FILE = "cliche_bible";
@@ -26,21 +23,15 @@ namespace NovemberProject.System
         public TimeSystem.TimeSystem TimeSystem { get; private set; } = null!;
         public InputSystem InputSystem { get; private set; } = null!;
         public MessageBroker MessageBroker { get; private set; } = null!;
+        public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
 
         private void Start()
         {
             DontDestroyOnLoad(this);
-            GetComponents();
+            CreateComponents();
             Initialize();
-        }
-
-        private static Game CreateGameObject()
-        {
-            var instanceObject = new GameObject(nameof(Game));
-            var game = instanceObject.AddComponent<Game>();
-            return game;
         }
 
         private static Game GetInstance()
@@ -56,24 +47,24 @@ namespace NovemberProject.System
                 return _instance;
             }
 
-            _instance = CreateGameObject();
+            var obj = new GameObject(nameof(Game));
+            _instance = obj.AddComponent<Game>();
             return _instance;
         }
 
-        private void GetComponents()
+        private void CreateComponents()
         {
-            RoundSystem = GetComponent<RoundSystem>();
-            TimeSystem = GetComponent<TimeSystem.TimeSystem>();
-            InputSystem = GetComponent<InputSystem>();
+            RoundSystem = gameObject.AddComponent<RoundSystem>();
+            TimeSystem = gameObject.AddComponent<TimeSystem.TimeSystem>();
+            InputSystem = gameObject.AddComponent<InputSystem>();
         }
 
         private void Initialize()
         {
             ClicheBible = new ClicheBible(CLICHE_BIBLE_FILE);
             MessageBroker = new MessageBroker();
-            TimeSystem.Initialize();
-            InputSystem.Initialize();
             _onInitialized.OnNext(Unit.Default);
+            IsInitialized = true;
         }
     }
 }

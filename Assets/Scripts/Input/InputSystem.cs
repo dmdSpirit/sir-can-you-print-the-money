@@ -1,10 +1,12 @@
 ﻿#nullable enable
+using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
+using NovemberProject.System.UI;
 using UnityEngine;
 
 namespace NovemberProject.Input
 {
-    public class InputSystem : MonoBehaviour
+    public class InputSystem : InitializableBehaviour
     {
         private const KeyCode PAUSE_TOGGLE_KEY = KeyCode.Space;
         private const KeyCode PAUSE_KEY = KeyCode.Alpha1;
@@ -13,7 +15,7 @@ namespace NovemberProject.Input
 
         private bool _isActive;
 
-        public void Initialize()
+        protected override void Initialize()
         {
             _isActive = true;
         }

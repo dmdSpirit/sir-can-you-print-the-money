@@ -2,6 +2,7 @@
 using System;
 using NovemberProject.ClicheSpeech.UI;
 using NovemberProject.System;
+using NovemberProject.TimeSystem;
 using UniRx;
 using UnityEngine;
 
@@ -10,8 +11,8 @@ namespace NovemberProject.ClicheSpeech
     public class ShowClicheBubble : MonoBehaviour
     {
         private bool _isShown;
-        private IDisposable? _timerSub;
         private readonly Subject<Unit> _onHidden = new();
+        private Timer? _displayTimer;
 
         [SerializeField]
         private SpeechBubble _speechBubble = null!;
@@ -25,17 +26,13 @@ namespace NovemberProject.ClicheSpeech
         {
             var clicheBible = Game.Instance.ClicheBible;
             string text = clicheBible.GetCliche();
-            if (_isShown)
-            {
-                _timerSub?.Dispose();
-            }
+            _displayTimer?.Cancel();
 
             _speechBubble.Show(text);
             _isShown = true;
             float duration = _perCharShowDuration * text.Length;
-            _timerSub = Observable
-                .Timer(TimeSpan.FromSeconds(duration))
-                .Subscribe(_ => HideBubble());
+            _displayTimer = Game.Instance.TimeSystem.CreateTimer(duration, _ => HideBubble());
+            _displayTimer.Start();
         }
 
         public void HideBubble()
@@ -47,7 +44,8 @@ namespace NovemberProject.ClicheSpeech
 
             _isShown = false;
             _speechBubble.Hide();
-            _timerSub?.Dispose();
+            _displayTimer?.Cancel();
+            _displayTimer = null;
             _onHidden.OnNext(Unit.Default);
         }
 
@@ -60,7 +58,8 @@ namespace NovemberProject.ClicheSpeech
 
             _isShown = false;
             _speechBubble.Hide();
-            _timerSub?.Dispose();
+            _displayTimer?.Cancel();
+            _displayTimer = null;
         }
     }
 }

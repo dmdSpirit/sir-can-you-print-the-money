@@ -1,15 +1,15 @@
 ﻿#nullable enable
-using System;
-using NovemberProject.ClicheSpeech;
+using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
+using NovemberProject.TimeSystem;
 using UniRx;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace NovemberProject.Pops
+namespace NovemberProject.ClicheSpeech
 {
-    public class PopBehaviour : MonoBehaviour
+    public class RandomClicheTrigger : InitializableBehaviour
     {
-        private IDisposable? _timerSub;
+        private Timer? _timer;
 
         [SerializeField]
         private ShowClicheBubble _showClicheBubble = null!;
@@ -20,38 +20,36 @@ namespace NovemberProject.Pops
         [SerializeField]
         private Vector2 _cooldown;
 
-        // TODO (Stas): Most of this stuff belongs to ShowClicheBubble
-        private void Start()
+        protected override void Initialize()
         {
+            _showClicheBubble.OnHidden
+                .TakeUntilDisable(this)
+                .Subscribe(_ => OnBubbleHidden());
             float warmupTime = Random.Range(_warmUp.x, _warmUp.y);
             ShowBubbleAfterDelay(warmupTime);
         }
 
         private void ShowNextBubble()
         {
-            _timerSub?.Dispose();
             _showClicheBubble.ShowBubble();
-            _timerSub = _showClicheBubble.OnHidden.Subscribe(_ => OnBubbleHidden());
         }
 
         private void OnBubbleHidden()
         {
-            _timerSub?.Dispose();
             float cooldown = Random.Range(_cooldown.x, _cooldown.y);
             ShowBubbleAfterDelay(cooldown);
         }
 
         private void ShowBubbleAfterDelay(float delay)
         {
-            _timerSub?.Dispose();
-            _timerSub = Observable
-                .Timer(TimeSpan.FromSeconds(delay))
-                .Subscribe(_ => ShowNextBubble());
+            _timer = Game.Instance.TimeSystem.CreateTimer(delay, _ => ShowNextBubble());
+            _timer.Start();
         }
 
         private void OnDisable()
         {
-            _timerSub?.Dispose();
+            _timer?.Cancel();
+            _timer = null;
         }
     }
 }

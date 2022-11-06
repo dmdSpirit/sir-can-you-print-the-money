@@ -1,11 +1,13 @@
 ﻿#nullable enable
+using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
+using NovemberProject.System.UI;
 using UniRx;
 using UnityEngine;
 
 namespace NovemberProject.TimeSystem.UI
 {
-    public class TimeControlsPanel : MonoBehaviour
+    public class TimeControlsPanel : InitializableBehaviour
     {
         private const int PAUSE_BUTTON_INDEX = 0;
         private const int PLAY_BUTTON_INDEX = 1;
@@ -14,12 +16,7 @@ namespace NovemberProject.TimeSystem.UI
         [SerializeField]
         private RadioButtonGroup _buttonsGroup = null!;
 
-        private void OnEnable()
-        {
-            Game.Instance.OnInitialized.TakeUntilDisable(this).Subscribe(_ => Initialize());
-        }
-
-        private void Initialize()
+        protected override void Initialize()
         {
             Game.Instance.TimeSystem.Status
                 .TakeUntilDisable(this)

@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NovemberProject.TimeSystem.UI
+namespace NovemberProject.CommonUIStuff
 {
     [RequireComponent(typeof(Button))]
     public class SelectableButton : MonoBehaviour

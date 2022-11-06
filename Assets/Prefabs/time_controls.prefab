@@ -159,10 +159,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1259994256688059364}
     m_Modifications:
-    - target: {fileID: 1523333461544907180, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
+    - target: {fileID: 6119954749919405144, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -338542458, guid: 5a36c266e81f9304ea010d12efc32389, type: 3}
+      objectReference: {fileID: -1886227456, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
     - target: {fileID: 6944239044529633431, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
       propertyPath: m_Name
       value: speed_up_button
@@ -401,10 +401,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1259994256688059364}
     m_Modifications:
-    - target: {fileID: 1523333461544907180, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
+    - target: {fileID: 6119954749919405144, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -804037062, guid: 5a36c266e81f9304ea010d12efc32389, type: 3}
+      objectReference: {fileID: -1138297432, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
     - target: {fileID: 6944239044529633431, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
       propertyPath: m_Name
       value: play_button
