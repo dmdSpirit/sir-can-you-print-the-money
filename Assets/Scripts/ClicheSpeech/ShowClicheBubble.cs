@@ -2,7 +2,7 @@
 using System;
 using NovemberProject.ClicheSpeech.UI;
 using NovemberProject.System;
-using NovemberProject.TimeSystem;
+using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace NovemberProject.ClicheSpeech
 
         public void ShowBubble()
         {
-            var clicheBible = Game.Instance.ClicheBible;
+            ClicheBible clicheBible = Game.Instance.ClicheBible;
             string text = clicheBible.GetCliche();
             _displayTimer?.Cancel();
 

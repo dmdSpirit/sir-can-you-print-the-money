@@ -1,6 +1,6 @@
 ﻿#nullable enable
 
-namespace NovemberProject.TimeSystem
+namespace NovemberProject.Time
 {
     public enum TimeSystemStatus
     {

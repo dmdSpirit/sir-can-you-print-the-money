@@ -1,0 +1,39 @@
+﻿#nullable enable
+using System;
+using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
+using TMPro;
+using UniRx;
+using UnityEngine;
+
+namespace NovemberProject.System.UI
+{
+    public class GameStatePanel : UIElement
+    {
+        private IDisposable? _sub;
+
+        [SerializeField]
+        private TMP_Text _stateName = null!;
+
+        protected override void Initialize()
+        {
+        }
+
+        protected override void OnShow()
+        {
+            gameObject.SetActive(true);
+            _sub = Game.Instance.OnStateChanged.Subscribe(UpdateState);
+        }
+
+        protected override void OnHide()
+        {
+            gameObject.SetActive(false);
+            _sub?.Dispose();
+        }
+
+        private void UpdateState(State state)
+        {
+            _stateName.text = state.GetType().Name.Replace("State", "");
+        }
+    }
+}

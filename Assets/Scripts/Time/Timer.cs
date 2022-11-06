@@ -3,7 +3,7 @@ using System;
 using UniRx;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.TimeSystem
+namespace NovemberProject.Time
 {
     public class Timer
     {
