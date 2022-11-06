@@ -1,11 +1,10 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
-using NovemberProject.System.UI;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject.TimeSystem.UI
+namespace NovemberProject.Time.UI
 {
     public class TimeControlsPanel : InitializableBehaviour
     {

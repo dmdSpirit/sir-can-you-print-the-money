@@ -1,8 +1,11 @@
 #nullable enable
 using System;
 using NovemberProject.ClicheSpeech;
+using NovemberProject.GameStates;
 using NovemberProject.Input;
 using NovemberProject.RoundS;
+using NovemberProject.System.UI;
+using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 
@@ -16,22 +19,26 @@ namespace NovemberProject.System
 
         private static Game _instance = null!;
 
+
         public static Game Instance => GetInstance();
 
         public ClicheBible ClicheBible { get; private set; } = null!;
         public RoundSystem RoundSystem { get; private set; } = null!;
-        public TimeSystem.TimeSystem TimeSystem { get; private set; } = null!;
+        public TimeSystem TimeSystem { get; private set; } = null!;
         public InputSystem InputSystem { get; private set; } = null!;
-        public MessageBroker MessageBroker { get; private set; } = null!;
+        public UIManager UIManager { get; private set; } = null!;
+        public GameStateMachine GameStateMachine { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
+        public IObservable<State> OnStateChanged => GameStateMachine.OnStateChanged;
 
         private void Start()
         {
             DontDestroyOnLoad(this);
             CreateComponents();
             Initialize();
+            MainMenu();
         }
 
         private static Game GetInstance()
@@ -52,17 +59,22 @@ namespace NovemberProject.System
             return _instance;
         }
 
+        public void NewGame() => GameStateMachine.NewGame();
+        public void ExitGame() => GameStateMachine.ExitGame();
+        public void MainMenu() => GameStateMachine.MainMenu();
+
         private void CreateComponents()
         {
             RoundSystem = gameObject.AddComponent<RoundSystem>();
-            TimeSystem = gameObject.AddComponent<TimeSystem.TimeSystem>();
+            TimeSystem = gameObject.AddComponent<TimeSystem>();
             InputSystem = gameObject.AddComponent<InputSystem>();
+            UIManager = FindObjectOfType<UIManager>();
         }
 
         private void Initialize()
         {
             ClicheBible = new ClicheBible(CLICHE_BIBLE_FILE);
-            MessageBroker = new MessageBroker();
+            GameStateMachine = new GameStateMachine();
             _onInitialized.OnNext(Unit.Default);
             IsInitialized = true;
         }

@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.TimeSystem
+namespace NovemberProject.Time
 {
     public class TimeSystem : InitializableBehaviour
     {
@@ -32,13 +31,13 @@ namespace NovemberProject.TimeSystem
 
         protected override void Initialize()
         {
-            ResetTimeScale();
+            PauseTime();
         }
 
         private void Update()
         {
-            AddProgressToTimers(_unscaledTimers.ToArray(), Time.deltaTime);
-            float deltaTime = Time.deltaTime * _timeScale.Value;
+            AddProgressToTimers(_unscaledTimers.ToArray(), UnityEngine.Time.deltaTime);
+            float deltaTime = UnityEngine.Time.deltaTime * _timeScale.Value;
             if (deltaTime == 0)
             {
                 return;
@@ -49,16 +48,16 @@ namespace NovemberProject.TimeSystem
             _onUpdate.OnNext(deltaTime);
         }
 
-        private void AddProgressToTimers(Timer[] timers, float deltaTime)
+        private void AddProgressToTimers(IEnumerable<Timer> timers, float deltaTime)
         {
-            for (var index = 0; index < timers.Length; index++)
+            foreach (Timer timer in timers)
             {
-                if (!timers[index].IsActive)
+                if (!timer.IsActive)
                 {
                     continue;
                 }
 
-                timers[index].AddProgress(deltaTime);
+                timer.AddProgress(deltaTime);
             }
         }
 

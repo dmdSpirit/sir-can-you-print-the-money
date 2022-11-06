@@ -1,8 +1,5 @@
 ﻿#nullable enable
-using System.Globalization;
 using NovemberProject.CommonUIStuff;
-using TMPro;
-using UniRx;
 using UnityEngine;
 
 namespace NovemberProject.System.UI
@@ -10,16 +7,15 @@ namespace NovemberProject.System.UI
     public class SystemInfoPanel : InitializableBehaviour
     {
         [SerializeField]
-        private TMP_Text _timeScale = null!;
+        private TimeScalePanel _timeScalePanel = null!;
+
+        [SerializeField]
+        private GameStatePanel _gameStatePanel = null!;
 
         protected override void Initialize()
         {
-            Game.Instance.TimeSystem.TimeScale.TakeUntilDisable(this).Subscribe(UpdateScale);
-        }
-
-        private void UpdateScale(float timeScale)
-        {
-            _timeScale.text = timeScale.ToString(CultureInfo.InvariantCulture);
+            _timeScalePanel.Show();
+            _gameStatePanel.Show();
         }
     }
 }
