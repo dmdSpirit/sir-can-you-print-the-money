@@ -13,6 +13,24 @@ https://datagoblin.itch.io/monogram
 
 #
 
+PT Serif is a free and Open Font License font, made by Paratype.
+
+https://fonts.google.com/specimen/PT+Serif/about
+
+#
+
+PT Serif Caption is a free and OFL font, made by Paratype.
+
+https://fonts.google.com/specimen/PT+Serif+Caption/about
+
+#
+
+Cascadia Code is a free and OFL font, made by Microsoft Corporation.
+
+https://github.com/microsoft/cascadia-code
+
+#
+
 Forager is a free and CC0 sample pack, made by Luke Holizna.
 
 https://holizna.com/product/forager/
