@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/BubbleTestScene.unity
+    guid: 363c26c0c2c88114684ca988b72595b1
   m_configObjects: {}
