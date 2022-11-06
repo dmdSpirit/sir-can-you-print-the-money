@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace NovemberProject.TimeSystem
         private readonly List<Timer> _unscaledTimers = new();
         private readonly ReactiveProperty<float> _timeScale = new();
         private readonly ReactiveProperty<TimeSystemStatus> _status = new();
+        private readonly Subject<float> _onUpdate = new();
 
         private TimeSystemStatus _statusBeforePause;
 
@@ -24,6 +26,7 @@ namespace NovemberProject.TimeSystem
 
         public IReadOnlyReactiveProperty<float> TimeScale => _timeScale;
         public IReadOnlyReactiveProperty<TimeSystemStatus> Status => _status;
+        public IObservable<float> OnUpdate => _onUpdate;
 
         public void Initialize()
         {
@@ -32,6 +35,7 @@ namespace NovemberProject.TimeSystem
 
         private void Update()
         {
+            float deltaTime = Time.deltaTime * _timeScale.Value;
             foreach (var timer in _timers)
             {
                 if (!timer.IsActive)
@@ -39,7 +43,7 @@ namespace NovemberProject.TimeSystem
                     continue;
                 }
 
-                timer.AddProgress(Time.deltaTime * _timeScale.Value);
+                timer.AddProgress(deltaTime);
             }
 
             foreach (var timer in _unscaledTimers)
@@ -51,6 +55,7 @@ namespace NovemberProject.TimeSystem
 
                 timer.AddProgress(Time.deltaTime);
             }
+            _onUpdate.OnNext(deltaTime);
         }
 
         private void OnDestroy()
