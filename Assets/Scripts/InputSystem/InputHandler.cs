@@ -1,5 +1,5 @@
 ﻿#nullable enable
-namespace NovemberProject.Input
+namespace NovemberProject.InputSystem
 {
     public abstract class InputHandler
     {

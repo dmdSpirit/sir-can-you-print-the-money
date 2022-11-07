@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NovemberProject.Input
+namespace NovemberProject.InputSystem
 {
     public class InputHandlersFactory
     {

@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using System;
-using NovemberProject.Input;
+using NovemberProject.InputSystem;
 using NovemberProject.System;
 using UniRx;
 
@@ -23,13 +23,15 @@ namespace NovemberProject.GameStates
 
         public GameStateMachine()
         {
-            InputSystem inputSystem = Game.Instance.InputSystem;
+            InputSystem.InputSystem inputSystem = Game.Instance.InputSystem;
             _exitGameState = new ExitGameState();
             _mainMenuState = new MainMenuState();
             _mainMenuState.AddInputHandler(inputSystem.GetInputHandler<EscapeToExitGameHandler>());
             _newGameState = new NewGameState();
             _roundState = new RoundState();
             _roundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
+            _roundState.AddInputHandler(inputSystem.GetInputHandler<MoveCameraHandler>());
+            _roundState.AddInputHandler(inputSystem.GetInputHandler<TimeControlsHandler>());
             _endOnRoundState = new EndOnRoundState();
             _endOnRoundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
             _initializeGameState = new InitializeGameState();
