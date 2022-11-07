@@ -3,13 +3,13 @@ using NovemberProject.System;
 
 namespace NovemberProject.GameStates
 {
-    public class NewGameState : State
+    public class InitializeGameState : State
     {
         protected override void OnEnter()
         {
-            Game.Instance.TimeSystem.ResetTimeScale();
-            Game.Instance.RoundSystem.ResetRounds();
-            Game.Instance.GameStateMachine.Turn();
+            Game.Instance.UIManager.HideRoundTimer();
+            Game.Instance.UIManager.HideEndOfRoundPanel();
+            Game.Instance.MainMenu();
         }
 
         protected override void OnExit()

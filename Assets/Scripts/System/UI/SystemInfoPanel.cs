@@ -14,8 +14,8 @@ namespace NovemberProject.System.UI
 
         protected override void Initialize()
         {
-            _timeScalePanel.Show();
-            _gameStatePanel.Show();
+            _timeScalePanel.Show(null);
+            _gameStatePanel.Show(null);
         }
     }
 }

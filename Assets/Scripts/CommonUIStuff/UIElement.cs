@@ -4,19 +4,19 @@ using UniRx;
 
 namespace NovemberProject.CommonUIStuff
 {
-    public abstract class UIElement : InitializableBehaviour
+    public abstract class UIElement<T> : InitializableBehaviour
     {
-        private readonly Subject<UIElement> _onShown = new();
-        private readonly Subject<UIElement> _onHidden = new();
+        private readonly Subject<UIElement<T>> _onShown = new();
+        private readonly Subject<UIElement<T>> _onHidden = new();
 
-        public IObservable<UIElement> OnShown => _onShown;
-        public IObservable<UIElement> OnHidden => _onHidden;
+        public IObservable<UIElement<T>> OnShown => _onShown;
+        public IObservable<UIElement<T>> OnHidden => _onHidden;
 
         public bool IsShown { get; private set; }
 
-        public void Show()
+        public void Show(T value)
         {
-            OnShow();
+            OnShow(value);
             IsShown = true;
             _onShown.OnNext(this);
         }
@@ -28,7 +28,7 @@ namespace NovemberProject.CommonUIStuff
             _onHidden.OnNext(this);
         }
 
-        protected abstract void OnShow();
+        protected abstract void OnShow(T value);
         protected abstract void OnHide();
     }
 }

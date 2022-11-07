@@ -11,8 +11,9 @@ namespace NovemberProject.GameStates
         private readonly ExitGameState _exitGameState;
         private readonly MainMenuState _mainMenuState;
         private readonly NewGameState _newGameState;
-        private readonly TurnState _turnState;
-        private readonly EndOnTurnState _endOnTurnState;
+        private readonly RoundState _roundState;
+        private readonly EndOnRoundState _endOnRoundState;
+        private readonly InitializeGameState _initializeGameState;
 
         private readonly Subject<State> _onStateChanged = new();
 
@@ -27,10 +28,11 @@ namespace NovemberProject.GameStates
             _mainMenuState = new MainMenuState();
             _mainMenuState.AddInputHandler(inputSystem.GetInputHandler<EscapeToExitGameHandler>());
             _newGameState = new NewGameState();
-            _turnState = new TurnState();
-            _turnState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
-            _endOnTurnState = new EndOnTurnState();
-            _endOnTurnState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
+            _roundState = new RoundState();
+            _roundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
+            _endOnRoundState = new EndOnRoundState();
+            _endOnRoundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
+            _initializeGameState = new InitializeGameState();
 
             Game.Instance.InputSystem.OnHandleInput.Subscribe(_ => HandleInput());
         }
@@ -38,8 +40,9 @@ namespace NovemberProject.GameStates
         public void NewGame() => ChangeState(_newGameState);
         public void ExitGame() => ChangeState(_exitGameState);
         public void MainMenu() => ChangeState(_mainMenuState);
-        public void Turn() => ChangeState(_turnState);
-        public void EndTurn() => ChangeState(_endOnTurnState);
+        public void Turn() => ChangeState(_roundState);
+        public void InitializeGame() => ChangeState(_initializeGameState);
+        public void FinishRound() => ChangeState(_endOnRoundState);
 
         private void ChangeState(State state)
         {

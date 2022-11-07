@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.System.UI
 {
-    public class TimeScalePanel : UIElement
+    public class TimeScalePanel : UIElement<object?>
     {
         private IDisposable? _sub;
 
@@ -19,7 +19,7 @@ namespace NovemberProject.System.UI
         {
         }
 
-        protected override void OnShow()
+        protected override void OnShow(object? _)
         {
             gameObject.SetActive(true);
             _sub = Game.Instance.TimeSystem.TimeScale.Subscribe(UpdateScale);

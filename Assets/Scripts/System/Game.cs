@@ -38,7 +38,7 @@ namespace NovemberProject.System
             DontDestroyOnLoad(this);
             CreateComponents();
             Initialize();
-            MainMenu();
+            GameStateMachine.InitializeGame();
         }
 
         private static Game GetInstance()
@@ -62,10 +62,12 @@ namespace NovemberProject.System
         public void NewGame() => GameStateMachine.NewGame();
         public void ExitGame() => GameStateMachine.ExitGame();
         public void MainMenu() => GameStateMachine.MainMenu();
+        public void FinishRound() => GameStateMachine.FinishRound();
+        public void NextRound() => GameStateMachine.Turn();
 
         private void CreateComponents()
         {
-            RoundSystem = gameObject.AddComponent<RoundSystem>();
+            RoundSystem = GetComponent<RoundSystem>();
             TimeSystem = gameObject.AddComponent<TimeSystem>();
             InputSystem = gameObject.AddComponent<InputSystem>();
             UIManager = FindObjectOfType<UIManager>();

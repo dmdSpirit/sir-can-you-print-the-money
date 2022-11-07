@@ -121,8 +121,9 @@ namespace NovemberProject.Time
             return (timer.Duration - timer.Progress) * _timeScale.Value;
         }
 
-        private void RemoveTimer(Timer timer)
+        private void RemoveTimer(IReadOnlyTimer readOnlyTimer)
         {
+            var timer = (Timer)readOnlyTimer;
             if (_timers.Contains(timer))
             {
                 _timers.Remove(timer);

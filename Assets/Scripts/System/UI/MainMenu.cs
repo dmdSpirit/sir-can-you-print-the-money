@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.System.UI
 {
-    public class MainMenu : UIElement
+    public class MainMenu : UIElement<object?>
     {
         [SerializeField]
         private Button _newGame = null!;
@@ -40,7 +40,7 @@ namespace NovemberProject.System.UI
             Game.Instance.ExitGame();
         }
 
-        protected override void OnShow()
+        protected override void OnShow(object? _)
         {
             gameObject.SetActive(true);
         }
