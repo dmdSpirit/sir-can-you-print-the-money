@@ -5,22 +5,24 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Time
 {
-    public class Timer
+    public class Timer : IReadOnlyTimer
     {
         private readonly Subject<Timer> _onTimerFinished = new();
         private readonly Subject<Timer> _onTimerCanceled = new();
         private readonly Action<Timer>? _callback;
 
-        public readonly float Duration;
-
+        public float Duration { get; }
         public float Progress { get; private set; }
         public bool IsActive { get; private set; }
 
-        public IObservable<Timer> OnTimerFinished => _onTimerFinished;
-        public IObservable<Timer> OnTimerCanceled => _onTimerCanceled;
+        public IObservable<IReadOnlyTimer> OnTimerFinished => _onTimerFinished;
+        public IObservable<IReadOnlyTimer> OnTimerCanceled => _onTimerCanceled;
+
+        public float ProgressRate => Progress / Duration;
 
         public Timer(float duration, Action<Timer>? callback = null)
         {
+            Assert.IsTrue(duration > 0);
             Duration = duration;
             _callback = callback;
         }

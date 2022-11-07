@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2243828583067338665}
   - component: {fileID: 2243828583067338664}
   - component: {fileID: 2243828583067338666}
+  - component: {fileID: 2445315342722928152}
   - component: {fileID: 2243828583067338671}
   m_Layer: 0
   m_Name: Game
@@ -59,6 +60,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedUpScale: 8
+--- !u!114 &2445315342722928152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243828583067338670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00abef4ec04e41dcb1a242251c3bb06c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roundToStartFrom: 0
+  _roundDuration: 20
 --- !u!82 &2243828583067338671
 AudioSource:
   m_ObjectHideFlags: 0
