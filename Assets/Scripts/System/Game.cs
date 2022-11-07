@@ -2,7 +2,6 @@
 using System;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.GameStates;
-using NovemberProject.Input;
 using NovemberProject.RoundS;
 using NovemberProject.System.UI;
 using NovemberProject.Time;
@@ -19,15 +18,15 @@ namespace NovemberProject.System
 
         private static Game _instance = null!;
 
-
         public static Game Instance => GetInstance();
 
         public ClicheBible ClicheBible { get; private set; } = null!;
         public RoundSystem RoundSystem { get; private set; } = null!;
         public TimeSystem TimeSystem { get; private set; } = null!;
-        public InputSystem InputSystem { get; private set; } = null!;
+        public InputSystem.InputSystem InputSystem { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
         public GameStateMachine GameStateMachine { get; private set; } = null!;
+        public CameraController CameraController { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
@@ -69,8 +68,9 @@ namespace NovemberProject.System
         {
             RoundSystem = GetComponent<RoundSystem>();
             TimeSystem = gameObject.AddComponent<TimeSystem>();
-            InputSystem = gameObject.AddComponent<InputSystem>();
+            InputSystem = gameObject.AddComponent<InputSystem.InputSystem>();
             UIManager = FindObjectOfType<UIManager>();
+            CameraController = FindObjectOfType<CameraController>();
         }
 
         private void Initialize()

@@ -2,7 +2,7 @@
 using NovemberProject.System;
 using UnityEngine;
 
-namespace NovemberProject.Input
+namespace NovemberProject.InputSystem
 {
     public sealed class EscapeToMainMenuHandler : InputHandler
     {
