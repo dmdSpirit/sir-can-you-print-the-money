@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1397782429}
-  m_IndirectSpecularColor: {r: 0.11678182, g: 0.42537132, b: 0.7317809, a: 1}
+  m_IndirectSpecularColor: {r: 0.11613609, g: 0.42406118, b: 0.73004735, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8709,6 +8709,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_PressedColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1438180463989466018, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1485619688533813354, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -8969,6 +8973,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 5600805757735671442, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600805758830780240, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5906552525501098595, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -9024,6 +9036,10 @@ PrefabInstance:
     - target: {fileID: 6350039189460196019, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4293457919
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350545131609890740, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6393288298931917072, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_Name
@@ -9116,6 +9132,10 @@ PrefabInstance:
     - target: {fileID: 6393288298931917076, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556108115314148339, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6655836203671983300, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_Pivot.y
