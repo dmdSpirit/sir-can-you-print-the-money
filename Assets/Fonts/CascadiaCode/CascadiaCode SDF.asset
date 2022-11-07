@@ -7314,14 +7314,14 @@ MonoBehaviour:
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 11400000, guid: a8cd23f14d33f914f95b88d7fbbc9c21, type: 2}
+    italicTypeface: {fileID: 11400000, guid: 2a38017caa6256f4c8ee4dfc3701e9d6, type: 2}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
-  - regularTypeface: {fileID: 0}
-    italicTypeface: {fileID: 0}
-  - regularTypeface: {fileID: 0}
-    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 11400000, guid: 447737d40bb51164b81c637760c40ba7, type: 2}
+    italicTypeface: {fileID: 11400000, guid: cd965b179c8b6de4e83d4a52062a274a, type: 2}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
