@@ -6,7 +6,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.RoundS
+namespace NovemberProject.Rounds
 {
     public class RoundSystem : MonoBehaviour
     {
@@ -17,7 +17,6 @@ namespace NovemberProject.RoundS
         private readonly Subject<Unit> _onRoundStarted = new();
 
         private Timer? _roundTimer;
-        private bool _isRoundActive;
 
         [SerializeField]
         private float _roundDuration;
@@ -26,11 +25,6 @@ namespace NovemberProject.RoundS
         public IObservable<Unit> OnRoundEnded => _onRoundEnded;
         public IObservable<Unit> OnRoundStarted => _onRoundStarted;
         public IReadOnlyTimer? RoundTimer => _roundTimer;
-
-        private void Awake()
-        {
-            Debug.Log(_roundDuration);
-        }
 
         public void ResetRounds()
         {
@@ -43,14 +37,12 @@ namespace NovemberProject.RoundS
             _round.Value++;
             _roundTimer = Game.Instance.TimeSystem.CreateTimer(_roundDuration, OnRoundTimerFinished);
             _roundTimer.Start();
-            _isRoundActive = true;
 
             _onRoundStarted.OnNext(Unit.Default);
         }
 
         public void EndRound()
         {
-            _isRoundActive = false;
         }
 
         private void OnRoundTimerFinished(IReadOnlyTimer timer)

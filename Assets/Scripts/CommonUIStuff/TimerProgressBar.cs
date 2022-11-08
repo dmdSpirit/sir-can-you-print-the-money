@@ -1,12 +1,12 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-namespace NovemberProject.System.UI
+namespace NovemberProject.CommonUIStuff
 {
     public class TimerProgressBar : UIElement<IReadOnlyTimer>
     {
@@ -16,10 +16,6 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private Image _barImage = null!;
-
-        protected override void Initialize()
-        {
-        }
 
         protected override void OnShow(IReadOnlyTimer timer)
         {

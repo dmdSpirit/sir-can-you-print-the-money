@@ -1,11 +1,12 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NovemberProject.System.UI
+namespace NovemberProject.Rounds.UI
 {
     public class EndOfRoundPanel : UIElement<object?>
     {

@@ -1,12 +1,13 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.System.UI
+namespace NovemberProject.Rounds.UI
 {
     public class RoundTimer : UIElement<object?>
     {
@@ -17,10 +18,6 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private TimerProgressBar _timerProgressBar = null!;
-
-        protected override void Initialize()
-        {
-        }
 
         protected override void OnShow(object? value)
         {
@@ -39,7 +36,8 @@ namespace NovemberProject.System.UI
         private void OnRoundStarted()
         {
             _roundNumber.text = Game.Instance.RoundSystem.Round.Value.ToString();
-            IReadOnlyTimer? roundTimer = Game.Instance.RoundSystem.RoundTimer;
+            RoundSystem roundSystem = Game.Instance.RoundSystem;
+            IReadOnlyTimer? roundTimer = roundSystem.RoundTimer;
             Assert.IsTrue(roundTimer != null);
             _timerProgressBar.Show(roundTimer!);
         }

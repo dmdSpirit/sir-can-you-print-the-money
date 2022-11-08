@@ -8,7 +8,7 @@ namespace NovemberProject.InputSystem
     {
         public override void HandleInput()
         {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Game.Instance.MainMenu();
             }

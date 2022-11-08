@@ -48,19 +48,6 @@ namespace NovemberProject.Time
             _onUpdate.OnNext(deltaTime);
         }
 
-        private void AddProgressToTimers(IEnumerable<Timer> timers, float deltaTime)
-        {
-            foreach (Timer timer in timers)
-            {
-                if (!timer.IsActive)
-                {
-                    continue;
-                }
-
-                timer.AddProgress(deltaTime);
-            }
-        }
-
         private void OnDestroy()
         {
             _timerSubs.Dispose();
@@ -119,6 +106,19 @@ namespace NovemberProject.Time
         {
             Assert.IsTrue(_timers.Contains(timer) || _unscaledTimers.Contains(timer));
             return (timer.Duration - timer.Progress) * _timeScale.Value;
+        }
+
+        private void AddProgressToTimers(IEnumerable<Timer> timers, float deltaTime)
+        {
+            foreach (Timer timer in timers)
+            {
+                if (!timer.IsActive)
+                {
+                    continue;
+                }
+
+                timer.AddProgress(deltaTime);
+            }
         }
 
         private void RemoveTimer(IReadOnlyTimer readOnlyTimer)

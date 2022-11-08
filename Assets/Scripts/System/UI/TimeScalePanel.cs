@@ -15,10 +15,6 @@ namespace NovemberProject.System.UI
         [SerializeField]
         private TMP_Text _timeScale = null!;
 
-        protected override void Initialize()
-        {
-        }
-
         protected override void OnShow(object? _)
         {
             gameObject.SetActive(true);
