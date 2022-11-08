@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644c11180a8f49e49667f09fbaa7998a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 30
+  _speed: 10
   _mouseMoveSpeed: 0.0001
 --- !u!114 &501451714765177449
 MonoBehaviour:
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1764124195811928274}
-  _minHeight: 1
+  _minHeight: 0.5
   _maxHeight: 5
   _maxDistance: 3
   _zoomSpeed: 120
