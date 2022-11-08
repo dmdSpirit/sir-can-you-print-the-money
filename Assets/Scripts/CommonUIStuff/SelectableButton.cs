@@ -28,12 +28,6 @@ namespace NovemberProject.CommonUIStuff
             Button.OnClickAsObservable().Subscribe(OnButtonClicked);
         }
 
-        private void OnButtonClicked(Unit _)
-        {
-            Select();
-            _onClicked.OnNext(Unit.Default);
-        }
-
         public void Select()
         {
             if (IsSelected)
@@ -54,6 +48,12 @@ namespace NovemberProject.CommonUIStuff
 
             Button.targetGraphic.color = _unselectedColor;
             IsSelected = false;
+        }
+        
+        private void OnButtonClicked(Unit _)
+        {
+            Select();
+            _onClicked.OnNext(Unit.Default);
         }
     }
 }

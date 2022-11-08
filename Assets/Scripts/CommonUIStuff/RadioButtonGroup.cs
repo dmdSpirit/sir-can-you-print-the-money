@@ -21,7 +21,7 @@ namespace NovemberProject.CommonUIStuff
         {
             for (var buttonIndex = 0; buttonIndex < _buttons.Length; buttonIndex++)
             {
-                var button = _buttons[buttonIndex];
+                SelectableButton button = _buttons[buttonIndex];
                 int clickedButtonIndex = buttonIndex;
                 button.OnClicked
                     .TakeUntilDisable(this)

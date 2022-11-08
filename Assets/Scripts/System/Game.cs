@@ -2,7 +2,7 @@
 using System;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.GameStates;
-using NovemberProject.RoundS;
+using NovemberProject.Rounds;
 using NovemberProject.System.UI;
 using NovemberProject.Time;
 using UniRx;
@@ -26,7 +26,7 @@ namespace NovemberProject.System
         public InputSystem.InputSystem InputSystem { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
         public GameStateMachine GameStateMachine { get; private set; } = null!;
-        public CameraController CameraController { get; private set; } = null!;
+        public CameraController.CameraController CameraController { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
@@ -39,6 +39,12 @@ namespace NovemberProject.System
             Initialize();
             GameStateMachine.InitializeGame();
         }
+
+        public void NewGame() => GameStateMachine.NewGame();
+        public void ExitGame() => GameStateMachine.ExitGame();
+        public void MainMenu() => GameStateMachine.MainMenu();
+        public void FinishRound() => GameStateMachine.FinishRound();
+        public void NextRound() => GameStateMachine.Turn();
 
         private static Game GetInstance()
         {
@@ -58,19 +64,13 @@ namespace NovemberProject.System
             return _instance;
         }
 
-        public void NewGame() => GameStateMachine.NewGame();
-        public void ExitGame() => GameStateMachine.ExitGame();
-        public void MainMenu() => GameStateMachine.MainMenu();
-        public void FinishRound() => GameStateMachine.FinishRound();
-        public void NextRound() => GameStateMachine.Turn();
-
         private void CreateComponents()
         {
             RoundSystem = GetComponent<RoundSystem>();
             TimeSystem = gameObject.AddComponent<TimeSystem>();
             InputSystem = gameObject.AddComponent<InputSystem.InputSystem>();
             UIManager = FindObjectOfType<UIManager>();
-            CameraController = FindObjectOfType<CameraController>();
+            CameraController = FindObjectOfType<CameraController.CameraController>();
         }
 
         private void Initialize()

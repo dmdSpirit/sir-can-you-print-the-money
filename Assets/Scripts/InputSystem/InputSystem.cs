@@ -16,6 +16,8 @@ namespace NovemberProject.InputSystem
         public const KeyCode CAMERA_BACKWARD_KEY = KeyCode.S;
         public const KeyCode CAMERA_LEFT_KEY = KeyCode.A;
         public const KeyCode CAMERA_RIGHT_KEY = KeyCode.D;
+        public const KeyCode CAMERA_ZOOM_IN_KEY = KeyCode.E;
+        public const KeyCode CAMERA_ZOOM_OUT_KEY = KeyCode.Q;
 
         private readonly InputHandlersFactory _inputHandlersFactory = new InputHandlersFactory();
         private readonly Subject<Unit> _onHandleInput = new();

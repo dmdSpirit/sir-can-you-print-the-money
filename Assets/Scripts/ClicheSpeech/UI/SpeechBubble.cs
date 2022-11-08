@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CommonUIStuff;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 namespace NovemberProject.ClicheSpeech.UI
 {
     [RequireComponent(typeof(ContentSizeFitter))]
-    public class SpeechBubble : MonoBehaviour
+    public class SpeechBubble : UIElement<string>
     {
         private ContentSizeFitter? _contentSizeFitter;
 
@@ -19,14 +20,14 @@ namespace NovemberProject.ClicheSpeech.UI
             _contentSizeFitter = GetComponent<ContentSizeFitter>();
         }
 
-        public void Show(string text)
+        protected override void OnShow(string text)
         {
             gameObject.SetActive(true);
             _text.text = text;
             Observable.IntervalFrame(1).Subscribe(_ => UpdateSize());
         }
 
-        public void Hide()
+        protected override void OnHide()
         {
             gameObject.SetActive(false);
             _text.text = string.Empty;

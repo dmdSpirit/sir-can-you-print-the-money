@@ -85,6 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7296653750855821505}
   - component: {fileID: 4707874977462090420}
+  - component: {fileID: 1934851830503507672}
+  - component: {fileID: 501451714765177449}
   m_Layer: 0
   m_Name: Camera_Rig
   m_TagString: Untagged
@@ -120,9 +122,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ddbd79a00c843d98e96f313ac1c3548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1934851830503507672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848053768656541863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644c11180a8f49e49667f09fbaa7998a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 30
+  _mouseMoveSpeed: 0.0001
+--- !u!114 &501451714765177449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848053768656541863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801e7fff12064405ab74f86169dadc32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _camera: {fileID: 1764124195811928274}
-  _speed: 10
   _minHeight: 1
   _maxHeight: 5
   _maxDistance: 3
   _zoomSpeed: 120
+  _keysZoomModifier: 0.02

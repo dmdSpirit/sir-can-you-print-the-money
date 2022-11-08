@@ -30,16 +30,6 @@ namespace NovemberProject.System.UI
                 .Subscribe(OnExitGame);
         }
 
-        private void OnNewGame(Unit _)
-        {
-            Game.Instance.NewGame();
-        }
-
-        private void OnExitGame(Unit _)
-        {
-            Game.Instance.ExitGame();
-        }
-
         protected override void OnShow(object? _)
         {
             gameObject.SetActive(true);
@@ -48,6 +38,16 @@ namespace NovemberProject.System.UI
         protected override void OnHide()
         {
             gameObject.SetActive(false);
+        }
+        
+        private void OnNewGame(Unit _)
+        {
+            Game.Instance.NewGame();
+        }
+
+        private void OnExitGame(Unit _)
+        {
+            Game.Instance.ExitGame();
         }
     }
 }

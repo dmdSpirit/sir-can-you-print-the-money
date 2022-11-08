@@ -2,7 +2,6 @@
 using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
-using NovemberProject.System.UI;
 using UniRx;
 using UnityEngine;
 
@@ -32,7 +31,8 @@ namespace NovemberProject.Pops
 
         private void OnUpdate(float deltaTime)
         {
-            var rotation = _model.transform.rotation.eulerAngles;
+            Quaternion quaternion = _model.transform.rotation;
+            Vector3 rotation = quaternion.eulerAngles;
             if (rotation.z >= 180)
             {
                 rotation.z -= 360f;

@@ -15,11 +15,6 @@ namespace NovemberProject.GameStates
         public IObservable<State> OnStateEnter => _onStateEnter;
         public IObservable<State> OnStateExit => _onStateExit;
 
-        public void AddInputHandler(InputHandler inputHandler)
-        {
-            _inputHandlers.Add(inputHandler);
-        }
-
         public void Enter()
         {
             OnEnter();
@@ -32,6 +27,11 @@ namespace NovemberProject.GameStates
             _onStateExit.OnNext(this);
         }
 
+        public void AddInputHandler(InputHandler inputHandler)
+        {
+            _inputHandlers.Add(inputHandler);
+        }
+        
         public void HandleInput()
         {
             foreach (InputHandler inputHandler in _inputHandlers)

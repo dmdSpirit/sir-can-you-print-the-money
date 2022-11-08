@@ -1,4 +1,0 @@
-+ move camera with wsad
-- move camera with mouse edge hower
-+ zoom camera with scroll
-- camera boundaries
