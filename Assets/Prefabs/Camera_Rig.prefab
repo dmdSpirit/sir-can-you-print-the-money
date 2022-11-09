@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ddbd79a00c843d98e96f313ac1c3548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 1764124195811928274}
 --- !u!114 &1934851830503507672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801e7fff12064405ab74f86169dadc32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 1764124195811928274}
   _minHeight: 0.5
   _maxHeight: 5
   _maxDistance: 3

@@ -8,9 +8,7 @@ namespace NovemberProject.CameraController
     {
         private float _zoom;
         private float _zoomDif;
-
-        [SerializeField]
-        private Camera _camera = null!;
+        private Camera? _camera;
 
         [SerializeField]
         private float _minHeight;
@@ -36,7 +34,7 @@ namespace NovemberProject.CameraController
 
         private void LateUpdate()
         {
-            if (_zoomDif != 0)
+            if (_zoomDif != 0 && _camera != null)
             {
                 UpdateCameraPosition();
             }
@@ -51,9 +49,11 @@ namespace NovemberProject.CameraController
             float cameraDistance = Mathf.Lerp(-_maxDistance, 0, _zoom);
             var cameraPosition = new Vector3(0, cameraHeight, cameraDistance);
             var cameraRotation = new Vector3(Mathf.Lerp(60, 0, _zoom), 0, 0);
-            _camera.transform.localPosition = cameraPosition;
+            _camera!.transform.localPosition = cameraPosition;
             _camera.transform.localRotation = Quaternion.Euler(cameraRotation);
             _zoomDif = 0;
         }
+
+        public void SetCamera(Camera cameraToSet) => _camera = cameraToSet;
     }
 }
