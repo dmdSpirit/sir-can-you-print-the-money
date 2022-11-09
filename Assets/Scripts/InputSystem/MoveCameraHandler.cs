@@ -1,4 +1,5 @@
 #nullable enable
+using NovemberProject.CameraSystem;
 using NovemberProject.System;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace NovemberProject.InputSystem
                 return direction.normalized;
             }
 
-            CameraController.CameraController cameraController = Game.Instance.CameraController;
+            CameraController cameraController = Game.Instance.CameraController;
             float mouseMoveSpeed = cameraController.MouseMoveSpeed;
             direction.x -= Input.GetAxis("Mouse X") * mouseMoveSpeed;
             direction.y -= Input.GetAxis("Mouse Y") * mouseMoveSpeed;

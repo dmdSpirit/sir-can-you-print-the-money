@@ -1,13 +1,10 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using TMPro;
-using UniRx;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
     public class BuildingInfoPanel : UIElement<Building>
     {
@@ -22,18 +19,7 @@ namespace NovemberProject.CameraController
         [SerializeField]
         private Image _image = null!;
 
-        [SerializeField]
-        private Button _closeButton = null!;
-
         public Building Building => _building;
-
-        protected override void Initialize()
-        {
-            base.Initialize();
-            _closeButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
-                .Subscribe(OnCloseButtonClicked);
-        }
 
         protected override void OnShow(Building building)
         {
@@ -45,12 +31,6 @@ namespace NovemberProject.CameraController
 
         protected override void OnHide()
         {
-        }
-
-        private void OnCloseButtonClicked(Unit _)
-        {
-            Assert.IsTrue(IsShown);
-            Game.Instance.UIManager.HideBuildingInfo();
         }
     }
 }

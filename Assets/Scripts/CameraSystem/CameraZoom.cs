@@ -2,7 +2,7 @@
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
     public class CameraZoom : InitializableBehaviour
     {

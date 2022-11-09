@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.GameStates;
 using NovemberProject.Rounds;
@@ -26,7 +27,8 @@ namespace NovemberProject.System
         public InputSystem.InputSystem InputSystem { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
         public GameStateMachine GameStateMachine { get; private set; } = null!;
-        public CameraController.CameraController CameraController { get; private set; } = null!;
+        public CameraController CameraController { get; private set; } = null!;
+        public BuildingSelector BuildingSelector { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
@@ -70,7 +72,8 @@ namespace NovemberProject.System
             TimeSystem = gameObject.AddComponent<TimeSystem>();
             InputSystem = gameObject.AddComponent<InputSystem.InputSystem>();
             UIManager = FindObjectOfType<UIManager>();
-            CameraController = FindObjectOfType<CameraController.CameraController>();
+            CameraController = FindObjectOfType<CameraController>();
+            BuildingSelector = FindObjectOfType<BuildingSelector>();
         }
 
         private void Initialize()

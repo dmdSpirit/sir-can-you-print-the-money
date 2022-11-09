@@ -1,9 +1,8 @@
 #nullable enable
-using System;
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
     [RequireComponent(typeof(CameraMovement))]
     [RequireComponent(typeof(CameraZoom))]

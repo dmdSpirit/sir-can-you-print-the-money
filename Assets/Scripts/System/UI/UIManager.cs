@@ -1,5 +1,5 @@
 ﻿#nullable enable
-using NovemberProject.CameraController;
+using NovemberProject.CameraSystem;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Rounds.UI;
 using UnityEngine;
@@ -9,8 +9,6 @@ namespace NovemberProject.System.UI
 {
     public class UIManager : InitializableBehaviour
     {
-        private bool _buildingInfoCanBeShown;
-
         [SerializeField]
         private MainMenu _mainMenu = null!;
 
@@ -22,6 +20,11 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private BuildingInfoPanel _buildingInfoPanel = null!;
+
+        [SerializeField]
+        private LayerMask _layerMask;
+
+        public LayerMask LayerMask => _layerMask;
 
         protected override void Initialize()
         {
@@ -47,11 +50,6 @@ namespace NovemberProject.System.UI
 
         public void ShowBuildingInfo(Building building)
         {
-            if (!_buildingInfoCanBeShown)
-            {
-                return;
-            }
-
             if (_buildingInfoPanel.IsShown && _buildingInfoPanel.Building == building)
             {
                 return;
@@ -63,17 +61,6 @@ namespace NovemberProject.System.UI
         public void HideBuildingInfo()
         {
             _buildingInfoPanel.Hide();
-        }
-
-        public void LockBuildingInfoShowing()
-        {
-            _buildingInfoCanBeShown = false;
-            HideBuildingInfo();
-        }
-
-        public void UnlockBuildingInfoShowing()
-        {
-            _buildingInfoCanBeShown = true;
         }
     }
 }

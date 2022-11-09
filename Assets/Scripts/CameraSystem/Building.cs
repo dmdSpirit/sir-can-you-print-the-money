@@ -4,13 +4,10 @@ using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
     public class Building : InitializableBehaviour
     {
-        [SerializeField]
-        private BuildingClickObserver _clickObserver = null!;
-
         [SerializeField]
         private string _title = null!;
 
@@ -23,18 +20,5 @@ namespace NovemberProject.CameraController
         public string Title => _title;
         public string Description => _description;
         public Sprite Image => _image;
-
-        protected override void Initialize()
-        {
-            base.Initialize();
-            _clickObserver.OnBuildingClicked
-                .TakeUntilDisable(this)
-                .Subscribe(OnBuildingClick);
-        }
-
-        private void OnBuildingClick(Unit _)
-        {
-            Game.Instance.UIManager.ShowBuildingInfo(this);
-        }
     }
 }

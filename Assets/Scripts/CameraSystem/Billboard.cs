@@ -3,7 +3,7 @@ using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using UnityEngine;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
     public class Billboard : InitializableBehaviour
     {
