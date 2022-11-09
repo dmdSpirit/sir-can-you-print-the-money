@@ -17,13 +17,11 @@ namespace NovemberProject.System.UI
 
         protected override void OnShow(object? _)
         {
-            gameObject.SetActive(true);
             _sub = Game.Instance.OnStateChanged.Subscribe(UpdateState);
         }
 
         protected override void OnHide()
         {
-            gameObject.SetActive(false);
             _sub?.Dispose();
         }
 

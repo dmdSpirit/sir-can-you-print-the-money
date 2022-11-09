@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CameraController;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Rounds.UI;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace NovemberProject.System.UI
 {
     public class UIManager : InitializableBehaviour
     {
+        private bool _buildingInfoCanBeShown;
+
         [SerializeField]
         private MainMenu _mainMenu = null!;
 
@@ -16,6 +19,9 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private EndOfRoundPanel _endOfRoundPanel = null!;
+
+        [SerializeField]
+        private BuildingInfoPanel _buildingInfoPanel = null!;
 
         protected override void Initialize()
         {
@@ -34,24 +40,40 @@ namespace NovemberProject.System.UI
             _mainMenu.Hide();
         }
 
-        public void ShowRoundTimer()
+        public void ShowRoundTimer() => _roundTimer.Show(null);
+        public void HideRoundTimer() => _roundTimer.Hide();
+        public void ShowEndOfRoundPanel() => _endOfRoundPanel.Show(null);
+        public void HideEndOfRoundPanel() => _endOfRoundPanel.Hide();
+
+        public void ShowBuildingInfo(Building building)
         {
-            _roundTimer.Show(null);
+            if (!_buildingInfoCanBeShown)
+            {
+                return;
+            }
+
+            if (_buildingInfoPanel.IsShown && _buildingInfoPanel.Building == building)
+            {
+                return;
+            }
+
+            _buildingInfoPanel.Show(building);
         }
 
-        public void HideRoundTimer()
+        public void HideBuildingInfo()
         {
-            _roundTimer.Hide();
+            _buildingInfoPanel.Hide();
         }
 
-        public void ShowEndOfRoundPanel()
+        public void LockBuildingInfoShowing()
         {
-            _endOfRoundPanel.Show(null);
+            _buildingInfoCanBeShown = false;
+            HideBuildingInfo();
         }
 
-        public void HideEndOfRoundPanel()
+        public void UnlockBuildingInfoShowing()
         {
-            _endOfRoundPanel.Hide();
+            _buildingInfoCanBeShown = true;
         }
     }
 }

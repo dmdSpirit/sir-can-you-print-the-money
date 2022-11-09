@@ -21,7 +21,6 @@ namespace NovemberProject.Rounds.UI
 
         protected override void OnShow(object? value)
         {
-            gameObject.SetActive(true);
             _subs.Clear();
             OnRoundStarted();
             Game.Instance.RoundSystem.OnRoundStarted.Subscribe(_ => OnRoundStarted()).AddTo(_subs);
@@ -30,7 +29,6 @@ namespace NovemberProject.Rounds.UI
         protected override void OnHide()
         {
             _subs.Clear();
-            gameObject.SetActive(false);
         }
 
         private void OnRoundStarted()
