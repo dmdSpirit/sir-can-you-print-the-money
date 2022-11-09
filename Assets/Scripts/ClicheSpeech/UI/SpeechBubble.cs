@@ -22,14 +22,12 @@ namespace NovemberProject.ClicheSpeech.UI
 
         protected override void OnShow(string text)
         {
-            gameObject.SetActive(true);
             _text.text = text;
             Observable.IntervalFrame(1).Subscribe(_ => UpdateSize());
         }
 
         protected override void OnHide()
         {
-            gameObject.SetActive(false);
             _text.text = string.Empty;
         }
 

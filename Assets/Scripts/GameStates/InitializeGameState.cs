@@ -10,6 +10,7 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideRoundTimer();
             Game.Instance.UIManager.HideEndOfRoundPanel();
             Game.Instance.MainMenu();
+            Game.Instance.UIManager.HideBuildingInfo();
         }
 
         protected override void OnExit()

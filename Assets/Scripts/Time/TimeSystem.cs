@@ -84,6 +84,22 @@ namespace NovemberProject.Time
             }
         }
 
+        public void RestoreAfterPause()
+        {
+            if (_status.Value != TimeSystemStatus.Pause)
+            {
+                return;
+            }
+
+            if (_statusBeforePause == TimeSystemStatus.SpedUp)
+            {
+                SpeedUp();
+                return;
+            }
+
+            ResetTimeScale();
+        }
+
         public Timer CreateTimer(float duration, Action<Timer>? callback = null)
         {
             var timer = new Timer(duration, callback);
@@ -132,22 +148,6 @@ namespace NovemberProject.Time
             {
                 _unscaledTimers.Remove(timer);
             }
-        }
-
-        private void RestoreAfterPause()
-        {
-            if (_status.Value != TimeSystemStatus.Pause)
-            {
-                return;
-            }
-
-            if (_statusBeforePause == TimeSystemStatus.SpedUp)
-            {
-                SpeedUp();
-                return;
-            }
-
-            ResetTimeScale();
         }
     }
 }

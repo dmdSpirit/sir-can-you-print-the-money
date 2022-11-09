@@ -16,6 +16,7 @@ namespace NovemberProject.CommonUIStuff
 
         public void Show(T value)
         {
+            gameObject.SetActive(true);
             OnShow(value);
             IsShown = true;
             _onShown.OnNext(this);
@@ -25,6 +26,7 @@ namespace NovemberProject.CommonUIStuff
         {
             OnHide();
             IsShown = false;
+            gameObject.SetActive(false);
             _onHidden.OnNext(this);
         }
 

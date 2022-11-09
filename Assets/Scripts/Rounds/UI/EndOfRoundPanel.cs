@@ -28,13 +28,11 @@ namespace NovemberProject.Rounds.UI
 
         protected override void OnShow(object? _)
         {
-            gameObject.SetActive(true);
             _title.text = _titleText.Replace("[value]", Game.Instance.RoundSystem.Round.Value.ToString());
         }
 
         protected override void OnHide()
         {
-            gameObject.SetActive(false);
         }
 
         private void OnNextRound(Unit _)

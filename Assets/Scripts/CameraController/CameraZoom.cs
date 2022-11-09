@@ -11,16 +11,16 @@ namespace NovemberProject.CameraController
         private Camera? _camera;
 
         [SerializeField]
-        private float _minHeight;
+        private float _minHeight = .5f;
 
         [SerializeField]
-        private float _maxHeight;
+        private float _maxHeight = 5f;
 
         [SerializeField]
-        private float _maxDistance;
+        private float _maxDistance = 3f;
 
         [SerializeField]
-        private float _zoomSpeed;
+        private float _zoomSpeed = 120f;
 
         [SerializeField]
         private float _keysZoomModifier = .02f;

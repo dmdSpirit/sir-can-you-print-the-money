@@ -32,12 +32,10 @@ namespace NovemberProject.System.UI
 
         protected override void OnShow(object? _)
         {
-            gameObject.SetActive(true);
         }
 
         protected override void OnHide()
         {
-            gameObject.SetActive(false);
         }
         
         private void OnNewGame(Unit _)
