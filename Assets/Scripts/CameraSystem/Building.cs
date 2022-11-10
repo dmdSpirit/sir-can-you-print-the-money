@@ -1,7 +1,5 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
-using UniRx;
 using UnityEngine;
 
 namespace NovemberProject.CameraSystem
