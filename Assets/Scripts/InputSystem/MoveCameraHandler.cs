@@ -27,8 +27,7 @@ namespace NovemberProject.InputSystem
         private Vector2 GetRigMovementDirection()
         {
             Vector2 direction = GetKeyboardMovement();
-
-            if (!Input.GetMouseButton(RIGHT_MOUSE_BUTTON))
+            if (!Input.GetMouseButton(RIGHT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
             {
                 return direction.normalized;
             }

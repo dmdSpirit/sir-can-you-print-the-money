@@ -2,13 +2,18 @@
 using NovemberProject.CameraSystem;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Rounds.UI;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System.UI
 {
+    [RequireComponent(typeof(MouseOverObserver))]
     public class UIManager : InitializableBehaviour
     {
+        private MouseOverObserver _mouseOverObserver;
+
         [SerializeField]
         private MainMenu _mainMenu = null!;
 
@@ -25,6 +30,12 @@ namespace NovemberProject.System.UI
         private LayerMask _layerMask;
 
         public LayerMask LayerMask => _layerMask;
+        public IReadOnlyReactiveProperty<bool> IsMouseOver => _mouseOverObserver.IsMouseOver;
+
+        private void Awake()
+        {
+            _mouseOverObserver = GetComponent<MouseOverObserver>();
+        }
 
         protected override void Initialize()
         {

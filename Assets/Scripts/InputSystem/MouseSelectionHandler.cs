@@ -3,7 +3,6 @@ using NovemberProject.CameraSystem;
 using NovemberProject.System;
 using NovemberProject.System.UI;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace NovemberProject.InputSystem
 {
@@ -14,7 +13,7 @@ namespace NovemberProject.InputSystem
 
         public override void HandleInput()
         {
-            if (!Input.GetMouseButtonDown(LEFT_MOUSE_BUTTON))
+            if (!Input.GetMouseButtonDown(LEFT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
             {
                 return;
             }
