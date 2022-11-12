@@ -5,14 +5,13 @@ using NovemberProject.Rounds.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System.UI
 {
     [RequireComponent(typeof(MouseOverObserver))]
     public class UIManager : InitializableBehaviour
     {
-        private MouseOverObserver _mouseOverObserver;
+        private MouseOverObserver _mouseOverObserver = null!;
 
         [SerializeField]
         private MainMenu _mainMenu = null!;
@@ -27,6 +26,12 @@ namespace NovemberProject.System.UI
         private BuildingInfoPanel _buildingInfoPanel = null!;
 
         [SerializeField]
+        private CheatMenu _cheatMenu = null!;
+
+        [SerializeField]
+        private SystemInfoPanel _systemInfoPanel = null!;
+
+        [SerializeField]
         private LayerMask _layerMask;
 
         public LayerMask LayerMask => _layerMask;
@@ -39,7 +44,6 @@ namespace NovemberProject.System.UI
 
         protected override void Initialize()
         {
-            _mainMenu.Hide();
         }
 
         public void ShowMainMenu()
@@ -50,7 +54,7 @@ namespace NovemberProject.System.UI
 
         public void HideMainMenu()
         {
-            Assert.IsTrue(_mainMenu.IsShown);
+            Assert.IsTrue(_mainMenu.IsShown || _mainMenu.gameObject.activeInHierarchy);
             _mainMenu.Hide();
         }
 
@@ -73,5 +77,36 @@ namespace NovemberProject.System.UI
         {
             _buildingInfoPanel.Hide();
         }
+
+        public void ToggleSystemInfoPanel()
+        {
+            if (_systemInfoPanel.IsShown)
+            {
+                _systemInfoPanel.Hide();
+            }
+            else
+            {
+                _systemInfoPanel.Show(null);
+            }
+        }
+
+        public void ToggleCheatMenu()
+        {
+            if (_cheatMenu.IsShown)
+            {
+                _cheatMenu.Hide();
+            }
+            else
+            {
+                _cheatMenu.Show(null);
+            }
+        }
+
+        public void ShowSystemInfoPanel() => _systemInfoPanel.Show(null);
+        public void ShowCheatPanel() => _cheatMenu.Show(null);
+        public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
+        public void HideCheatPanel() => _cheatMenu.Hide();
     }
 }
+
+// TODO (Stas): #idea Would be great to have Show<UIElement> Hide<UIElement> methods.

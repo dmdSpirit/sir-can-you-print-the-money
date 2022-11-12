@@ -185,6 +185,7 @@ MonoBehaviour:
   _title: Castle
   _description: Castle description
   _image: {fileID: 21300000, guid: 8da54e9fb342bc6458c7b324660e77a8, type: 3}
+  <A>k__BackingField: 10
 --- !u!65 &5286698737886348174
 BoxCollider:
   m_ObjectHideFlags: 0

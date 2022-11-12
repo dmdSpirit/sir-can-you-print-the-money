@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace NovemberProject.System
 {
-    public sealed class CheatMenu : InitializableBehaviour
+    [RequireComponent(typeof(ContentSizeFitter))]
+    public sealed class CheatMenu : UIElement<object?>
     {
         private readonly List<CheatButtonInfo> _cheatButtons = new();
         private readonly List<CheatButton> _generatedButtons = new();
@@ -16,6 +18,8 @@ namespace NovemberProject.System
         [SerializeField]
         private Transform _buttonsParent = null!;
 
+        private bool _isSizeFitterRefreshNeeded;
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -23,15 +27,27 @@ namespace NovemberProject.System
             ClearOldButtons();
             PrepareButtonsList();
             GenerateButtons();
+        }
+
+        protected override void OnShow(object? _)
+        {
             if (_generatedButtons.Count == 0)
             {
-                
+                Debug.LogWarning("No cheat buttons to show");
+                Hide();
             }
+            
+            // Bug (Stas): parent layout group is not updated properly first time.
+        }
+
+        protected override void OnHide()
+        {
         }
 
         private void PrepareButtonsList()
         {
             _cheatButtons.Add(new CheatButtonInfo("Test", () => Debug.Log("Test")));
+            _cheatButtons.Add(new CheatButtonInfo("Test2", () => Debug.Log("Test2")));
         }
 
         private void GenerateButtons()
@@ -42,6 +58,7 @@ namespace NovemberProject.System
                 button.Show(cheatButtonInfo);
                 _generatedButtons.Add(button);
             }
+
         }
 
         private void ClearOldButtons()
