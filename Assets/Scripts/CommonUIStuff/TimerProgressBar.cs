@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.CommonUIStuff
 {
-    public class TimerProgressBar : UIElement<IReadOnlyTimer>
+    public sealed class TimerProgressBar : UIElement<IReadOnlyTimer>
     {
         private readonly CompositeDisposable _timerSubs = new();
 

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace NovemberProject.System.UI
 {
-    public class MouseOverObserver : InitializableBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public sealed class MouseOverObserver : InitializableBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private readonly ReactiveProperty<bool> _isMouseOver = new();
 

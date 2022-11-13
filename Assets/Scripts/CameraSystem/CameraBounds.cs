@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NovemberProject.CameraSystem
 {
-    public class CameraBounds : InitializableBehaviour
+    public sealed class CameraBounds : InitializableBehaviour
     {
         private const int VALID_NUMBER_OF_BOUNDS = 4;
 

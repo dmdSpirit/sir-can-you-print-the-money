@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.System.UI
 {
-    public class TimeScalePanel : UIElement<object?>
+    public sealed class TimeScalePanel : UIElement<object?>
     {
         private IDisposable? _sub;
 

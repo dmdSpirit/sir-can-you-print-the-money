@@ -6,7 +6,7 @@ using UniRx;
 
 namespace NovemberProject.GameStates
 {
-    public class GameStateMachine
+    public sealed class GameStateMachine
     {
         private readonly ExitGameState _exitGameState;
         private readonly MainMenuState _mainMenuState;

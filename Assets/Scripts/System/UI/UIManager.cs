@@ -1,5 +1,7 @@
 ﻿#nullable enable
-using NovemberProject.CameraSystem;
+using NovemberProject.Buildings;
+using NovemberProject.Buildings.UI;
+using NovemberProject.Cheats;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Rounds.UI;
 using UniRx;
@@ -9,7 +11,7 @@ using UnityEngine.Assertions;
 namespace NovemberProject.System.UI
 {
     [RequireComponent(typeof(MouseOverObserver))]
-    public class UIManager : InitializableBehaviour
+    public sealed class UIManager : InitializableBehaviour
     {
         private MouseOverObserver _mouseOverObserver = null!;
 
@@ -37,13 +39,13 @@ namespace NovemberProject.System.UI
         public LayerMask LayerMask => _layerMask;
         public IReadOnlyReactiveProperty<bool> IsMouseOver => _mouseOverObserver.IsMouseOver;
 
+        protected override void Initialize()
+        {
+        }
+
         private void Awake()
         {
             _mouseOverObserver = GetComponent<MouseOverObserver>();
-        }
-
-        protected override void Initialize()
-        {
         }
 
         public void ShowMainMenu()

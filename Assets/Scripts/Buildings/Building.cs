@@ -2,7 +2,7 @@
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
-namespace NovemberProject.CameraSystem
+namespace NovemberProject.Buildings
 {
     public class Building : InitializableBehaviour
     {
@@ -14,9 +14,6 @@ namespace NovemberProject.CameraSystem
 
         [SerializeField]
         private Sprite _image = null!;
-        
-        [field:SerializeField]
-        public int A { get; private set; }
 
         public string Title => _title;
         public string Description => _description;

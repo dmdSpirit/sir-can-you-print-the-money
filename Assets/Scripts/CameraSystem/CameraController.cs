@@ -6,7 +6,7 @@ namespace NovemberProject.CameraSystem
 {
     [RequireComponent(typeof(CameraMovement))]
     [RequireComponent(typeof(CameraZoom))]
-    public class CameraController : InitializableBehaviour
+    public sealed class CameraController : InitializableBehaviour
     {
         private CameraMovement _cameraMovement = null!;
         private CameraZoom _cameraZoom = null!;

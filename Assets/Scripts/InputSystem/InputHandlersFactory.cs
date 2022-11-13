@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace NovemberProject.InputSystem
 {
-    public class InputHandlersFactory
+    public sealed class InputHandlersFactory
     {
         private readonly Dictionary<Type, InputHandler> _inputHandlers = new();
 

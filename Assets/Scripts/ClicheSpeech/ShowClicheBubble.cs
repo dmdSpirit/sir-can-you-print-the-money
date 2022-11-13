@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.ClicheSpeech
 {
-    public class ShowClicheBubble : MonoBehaviour
+    public sealed class ShowClicheBubble : MonoBehaviour
     {
         private bool _isShown;
         private readonly Subject<Unit> _onHidden = new();
@@ -35,7 +35,7 @@ namespace NovemberProject.ClicheSpeech
             _displayTimer.Start();
         }
 
-        public void HideBubble()
+        private void HideBubble()
         {
             if (!_isShown)
             {

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace NovemberProject.System
 {
-    public class Game : MonoBehaviour
+    public sealed class Game : MonoBehaviour
     {
         private const string CLICHE_BIBLE_FILE = "cliche_bible";
 

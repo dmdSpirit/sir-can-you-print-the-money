@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.Rounds.UI
 {
-    public class EndOfRoundPanel : UIElement<object?>
+    public sealed class EndOfRoundPanel : UIElement<object?>
     {
         [SerializeField]
         private TMP_Text _title = null!;

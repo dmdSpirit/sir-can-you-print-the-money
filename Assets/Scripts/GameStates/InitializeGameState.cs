@@ -4,7 +4,7 @@ using NovemberProject.System;
 
 namespace NovemberProject.GameStates
 {
-    public class InitializeGameState : State
+    public sealed class InitializeGameState : State
     {
         protected override void OnEnter()
         {

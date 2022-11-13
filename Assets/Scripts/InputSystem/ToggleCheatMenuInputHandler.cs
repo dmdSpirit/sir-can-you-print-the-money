@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace NovemberProject.InputSystem
 {
-    public sealed class ToggleCheatMenuInputHandler:InputHandler
+    public sealed class ToggleCheatMenuInputHandler : InputHandler
     {
         public override void HandleInput()
         {
-            if (!Input.GetKeyDown(InputSystem.TOGGLE_CHEAT_MENU))
+            if (!Input.GetKeyDown(InputKeys.TOGGLE_CHEAT_MENU))
             {
                 return;
             }

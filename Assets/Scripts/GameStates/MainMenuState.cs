@@ -3,7 +3,7 @@ using NovemberProject.System;
 
 namespace NovemberProject.GameStates
 {
-    public class MainMenuState : State
+    public sealed class MainMenuState : State
     {
         protected override void OnEnter()
         {

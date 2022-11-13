@@ -43,22 +43,22 @@ namespace NovemberProject.InputSystem
         private Vector2 GetKeyboardMovement()
         {
             Vector2 direction = Vector2.zero;
-            if (Input.GetKey(InputSystem.CAMERA_FORWARD_KEY))
+            if (Input.GetKey(InputKeys.CAMERA_FORWARD_KEY))
             {
                 direction.y++;
             }
 
-            if (Input.GetKey(InputSystem.CAMERA_LEFT_KEY))
+            if (Input.GetKey(InputKeys.CAMERA_LEFT_KEY))
             {
                 direction.x--;
             }
 
-            if (Input.GetKey(InputSystem.CAMERA_BACKWARD_KEY))
+            if (Input.GetKey(InputKeys.CAMERA_BACKWARD_KEY))
             {
                 direction.y--;
             }
 
-            if (Input.GetKey(InputSystem.CAMERA_RIGHT_KEY))
+            if (Input.GetKey(InputKeys.CAMERA_RIGHT_KEY))
             {
                 direction.x++;
             }
@@ -69,12 +69,12 @@ namespace NovemberProject.InputSystem
         private float GetZoom()
         {
             float zoom = Input.GetAxis("Mouse ScrollWheel");
-            if (Input.GetKey(InputSystem.CAMERA_ZOOM_IN_KEY))
+            if (Input.GetKey(InputKeys.CAMERA_ZOOM_IN_KEY))
             {
                 zoom += Game.Instance.CameraController.KeysZoomModifier;
             }
 
-            if (Input.GetKey(InputSystem.CAMERA_ZOOM_OUT_KEY))
+            if (Input.GetKey(InputKeys.CAMERA_ZOOM_OUT_KEY))
             {
                 zoom -= Game.Instance.CameraController.KeysZoomModifier;
             }

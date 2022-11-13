@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NovemberProject.Time.UI
 {
-    public class TimeControlsPanel : InitializableBehaviour
+    public sealed class TimeControlsPanel : InitializableBehaviour
     {
         private const int PAUSE_BUTTON_INDEX = 0;
         private const int PLAY_BUTTON_INDEX = 1;

@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 
-namespace NovemberProject.System
+namespace NovemberProject.Cheats
 {
     public readonly struct CheatButtonInfo
     {

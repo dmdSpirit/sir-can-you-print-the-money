@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace NovemberProject.ClicheSpeech
 {
-    public class ClicheBible
+    public sealed class ClicheBible
     {
         private readonly string[] _cliches;
 

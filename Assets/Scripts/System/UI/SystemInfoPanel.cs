@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NovemberProject.System.UI
 {
-    public class SystemInfoPanel : UIElement<object?>
+    public sealed class SystemInfoPanel : UIElement<object?>
     {
         [SerializeField]
         private TimeScalePanel _timeScalePanel = null!;

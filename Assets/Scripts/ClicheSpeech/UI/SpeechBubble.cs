@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace NovemberProject.ClicheSpeech.UI
 {
     [RequireComponent(typeof(ContentSizeFitter))]
-    public class SpeechBubble : UIElement<string>
+    public sealed class SpeechBubble : UIElement<string>
     {
         private ContentSizeFitter? _contentSizeFitter;
 

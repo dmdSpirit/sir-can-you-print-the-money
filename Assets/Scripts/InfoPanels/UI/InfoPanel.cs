@@ -5,7 +5,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NovemberProject.CameraSystem
+namespace NovemberProject.InfoPanels.UI
 {
     public sealed class InfoPanel : UIElement<IInfo>
     {

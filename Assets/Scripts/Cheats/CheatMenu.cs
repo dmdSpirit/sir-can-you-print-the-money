@@ -4,7 +4,7 @@ using NovemberProject.CommonUIStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NovemberProject.System
+namespace NovemberProject.Cheats
 {
     [RequireComponent(typeof(ContentSizeFitter))]
     public sealed class CheatMenu : UIElement<object?>
@@ -36,7 +36,7 @@ namespace NovemberProject.System
                 Debug.LogWarning("No cheat buttons to show");
                 Hide();
             }
-            
+
             // Bug (Stas): parent layout group is not updated properly first time.
         }
 
@@ -58,7 +58,6 @@ namespace NovemberProject.System
                 button.Show(cheatButtonInfo);
                 _generatedButtons.Add(button);
             }
-
         }
 
         private void ClearOldButtons()
@@ -67,7 +66,7 @@ namespace NovemberProject.System
             _generatedButtons.Clear();
 
             var oldButtons = _buttonsParent.GetComponentsInChildren<CheatButton>();
-            if (oldButtons == null || oldButtons.Length == 0)
+            if (!HasOldButtons())
             {
                 return;
             }
@@ -81,6 +80,8 @@ namespace NovemberProject.System
 
                 Destroy(button.gameObject);
             }
+
+            bool HasOldButtons() => oldButtons is { Length: > 0 };
         }
     }
 }

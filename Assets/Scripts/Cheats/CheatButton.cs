@@ -5,7 +5,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NovemberProject.System
+namespace NovemberProject.Cheats
 {
     public sealed class CheatButton : UIElement<CheatButtonInfo>
     {
@@ -41,6 +41,7 @@ namespace NovemberProject.System
             {
                 return;
             }
+
             _info.Action.Invoke();
         }
     }

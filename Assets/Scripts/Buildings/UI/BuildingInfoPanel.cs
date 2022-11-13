@@ -4,12 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NovemberProject.CameraSystem
+namespace NovemberProject.Buildings.UI
 {
-    public class BuildingInfoPanel : UIElement<Building>
+    public sealed class BuildingInfoPanel : UIElement<Building>
     {
-        private Building _building = null!;
-
         [SerializeField]
         private TMP_Text _title = null!;
 
@@ -19,14 +17,14 @@ namespace NovemberProject.CameraSystem
         [SerializeField]
         private Image _image = null!;
 
-        public Building Building => _building;
+        public Building Building { get; private set; } = null!;
 
         protected override void OnShow(Building building)
         {
-            _building = building;
-            _title.text = _building.Title;
-            _description.text = _building.Description;
-            _image.sprite = _building.Image;
+            Building = building;
+            _title.text = Building.Title;
+            _description.text = Building.Description;
+            _image.sprite = Building.Image;
         }
 
         protected override void OnHide()

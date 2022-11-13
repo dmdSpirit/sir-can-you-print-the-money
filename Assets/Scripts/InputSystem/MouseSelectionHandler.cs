@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.System;
 using NovemberProject.System.UI;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace NovemberProject.InputSystem
 {
-    public class MouseSelectionHandler : InputHandler
+    public sealed class MouseSelectionHandler : InputHandler
     {
         private const int LEFT_MOUSE_BUTTON = 0;
         private const float RAYCAST_MAX_DISTANCE = 1000f;

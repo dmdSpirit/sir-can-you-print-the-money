@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace NovemberProject.CommonUIStuff
 {
     [RequireComponent(typeof(Button))]
-    public class SelectableButton : MonoBehaviour
+    public sealed class SelectableButton : MonoBehaviour
     {
         private readonly Subject<Unit> _onClicked = new();
 
@@ -49,7 +49,7 @@ namespace NovemberProject.CommonUIStuff
             Button.targetGraphic.color = _unselectedColor;
             IsSelected = false;
         }
-        
+
         private void OnButtonClicked(Unit _)
         {
             Select();

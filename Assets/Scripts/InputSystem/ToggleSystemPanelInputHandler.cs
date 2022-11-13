@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace NovemberProject.InputSystem
 {
-    public sealed class ToggleSystemPanelInputHandler:InputHandler
+    public sealed class ToggleSystemPanelInputHandler : InputHandler
     {
         public override void HandleInput()
         {
-            if (!Input.GetKeyDown(InputSystem.TOGGLE_SYSTEM_PANEL))
+            if (!Input.GetKeyDown(InputKeys.TOGGLE_SYSTEM_PANEL))
             {
                 return;
             }

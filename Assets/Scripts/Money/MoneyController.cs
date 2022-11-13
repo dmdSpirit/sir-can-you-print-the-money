@@ -3,7 +3,7 @@ using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.System
+namespace NovemberProject.Money
 {
     public sealed class MoneyController : InitializableBehaviour
     {
