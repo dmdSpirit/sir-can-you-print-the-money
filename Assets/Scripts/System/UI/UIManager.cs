@@ -38,11 +38,7 @@ namespace NovemberProject.System.UI
 
         public LayerMask LayerMask => _layerMask;
         public IReadOnlyReactiveProperty<bool> IsMouseOver => _mouseOverObserver.IsMouseOver;
-
-        protected override void Initialize()
-        {
-        }
-
+        
         private void Awake()
         {
             _mouseOverObserver = GetComponent<MouseOverObserver>();

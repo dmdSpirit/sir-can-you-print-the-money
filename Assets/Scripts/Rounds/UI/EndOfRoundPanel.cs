@@ -19,8 +19,10 @@ namespace NovemberProject.Rounds.UI
         [SerializeField]
         private Button _nextRound = null!;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             _nextRound.OnClickAsObservable()
                 .TakeUntilDisable(this)
                 .Subscribe(OnNextRound);

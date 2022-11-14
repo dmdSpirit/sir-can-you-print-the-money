@@ -22,8 +22,10 @@ namespace NovemberProject.Pops
         [SerializeField]
         private float _maxValue;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             Game.Instance.TimeSystem.OnUpdate
                 .Where(deltaTime => deltaTime != 0)
                 .Subscribe(OnUpdate);

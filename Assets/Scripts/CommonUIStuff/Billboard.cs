@@ -8,9 +8,10 @@ namespace NovemberProject.CommonUIStuff
     {
         private Camera _camera = null!;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
-            base.Initialize();
+            base.OnInitialized();
+
             _camera = Game.Instance.CameraController.MainCamera;
         }
 

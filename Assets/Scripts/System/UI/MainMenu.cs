@@ -17,8 +17,10 @@ namespace NovemberProject.System.UI
         [SerializeField]
         private Button _continue = null!;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             _newGame.OnClickAsObservable()
                 .TakeUntilDisable(this)
                 .Subscribe(OnNewGame);

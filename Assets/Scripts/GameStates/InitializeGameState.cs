@@ -21,6 +21,7 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideSystemInfoPanel();
             Game.Instance.UIManager.HideCheatPanel();
 #endif
+            Game.Instance.MoneyController.AddGovernmentMoney(100);
             Game.Instance.MainMenu();
         }
 

@@ -12,8 +12,9 @@ namespace NovemberProject.CameraSystem
         [SerializeField]
         private GameObject[] _bounds = null!;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
             if (_bounds.Length != VALID_NUMBER_OF_BOUNDS)
             {
                 return;

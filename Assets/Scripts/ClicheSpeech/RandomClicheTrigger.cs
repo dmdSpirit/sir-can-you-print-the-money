@@ -20,8 +20,10 @@ namespace NovemberProject.ClicheSpeech
         [SerializeField]
         private Vector2 _cooldown;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             _showClicheBubble.OnHidden
                 .TakeUntilDisable(this)
                 .Subscribe(_ => OnBubbleHidden());

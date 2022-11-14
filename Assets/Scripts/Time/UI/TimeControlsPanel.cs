@@ -15,8 +15,10 @@ namespace NovemberProject.Time.UI
         [SerializeField]
         private RadioButtonGroup _buttonsGroup = null!;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             Game.Instance.TimeSystem.Status
                 .TakeUntilDisable(this)
                 .Subscribe(OnTimeSystemStatusChanged);

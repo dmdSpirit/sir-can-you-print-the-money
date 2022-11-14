@@ -16,10 +16,10 @@ namespace NovemberProject.Cheats
 
         [SerializeField]
         private TMP_Text _title = null!;
-
-        protected override void Initialize()
+        
+        protected override void OnInitialized()
         {
-            base.Initialize();
+            base.OnInitialized();
             _button.OnClickAsObservable()
                 .TakeUntilDisable(this)
                 .Subscribe(OnButtonClick);

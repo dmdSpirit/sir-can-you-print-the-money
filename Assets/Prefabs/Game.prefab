@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2445315342722928152}
   - component: {fileID: 2243828583067338671}
   - component: {fileID: 1641860681010415540}
+  - component: {fileID: 7054615164634619179}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -185,3 +186,11 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!81 &7054615164634619179
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243828583067338670}
+  m_Enabled: 1
