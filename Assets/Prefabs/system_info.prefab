@@ -109,12 +109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
-    m_Right: 10
-    m_Top: 10
-    m_Bottom: 10
+    m_Left: 12
+    m_Right: 12
+    m_Top: 12
+    m_Bottom: 12
   m_ChildAlignment: 1
-  m_Spacing: 5
+  m_Spacing: 12
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6033150737037674706, guid: 60f32b282fb01c4418f66e72b4298b5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6631736401095781779, guid: 60f32b282fb01c4418f66e72b4298b5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -218,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631736401095781779, guid: 60f32b282fb01c4418f66e72b4298b5b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 35
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6631736401095781779, guid: 60f32b282fb01c4418f66e72b4298b5b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -280,6 +284,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7289394315746078337, guid: 60f32b282fb01c4418f66e72b4298b5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8848780262285652083, guid: 60f32b282fb01c4418f66e72b4298b5b, type: 3}
       propertyPath: m_Name
       value: time scale label
@@ -325,6 +333,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 374620958540248719, guid: bb47178ef8361344d8e61ffb48826953, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 756688821951009742, guid: bb47178ef8361344d8e61ffb48826953, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -359,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 756688821951009742, guid: bb47178ef8361344d8e61ffb48826953, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 35
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 756688821951009742, guid: bb47178ef8361344d8e61ffb48826953, type: 3}
       propertyPath: m_LocalPosition.x
