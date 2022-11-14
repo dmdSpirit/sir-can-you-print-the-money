@@ -31,7 +31,7 @@ namespace NovemberProject.GameStates
         {
             _inputHandlers.Add(inputHandler);
         }
-        
+
         public void HandleInput()
         {
             foreach (InputHandler inputHandler in _inputHandlers)

@@ -20,6 +20,8 @@ namespace NovemberProject.CommonUIStuff
                 .Subscribe(_ => Initialize());
         }
 
-        protected virtual void Initialize(){}
+        protected virtual void Initialize()
+        {
+        }
     }
 }

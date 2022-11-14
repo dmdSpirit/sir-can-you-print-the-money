@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.System.UI
 {
-    public class GameStatePanel : UIElement<object?>
+    public sealed class GameStatePanel : UIElement<object?>
     {
         private IDisposable? _sub;
 

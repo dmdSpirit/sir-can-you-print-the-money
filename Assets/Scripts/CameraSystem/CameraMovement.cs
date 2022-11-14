@@ -2,9 +2,9 @@
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
-    public class CameraMovement : InitializableBehaviour
+    public sealed class CameraMovement : InitializableBehaviour
     {
         private Vector2 _direction;
         private bool _areBoundsSet;
@@ -18,17 +18,23 @@ namespace NovemberProject.CameraController
 
         public float MouseMoveSpeed => _mouseMoveSpeed;
 
-        public void MoveCamera(Vector2 direction)
-        {
-            _direction += direction;
-        }
-
         private void LateUpdate()
         {
             if (_direction != Vector2.zero)
             {
                 UpdateRigPosition();
             }
+        }
+
+        public void MoveCamera(Vector2 direction)
+        {
+            _direction += direction;
+        }
+
+        public void SetBounds(Rect bounds)
+        {
+            _areBoundsSet = true;
+            _bounds = bounds;
         }
 
         private void UpdateRigPosition()
@@ -45,12 +51,6 @@ namespace NovemberProject.CameraController
 
             transform.position = position;
             _direction = Vector2.zero;
-        }
-
-        public void SetBounds(Rect bounds)
-        {
-            _areBoundsSet = true;
-            _bounds = bounds;
         }
     }
 }

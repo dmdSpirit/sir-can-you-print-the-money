@@ -1,15 +1,19 @@
 ﻿#nullable enable
-using NovemberProject.CameraController;
+using NovemberProject.Buildings;
+using NovemberProject.Buildings.UI;
+using NovemberProject.Cheats;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Rounds.UI;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NovemberProject.System.UI
 {
-    public class UIManager : InitializableBehaviour
+    [RequireComponent(typeof(MouseOverObserver))]
+    public sealed class UIManager : InitializableBehaviour
     {
-        private bool _buildingInfoCanBeShown;
+        private MouseOverObserver _mouseOverObserver = null!;
 
         [SerializeField]
         private MainMenu _mainMenu = null!;
@@ -23,9 +27,25 @@ namespace NovemberProject.System.UI
         [SerializeField]
         private BuildingInfoPanel _buildingInfoPanel = null!;
 
+        [SerializeField]
+        private CheatMenu _cheatMenu = null!;
+
+        [SerializeField]
+        private SystemInfoPanel _systemInfoPanel = null!;
+
+        [SerializeField]
+        private LayerMask _layerMask;
+
+        public LayerMask LayerMask => _layerMask;
+        public IReadOnlyReactiveProperty<bool> IsMouseOver => _mouseOverObserver.IsMouseOver;
+
         protected override void Initialize()
         {
-            _mainMenu.Hide();
+        }
+
+        private void Awake()
+        {
+            _mouseOverObserver = GetComponent<MouseOverObserver>();
         }
 
         public void ShowMainMenu()
@@ -36,7 +56,7 @@ namespace NovemberProject.System.UI
 
         public void HideMainMenu()
         {
-            Assert.IsTrue(_mainMenu.IsShown);
+            Assert.IsTrue(_mainMenu.IsShown || _mainMenu.gameObject.activeInHierarchy);
             _mainMenu.Hide();
         }
 
@@ -47,11 +67,6 @@ namespace NovemberProject.System.UI
 
         public void ShowBuildingInfo(Building building)
         {
-            if (!_buildingInfoCanBeShown)
-            {
-                return;
-            }
-
             if (_buildingInfoPanel.IsShown && _buildingInfoPanel.Building == building)
             {
                 return;
@@ -65,15 +80,35 @@ namespace NovemberProject.System.UI
             _buildingInfoPanel.Hide();
         }
 
-        public void LockBuildingInfoShowing()
+        public void ToggleSystemInfoPanel()
         {
-            _buildingInfoCanBeShown = false;
-            HideBuildingInfo();
+            if (_systemInfoPanel.IsShown)
+            {
+                _systemInfoPanel.Hide();
+            }
+            else
+            {
+                _systemInfoPanel.Show(null);
+            }
         }
 
-        public void UnlockBuildingInfoShowing()
+        public void ToggleCheatMenu()
         {
-            _buildingInfoCanBeShown = true;
+            if (_cheatMenu.IsShown)
+            {
+                _cheatMenu.Hide();
+            }
+            else
+            {
+                _cheatMenu.Show(null);
+            }
         }
+
+        public void ShowSystemInfoPanel() => _systemInfoPanel.Show(null);
+        public void ShowCheatPanel() => _cheatMenu.Show(null);
+        public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
+        public void HideCheatPanel() => _cheatMenu.Hide();
     }
 }
+
+// TODO (Stas): #idea Would be great to have Show<UIElement> Hide<UIElement> methods.

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.CommonUIStuff
 {
-    public class RadioButtonGroup : MonoBehaviour
+    public sealed class RadioButtonGroup : MonoBehaviour
     {
         private readonly Subject<int> _onButtonClicked = new();
         private int _selectedButton;

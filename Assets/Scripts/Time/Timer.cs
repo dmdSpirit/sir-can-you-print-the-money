@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Time
 {
-    public class Timer : IReadOnlyTimer
+    public sealed class Timer : IReadOnlyTimer
     {
         private readonly Subject<Timer> _onTimerFinished = new();
         private readonly Subject<Timer> _onTimerCanceled = new();

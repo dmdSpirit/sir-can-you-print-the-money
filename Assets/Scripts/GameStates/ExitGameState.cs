@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace NovemberProject.GameStates
 {
-    public class ExitGameState : State
+    public sealed class ExitGameState : State
     {
         protected override void OnEnter()
         {

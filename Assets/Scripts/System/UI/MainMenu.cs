@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.System.UI
 {
-    public class MainMenu : UIElement<object?>
+    public sealed class MainMenu : UIElement<object?>
     {
         [SerializeField]
         private Button _newGame = null!;
@@ -37,7 +37,7 @@ namespace NovemberProject.System.UI
         protected override void OnHide()
         {
         }
-        
+
         private void OnNewGame(Unit _)
         {
             Game.Instance.NewGame();

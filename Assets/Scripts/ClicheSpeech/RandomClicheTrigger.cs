@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace NovemberProject.ClicheSpeech
 {
-    public class RandomClicheTrigger : InitializableBehaviour
+    public sealed class RandomClicheTrigger : InitializableBehaviour
     {
         private Timer? _timer;
 

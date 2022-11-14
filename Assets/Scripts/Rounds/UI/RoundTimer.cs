@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Rounds.UI
 {
-    public class RoundTimer : UIElement<object?>
+    public sealed class RoundTimer : UIElement<object?>
     {
         private readonly CompositeDisposable _subs = new();
 

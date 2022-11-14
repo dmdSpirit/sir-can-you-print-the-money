@@ -8,22 +8,22 @@ namespace NovemberProject.InputSystem
     {
         public override void HandleInput()
         {
-            if (Input.GetKeyDown(InputSystem.PAUSE_TOGGLE_KEY))
+            if (Input.GetKeyDown(InputKeys.PAUSE_TOGGLE_KEY))
             {
                 Game.Instance.TimeSystem.TogglePause();
             }
 
-            if (Input.GetKeyDown(InputSystem.PAUSE_KEY))
+            if (Input.GetKeyDown(InputKeys.PAUSE_KEY))
             {
                 Game.Instance.TimeSystem.PauseTime();
             }
 
-            if (Input.GetKeyDown(InputSystem.PLAY_KEY))
+            if (Input.GetKeyDown(InputKeys.PLAY_KEY))
             {
                 Game.Instance.TimeSystem.ResetTimeScale();
             }
 
-            if (Input.GetKeyDown(InputSystem.SPEED_UP_KEY))
+            if (Input.GetKeyDown(InputKeys.SPEED_UP_KEY))
             {
                 Game.Instance.TimeSystem.SpeedUp();
             }

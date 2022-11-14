@@ -3,9 +3,9 @@ using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using UnityEngine;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
-    public class CameraBounds : InitializableBehaviour
+    public sealed class CameraBounds : InitializableBehaviour
     {
         private const int VALID_NUMBER_OF_BOUNDS = 4;
 

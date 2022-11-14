@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Rounds
 {
-    public class RoundSystem : MonoBehaviour
+    public sealed class RoundSystem : MonoBehaviour
     {
         private const int ROUND_TO_START_FROM = 0;
 

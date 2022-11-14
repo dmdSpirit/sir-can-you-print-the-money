@@ -4,7 +4,7 @@ using NovemberProject.System;
 
 namespace NovemberProject.GameStates
 {
-    public class EndOnRoundState : State
+    public sealed class EndOnRoundState : State
     {
         protected override void OnEnter()
         {

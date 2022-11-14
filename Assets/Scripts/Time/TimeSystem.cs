@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Time
 {
-    public class TimeSystem : InitializableBehaviour
+    public sealed class TimeSystem : InitializableBehaviour
     {
         private const float DEFAULT_TIME_SCALE = 1f;
         private const float PAUSED_TIME_SCALE = 0f;

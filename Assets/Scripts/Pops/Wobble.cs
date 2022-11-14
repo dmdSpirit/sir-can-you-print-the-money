@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace NovemberProject.Pops
 {
-    public class Wobble : InitializableBehaviour
+    public sealed class Wobble : InitializableBehaviour
     {
         private const float TOLERANCE = 0.001f;
 

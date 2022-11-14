@@ -2,13 +2,15 @@
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
-namespace NovemberProject.CameraController
+namespace NovemberProject.CameraSystem
 {
-    public class CameraZoom : InitializableBehaviour
+    public sealed class CameraZoom : InitializableBehaviour
     {
         private float _zoom;
         private float _zoomDif;
-        private Camera? _camera;
+        private bool _isCameraSet;
+
+        private Camera _camera = null!;
 
         [SerializeField]
         private float _minHeight = .5f;
@@ -27,19 +29,34 @@ namespace NovemberProject.CameraController
 
         public float KeysZoomModifier => _keysZoomModifier;
 
-        public void ZoomCamera(float zoomDif)
-        {
-            _zoomDif += zoomDif;
-        }
-
         private void LateUpdate()
         {
-            if (_zoomDif != 0 && _camera != null)
+            if (!_isCameraSet)
+            {
+                return;
+            }
+
+            if (_zoomDif != 0)
             {
                 UpdateCameraPosition();
             }
         }
 
+        public void ZoomCamera(float zoomDif)
+        {
+            _zoomDif += zoomDif;
+        }
+
+        public void SetCamera(Camera cameraToSet)
+        {
+            if (cameraToSet == null)
+            {
+                return;
+            }
+
+            _camera = cameraToSet;
+            _isCameraSet = true;
+        }
 
         private void UpdateCameraPosition()
         {
@@ -49,11 +66,9 @@ namespace NovemberProject.CameraController
             float cameraDistance = Mathf.Lerp(-_maxDistance, 0, _zoom);
             var cameraPosition = new Vector3(0, cameraHeight, cameraDistance);
             var cameraRotation = new Vector3(Mathf.Lerp(60, 0, _zoom), 0, 0);
-            _camera!.transform.localPosition = cameraPosition;
+            _camera.transform.localPosition = cameraPosition;
             _camera.transform.localRotation = Quaternion.Euler(cameraRotation);
             _zoomDif = 0;
         }
-
-        public void SetCamera(Camera cameraToSet) => _camera = cameraToSet;
     }
 }

@@ -6,7 +6,7 @@ using UniRx;
 
 namespace NovemberProject.GameStates
 {
-    public class GameStateMachine
+    public sealed class GameStateMachine
     {
         private readonly ExitGameState _exitGameState;
         private readonly MainMenuState _mainMenuState;
@@ -32,6 +32,7 @@ namespace NovemberProject.GameStates
             _roundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
             _roundState.AddInputHandler(inputSystem.GetInputHandler<MoveCameraHandler>());
             _roundState.AddInputHandler(inputSystem.GetInputHandler<TimeControlsHandler>());
+            _roundState.AddInputHandler(inputSystem.GetInputHandler<MouseSelectionHandler>());
             _endOnRoundState = new EndOnRoundState();
             _endOnRoundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
             _initializeGameState = new InitializeGameState();
