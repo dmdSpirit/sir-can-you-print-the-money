@@ -20,7 +20,13 @@ namespace NovemberProject.CommonUIStuff
                 .Subscribe(_ => Initialize());
         }
 
-        protected virtual void Initialize()
+        private void Initialize()
+        {
+            OnInitialized();
+            Game.Instance.MessageBroker.Publish(new BehaviourInitialized(this));
+        }
+
+        protected virtual void OnInitialized()
         {
         }
     }

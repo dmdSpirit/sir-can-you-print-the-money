@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,11 +19,14 @@ namespace NovemberProject.Cheats
         [SerializeField]
         private Transform _buttonsParent = null!;
 
+        [SerializeField]
+        private int _moneyToMove = 10;
+
         private bool _isSizeFitterRefreshNeeded;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
-            base.Initialize();
+            base.OnInitialized();
 
             ClearOldButtons();
             PrepareButtonsList();
@@ -46,8 +50,9 @@ namespace NovemberProject.Cheats
 
         private void PrepareButtonsList()
         {
-            _cheatButtons.Add(new CheatButtonInfo("Test", () => Debug.Log("Test")));
-            _cheatButtons.Add(new CheatButtonInfo("Test2", () => Debug.Log("Test2")));
+            _cheatButtons.Add(new CheatButtonInfo("Gov to Army", MoveMoneyGovToArmy));
+            _cheatButtons.Add(new CheatButtonInfo("Army to Folk", MoveMoneyArmyToFolk));
+            _cheatButtons.Add(new CheatButtonInfo("Folk to Gov", MoveMoneyFolkToGov));
         }
 
         private void GenerateButtons()
@@ -82,6 +87,36 @@ namespace NovemberProject.Cheats
             }
 
             bool HasOldButtons() => oldButtons is { Length: > 0 };
+        }
+
+        private void MoveMoneyGovToArmy()
+        {
+            if (Game.Instance.MoneyController.GovernmentMoney.Value < _moneyToMove)
+            {
+                return;
+            }
+
+            Game.Instance.MoneyController.TransferMoneyFromGovernmentToArmy(_moneyToMove);
+        }
+
+        private void MoveMoneyArmyToFolk()
+        {
+            if (Game.Instance.MoneyController.ArmyMoney.Value < _moneyToMove)
+            {
+                return;
+            }
+
+            Game.Instance.MoneyController.TransferMoneyFromArmyToFolk(_moneyToMove);
+        }
+
+        private void MoveMoneyFolkToGov()
+        {
+            if (Game.Instance.MoneyController.FolkMoney.Value < _moneyToMove)
+            {
+                return;
+            }
+
+            Game.Instance.MoneyController.TransferMoneyFromFolkToGovernment(_moneyToMove);
         }
     }
 }

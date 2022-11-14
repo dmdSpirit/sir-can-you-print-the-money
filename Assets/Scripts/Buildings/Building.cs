@@ -1,10 +1,13 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.Money;
+using NovemberProject.System;
+using UniRx;
 using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public class Building : InitializableBehaviour
+    public sealed class Building : InitializableBehaviour
     {
         [SerializeField]
         private string _title = null!;
@@ -15,8 +18,34 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private Sprite _image = null!;
 
+        [SerializeField]
+        private BuildingType _buildingType;
+
         public string Title => _title;
         public string Description => _description;
         public Sprite Image => _image;
+        public BuildingType BuildingType => _buildingType;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            if (Game.Instance.BuildingsController != null)
+            {
+                Game.Instance.BuildingsController.RegisterBuilding(this);
+            }
+            else
+            {
+                Game.Instance.MessageBroker.Receive<BehaviourInitialized>()
+                    .TakeUntilDisable(this)
+                    .Where(message => message.InitializableBehaviour is BuildingsController)
+                    .Subscribe(OnBuildingControllerInitialized);
+            }
+        }
+
+        private void OnBuildingControllerInitialized(BehaviourInitialized message)
+        {
+            var controller = (BuildingsController)message.InitializableBehaviour;
+            controller.RegisterBuilding(this);
+        }
     }
 }

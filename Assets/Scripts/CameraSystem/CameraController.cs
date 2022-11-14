@@ -24,9 +24,9 @@ namespace NovemberProject.CameraSystem
             _cameraZoom = GetComponent<CameraZoom>();
         }
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
-            base.Initialize();
+            base.OnInitialized();
             _cameraZoom.SetCamera(_mainCamera);
         }
 

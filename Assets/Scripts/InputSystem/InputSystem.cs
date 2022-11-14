@@ -17,8 +17,10 @@ namespace NovemberProject.InputSystem
 
         public IObservable<Unit> OnHandleInput => _onHandleInput;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             _isActive = true;
         }
 

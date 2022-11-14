@@ -29,8 +29,10 @@ namespace NovemberProject.Time
         public IReadOnlyReactiveProperty<TimeSystemStatus> Status => _status;
         public IObservable<float> OnUpdate => _onUpdate;
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
+            base.OnInitialized();
+
             PauseTime();
         }
 

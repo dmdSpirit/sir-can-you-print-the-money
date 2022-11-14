@@ -3,6 +3,7 @@ using System;
 using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.GameStates;
+using NovemberProject.Money;
 using NovemberProject.Rounds;
 using NovemberProject.System.UI;
 using NovemberProject.Time;
@@ -29,10 +30,14 @@ namespace NovemberProject.System
         public GameStateMachine GameStateMachine { get; private set; } = null!;
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
+        public MoneyController MoneyController { get; private set; } = null!;
+        public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
+        public BuildingsController BuildingsController { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
         public IObservable<State> OnStateChanged => GameStateMachine.OnStateChanged;
+        public MessageBroker MessageBroker = new();
 
         private void Start()
         {
@@ -74,6 +79,9 @@ namespace NovemberProject.System
             UIManager = FindObjectOfType<UIManager>();
             CameraController = FindObjectOfType<CameraController>();
             BuildingSelector = FindObjectOfType<BuildingSelector>();
+            MoneyController = FindObjectOfType<MoneyController>();
+            ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
+            BuildingsController = FindObjectOfType<BuildingsController>();
         }
 
         private void Initialize()
