@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801e7fff12064405ab74f86169dadc32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minHeight: 0.5
+  _minHeight: 0.8
   _maxHeight: 5
   _maxDistance: 3
   _zoomSpeed: 120
