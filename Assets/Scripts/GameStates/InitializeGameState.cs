@@ -10,6 +10,7 @@ namespace NovemberProject.GameStates
         {
             Game.Instance.UIManager.HideRoundTimer();
             Game.Instance.UIManager.HideEndOfRoundPanel();
+            Game.Instance.UIManager.HideRoundStartPanel();
             Game.Instance.UIManager.HideBuildingInfo();
             Game.Instance.UIManager.HideMainMenu();
 #if UNITY_EDITOR
@@ -22,7 +23,7 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideCheatPanel();
 #endif
             Game.Instance.MoneyController.AddGovernmentMoney(100);
-            Game.Instance.MainMenu();
+            Game.Instance.GameStateMachine.MainMenu();
         }
 
         protected override void OnExit()

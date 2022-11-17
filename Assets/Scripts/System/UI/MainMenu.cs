@@ -42,12 +42,12 @@ namespace NovemberProject.System.UI
 
         private void OnNewGame(Unit _)
         {
-            Game.Instance.NewGame();
+            Game.Instance.GameStateMachine.NewGame();
         }
 
         private void OnExitGame(Unit _)
         {
-            Game.Instance.ExitGame();
+            Game.Instance.GameStateMachine.ExitGame();
         }
     }
 }

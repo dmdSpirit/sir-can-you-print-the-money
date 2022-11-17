@@ -10,7 +10,7 @@ namespace NovemberProject.InputSystem
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Game.Instance.ExitGame();
+                Game.Instance.GameStateMachine.ExitGame();
             }
         }
     }

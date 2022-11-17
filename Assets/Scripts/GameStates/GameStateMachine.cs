@@ -12,7 +12,8 @@ namespace NovemberProject.GameStates
         private readonly MainMenuState _mainMenuState;
         private readonly NewGameState _newGameState;
         private readonly RoundState _roundState;
-        private readonly EndOnRoundState _endOnRoundState;
+        private readonly RoundEndState _roundEndState;
+        private readonly RoundStartState _roundStartState;
         private readonly InitializeGameState _initializeGameState;
 
         private readonly Subject<State> _onStateChanged = new();
@@ -33,9 +34,10 @@ namespace NovemberProject.GameStates
             _roundState.AddInputHandler(inputSystem.GetInputHandler<MoveCameraHandler>());
             _roundState.AddInputHandler(inputSystem.GetInputHandler<TimeControlsHandler>());
             _roundState.AddInputHandler(inputSystem.GetInputHandler<MouseSelectionHandler>());
-            _endOnRoundState = new EndOnRoundState();
-            _endOnRoundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
+            _roundEndState = new RoundEndState();
+            _roundEndState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
             _initializeGameState = new InitializeGameState();
+            _roundStartState = new RoundStartState();
 
             Game.Instance.InputSystem.OnHandleInput.Subscribe(_ => HandleInput());
         }
@@ -43,9 +45,10 @@ namespace NovemberProject.GameStates
         public void NewGame() => ChangeState(_newGameState);
         public void ExitGame() => ChangeState(_exitGameState);
         public void MainMenu() => ChangeState(_mainMenuState);
-        public void Turn() => ChangeState(_roundState);
+        public void Round() => ChangeState(_roundState);
         public void InitializeGame() => ChangeState(_initializeGameState);
-        public void FinishRound() => ChangeState(_endOnRoundState);
+        public void FinishRound() => ChangeState(_roundEndState);
+        public void StartRound() => ChangeState(_roundStartState);
 
         private void ChangeState(State state)
         {

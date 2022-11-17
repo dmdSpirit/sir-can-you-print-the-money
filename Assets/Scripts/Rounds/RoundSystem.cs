@@ -31,10 +31,13 @@ namespace NovemberProject.Rounds
             _round.Value = ROUND_TO_START_FROM;
         }
 
+        public void IncrementRound()
+        {
+            _round.Value++;
+        }
+
         public void StartRound()
         {
-            _onRoundEnded.OnNext(Unit.Default);
-            _round.Value++;
             _roundTimer = Game.Instance.TimeSystem.CreateTimer(_roundDuration, OnRoundTimerFinished);
             _roundTimer.Start();
 
@@ -43,12 +46,13 @@ namespace NovemberProject.Rounds
 
         public void EndRound()
         {
+            _onRoundEnded.OnNext(Unit.Default);
         }
 
         private void OnRoundTimerFinished(IReadOnlyTimer timer)
         {
             Assert.IsTrue(timer == _roundTimer);
-            Game.Instance.FinishRound();
+            Game.Instance.GameStateMachine.FinishRound();
         }
     }
 }

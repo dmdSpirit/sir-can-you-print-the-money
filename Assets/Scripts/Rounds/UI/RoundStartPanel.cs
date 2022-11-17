@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class EndOfRoundPanel : UIElement<object?>
+    public sealed class RoundStartPanel : UIElement<object?>
     {
         [SerializeField]
         private TMP_Text _title = null!;
@@ -39,7 +39,7 @@ namespace NovemberProject.Rounds.UI
 
         private void OnNextRound(Unit _)
         {
-            Game.Instance.NextRound();
+            Game.Instance.GameStateMachine.Round();
         }
     }
 }

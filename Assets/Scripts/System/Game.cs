@@ -47,12 +47,6 @@ namespace NovemberProject.System
             GameStateMachine.InitializeGame();
         }
 
-        public void NewGame() => GameStateMachine.NewGame();
-        public void ExitGame() => GameStateMachine.ExitGame();
-        public void MainMenu() => GameStateMachine.MainMenu();
-        public void FinishRound() => GameStateMachine.FinishRound();
-        public void NextRound() => GameStateMachine.Turn();
-
         private static Game GetInstance()
         {
             if (_instance != null)

@@ -22,10 +22,13 @@ namespace NovemberProject.System.UI
         private RoundTimer _roundTimer = null!;
 
         [SerializeField]
-        private EndOfRoundPanel _endOfRoundPanel = null!;
+        private RoundEndPanel _roundEndPanel = null!;
 
         [SerializeField]
         private BuildingInfoPanel _buildingInfoPanel = null!;
+
+        [SerializeField]
+        private RoundStartPanel _roundStartPanel = null!;
 
         [SerializeField]
         private CheatMenu _cheatMenu = null!;
@@ -36,9 +39,10 @@ namespace NovemberProject.System.UI
         [SerializeField]
         private LayerMask _layerMask;
 
+
         public LayerMask LayerMask => _layerMask;
         public IReadOnlyReactiveProperty<bool> IsMouseOver => _mouseOverObserver.IsMouseOver;
-        
+
         private void Awake()
         {
             _mouseOverObserver = GetComponent<MouseOverObserver>();
@@ -58,8 +62,8 @@ namespace NovemberProject.System.UI
 
         public void ShowRoundTimer() => _roundTimer.Show(null);
         public void HideRoundTimer() => _roundTimer.Hide();
-        public void ShowEndOfRoundPanel() => _endOfRoundPanel.Show(null);
-        public void HideEndOfRoundPanel() => _endOfRoundPanel.Hide();
+        public void ShowRoundEndPanel() => _roundEndPanel.Show(null);
+        public void HideEndOfRoundPanel() => _roundEndPanel.Hide();
 
         public void ShowBuildingInfo(Building building)
         {
@@ -104,6 +108,8 @@ namespace NovemberProject.System.UI
         public void ShowCheatPanel() => _cheatMenu.Show(null);
         public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
         public void HideCheatPanel() => _cheatMenu.Hide();
+        public void ShowRoundStartPanel() => _roundStartPanel.Show(null);
+        public void HideRoundStartPanel() => _roundStartPanel.Hide();
     }
 }
 
