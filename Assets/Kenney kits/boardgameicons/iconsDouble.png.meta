@@ -188,7 +188,7 @@ TextureImporter:
         width: 114
         height: 114
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,6 +196,69 @@ TextureImporter:
       bones: []
       spriteID: b5aa180a0329b874ebb6a51467b1eb30
       internalID: 1542654287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: food
+      rect:
+        serializedVersion: 2
+        x: 1415
+        y: 268
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d15577f1a6cc44494700df3423f0ff
+      internalID: -700532128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lock
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 1165
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15123389b1724324da04b1b25a807624
+      internalID: -477202142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sword
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 1419
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62c1a9cde967fb44dadb172c7e26e28f
+      internalID: -370356706
       vertices: []
       indices: 
       edges: []
@@ -211,10 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      sword: -370356706
       human: -718504556
       coins: 1166264754
       money: 1542654287
+      food: -700532128
       castle: 1292768485
+      lock: -477202142
       iconsDouble_1: 1378114989
   spritePackingTag: 
   pSDRemoveMatte: 0
