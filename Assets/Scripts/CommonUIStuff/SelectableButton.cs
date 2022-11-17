@@ -10,12 +10,13 @@ namespace NovemberProject.CommonUIStuff
     public sealed class SelectableButton : MonoBehaviour
     {
         private readonly Subject<Unit> _onClicked = new();
+        private Color _unselectedColor;
 
         [SerializeField]
         private Color _selectedColor;
 
         [SerializeField]
-        private Color _unselectedColor;
+        private Image _targetGraghic;
 
         public Button Button { get; private set; } = null!;
         public IObservable<Unit> OnClicked => _onClicked;
@@ -25,6 +26,7 @@ namespace NovemberProject.CommonUIStuff
         private void Awake()
         {
             Button = GetComponent<Button>();
+            _unselectedColor = _targetGraghic.color;
             Button.OnClickAsObservable().Subscribe(OnButtonClicked);
         }
 
@@ -35,7 +37,7 @@ namespace NovemberProject.CommonUIStuff
                 return;
             }
 
-            Button.targetGraphic.color = _selectedColor;
+            _targetGraghic.color = _selectedColor;
             IsSelected = true;
         }
 
@@ -46,13 +48,13 @@ namespace NovemberProject.CommonUIStuff
                 return;
             }
 
-            Button.targetGraphic.color = _unselectedColor;
+            _targetGraghic.color = _unselectedColor;
             IsSelected = false;
         }
 
         private void OnButtonClicked(Unit _)
         {
-            Select();
+            // Select();
             _onClicked.OnNext(Unit.Default);
         }
     }

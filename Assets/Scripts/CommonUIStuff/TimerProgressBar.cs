@@ -34,7 +34,7 @@ namespace NovemberProject.CommonUIStuff
 
         private void OnUpdate(float deltaTime)
         {
-            _barImage.fillAmount = 1 - _timer.ProgressRate;
+            _barImage.fillAmount = _timer.ProgressRate;
         }
 
         private void OnTimerCanceled(IReadOnlyTimer timer)

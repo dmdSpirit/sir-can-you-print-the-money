@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using NovemberProject.Time;
@@ -11,7 +12,7 @@ namespace NovemberProject.Rounds.UI
 {
     public sealed class RoundTimer : UIElement<object?>
     {
-        private readonly CompositeDisposable _subs = new();
+        private IDisposable? _sub;
 
         [SerializeField]
         private TMP_Text _roundNumber = null!;
@@ -21,14 +22,14 @@ namespace NovemberProject.Rounds.UI
 
         protected override void OnShow(object? value)
         {
-            _subs.Clear();
+            _sub?.Dispose();
+            _sub= Game.Instance.RoundSystem.OnRoundTimerStarted.Subscribe(_ => OnRoundStarted());
             OnRoundStarted();
-            Game.Instance.RoundSystem.OnRoundStarted.Subscribe(_ => OnRoundStarted()).AddTo(_subs);
         }
 
         protected override void OnHide()
         {
-            _subs.Clear();
+            _sub?.Dispose();
         }
 
         private void OnRoundStarted()

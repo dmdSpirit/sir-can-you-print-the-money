@@ -11,6 +11,7 @@ namespace NovemberProject.CommonUIStuff
         private readonly Subject<int> _onButtonClicked = new();
         private int _selectedButton;
         private bool _isAnythingSelected;
+        private bool _isLocked;
 
         [SerializeField]
         private SelectableButton[] _buttons = null!;
@@ -28,6 +29,9 @@ namespace NovemberProject.CommonUIStuff
                     .Subscribe(_ => ButtonClickedHandler(clickedButtonIndex));
             }
         }
+
+        public void Lock() => _isLocked = true;
+        public void Unlock() => _isLocked = false;
 
         public void SetClickedButtonSilently(Button selectedButton)
         {
@@ -62,6 +66,11 @@ namespace NovemberProject.CommonUIStuff
 
         private void ButtonClickedHandler(int buttonIndex)
         {
+            if (_isLocked)
+            {
+                return;
+            }
+
             SetClickedButtonSilently(buttonIndex);
             _onButtonClicked.OnNext(buttonIndex);
         }

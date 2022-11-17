@@ -8,11 +8,12 @@ namespace NovemberProject.GameStates
     {
         protected override void OnEnter()
         {
-            Game.Instance.UIManager.HideRoundTimer();
             Game.Instance.UIManager.HideEndOfRoundPanel();
             Game.Instance.UIManager.HideRoundStartPanel();
             Game.Instance.UIManager.HideBuildingInfo();
             Game.Instance.UIManager.HideMainMenu();
+            Game.Instance.UIManager.HideRoundTimer();
+            Game.Instance.UIManager.HideTimeControls();
 #if UNITY_EDITOR
             Game.Instance.InputSystem.AddGlobalInputHandler<ToggleCheatMenuInputHandler>();
             Game.Instance.InputSystem.AddGlobalInputHandler<ToggleSystemPanelInputHandler>();
@@ -23,6 +24,8 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideCheatPanel();
 #endif
             Game.Instance.MoneyController.AddGovernmentMoney(100);
+            Game.Instance.TimeSystem.PauseTime();
+            Game.Instance.UIManager.LockTimeControls();
             Game.Instance.GameStateMachine.MainMenu();
         }
 

@@ -7,6 +7,8 @@ namespace NovemberProject.GameStates
     {
         protected override void OnEnter()
         {
+            Game.Instance.UIManager.HideRoundTimer();
+            Game.Instance.UIManager.HideTimeControls();
             Game.Instance.UIManager.ShowMainMenu();
         }
 

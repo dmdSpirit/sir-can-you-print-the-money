@@ -4,6 +4,7 @@ using NovemberProject.Buildings.UI;
 using NovemberProject.Cheats;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Rounds.UI;
+using NovemberProject.Time.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -37,6 +38,9 @@ namespace NovemberProject.System.UI
         private SystemInfoPanel _systemInfoPanel = null!;
 
         [SerializeField]
+        private TimeControlsPanel _timeControlsPanel = null;
+
+        [SerializeField]
         private LayerMask _layerMask;
 
 
@@ -62,6 +66,10 @@ namespace NovemberProject.System.UI
 
         public void ShowRoundTimer() => _roundTimer.Show(null);
         public void HideRoundTimer() => _roundTimer.Hide();
+        public void LockTimeControls() => _timeControlsPanel.Lock();
+        public void UnlockTimeControls() => _timeControlsPanel.Unlock();
+        public void ShowTimeControls() => _timeControlsPanel.Show(null);
+        public void HideTimeControls() => _timeControlsPanel.Hide();
         public void ShowRoundEndPanel() => _roundEndPanel.Show(null);
         public void HideEndOfRoundPanel() => _roundEndPanel.Hide();
 

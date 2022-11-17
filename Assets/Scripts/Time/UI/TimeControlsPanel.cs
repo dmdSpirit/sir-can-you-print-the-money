@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using UniRx;
@@ -6,11 +7,14 @@ using UnityEngine;
 
 namespace NovemberProject.Time.UI
 {
-    public sealed class TimeControlsPanel : InitializableBehaviour
+    public sealed class TimeControlsPanel : UIElement<object?>
     {
         private const int PAUSE_BUTTON_INDEX = 0;
         private const int PLAY_BUTTON_INDEX = 1;
         private const int SPEED_UP_BUTTON_INDEX = 2;
+
+        private bool _isLocked;
+        private IDisposable? _timeStatusSub;
 
         [SerializeField]
         private RadioButtonGroup _buttonsGroup = null!;
@@ -19,12 +23,33 @@ namespace NovemberProject.Time.UI
         {
             base.OnInitialized();
 
-            Game.Instance.TimeSystem.Status
-                .TakeUntilDisable(this)
-                .Subscribe(OnTimeSystemStatusChanged);
             _buttonsGroup.OnButtonClicked
                 .TakeUntilDisable(this)
                 .Subscribe(OnButtonClicked);
+        }
+
+        protected override void OnShow(object? value)
+        {
+            _timeStatusSub?.Dispose();
+            _timeStatusSub = Game.Instance.TimeSystem.Status
+                .Subscribe(OnTimeSystemStatusChanged);
+        }
+
+        protected override void OnHide()
+        {
+            _timeStatusSub?.Dispose();
+        }
+
+        public void Lock()
+        {
+            _isLocked = true;
+            _buttonsGroup.Lock();
+        }
+
+        public void Unlock()
+        {
+            _isLocked = false;
+            _buttonsGroup.Unlock();
         }
 
         private void OnTimeSystemStatusChanged(TimeSystemStatus status)
@@ -45,6 +70,11 @@ namespace NovemberProject.Time.UI
 
         private void OnButtonClicked(int buttonIndex)
         {
+            if (_isLocked)
+            {
+                return;
+            }
+
             switch (buttonIndex)
             {
                 case PAUSE_BUTTON_INDEX:

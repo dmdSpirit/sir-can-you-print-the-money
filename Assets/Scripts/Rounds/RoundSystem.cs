@@ -14,7 +14,7 @@ namespace NovemberProject.Rounds
 
         private readonly ReactiveProperty<int> _round = new();
         private readonly Subject<Unit> _onRoundEnded = new();
-        private readonly Subject<Unit> _onRoundStarted = new();
+        private readonly Subject<Unit> _onRoundTimerStarted = new();
 
         private Timer? _roundTimer;
 
@@ -23,7 +23,7 @@ namespace NovemberProject.Rounds
 
         public IReadOnlyReactiveProperty<int> Round => _round;
         public IObservable<Unit> OnRoundEnded => _onRoundEnded;
-        public IObservable<Unit> OnRoundStarted => _onRoundStarted;
+        public IObservable<Unit> OnRoundTimerStarted => _onRoundTimerStarted;
         public IReadOnlyTimer? RoundTimer => _roundTimer;
 
         public void ResetRounds()
@@ -41,7 +41,7 @@ namespace NovemberProject.Rounds
             _roundTimer = Game.Instance.TimeSystem.CreateTimer(_roundDuration, OnRoundTimerFinished);
             _roundTimer.Start();
 
-            _onRoundStarted.OnNext(Unit.Default);
+            _onRoundTimerStarted.OnNext(Unit.Default);
         }
 
         public void EndRound()

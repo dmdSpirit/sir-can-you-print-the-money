@@ -9,11 +9,15 @@ namespace NovemberProject.GameStates
         {
             Game.Instance.RoundSystem.StartRound();
             Game.Instance.UIManager.ShowRoundTimer();
+            Game.Instance.UIManager.UnlockTimeControls();
             Game.Instance.TimeSystem.RestoreAfterPause();
+            Game.Instance.UIManager.UnlockTimeControls();
         }
 
         protected override void OnExit()
         {
+            Game.Instance.UIManager.LockTimeControls();
+            Game.Instance.UIManager.HideRoundTimer();
         }
     }
 }
