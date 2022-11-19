@@ -8,5 +8,9 @@ namespace NovemberProject.Buildings
         ArmyTreasury = 2,
         FolkTreasury = 3,
         Farm = 4,
+        ArmyFoodStorage = 5,
+        FolkFoodStorage = 6,
+        Market = 7,
+        GuardTower = 8
     }
 }

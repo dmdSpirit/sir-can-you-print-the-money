@@ -9,7 +9,6 @@ namespace NovemberProject.System
     public sealed class ArmyManager : InitializableBehaviour
     {
         private readonly ReactiveProperty<int> _armyCount = new();
-        private readonly ReactiveProperty<int> _foodCount = new();
         private readonly ReactiveProperty<int> _salary = new();
 
         [SerializeField]
@@ -18,11 +17,12 @@ namespace NovemberProject.System
         [SerializeField]
         private int _startingArmyCount = 2;
 
+        [SerializeField]
+        private int _startingFood = 30;
+
         public IReactiveProperty<int> ArmyCount => _armyCount;
         public IReactiveProperty<int> Salary => _salary;
-        private IReactiveProperty<int> FoodCount => _foodCount;
-        
-        
+
         public void InitializeGameData()
         {
             _salary.Value = _startingArmySalary;
@@ -46,8 +46,8 @@ namespace NovemberProject.System
         public void BuyArmyForFood()
         {
             int newArmyCost = Game.Instance.CoreGameplay.NewArmyForFoodCost;
-            Assert.IsTrue(_foodCount.Value >= newArmyCost);
-            _foodCount.Value -= newArmyCost;
+            Assert.IsTrue(Game.Instance.FoodController.ArmyFood.Value >= newArmyCost);
+            Game.Instance.FoodController.SpendArmyFood(newArmyCost);
             _armyCount.Value++;
         }
 
@@ -66,13 +66,13 @@ namespace NovemberProject.System
         private void EatFood()
         {
             int foodToEat = _armyCount.Value * Game.Instance.CoreGameplay.FoodPerPerson;
-            Assert.IsTrue(_foodCount.Value >= foodToEat);
-            _foodCount.Value -= foodToEat;
+            Assert.IsTrue(Game.Instance.FoodController.ArmyFood.Value >= foodToEat);
+            Game.Instance.FoodController.SpendArmyFood(foodToEat);
         }
 
         private void KillStarved()
         {
-            int maxArmyToFeed = _foodCount.Value / Game.Instance.CoreGameplay.FoodPerPerson;
+            int maxArmyToFeed = Game.Instance.FoodController.ArmyFood.Value / Game.Instance.CoreGameplay.FoodPerPerson;
             int starvedArmy = _armyCount.Value - maxArmyToFeed;
             if (starvedArmy > 0)
             {

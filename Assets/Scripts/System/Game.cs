@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.GameStates;
@@ -31,6 +32,7 @@ namespace NovemberProject.System
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
         public MoneyController MoneyController { get; private set; } = null!;
+        public FoodController FoodController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public BuildingsController BuildingsController { get; private set; } = null!;
         public CoreGameplay CoreGameplay { get; private set; } = null!;
@@ -80,6 +82,7 @@ namespace NovemberProject.System
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             BuildingsController = FindObjectOfType<BuildingsController>();
             CoreGameplay = FindObjectOfType<CoreGameplay>();
+            FoodController = FindObjectOfType<FoodController>();
         }
 
         private void Initialize()

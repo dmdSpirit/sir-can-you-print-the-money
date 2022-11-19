@@ -2,27 +2,25 @@
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 using UnityEngine.UI;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.Money
 {
     public sealed class ResourceObjectFactory : InitializableBehaviour
     {
         [SerializeField]
-        private Sprite _coinImage = null!;
-
+        private GameObject _coinPrefab = null!;
         [SerializeField]
-        private GameObject _resourcePrefab = null!;
+        private GameObject _foodPrefab = null!;
 
         public GameObject Coin()
         {
-            GameObject coin = Instantiate(_resourcePrefab, transform);
-            var image = coin.GetComponentInChildren<Image>();
-            if (image != null)
-            {
-                image.sprite = _coinImage;
-            }
+            return Instantiate(_coinPrefab, transform);
+        }
 
-            return coin;
+        public GameObject Food()
+        {
+            return Instantiate(_foodPrefab, transform);
         }
     }
 }

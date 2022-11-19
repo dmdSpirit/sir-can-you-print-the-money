@@ -16,14 +16,24 @@ namespace NovemberProject.Money
         private readonly ReactiveProperty<int> _folkMoney = new();
 
         [SerializeField]
-        private float _height = 1f;
+        private int _startingGovernmentMoney = 100;
 
         [SerializeField]
-        private float _duration = 1f;
+        private int _startingArmyMoney = 0;
+
+        [SerializeField]
+        private int _startingFolkMoney = 13;
 
         public IReadOnlyReactiveProperty<int> GovernmentMoney => _governmentMoney;
         public IReadOnlyReactiveProperty<int> ArmyMoney => _armyMoney;
         public IReadOnlyReactiveProperty<int> FolkMoney => _folkMoney;
+
+        public void InitializeGameData()
+        {
+            _governmentMoney.Value = _startingGovernmentMoney;
+            _folkMoney.Value = _startingFolkMoney;
+            _armyMoney.Value = _startingArmyMoney;
+        }
 
         public void AddGovernmentMoney(int money)
         {
@@ -44,7 +54,8 @@ namespace NovemberProject.Money
             Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
             Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
             _governmentMoney.Value -= money;
-            ShowCoinMove(governmentTreasury.transform, armyTreasury.transform, _duration, () => _armyMoney.Value += money);
+            ShowCoinMove(governmentTreasury.transform, armyTreasury.transform,
+                () => _armyMoney.Value += money);
         }
 
         public void TransferMoneyFromArmyToFolkSilent(int money)
@@ -61,7 +72,7 @@ namespace NovemberProject.Money
             Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
             Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
             _armyMoney.Value -= money;
-            ShowCoinMove(armyTreasury.transform, folkTreasury.transform, _duration, () => _folkMoney.Value += money);
+            ShowCoinMove(armyTreasury.transform, folkTreasury.transform,() => _folkMoney.Value += money);
         }
 
         public void TransferMoneyFromFolkToGovernmentSilent(int money)
@@ -78,18 +89,14 @@ namespace NovemberProject.Money
             Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
             Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
             _folkMoney.Value -= money;
-            ShowCoinMove(folkTreasury.transform, governmentTreasury.transform, _duration,
+            ShowCoinMove(folkTreasury.transform, governmentTreasury.transform,
                 () => _governmentMoney.Value += money);
         }
 
-        private void ShowCoinMove(Transform start, Transform finish, float duration, Action callback)
+        private void ShowCoinMove(Transform start, Transform finish, Action callback)
         {
             ResourceMoveEffectSpawner moveEffectSpawner = Game.Instance.ResourceMoveEffectSpawner;
-            Vector3 startPosition = start.position;
-            startPosition.y += _height;
-            Vector3 finishPosition = finish.position;
-            finishPosition.y += _height;
-            MoveEffect effect = moveEffectSpawner.ShowMovingCoin(startPosition, finishPosition, duration);
+            MoveEffect effect = moveEffectSpawner.ShowMovingCoin(start.position, finish.position);
             effect.OnFinished.Subscribe(_ => callback.Invoke());
         }
     }
