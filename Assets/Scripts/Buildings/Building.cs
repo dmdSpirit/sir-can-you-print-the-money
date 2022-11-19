@@ -35,14 +35,14 @@ namespace NovemberProject.Buildings
             }
             else
             {
-                Game.Instance.MessageBroker.Receive<BehaviourInitialized>()
+                Game.Instance.MessageBroker.Receive<BehaviourIsInitializedMessage>()
                     .TakeUntilDisable(this)
                     .Where(message => message.InitializableBehaviour is BuildingsController)
                     .Subscribe(OnBuildingControllerInitialized);
             }
         }
 
-        private void OnBuildingControllerInitialized(BehaviourInitialized message)
+        private void OnBuildingControllerInitialized(BehaviourIsInitializedMessage message)
         {
             var controller = (BuildingsController)message.InitializableBehaviour;
             controller.RegisterBuilding(this);

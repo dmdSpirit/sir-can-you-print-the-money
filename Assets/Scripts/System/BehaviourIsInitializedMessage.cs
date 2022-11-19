@@ -3,11 +3,11 @@ using NovemberProject.CommonUIStuff;
 
 namespace NovemberProject.System
 {
-    public class BehaviourInitialized : IMessage
+    public class BehaviourIsInitializedMessage : IMessage
     {
         public readonly InitializableBehaviour InitializableBehaviour;
 
-        public BehaviourInitialized(InitializableBehaviour initializableBehaviour)
+        public BehaviourIsInitializedMessage(InitializableBehaviour initializableBehaviour)
         {
             InitializableBehaviour = initializableBehaviour;
         }
