@@ -9,6 +9,7 @@ namespace NovemberProject.GameStates
         {
             Game.Instance.TimeSystem.ResetTimeScale();
             Game.Instance.RoundSystem.ResetRounds();
+            Game.Instance.CoreGameplay.InitializeGameData();
             Game.Instance.GameStateMachine.StartRound();
         }
 

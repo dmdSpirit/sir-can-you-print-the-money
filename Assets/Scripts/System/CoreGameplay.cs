@@ -8,14 +8,12 @@ namespace NovemberProject.System
     [RequireComponent(typeof(ArmyManager))]
     public sealed class CoreGameplay : InitializableBehaviour
     {
-        private FolkManager _folkManager = null!;
-        private ArmyManager _armyManager = null!;
-
         [SerializeField]
         private int _foodPerPerson = 2;
 
         [SerializeField]
         private int _newFolkForFoodCost = 10;
+
         [SerializeField]
         private int _newArmyForFoodCost = 10;
 
@@ -23,22 +21,31 @@ namespace NovemberProject.System
         public int NewFolkForFoodCost => _newFolkForFoodCost;
         public int NewArmyForFoodCost => _newFolkForFoodCost;
 
+        public FolkManager FolkManager { get; private set; } = null!;
+        public ArmyManager ArmyManager { get; private set; } = null!;
+
         private void Awake()
         {
-            _folkManager = GetComponent<FolkManager>();
-            _armyManager = GetComponent<ArmyManager>();
+            FolkManager = GetComponent<FolkManager>();
+            ArmyManager = GetComponent<ArmyManager>();
+        }
+
+        public void InitializeGameData()
+        {
+            FolkManager.InitializeGameData();
+            ArmyManager.InitializeGameData();
         }
 
         public void StartRound()
         {
-            _folkManager.StartRound();
-            _armyManager.StartRound();
+            FolkManager.StartRound();
+            ArmyManager.StartRound();
         }
 
         public void EndRound()
         {
-            _folkManager.EndRound();
-            _armyManager.EndRound();
+            FolkManager.EndRound();
+            ArmyManager.EndRound();
         }
     }
 }

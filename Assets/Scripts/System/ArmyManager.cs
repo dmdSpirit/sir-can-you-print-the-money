@@ -13,7 +13,7 @@ namespace NovemberProject.System
         private readonly ReactiveProperty<int> _salary = new();
 
         [SerializeField]
-        private int _armySalary = 5;
+        private int _startingArmySalary = 5;
 
         [SerializeField]
         private int _startingArmyCount = 2;
@@ -23,6 +23,12 @@ namespace NovemberProject.System
         private IReactiveProperty<int> FoodCount => _foodCount;
         
         
+        public void InitializeGameData()
+        {
+            _salary.Value = _startingArmySalary;
+            _armyCount.Value = _startingArmyCount;
+        }
+
         public void StartRound()
         {
             DesertUnpaid();
@@ -36,10 +42,10 @@ namespace NovemberProject.System
         }
 
         public void SetSalary(int salary) => _salary.Value = salary;
-        
+
         public void BuyArmyForFood()
         {
-            int newArmyCost = Game.Instance.CoreGameplay.NewFolkForFoodCost;
+            int newArmyCost = Game.Instance.CoreGameplay.NewArmyForFoodCost;
             Assert.IsTrue(_foodCount.Value >= newArmyCost);
             _foodCount.Value -= newArmyCost;
             _armyCount.Value++;
@@ -48,14 +54,19 @@ namespace NovemberProject.System
         private void PaySalary()
         {
             int salaryToPay = _salary.Value * _armyCount.Value;
-            Assert.IsTrue(Game.Instance.MoneyController.GovernmentMoney.Value>=salaryToPay);
+            if (salaryToPay == 0)
+            {
+                return;
+            }
+
+            Assert.IsTrue(Game.Instance.MoneyController.GovernmentMoney.Value >= salaryToPay);
             Game.Instance.MoneyController.TransferMoneyFromGovernmentToArmy(salaryToPay);
         }
 
         private void EatFood()
         {
             int foodToEat = _armyCount.Value * Game.Instance.CoreGameplay.FoodPerPerson;
-            Assert.IsTrue(_foodCount.Value>=foodToEat);
+            Assert.IsTrue(_foodCount.Value >= foodToEat);
             _foodCount.Value -= foodToEat;
         }
 
@@ -74,7 +85,7 @@ namespace NovemberProject.System
         {
             int governmentMoney = Game.Instance.MoneyController.GovernmentMoney.Value;
             int maxAffordableArmy = governmentMoney / _salary.Value;
-            int numberToDesert = maxAffordableArmy - _armyCount.Value;
+            int numberToDesert = _armyCount.Value - maxAffordableArmy;
             if (numberToDesert > 0)
             {
                 Game.PublishMessage(new ArmyDesertedMessage(numberToDesert));

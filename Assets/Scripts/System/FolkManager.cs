@@ -3,6 +3,7 @@ using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System
 {
@@ -17,7 +18,7 @@ namespace NovemberProject.System
         private int _tax;
 
         [SerializeField]
-        private int _folkTax = 2;
+        private int _startingFolkTax = 2;
 
         [SerializeField]
         private int _startingFolkCount = 2;
@@ -27,6 +28,13 @@ namespace NovemberProject.System
         public IReadOnlyReactiveProperty<int> FarmFolk => _farmFolk;
         public IReadOnlyReactiveProperty<int> IdleFolk => _idleFolk;
         public IReadOnlyReactiveProperty<int> MarketFolk => _marketFolk;
+
+        public void InitializeGameData()
+        {
+            _folkCount.Value = _startingFolkCount;
+            _idleFolk.Value = _startingFolkCount;
+            _tax = _startingFolkTax;
+        }
 
         public void StartRound()
         {
@@ -82,6 +90,11 @@ namespace NovemberProject.System
         private void PayTaxes()
         {
             int taxesToPay = _folkCount.Value * _tax;
+            if (taxesToPay == 0)
+            {
+                return;
+            }
+
             Assert.IsTrue(Game.Instance.MoneyController.FolkMoney.Value >= taxesToPay);
             Game.Instance.MoneyController.TransferMoneyFromFolkToGovernment(taxesToPay);
         }
@@ -123,6 +136,37 @@ namespace NovemberProject.System
         {
             Assert.IsTrue(_folkCount.Value >= numberToExecute);
             _folkCount.Value -= numberToExecute;
+            if (_idleFolk.Value > 0)
+            {
+                if (_idleFolk.Value >= numberToExecute)
+                {
+                    _idleFolk.Value -= numberToExecute;
+                    Assert.IsTrue(ValidateTotalCount());
+                    return;
+                }
+
+                numberToExecute -= _idleFolk.Value;
+                _idleFolk.Value = 0;
+            }
+
+            if (_farmFolk.Value > 0)
+            {
+                if (_farmFolk.Value >= numberToExecute)
+                {
+                    _farmFolk.Value -= numberToExecute;
+                    Assert.IsTrue(ValidateTotalCount());
+                    return;
+                }
+            }
+
+            _marketFolk.Value -= numberToExecute;
+            Assert.IsTrue(ValidateTotalCount());
         }
+
+        private bool ValidateTotalCount()
+        {
+            return _idleFolk.Value + _farmFolk.Value + _marketFolk.Value == _folkCount.Value;
+        }
+
     }
 }

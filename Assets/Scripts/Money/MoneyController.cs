@@ -41,10 +41,10 @@ namespace NovemberProject.Money
         {
             Assert.IsTrue(_governmentMoney.Value >= money);
             BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building governmentMarket = buildingController.GetBuilding(BuildingType.GovernmentMarket);
-            Building armyMarket = buildingController.GetBuilding(BuildingType.ArmyMarket);
+            Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
+            Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
             _governmentMoney.Value -= money;
-            ShowCoinMove(governmentMarket.transform, armyMarket.transform, _duration, () => _armyMoney.Value += money);
+            ShowCoinMove(governmentTreasury.transform, armyTreasury.transform, _duration, () => _armyMoney.Value += money);
         }
 
         public void TransferMoneyFromArmyToFolkSilent(int money)
@@ -58,10 +58,10 @@ namespace NovemberProject.Money
         {
             Assert.IsTrue(_armyMoney.Value >= money);
             BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building armyMarket = buildingController.GetBuilding(BuildingType.ArmyMarket);
-            Building folkMarket = buildingController.GetBuilding(BuildingType.FolkMarket);
+            Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
+            Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
             _armyMoney.Value -= money;
-            ShowCoinMove(armyMarket.transform, folkMarket.transform, _duration, () => _folkMoney.Value += money);
+            ShowCoinMove(armyTreasury.transform, folkTreasury.transform, _duration, () => _folkMoney.Value += money);
         }
 
         public void TransferMoneyFromFolkToGovernmentSilent(int money)
@@ -75,10 +75,10 @@ namespace NovemberProject.Money
         {
             Assert.IsTrue(_folkMoney.Value >= money);
             BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building folkMarket = buildingController.GetBuilding(BuildingType.FolkMarket);
-            Building governmentMarket = buildingController.GetBuilding(BuildingType.GovernmentMarket);
+            Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
+            Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
             _folkMoney.Value -= money;
-            ShowCoinMove(folkMarket.transform, governmentMarket.transform, _duration,
+            ShowCoinMove(folkTreasury.transform, governmentTreasury.transform, _duration,
                 () => _governmentMoney.Value += money);
         }
 
