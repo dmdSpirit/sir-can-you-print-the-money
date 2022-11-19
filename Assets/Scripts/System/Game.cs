@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.GameStates;
@@ -31,13 +32,15 @@ namespace NovemberProject.System
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
         public MoneyController MoneyController { get; private set; } = null!;
+        public FoodController FoodController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public BuildingsController BuildingsController { get; private set; } = null!;
+        public CoreGameplay CoreGameplay { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
         public IObservable<State> OnStateChanged => GameStateMachine.OnStateChanged;
-        public MessageBroker MessageBroker = new();
+        public MessageBroker MessageBroker { get; } = new();
 
         private void Start()
         {
@@ -46,6 +49,8 @@ namespace NovemberProject.System
             Initialize();
             GameStateMachine.InitializeGame();
         }
+
+        public static void PublishMessage(IMessage message) => Instance.MessageBroker.Publish(message);
 
         private static Game GetInstance()
         {
@@ -76,6 +81,8 @@ namespace NovemberProject.System
             MoneyController = FindObjectOfType<MoneyController>();
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             BuildingsController = FindObjectOfType<BuildingsController>();
+            CoreGameplay = FindObjectOfType<CoreGameplay>();
+            FoodController = FindObjectOfType<FoodController>();
         }
 
         private void Initialize()

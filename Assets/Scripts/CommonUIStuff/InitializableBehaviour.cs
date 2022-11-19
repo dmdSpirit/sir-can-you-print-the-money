@@ -23,7 +23,7 @@ namespace NovemberProject.CommonUIStuff
         private void Initialize()
         {
             OnInitialized();
-            Game.Instance.MessageBroker.Publish(new BehaviourInitialized(this));
+            Game.PublishMessage(new BehaviourIsInitializedMessage(this));
         }
 
         protected virtual void OnInitialized()

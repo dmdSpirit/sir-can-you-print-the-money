@@ -164,8 +164,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+--- !u!114 &803239951602069668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+  m_PrefabInstance: {fileID: 5565139870860679992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1463769438726629984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+  m_PrefabInstance: {fileID: 5565139870860679992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6318968588427045176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463769438726629984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5c5c08ccb24d61ae48bb115adc6fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: Farm
+  _description: Farm description
+  _image: {fileID: 21300000, guid: bf6ef44206eab864e90658da74257c30, type: 3}
+  _numberOfWorkersText: {fileID: 803239951602069668}
 --- !u!4 &1463769438726629991 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}

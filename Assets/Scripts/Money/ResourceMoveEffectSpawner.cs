@@ -16,11 +16,29 @@ namespace NovemberProject.Money
         private ResourceObjectFactory _resourceObjectFactory = null!;
 
         [SerializeField]
+        private float _height;
+
+        [SerializeField]
+        private float _moveDuration = .75f;
+
+        [SerializeField]
         private Ease _movingEase;
 
-        public MoveEffect ShowMovingCoin(Vector3 start, Vector3 finish, float time)
+        public MoveEffect ShowMovingCoin(Vector3 start, Vector3 finish)
         {
-            var effect = new MoveEffect(_resourceObjectFactory.Coin(), start, finish, time);
+            return ShowMovingEffect(start, finish, _resourceObjectFactory.Coin());
+        }
+
+        public MoveEffect ShowMovingFood(Vector3 start, Vector3 finish)
+        {
+            return ShowMovingEffect(start, finish, _resourceObjectFactory.Food());
+        }
+
+        private MoveEffect ShowMovingEffect(Vector3 start, Vector3 finish, GameObject movingObject)
+        {
+            start.y += _height;
+            finish.y += _height;
+            var effect = new MoveEffect(movingObject, start, finish, _moveDuration);
             _moveEffects.Add(effect);
             effect.SetEase(_movingEase);
             effect.OnFinished.Subscribe(OnEffectFinished);

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class Building : InitializableBehaviour
+    public class Building : InitializableBehaviour
     {
         [SerializeField]
         private string _title = null!;
@@ -17,14 +17,11 @@ namespace NovemberProject.Buildings
 
         [SerializeField]
         private Sprite _image = null!;
-
-        [SerializeField]
-        private BuildingType _buildingType;
-
+        
         public string Title => _title;
         public string Description => _description;
         public Sprite Image => _image;
-        public BuildingType BuildingType => _buildingType;
+        public virtual BuildingType BuildingType { get; } = BuildingType.None;
 
         protected override void OnInitialized()
         {
@@ -35,14 +32,14 @@ namespace NovemberProject.Buildings
             }
             else
             {
-                Game.Instance.MessageBroker.Receive<BehaviourInitialized>()
+                Game.Instance.MessageBroker.Receive<BehaviourIsInitializedMessage>()
                     .TakeUntilDisable(this)
                     .Where(message => message.InitializableBehaviour is BuildingsController)
                     .Subscribe(OnBuildingControllerInitialized);
             }
         }
 
-        private void OnBuildingControllerInitialized(BehaviourInitialized message)
+        private void OnBuildingControllerInitialized(BehaviourIsInitializedMessage message)
         {
             var controller = (BuildingsController)message.InitializableBehaviour;
             controller.RegisterBuilding(this);

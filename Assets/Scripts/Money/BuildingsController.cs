@@ -11,7 +11,12 @@ namespace NovemberProject.Money
 
         public void RegisterBuilding(Building building)
         {
-            /// _buildings.Add(building.BuildingType, building);
+            if (building.BuildingType == BuildingType.None)
+            {
+                return;
+            }
+
+            _buildings.Add(building.BuildingType, building);
         }
 
         public Building GetBuilding(BuildingType buildingType)

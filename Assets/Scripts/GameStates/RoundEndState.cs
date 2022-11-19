@@ -12,6 +12,7 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.ShowRoundEndPanel();
             Game.Instance.TimeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
+            Game.Instance.CoreGameplay.EndRound();
         }
 
         protected override void OnExit()

@@ -10,6 +10,7 @@ namespace NovemberProject.GameStates
             Game.Instance.RoundSystem.IncrementRound();
             Game.Instance.UIManager.ShowRoundStartPanel();
             Game.Instance.UIManager.ShowTimeControls();
+            Game.Instance.CoreGameplay.StartRound();
         }
 
         protected override void OnExit()

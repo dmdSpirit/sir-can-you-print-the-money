@@ -55,6 +55,27 @@ namespace NovemberProject.Time
             _timerSubs.Dispose();
         }
 
+        public void ResetTimers()
+        {
+            var timers = _timers.ToArray();
+            for (var index = 0; index < timers.Length; index++)
+            {
+                Timer timer = timers[index];
+                timer.Cancel();
+            }
+
+            _timers.Clear();
+
+            var unscaledTimers = _unscaledTimers.ToArray();
+            for (var index = 0; index < unscaledTimers.Length; index++)
+            {
+                Timer unscaledTimer = _unscaledTimers[index];
+                unscaledTimer.Cancel();
+            }
+
+            _unscaledTimers.Clear();
+        }
+
         public void ResetTimeScale()
         {
             _timeScale.Value = DEFAULT_TIME_SCALE;

@@ -16,14 +16,24 @@ namespace NovemberProject.Money
         private readonly ReactiveProperty<int> _folkMoney = new();
 
         [SerializeField]
-        private float _height = 1f;
+        private int _startingGovernmentMoney = 100;
 
         [SerializeField]
-        private float _duration = 1f;
+        private int _startingArmyMoney = 0;
+
+        [SerializeField]
+        private int _startingFolkMoney = 13;
 
         public IReadOnlyReactiveProperty<int> GovernmentMoney => _governmentMoney;
         public IReadOnlyReactiveProperty<int> ArmyMoney => _armyMoney;
         public IReadOnlyReactiveProperty<int> FolkMoney => _folkMoney;
+
+        public void InitializeGameData()
+        {
+            _governmentMoney.Value = _startingGovernmentMoney;
+            _folkMoney.Value = _startingFolkMoney;
+            _armyMoney.Value = _startingArmyMoney;
+        }
 
         public void AddGovernmentMoney(int money)
         {
@@ -41,10 +51,11 @@ namespace NovemberProject.Money
         {
             Assert.IsTrue(_governmentMoney.Value >= money);
             BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building governmentMarket = buildingController.GetBuilding(BuildingType.GovernmentMarket);
-            Building armyMarket = buildingController.GetBuilding(BuildingType.ArmyMarket);
+            Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
+            Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
             _governmentMoney.Value -= money;
-            ShowCoinMove(governmentMarket.transform, armyMarket.transform, _duration, () => _armyMoney.Value += money);
+            ShowCoinMove(governmentTreasury.transform, armyTreasury.transform,
+                () => _armyMoney.Value += money);
         }
 
         public void TransferMoneyFromArmyToFolkSilent(int money)
@@ -58,10 +69,10 @@ namespace NovemberProject.Money
         {
             Assert.IsTrue(_armyMoney.Value >= money);
             BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building armyMarket = buildingController.GetBuilding(BuildingType.ArmyMarket);
-            Building folkMarket = buildingController.GetBuilding(BuildingType.FolkMarket);
+            Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
+            Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
             _armyMoney.Value -= money;
-            ShowCoinMove(armyMarket.transform, folkMarket.transform, _duration, () => _folkMoney.Value += money);
+            ShowCoinMove(armyTreasury.transform, folkTreasury.transform,() => _folkMoney.Value += money);
         }
 
         public void TransferMoneyFromFolkToGovernmentSilent(int money)
@@ -75,21 +86,17 @@ namespace NovemberProject.Money
         {
             Assert.IsTrue(_folkMoney.Value >= money);
             BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building folkMarket = buildingController.GetBuilding(BuildingType.FolkMarket);
-            Building governmentMarket = buildingController.GetBuilding(BuildingType.GovernmentMarket);
+            Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
+            Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
             _folkMoney.Value -= money;
-            ShowCoinMove(folkMarket.transform, governmentMarket.transform, _duration,
+            ShowCoinMove(folkTreasury.transform, governmentTreasury.transform,
                 () => _governmentMoney.Value += money);
         }
 
-        private void ShowCoinMove(Transform start, Transform finish, float duration, Action callback)
+        private void ShowCoinMove(Transform start, Transform finish, Action callback)
         {
             ResourceMoveEffectSpawner moveEffectSpawner = Game.Instance.ResourceMoveEffectSpawner;
-            Vector3 startPosition = start.position;
-            startPosition.y += _height;
-            Vector3 finishPosition = finish.position;
-            finishPosition.y += _height;
-            MoveEffect effect = moveEffectSpawner.ShowMovingCoin(startPosition, finishPosition, duration);
+            MoveEffect effect = moveEffectSpawner.ShowMovingCoin(start.position, finish.position);
             effect.OnFinished.Subscribe(_ => callback.Invoke());
         }
     }
