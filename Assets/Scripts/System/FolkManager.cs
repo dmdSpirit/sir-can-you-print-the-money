@@ -3,6 +3,7 @@ using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System
 {
@@ -12,8 +13,7 @@ namespace NovemberProject.System
         private readonly ReactiveProperty<int> _farmFolk = new();
         private readonly ReactiveProperty<int> _idleFolk = new();
         private readonly ReactiveProperty<int> _marketFolk = new();
-
-        private int _tax;
+        private readonly ReactiveProperty<int> _tax = new();
 
         [SerializeField]
         private int _startingFolkTax = 2;
@@ -31,12 +31,13 @@ namespace NovemberProject.System
         public IReadOnlyReactiveProperty<int> FarmFolk => _farmFolk;
         public IReadOnlyReactiveProperty<int> IdleFolk => _idleFolk;
         public IReadOnlyReactiveProperty<int> MarketFolk => _marketFolk;
+        public IReadOnlyReactiveProperty<int> Tax => _tax;
 
         public void InitializeGameData()
         {
             _folkCount.Value = _startingFolkCount;
             _idleFolk.Value = _startingFolkCount - _startingFarmWorkers - _startingMarketWorkers;
-            _tax = _startingFolkTax;
+            _tax.Value = _startingFolkTax;
             _farmFolk.Value = _startingFarmWorkers;
             _marketFolk.Value = _startingMarketWorkers;
         }
@@ -51,8 +52,6 @@ namespace NovemberProject.System
             PayTaxes();
             EatFood();
         }
-
-        public void SetTax(int tax) => _tax = tax;
 
         public void BuyFolkForFood()
         {
@@ -94,7 +93,7 @@ namespace NovemberProject.System
 
         private void PayTaxes()
         {
-            int taxesToPay = _folkCount.Value * _tax;
+            int taxesToPay = _folkCount.Value * _tax.Value;
             if (taxesToPay == 0)
             {
                 return;
@@ -116,7 +115,7 @@ namespace NovemberProject.System
             int folkMoney = Game.Instance.MoneyController.FolkMoney.Value;
             int foodPerPerson = Game.Instance.CoreGameplay.FoodPerPerson;
             int maxFolkToFeed = Game.Instance.FoodController.FolkFood.Value / foodPerPerson;
-            int maxFolkToAffordTax = folkMoney / _tax;
+            int maxFolkToAffordTax = folkMoney / _tax.Value;
             int maxFolkToLive = Mathf.Min(maxFolkToFeed, maxFolkToAffordTax, _folkCount.Value);
             int starvedFolk = _folkCount.Value - maxFolkToFeed;
             if (starvedFolk > 0)
@@ -171,6 +170,17 @@ namespace NovemberProject.System
         private bool ValidateTotalCount()
         {
             return _idleFolk.Value + _farmFolk.Value + _marketFolk.Value == _folkCount.Value;
+        }
+
+        public void RaiseTax()
+        {
+            _tax.Value++;
+        }
+
+        public void LowerTax()
+        {
+            Assert.IsTrue(_tax.Value > 1);
+            _tax.Value--;
         }
     }
 }

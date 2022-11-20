@@ -3,6 +3,7 @@ using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System
 {
@@ -97,6 +98,17 @@ namespace NovemberProject.System
         {
             Assert.IsTrue(_armyCount.Value >= delta);
             _armyCount.Value -= delta;
+        }
+
+        public void RaiseSalary()
+        {
+            _salary.Value++;
+        }
+
+        public void LowerSalary()
+        {
+            Assert.IsTrue(_salary.Value > 1);
+            _salary.Value--;
         }
     }
 }
