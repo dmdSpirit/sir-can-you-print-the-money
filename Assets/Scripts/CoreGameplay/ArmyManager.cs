@@ -86,7 +86,7 @@ namespace NovemberProject.CoreGameplay
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int maxArmyToFeed = foodController.ArmyFood.Value / coreGameplay.FoodPerPerson;
             int starvedArmy = _armyCount.Value - maxArmyToFeed;
-            if (starvedArmy == 0)
+            if (starvedArmy <= 0)
             {
                 return;
             }
@@ -107,7 +107,7 @@ namespace NovemberProject.CoreGameplay
             int governmentMoney = moneyController.GovernmentMoney.Value;
             int maxAffordableArmy = governmentMoney / _salary.Value;
             int numberToDesert = _armyCount.Value - maxAffordableArmy;
-            if (numberToDesert == 0)
+            if (numberToDesert <= 0)
             {
                 return;
             }

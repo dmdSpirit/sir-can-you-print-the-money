@@ -107,7 +107,7 @@ namespace NovemberProject.CoreGameplay
         private void PayTaxes()
         {
             int taxesToPay = _folkCount.Value * _tax.Value;
-            if (taxesToPay == 0)
+            if (taxesToPay <= 0)
             {
                 return;
             }
@@ -186,7 +186,7 @@ namespace NovemberProject.CoreGameplay
         private static void KillFolk(IReactiveProperty<int> folkCount, ref int numberToKill)
         {
             // ReSharper disable once ComplexConditionExpression
-            if (numberToKill == 0 || folkCount.Value == 0)
+            if (numberToKill <= 0 || folkCount.Value == 0)
             {
                 return;
             }
