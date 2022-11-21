@@ -9,6 +9,7 @@ namespace NovemberProject.MovingResources
     public sealed class MoveEffect
     {
         private readonly Subject<MoveEffect> _onFinished = new();
+        private readonly Subject<MoveEffect> _onReadyToDestroy = new();
 
         private readonly Vector3 _start;
         private readonly Vector3 _finish;
@@ -18,6 +19,7 @@ namespace NovemberProject.MovingResources
 
         public GameObject MovingObject { get; }
         public IObservable<MoveEffect> OnFinished => _onFinished;
+        public IObservable<MoveEffect> OnReadyToDestroy => _onReadyToDestroy;
 
         // ReSharper disable once TooManyDependencies
         public MoveEffect(GameObject movingObject, Vector3 start, Vector3 finish, float time = 1f)
@@ -37,7 +39,13 @@ namespace NovemberProject.MovingResources
             medianPoint.y += 1;
             MovingObject.transform.DOPath(new[] { _start, medianPoint, _finish }, _time, PathType.CatmullRom)
                 .SetEase(_ease)
-                .onComplete += () => _onFinished.OnNext(this);
+                .OnComplete(MoveFinished);
+        }
+
+        private void MoveFinished()
+        {
+            _onFinished.OnNext(this);
+            _onReadyToDestroy.OnNext(this);
         }
     }
 }

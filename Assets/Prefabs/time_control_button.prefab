@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedColor: {r: 1, g: 0.5803922, b: 0.38431376, a: 1}
-  _targetGraphic: {fileID: 6119954749919405144}
+  _targetGraphic: {fileID: 7714072949218391051}
 --- !u!1 &8168137521036189419
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,8 +3,8 @@ namespace NovemberProject.GameStates
 {
     public enum GameOverType
     {
-        None,
-        NoArmy,
-        NoFolk
+        None = 0,
+        NoArmy = 1,
+        NoFolk = 2
     }
 }

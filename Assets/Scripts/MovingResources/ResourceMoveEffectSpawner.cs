@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using NovemberProject.CommonUIStuff;
@@ -11,6 +12,7 @@ namespace NovemberProject.MovingResources
     public sealed class ResourceMoveEffectSpawner : InitializableBehaviour
     {
         private readonly List<MoveEffect> _moveEffects = new();
+        private readonly Subject<Unit> _onEffectsFinished = new();
 
         [SerializeField]
         private ResourceObjectFactory _resourceObjectFactory = null!;
@@ -23,6 +25,9 @@ namespace NovemberProject.MovingResources
 
         [SerializeField]
         private Ease _movingEase;
+
+        public IReadOnlyList<MoveEffect> MoveEffects => _moveEffects;
+        public IObservable<Unit> OnEffectsFinished => _onEffectsFinished;
 
         public MoveEffect ShowMovingCoin(Vector3 start, Vector3 finish)
         {
@@ -41,16 +46,20 @@ namespace NovemberProject.MovingResources
             var effect = new MoveEffect(movingObject, start, finish, _moveDuration);
             _moveEffects.Add(effect);
             effect.SetEase(_movingEase);
-            effect.OnFinished.Subscribe(OnEffectFinished);
+            effect.OnReadyToDestroy.Subscribe(OnEffectReadyToDestroy);
             effect.Start();
             return effect;
         }
 
-        private void OnEffectFinished(MoveEffect effect)
+        private void OnEffectReadyToDestroy(MoveEffect effect)
         {
             Assert.IsTrue(_moveEffects.Contains(effect));
             _moveEffects.Remove(effect);
             Destroy(effect.MovingObject);
+            if (_moveEffects.Count == 0)
+            {
+                _onEffectsFinished.OnNext(Unit.Default);
+            }
         }
     }
 }

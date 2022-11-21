@@ -36,7 +36,7 @@ namespace NovemberProject.GameStates.UI
             _noFolkPanel.SetActive(false);
         }
 
-        private void ToMainMenuClicked()
+        private static void ToMainMenuClicked()
         {
             Game.Instance.GameStateMachine.MainMenu();
         }

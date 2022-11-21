@@ -59,7 +59,7 @@ namespace NovemberProject.Buildings
         private bool IsAbleToTrade()
         {
             return Game.Instance.FoodController.FolkFood.Value >= _foodChangedPerTrade
-                   && Game.Instance.FolkManager.FarmFolk.Value >= 1
+                   && Game.Instance.FolkManager.MarketFolk.Value >= 1
                    && Game.Instance.MoneyController.ArmyMoney.Value >= _foodChangedPerTrade * _foodCostPerUnit;
         }
 
