@@ -1,10 +1,11 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using TMPro;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject.System
+namespace NovemberProject.System.UI
 {
     public sealed class IdleFolkPanel : InitializableBehaviour
     {
@@ -16,7 +17,7 @@ namespace NovemberProject.System
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            _folkManager = Game.Instance.CoreGameplay.FolkManager;
+            _folkManager = Game.Instance.FolkManager;
             _folkManager.IdleFolk
                 .TakeUntilDisable(this)
                 .Subscribe(OnCountChanged);

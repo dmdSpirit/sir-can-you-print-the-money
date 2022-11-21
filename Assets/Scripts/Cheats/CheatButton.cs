@@ -16,7 +16,7 @@ namespace NovemberProject.Cheats
 
         [SerializeField]
         private TMP_Text _title = null!;
-        
+
         protected override void OnInitialized()
         {
             base.OnInitialized();

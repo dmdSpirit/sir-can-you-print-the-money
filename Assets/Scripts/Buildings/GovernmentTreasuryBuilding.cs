@@ -1,5 +1,5 @@
 ﻿#nullable enable
-using NovemberProject.Money;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
 using UniRx;

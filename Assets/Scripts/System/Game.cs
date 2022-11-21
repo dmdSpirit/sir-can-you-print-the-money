@@ -3,9 +3,11 @@ using System;
 using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
+using NovemberProject.CoreGameplay;
 using NovemberProject.GameStates;
-using NovemberProject.Money;
+using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
+using NovemberProject.System.Messages;
 using NovemberProject.System.UI;
 using NovemberProject.Time;
 using UniRx;
@@ -35,7 +37,9 @@ namespace NovemberProject.System
         public FoodController FoodController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public BuildingsController BuildingsController { get; private set; } = null!;
-        public CoreGameplay CoreGameplay { get; private set; } = null!;
+        public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
+        public FolkManager FolkManager => CoreGameplay.FolkManager;
+        public ArmyManager ArmyManager => CoreGameplay.ArmyManager;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
@@ -81,7 +85,7 @@ namespace NovemberProject.System
             MoneyController = FindObjectOfType<MoneyController>();
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             BuildingsController = FindObjectOfType<BuildingsController>();
-            CoreGameplay = FindObjectOfType<CoreGameplay>();
+            CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
             FoodController = FindObjectOfType<FoodController>();
         }
 

@@ -37,7 +37,7 @@ namespace NovemberProject.Rounds.UI
         {
         }
 
-        private void OnNextRound(Unit _)
+        private static void OnNextRound(Unit _)
         {
             Game.Instance.GameStateMachine.StartRound();
         }

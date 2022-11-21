@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 
-namespace NovemberProject.System
+namespace NovemberProject.System.Messages
 {
     public class BehaviourIsInitializedMessage : IMessage
     {

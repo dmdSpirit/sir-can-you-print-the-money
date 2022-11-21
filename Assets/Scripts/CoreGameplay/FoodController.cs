@@ -1,13 +1,14 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.Buildings;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.Money;
+using NovemberProject.MovingResources;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.Buildings
+namespace NovemberProject.CoreGameplay
 {
     public sealed class FoodController : InitializableBehaviour
     {

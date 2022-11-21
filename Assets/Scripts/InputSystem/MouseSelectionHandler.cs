@@ -20,9 +20,13 @@ namespace NovemberProject.InputSystem
             }
 
             CameraController cameraController = Game.Instance.CameraController;
-            Camera camera = cameraController.MainCamera;
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             BuildingSelector buildingSelector = Game.Instance.BuildingSelector;
+            RaycastBuildingSelection(cameraController, buildingSelector);
+        }
+
+        private static void RaycastBuildingSelection(CameraController cameraController, BuildingSelector buildingSelector)
+        {
+            Ray ray = cameraController.MainCamera.ScreenPointToRay(Input.mousePosition);
             UIManager uiManager = Game.Instance.UIManager;
             LayerMask layerMask = buildingSelector.LayerMask | uiManager.LayerMask;
             if (Physics.Raycast(ray, out RaycastHit hit, RAYCAST_MAX_DISTANCE, layerMask: layerMask))
@@ -33,11 +37,11 @@ namespace NovemberProject.InputSystem
                 {
                     Game.Instance.BuildingSelector.Select(building);
                 }
+
+                return;
             }
-            else
-            {
-                Game.Instance.BuildingSelector.Unselect();
-            }
+
+            Game.Instance.BuildingSelector.Unselect();
         }
     }
 }

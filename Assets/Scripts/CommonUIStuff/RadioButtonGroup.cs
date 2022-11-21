@@ -2,7 +2,6 @@
 using System;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace NovemberProject.CommonUIStuff
 {
@@ -32,22 +31,6 @@ namespace NovemberProject.CommonUIStuff
 
         public void Lock() => _isLocked = true;
         public void Unlock() => _isLocked = false;
-
-        public void SetClickedButtonSilently(Button selectedButton)
-        {
-            for (var index = 0; index < _buttons.Length; index++)
-            {
-                if (_buttons[index].Button != selectedButton)
-                {
-                    continue;
-                }
-
-                SetClickedButtonSilently(index);
-                return;
-            }
-
-            throw new ArgumentException($"Button {selectedButton.gameObject.name} is not in group {name}");
-        }
 
         public void SetClickedButtonSilently(int index)
         {

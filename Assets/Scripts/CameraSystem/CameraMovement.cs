@@ -20,10 +20,12 @@ namespace NovemberProject.CameraSystem
 
         private void LateUpdate()
         {
-            if (_direction != Vector2.zero)
+            if (_direction == Vector2.zero)
             {
-                UpdateRigPosition();
+                return;
             }
+
+            UpdateRigPosition();
         }
 
         public void MoveCamera(Vector2 direction)

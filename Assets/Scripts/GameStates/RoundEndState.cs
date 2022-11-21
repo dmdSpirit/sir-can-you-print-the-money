@@ -1,5 +1,4 @@
 ﻿#nullable enable
-
 using NovemberProject.System;
 
 namespace NovemberProject.GameStates

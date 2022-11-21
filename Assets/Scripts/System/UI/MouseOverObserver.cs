@@ -12,7 +12,6 @@ namespace NovemberProject.System.UI
         public IReadOnlyReactiveProperty<bool> IsMouseOver => _isMouseOver;
 
         public void OnPointerEnter(PointerEventData eventData) => _isMouseOver.Value = true;
-
         public void OnPointerExit(PointerEventData eventData) => _isMouseOver.Value = false;
     }
 }

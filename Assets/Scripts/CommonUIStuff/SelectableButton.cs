@@ -11,50 +11,48 @@ namespace NovemberProject.CommonUIStuff
     {
         private readonly Subject<Unit> _onClicked = new();
         private Color _unselectedColor;
+        private Button _button = null!;
+        private bool _isSelected;
 
         [SerializeField]
         private Color _selectedColor;
 
         [SerializeField]
-        private Image _targetGraghic;
+        private Image _targetGraphic = null!;
 
-        public Button Button { get; private set; } = null!;
         public IObservable<Unit> OnClicked => _onClicked;
-
-        public bool IsSelected { get; private set; }
 
         private void Awake()
         {
-            Button = GetComponent<Button>();
-            _unselectedColor = _targetGraghic.color;
-            Button.OnClickAsObservable().Subscribe(OnButtonClicked);
+            _button = GetComponent<Button>();
+            _unselectedColor = _targetGraphic.color;
+            _button.OnClickAsObservable().Subscribe(OnButtonClicked);
         }
 
         public void Select()
         {
-            if (IsSelected)
+            if (_isSelected)
             {
                 return;
             }
 
-            _targetGraghic.color = _selectedColor;
-            IsSelected = true;
+            _targetGraphic.color = _selectedColor;
+            _isSelected = true;
         }
 
         public void Unselect()
         {
-            if (!IsSelected)
+            if (!_isSelected)
             {
                 return;
             }
 
-            _targetGraghic.color = _unselectedColor;
-            IsSelected = false;
+            _targetGraphic.color = _unselectedColor;
+            _isSelected = false;
         }
 
         private void OnButtonClicked(Unit _)
         {
-            // Select();
             _onClicked.OnNext(Unit.Default);
         }
     }
