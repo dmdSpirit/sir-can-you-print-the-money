@@ -427,9 +427,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38977d840bd42f1b707f158b703b12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Army Food
-  _description: Army Food Storage
-  _image: {fileID: 21300000, guid: 4952007126871994ba6d37d328856125, type: 3}
+  _title: Army food
+  _description: Storage of army food. They have to buy it from folks. At the end
+    of the round each armymen has to eat 1 food, otherwise they starve.
+  _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
   _foodText: {fileID: 3272818714190228769}
 --- !u!1001 &7867909130857463367
 PrefabInstance:

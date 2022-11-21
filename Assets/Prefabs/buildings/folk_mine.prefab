@@ -7,6 +7,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _image
+      value: 
+      objectReference: {fileID: 21300000, guid: ddf148f8baf6ec34594d39700de1f41c, type: 3}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _title
+      value: Mine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _description
+      value: It takes 6 seconds for 1 miner to produce some stone. 0 miners are working
+        right now.
+      objectReference: {fileID: 0}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

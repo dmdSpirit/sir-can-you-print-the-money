@@ -143,8 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Market
-  _description: Market description
-  _image: {fileID: 21300000, guid: 9658da4b2c8304e40ac34109c8f16d40, type: 3}
+  _description: It takes 2 seconds for 1 merchant to trade 1 food for 5 gold coins.
+    1 merchant is working right now.
+  _image: {fileID: 21300000, guid: 2c1c3a87d1971be4a915b7400683c9f4, type: 3}
   _workerText: {fileID: 1144827295470003159}
   _tradeDuration: 2
   _foodCostPerUnit: 5

@@ -7,6 +7,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _image
+      value: 
+      objectReference: {fileID: 21300000, guid: 76746ec097296f1479ea0f3af028be13, type: 3}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _title
+      value: Arena
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _description
+      value: It takes 2 soldiers to fight on the arena. Folks pay 10 coins per battle.
+        4 coins goes to govermnent fund, 6 coins goes to army fund. Each fight lasts
+        for 4 seconds.
+      objectReference: {fileID: 0}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

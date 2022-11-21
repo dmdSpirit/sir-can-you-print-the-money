@@ -142,9 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bce7bf955ca47ed96f645f8dfb5d806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Government Treasury
-  _description: Government Treasury Description
-  _image: {fileID: 21300000, guid: 9840b9f8fc15f6e4d9ea6568cfebd1c0, type: 3}
+  _title: Treasury
+  _description: 'They store some big money here. You use it to pay salary to your
+    army. Current salary: 6 coins per person.'
+  _image: {fileID: 21300000, guid: 6de1eaa298ce4fa48a09cac6cae0cdaf, type: 3}
   _moneyText: {fileID: 5144040263797057310}
 --- !u!4 &6347464873161866717 stripped
 Transform:

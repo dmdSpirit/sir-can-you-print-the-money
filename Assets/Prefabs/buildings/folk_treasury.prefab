@@ -142,9 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8625f6b42a40a898dd73a6ae0848c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Folk Treasury
-  _description: Folk Treasury Description
-  _image: {fileID: 21300000, guid: 9840b9f8fc15f6e4d9ea6568cfebd1c0, type: 3}
+  _title: Folk money
+  _description: Folks store some money here. They don't have much. At the end of
+    the round they have to pay 8 coins per person as taxes. Otherwise they'll go
+    to jail.
+  _image: {fileID: 21300000, guid: f769a7f41957e7444aa7f0d122e58dce, type: 3}
   _moneyText: {fileID: 5144040263797057310}
 --- !u!4 &6347464873161866717 stripped
 Transform:

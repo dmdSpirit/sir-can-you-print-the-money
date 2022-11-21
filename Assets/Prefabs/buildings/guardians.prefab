@@ -146,9 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126e4a8d83994731bd1fa244b7593042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Guard tower
-  _description: Guard Tower
-  _image: {fileID: 21300000, guid: 5d8af9b78948fc84eb9da519f0d0a179, type: 3}
+  _title: Guardians
+  _description: 2 soldiers are sleeping on duty. They are guardians, they prevent
+    you from outside attacks.
+  _image: {fileID: 21300000, guid: a1817c4db3dfc274a9f0eff971287479, type: 3}
   _armyText: {fileID: 365639419248682996}
 --- !u!4 &1902480482118516023 stripped
 Transform:
