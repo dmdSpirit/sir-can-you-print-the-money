@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1397782429}
-  m_IndirectSpecularColor: {r: 0.11678182, g: 0.42537132, b: 0.7317809, a: 1}
+  m_IndirectSpecularColor: {r: 0.11613609, g: 0.42406118, b: 0.73004735, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingGovernmentMoney: 100
   _startingArmyMoney: 0
-  _startingFolkMoney: 13
+  _startingFolkMoney: 0
 --- !u!4 &32209916
 Transform:
   m_ObjectHideFlags: 0
@@ -431,8 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f978e992288d46b88b748365cf54c671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingArmyFood: 30
-  _startingFolkFood: 30
+  _startingArmyFood: 2
+  _startingFolkFood: 2
 --- !u!1001 &34367906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8075,6 +8075,7 @@ Transform:
   - {fileID: 1051809840}
   - {fileID: 212016280}
   - {fileID: 1319552038}
+  - {fileID: 1626905865}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10955,7 +10956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceObjectFactory: {fileID: 1445167902}
   _height: 0
-  _moveDuration: 0.75
+  _moveDuration: 1.75
   _movingEase: 7
 --- !u!4 &1445167904
 Transform:
@@ -12246,7 +12247,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1094725333}
     m_Modifications:
     - target: {fileID: 8185135250131074180, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
       propertyPath: m_AnchorMax.y
@@ -12286,7 +12287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8185135250750192788, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8185135250750192788, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
       propertyPath: m_AnchorMax.x
@@ -12364,6 +12365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: idle_folk_panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8185135250750192809, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8185135250830960484, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
       propertyPath: m_text
       value: 0/2
@@ -12419,6 +12424,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 1626905857}
+--- !u!224 &1626905865 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8185135250750192788, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
+  m_PrefabInstance: {fileID: 1626905855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1628532607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 007310bdc51f88b46b282a13bc8e9ecd, type: 3}
@@ -14327,9 +14337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9215b4d4e7544579bf97bedb26cd4eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodPerPerson: 2
-  _newFolkForFoodCost: 10
-  _newArmyForFoodCost: 10
+  _foodPerPerson: 1
+  _newFolkForFoodCost: 5
+  _newArmyForFoodCost: 5
 --- !u!114 &1985125196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14342,9 +14352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acefdeb233a419aa7b5dcffb1e12cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingArmySalary: 5
+  _startingArmySalary: 8
   _startingArmyCount: 2
-  _startingFood: 30
+  _startingFood: 4
 --- !u!114 &1985125197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14357,10 +14367,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd683463510433e891e672c45087803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingFolkTax: 2
-  _startingFolkCount: 3
-  _startingFarmWorkers: 1
-  _startingMarketWorkers: 1
+  _startingFolkTax: 6
+  _startingFolkCount: 2
+  _startingFarmWorkers: 2
+  _startingMarketWorkers: 0
 --- !u!4 &1985125198
 Transform:
   m_ObjectHideFlags: 0

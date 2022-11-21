@@ -49,7 +49,6 @@ MonoBehaviour:
   _title: Castle
   _description: Castle description
   _image: {fileID: 21300000, guid: 8da54e9fb342bc6458c7b324660e77a8, type: 3}
-  _buildingType: 0
 --- !u!65 &3389652019597639004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -185,6 +184,10 @@ PrefabInstance:
     - target: {fileID: 8185135250750192789, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
       propertyPath: m_Name
       value: panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185135250750192809, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8185135250830960486, guid: a996f81588a377c4bb04db1074fd2f19, type: 3}
       propertyPath: m_AnchorMax.y
