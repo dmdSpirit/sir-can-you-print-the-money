@@ -24,7 +24,7 @@ namespace NovemberProject.InputSystem
             }
         }
 
-        private Vector2 GetRigMovementDirection()
+        private static Vector2 GetRigMovementDirection()
         {
             Vector2 direction = GetKeyboardMovement();
             if (!Input.GetMouseButton(RIGHT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
@@ -40,7 +40,7 @@ namespace NovemberProject.InputSystem
             return direction.normalized;
         }
 
-        private Vector2 GetKeyboardMovement()
+        private static Vector2 GetKeyboardMovement()
         {
             Vector2 direction = Vector2.zero;
             if (Input.GetKey(InputKeys.CAMERA_FORWARD_KEY))
@@ -66,7 +66,7 @@ namespace NovemberProject.InputSystem
             return direction;
         }
 
-        private float GetZoom()
+        private static float GetZoom()
         {
             float zoom = Input.GetAxis("Mouse ScrollWheel");
             if (Input.GetKey(InputKeys.CAMERA_ZOOM_IN_KEY))

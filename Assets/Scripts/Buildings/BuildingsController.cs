@@ -1,9 +1,8 @@
 ﻿#nullable enable
 using System.Collections.Generic;
-using NovemberProject.Buildings;
 using NovemberProject.CommonUIStuff;
 
-namespace NovemberProject.Money
+namespace NovemberProject.Buildings
 {
     public sealed class BuildingsController : InitializableBehaviour
     {

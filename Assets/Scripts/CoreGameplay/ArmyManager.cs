@@ -1,11 +1,12 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay.Messages;
+using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using NotImplementedException = System.NotImplementedException;
 
-namespace NovemberProject.System
+namespace NovemberProject.CoreGameplay
 {
     public sealed class ArmyManager : InitializableBehaviour
     {
@@ -17,9 +18,6 @@ namespace NovemberProject.System
 
         [SerializeField]
         private int _startingArmyCount = 2;
-
-        [SerializeField]
-        private int _startingFood = 30;
 
         public IReactiveProperty<int> ArmyCount => _armyCount;
         public IReactiveProperty<int> Salary => _salary;
@@ -42,14 +40,24 @@ namespace NovemberProject.System
             EatFood();
         }
 
-        public void SetSalary(int salary) => _salary.Value = salary;
-
         public void BuyArmyForFood()
         {
-            int newArmyCost = Game.Instance.CoreGameplay.NewArmyForFoodCost;
+            CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
+            int newArmyCost = coreGameplay.NewArmyForFoodCost;
             Assert.IsTrue(Game.Instance.FoodController.ArmyFood.Value >= newArmyCost);
             Game.Instance.FoodController.SpendArmyFood(newArmyCost);
             _armyCount.Value++;
+        }
+
+        public void RaiseSalary()
+        {
+            _salary.Value++;
+        }
+
+        public void LowerSalary()
+        {
+            Assert.IsTrue(_salary.Value > 1);
+            _salary.Value--;
         }
 
         private void PaySalary()
@@ -66,32 +74,25 @@ namespace NovemberProject.System
 
         private void EatFood()
         {
-            int foodToEat = _armyCount.Value * Game.Instance.CoreGameplay.FoodPerPerson;
+            CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
+            int foodToEat = _armyCount.Value * coreGameplay.FoodPerPerson;
             Assert.IsTrue(Game.Instance.FoodController.ArmyFood.Value >= foodToEat);
             Game.Instance.FoodController.SpendArmyFood(foodToEat);
         }
 
         private void KillStarved()
         {
-            int maxArmyToFeed = Game.Instance.FoodController.ArmyFood.Value / Game.Instance.CoreGameplay.FoodPerPerson;
+            FoodController foodController = Game.Instance.FoodController;
+            CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
+            int maxArmyToFeed = foodController.ArmyFood.Value / coreGameplay.FoodPerPerson;
             int starvedArmy = _armyCount.Value - maxArmyToFeed;
-            if (starvedArmy > 0)
+            if (starvedArmy == 0)
             {
-                Game.PublishMessage(new ArmyStarvedMessage(starvedArmy));
-                ReduceArmy(starvedArmy);
+                return;
             }
-        }
 
-        private void DesertUnpaid()
-        {
-            int governmentMoney = Game.Instance.MoneyController.GovernmentMoney.Value;
-            int maxAffordableArmy = governmentMoney / _salary.Value;
-            int numberToDesert = _armyCount.Value - maxAffordableArmy;
-            if (numberToDesert > 0)
-            {
-                Game.PublishMessage(new ArmyDesertedMessage(numberToDesert));
-                ReduceArmy(numberToDesert);
-            }
+            Game.PublishMessage(new ArmyStarvedMessage(starvedArmy));
+            ReduceArmy(starvedArmy);
         }
 
         private void ReduceArmy(int delta)
@@ -100,15 +101,19 @@ namespace NovemberProject.System
             _armyCount.Value -= delta;
         }
 
-        public void RaiseSalary()
+        private void DesertUnpaid()
         {
-            _salary.Value++;
-        }
+            MoneyController moneyController = Game.Instance.MoneyController;
+            int governmentMoney = moneyController.GovernmentMoney.Value;
+            int maxAffordableArmy = governmentMoney / _salary.Value;
+            int numberToDesert = _armyCount.Value - maxAffordableArmy;
+            if (numberToDesert == 0)
+            {
+                return;
+            }
 
-        public void LowerSalary()
-        {
-            Assert.IsTrue(_salary.Value > 1);
-            _salary.Value--;
+            Game.PublishMessage(new ArmyDesertedMessage(numberToDesert));
+            ReduceArmy(numberToDesert);
         }
     }
 }

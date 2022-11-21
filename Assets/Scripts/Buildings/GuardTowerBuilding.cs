@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using NovemberProject.Money;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
@@ -17,7 +16,7 @@ namespace NovemberProject.Buildings
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Game.Instance.CoreGameplay.ArmyManager.ArmyCount
+            Game.Instance.ArmyManager.ArmyCount
                 .TakeUntilDisable(this)
                 .Subscribe(OnArmyCountChanged);
         }

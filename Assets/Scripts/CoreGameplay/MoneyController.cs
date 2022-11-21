@@ -2,12 +2,13 @@
 using System;
 using NovemberProject.Buildings;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.MovingResources;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.Money
+namespace NovemberProject.CoreGameplay
 {
     public sealed class MoneyController : InitializableBehaviour
     {

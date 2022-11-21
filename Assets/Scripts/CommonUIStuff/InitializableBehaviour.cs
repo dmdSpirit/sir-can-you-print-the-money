@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
 
@@ -20,14 +21,14 @@ namespace NovemberProject.CommonUIStuff
                 .Subscribe(_ => Initialize());
         }
 
+        protected virtual void OnInitialized()
+        {
+        }
+
         private void Initialize()
         {
             OnInitialized();
             Game.PublishMessage(new BehaviourIsInitializedMessage(this));
-        }
-
-        protected virtual void OnInitialized()
-        {
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿#nullable enable
-using NovemberProject.Buildings;
-using NovemberProject.CameraSystem;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
 using UnityEngine;
 
-namespace NovemberProject.System
+namespace NovemberProject.Buildings
 {
     public class BuildingSelector : InitializableBehaviour
     {

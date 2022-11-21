@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
@@ -30,7 +31,7 @@ namespace NovemberProject.Buildings
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            _folkManager = Game.Instance.CoreGameplay.FolkManager;
+            _folkManager = Game.Instance.FolkManager;
             _folkManager.FarmFolk
                 .TakeUntilDisable(this)
                 .Subscribe(OnFarmCountChanged);
@@ -55,16 +56,6 @@ namespace NovemberProject.Buildings
             {
                 _folkProducing = farmWorkers;
             }
-        }
-
-        private void AddFarmWorker()
-        {
-            _folkManager.AddFolkToFarm();
-        }
-
-        private void RemoveFarmWorker()
-        {
-            _folkManager.RemoveFolkFromFarm();
         }
 
         private void StartProduction()

@@ -2,7 +2,7 @@
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
-namespace NovemberProject.System
+namespace NovemberProject.CoreGameplay
 {
     [RequireComponent(typeof(FolkManager))]
     [RequireComponent(typeof(ArmyManager))]
@@ -19,7 +19,7 @@ namespace NovemberProject.System
 
         public int FoodPerPerson => _foodPerPerson;
         public int NewFolkForFoodCost => _newFolkForFoodCost;
-        public int NewArmyForFoodCost => _newFolkForFoodCost;
+        public int NewArmyForFoodCost => _newArmyForFoodCost;
 
         public FolkManager FolkManager { get; private set; } = null!;
         public ArmyManager ArmyManager { get; private set; } = null!;

@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.Money;
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace NovemberProject.Buildings
 
         [SerializeField]
         private Sprite _image = null!;
-        
+
         public string Title => _title;
         public string Description => _description;
         public Sprite Image => _image;

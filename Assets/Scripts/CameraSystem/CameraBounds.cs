@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Linq;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using UnityEngine;
@@ -28,60 +29,9 @@ namespace NovemberProject.CameraSystem
             Game.Instance.CameraController.SetBounds(rect);
         }
 
-        private float GetMinX()
-        {
-            var minX = float.MaxValue;
-            foreach (GameObject bound in _bounds)
-            {
-                if (bound.transform.position.x < minX)
-                {
-                    minX = bound.transform.position.x;
-                }
-            }
-
-            return minX;
-        }
-
-        private float GetMaxX()
-        {
-            var maxX = float.MinValue;
-            foreach (GameObject bound in _bounds)
-            {
-                if (bound.transform.position.x > maxX)
-                {
-                    maxX = bound.transform.position.x;
-                }
-            }
-
-            return maxX;
-        }
-
-        private float GetMinY()
-        {
-            var minY = float.MaxValue;
-            foreach (GameObject bound in _bounds)
-            {
-                if (bound.transform.position.z < minY)
-                {
-                    minY = bound.transform.position.z;
-                }
-            }
-
-            return minY;
-        }
-
-        private float GetMaxY()
-        {
-            var maxY = float.MinValue;
-            foreach (GameObject bound in _bounds)
-            {
-                if (bound.transform.position.z > maxY)
-                {
-                    maxY = bound.transform.position.z;
-                }
-            }
-
-            return maxY;
-        }
+        private float GetMinX() => _bounds.Select(bound => bound.transform.position.x).Min();
+        private float GetMaxX() => _bounds.Select(bound => bound.transform.position.x).Max();
+        private float GetMinY() => _bounds.Select(bound => bound.transform.position.z).Min();
+        private float GetMaxY() => _bounds.Select(bound => bound.transform.position.z).Max();
     }
 }

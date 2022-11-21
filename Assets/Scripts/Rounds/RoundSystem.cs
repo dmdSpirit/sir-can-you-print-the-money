@@ -29,11 +29,13 @@ namespace NovemberProject.Rounds
         public void ResetRounds()
         {
             _round.Value = ROUND_TO_START_FROM;
-            if (_roundTimer != null)
+            if (_roundTimer == null)
             {
-                _roundTimer.Cancel();
-                _roundTimer = null;
+                return;
             }
+
+            _roundTimer.Cancel();
+            _roundTimer = null;
         }
 
         public void IncrementRound()

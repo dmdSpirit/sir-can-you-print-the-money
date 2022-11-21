@@ -19,9 +19,6 @@ namespace NovemberProject.Cheats
         [SerializeField]
         private Transform _buttonsParent = null!;
 
-        [SerializeField]
-        private int _moneyToMove = 10;
-
         private bool _isSizeFitterRefreshNeeded;
 
         protected override void OnInitialized()
@@ -35,13 +32,12 @@ namespace NovemberProject.Cheats
 
         protected override void OnShow(object? _)
         {
-            if (_generatedButtons.Count == 0)
+            if (_generatedButtons.Count != 0)
             {
-                Debug.LogWarning("No cheat buttons to show");
-                Hide();
+                return;
             }
-
-            // Bug (Stas): parent layout group is not updated properly first time.
+            Debug.LogWarning("No cheat buttons to show");
+            Hide();
         }
 
         protected override void OnHide()
@@ -63,99 +59,99 @@ namespace NovemberProject.Cheats
             _cheatButtons.Add(new CheatButtonInfo("Lower salary", LowerSalary));
         }
 
-        private void Print10Money()
+        private static void Print10Money()
         {
             Game.Instance.MoneyController.AddGovernmentMoney(10);
         }
 
-        private void AddFarmer()
+        private static void AddFarmer()
         {
-            if (Game.Instance.CoreGameplay.FolkManager.IdleFolk.Value == 0)
+            if (Game.Instance.FolkManager.IdleFolk.Value == 0)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.FolkManager.AddFolkToFarm();
+            Game.Instance.FolkManager.AddFolkToFarm();
         }
 
-        private void RemoveFarmer()
+        private static void RemoveFarmer()
         {
-            if (Game.Instance.CoreGameplay.FolkManager.FarmFolk.Value == 0)
+            if (Game.Instance.FolkManager.FarmFolk.Value == 0)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.FolkManager.RemoveFolkFromFarm();
+            Game.Instance.FolkManager.RemoveFolkFromFarm();
         }
 
-        private void AddMarketWorker()
+        private static void AddMarketWorker()
         {
-            if (Game.Instance.CoreGameplay.FolkManager.MarketFolk.Value == 1)
+            if (Game.Instance.FolkManager.MarketFolk.Value == 1)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.FolkManager.AddFolkToMarket();
+            Game.Instance.FolkManager.AddFolkToMarket();
         }
 
-        private void RemoveMarketWorker()
+        private static void RemoveMarketWorker()
         {
-            if (Game.Instance.CoreGameplay.FolkManager.MarketFolk.Value == 0)
+            if (Game.Instance.FolkManager.MarketFolk.Value == 0)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.FolkManager.RemoveFolkFromMarket();
+            Game.Instance.FolkManager.RemoveFolkFromMarket();
         }
 
-        private void RaiseTax()
+        private static void RaiseTax()
         {
-            Game.Instance.CoreGameplay.FolkManager.RaiseTax();
+            Game.Instance.FolkManager.RaiseTax();
         }
 
-        private void LowerTax()
+        private static void LowerTax()
         {
-            if (Game.Instance.CoreGameplay.FolkManager.Tax.Value <= 1)
+            if (Game.Instance.FolkManager.Tax.Value <= 1)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.FolkManager.LowerTax();
+            Game.Instance.FolkManager.LowerTax();
         }
 
-        private void RaiseSalary()
+        private static void RaiseSalary()
         {
-            Game.Instance.CoreGameplay.ArmyManager.RaiseSalary();
+            Game.Instance.ArmyManager.RaiseSalary();
         }
 
-        private void LowerSalary()
+        private static void LowerSalary()
         {
-            if (Game.Instance.CoreGameplay.ArmyManager.Salary.Value <= 1)
+            if (Game.Instance.ArmyManager.Salary.Value <= 1)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.ArmyManager.LowerSalary();
+            Game.Instance.ArmyManager.LowerSalary();
         }
 
-        private void BuyFolk()
+        private static void BuyFolk()
         {
             if (Game.Instance.FoodController.FolkFood.Value < Game.Instance.CoreGameplay.NewFolkForFoodCost)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.FolkManager.BuyFolkForFood();
+            Game.Instance.FolkManager.BuyFolkForFood();
         }
 
-        private void BuyArmy()
+        private static void BuyArmy()
         {
             if (Game.Instance.FoodController.ArmyFood.Value < Game.Instance.CoreGameplay.NewArmyForFoodCost)
             {
                 return;
             }
 
-            Game.Instance.CoreGameplay.ArmyManager.BuyArmyForFood();
+            Game.Instance.ArmyManager.BuyArmyForFood();
         }
 
         private void GenerateButtons()

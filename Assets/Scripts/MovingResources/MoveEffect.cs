@@ -4,7 +4,7 @@ using DG.Tweening;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject.Money
+namespace NovemberProject.MovingResources
 {
     public sealed class MoveEffect
     {
@@ -19,7 +19,8 @@ namespace NovemberProject.Money
         public GameObject MovingObject { get; }
         public IObservable<MoveEffect> OnFinished => _onFinished;
 
-        public MoveEffect(GameObject movingObject, Vector3 start, Vector3 finish, float time)
+        // ReSharper disable once TooManyDependencies
+        public MoveEffect(GameObject movingObject, Vector3 start, Vector3 finish, float time = 1f)
         {
             MovingObject = movingObject;
             _start = start;

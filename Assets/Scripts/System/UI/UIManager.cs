@@ -38,11 +38,10 @@ namespace NovemberProject.System.UI
         private SystemInfoPanel _systemInfoPanel = null!;
 
         [SerializeField]
-        private TimeControlsPanel _timeControlsPanel = null;
+        private TimeControlsPanel _timeControlsPanel = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
-
 
         public LayerMask LayerMask => _layerMask;
         public IReadOnlyReactiveProperty<bool> IsMouseOver => _mouseOverObserver.IsMouseOver;
@@ -113,8 +112,6 @@ namespace NovemberProject.System.UI
         }
 
         public void ShowSystemInfoPanel() => _systemInfoPanel.Show(null);
-        public void ShowCheatPanel() => _cheatMenu.Show(null);
-        public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
         public void HideCheatPanel() => _cheatMenu.Hide();
         public void ShowRoundStartPanel() => _roundStartPanel.Show(null);
         public void HideRoundStartPanel() => _roundStartPanel.Hide();

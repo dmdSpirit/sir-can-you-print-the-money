@@ -1,11 +1,12 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay.Messages;
+using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using NotImplementedException = System.NotImplementedException;
 
-namespace NovemberProject.System
+namespace NovemberProject.CoreGameplay
 {
     public sealed class FolkManager : InitializableBehaviour
     {
@@ -55,7 +56,8 @@ namespace NovemberProject.System
 
         public void BuyFolkForFood()
         {
-            int newFolkCost = Game.Instance.CoreGameplay.NewFolkForFoodCost;
+            CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
+            int newFolkCost = coreGameplay.NewFolkForFoodCost;
             Assert.IsTrue(Game.Instance.FoodController.FolkFood.Value >= newFolkCost);
             Game.Instance.FoodController.SpendFolkFood(newFolkCost);
             _folkCount.Value++;
@@ -91,6 +93,17 @@ namespace NovemberProject.System
             _idleFolk.Value++;
         }
 
+        public void RaiseTax()
+        {
+            _tax.Value++;
+        }
+
+        public void LowerTax()
+        {
+            Assert.IsTrue(_tax.Value > 1);
+            _tax.Value--;
+        }
+
         private void PayTaxes()
         {
             int taxesToPay = _folkCount.Value * _tax.Value;
@@ -105,82 +118,92 @@ namespace NovemberProject.System
 
         private void EatFood()
         {
-            int foodToEat = _folkCount.Value * Game.Instance.CoreGameplay.FoodPerPerson;
+            CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
+            int foodToEat = _folkCount.Value * coreGameplay.FoodPerPerson;
             Assert.IsTrue(Game.Instance.FoodController.FolkFood.Value >= foodToEat);
             Game.Instance.FoodController.SpendFolkFood(foodToEat);
         }
 
         private void KillPoorAndHungry()
         {
-            int folkMoney = Game.Instance.MoneyController.FolkMoney.Value;
-            int foodPerPerson = Game.Instance.CoreGameplay.FoodPerPerson;
-            int maxFolkToFeed = Game.Instance.FoodController.FolkFood.Value / foodPerPerson;
-            int maxFolkToAffordTax = folkMoney / _tax.Value;
-            int maxFolkToLive = Mathf.Min(maxFolkToFeed, maxFolkToAffordTax, _folkCount.Value);
-            int starvedFolk = _folkCount.Value - maxFolkToFeed;
+            int starvedFolk = CalculateStarvingFolk();
             if (starvedFolk > 0)
             {
                 Game.PublishMessage(new FolkStarvedMessage(starvedFolk));
             }
 
-            int executedFolk = _folkCount.Value - maxFolkToAffordTax;
+            int executedFolk = CalculatePoorFolk();
             if (executedFolk > 0)
             {
                 Game.PublishMessage(new FolkExecutedMessage(executedFolk));
             }
 
-            int folkToKill = _folkCount.Value - maxFolkToLive;
+            int folkToKill = Mathf.Max(starvedFolk, executedFolk);
             if (folkToKill > 0)
             {
                 KillFolk(folkToKill);
             }
         }
 
+        private int CalculateStarvingFolk()
+        {
+            FoodController foodController = Game.Instance.FoodController;
+            CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
+            int foodPerPerson = coreGameplay.FoodPerPerson;
+            int folkFood = foodController.FolkFood.Value;
+            int maxFolkToEat = folkFood / foodPerPerson;
+            if (_folkCount.Value <= maxFolkToEat)
+            {
+                return 0;
+            }
+            return _folkCount.Value-maxFolkToEat;
+        }
+
+        private int CalculatePoorFolk()
+        {
+            MoneyController moneyController = Game.Instance.MoneyController;
+            int folkMoney = moneyController.FolkMoney.Value;
+            int maxFolkToPay = folkMoney / _tax.Value;
+            if (_folkCount.Value <= maxFolkToPay)
+            {
+                return 0;
+            }
+
+            return _folkCount.Value - maxFolkToPay;
+        }
+
         private void KillFolk(int numberToExecute)
         {
             Assert.IsTrue(_folkCount.Value >= numberToExecute);
             _folkCount.Value -= numberToExecute;
-            if (_idleFolk.Value > 0)
-            {
-                if (_idleFolk.Value >= numberToExecute)
-                {
-                    _idleFolk.Value -= numberToExecute;
-                    Assert.IsTrue(ValidateTotalCount());
-                    return;
-                }
 
-                numberToExecute -= _idleFolk.Value;
-                _idleFolk.Value = 0;
-            }
-
-            if (_farmFolk.Value > 0)
-            {
-                if (_farmFolk.Value >= numberToExecute)
-                {
-                    _farmFolk.Value -= numberToExecute;
-                    Assert.IsTrue(ValidateTotalCount());
-                    return;
-                }
-            }
-
-            _marketFolk.Value -= numberToExecute;
+            KillFolk(_folkCount, ref numberToExecute);
+            KillFolk(_farmFolk, ref numberToExecute);
+            KillFolk(_marketFolk, ref numberToExecute);
             Assert.IsTrue(ValidateTotalCount());
+        }
+
+        private static void KillFolk(IReactiveProperty<int> folkCount, ref int numberToKill)
+        {
+            // ReSharper disable once ComplexConditionExpression
+            if (numberToKill == 0 || folkCount.Value == 0)
+            {
+                return;
+            }
+
+            if (folkCount.Value >= numberToKill)
+            {
+                folkCount.Value -= numberToKill;
+                return;
+            }
+
+            numberToKill -= folkCount.Value;
+            folkCount.Value = 0;
         }
 
         private bool ValidateTotalCount()
         {
             return _idleFolk.Value + _farmFolk.Value + _marketFolk.Value == _folkCount.Value;
-        }
-
-        public void RaiseTax()
-        {
-            _tax.Value++;
-        }
-
-        public void LowerTax()
-        {
-            Assert.IsTrue(_tax.Value > 1);
-            _tax.Value--;
         }
     }
 }

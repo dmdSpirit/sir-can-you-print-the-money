@@ -1,5 +1,7 @@
 ﻿#nullable enable
-namespace NovemberProject.System
+using NovemberProject.System.Messages;
+
+namespace NovemberProject.CoreGameplay.Messages
 {
     public sealed class FolkStarvedMessage : IMessage
     {

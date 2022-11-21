@@ -6,7 +6,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NovemberProject.Money
+namespace NovemberProject.MovingResources
 {
     public sealed class ResourceMoveEffectSpawner : InitializableBehaviour
     {

@@ -1,5 +1,6 @@
 ﻿#nullable enable
-namespace NovemberProject.System
+
+namespace NovemberProject.System.Messages
 {
     public interface IMessage{}
 }
