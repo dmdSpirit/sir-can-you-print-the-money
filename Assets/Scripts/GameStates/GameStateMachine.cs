@@ -15,6 +15,7 @@ namespace NovemberProject.GameStates
         private readonly RoundEndState _roundEndState;
         private readonly RoundStartState _roundStartState;
         private readonly InitializeGameState _initializeGameState;
+        private readonly GameOverState _gameOverState;
 
         private readonly Subject<State> _onStateChanged = new();
 
@@ -38,6 +39,7 @@ namespace NovemberProject.GameStates
             _roundEndState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
             _initializeGameState = new InitializeGameState();
             _roundStartState = new RoundStartState();
+            _gameOverState = new GameOverState();
 
             Game.Instance.InputSystem.OnHandleInput.Subscribe(_ => HandleInput());
         }
@@ -49,6 +51,7 @@ namespace NovemberProject.GameStates
         public void InitializeGame() => ChangeState(_initializeGameState);
         public void FinishRound() => ChangeState(_roundEndState);
         public void StartRound() => ChangeState(_roundStartState);
+        public void GameOver() => ChangeState(_gameOverState);
 
         private void ChangeState(State state)
         {

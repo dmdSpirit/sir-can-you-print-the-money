@@ -14,6 +14,7 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideMainMenu();
             Game.Instance.UIManager.HideRoundTimer();
             Game.Instance.UIManager.HideTimeControls();
+            Game.Instance.UIManager.HideGameOverPanel();
 #if UNITY_EDITOR
             Game.Instance.InputSystem.AddGlobalInputHandler<ToggleCheatMenuInputHandler>();
             Game.Instance.InputSystem.AddGlobalInputHandler<ToggleSystemPanelInputHandler>();

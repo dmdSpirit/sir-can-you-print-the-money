@@ -3,6 +3,8 @@ using NovemberProject.Buildings;
 using NovemberProject.Buildings.UI;
 using NovemberProject.Cheats;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
+using NovemberProject.GameStates.UI;
 using NovemberProject.Rounds.UI;
 using NovemberProject.Time.UI;
 using UniRx;
@@ -39,6 +41,9 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private TimeControlsPanel _timeControlsPanel = null!;
+
+        [SerializeField]
+        private GameOverPanel _gameOverPanel = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
@@ -115,6 +120,8 @@ namespace NovemberProject.System.UI
         public void HideCheatPanel() => _cheatMenu.Hide();
         public void ShowRoundStartPanel() => _roundStartPanel.Show(null);
         public void HideRoundStartPanel() => _roundStartPanel.Hide();
+        public void ShowGameOverPanel(GameOverType gameOverType) => _gameOverPanel.Show(gameOverType);
+        public void HideGameOverPanel() => _gameOverPanel.Hide();
     }
 }
 

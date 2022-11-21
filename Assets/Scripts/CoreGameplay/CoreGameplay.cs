@@ -1,5 +1,8 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
+using NovemberProject.Rounds.UI;
+using NovemberProject.System;
 using UnityEngine;
 
 namespace NovemberProject.CoreGameplay
@@ -8,6 +11,8 @@ namespace NovemberProject.CoreGameplay
     [RequireComponent(typeof(ArmyManager))]
     public sealed class CoreGameplay : InitializableBehaviour
     {
+        private GameOverType _gameOverType;
+
         [SerializeField]
         private int _foodPerPerson = 2;
 
@@ -23,6 +28,7 @@ namespace NovemberProject.CoreGameplay
 
         public FolkManager FolkManager { get; private set; } = null!;
         public ArmyManager ArmyManager { get; private set; } = null!;
+        public GameOverType GameOverType => _gameOverType;
 
         private void Awake()
         {
@@ -34,6 +40,7 @@ namespace NovemberProject.CoreGameplay
         {
             FolkManager.InitializeGameData();
             ArmyManager.InitializeGameData();
+            _gameOverType = GameOverType.None;
         }
 
         public void StartRound()
@@ -46,6 +53,39 @@ namespace NovemberProject.CoreGameplay
         {
             FolkManager.EndRound();
             ArmyManager.EndRound();
+        }
+
+        public bool IsGameOver()
+        {
+            if (IsNoArmyLeft())
+            {
+                _gameOverType = GameOverType.NoArmy;
+                return true;
+            }
+
+            if (!IsNoFolkLeft())
+            {
+                return false;
+            }
+
+            _gameOverType = GameOverType.NoFolk;
+            return true;
+        }
+
+        private bool IsNoFolkLeft()
+        {
+            FoodController foodController = Game.Instance.FoodController;
+            var folkCount = FolkManager.FolkCount;
+            return folkCount.Value == 0
+                   && foodController.FolkFood.Value < _newFolkForFoodCost;
+        }
+
+        private bool IsNoArmyLeft()
+        {
+            FoodController foodController = Game.Instance.FoodController;
+            var armyCount = ArmyManager.ArmyCount;
+            return armyCount.Value == 0
+                   && foodController.ArmyFood.Value < _newArmyForFoodCost;
         }
     }
 }
