@@ -10,6 +10,7 @@ using NovemberProject.Time.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System.UI
 {
@@ -44,6 +45,9 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private GameOverPanel _gameOverPanel = null!;
+
+        [SerializeField]
+        private NewGamePanel _newGamePanel = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
@@ -122,6 +126,9 @@ namespace NovemberProject.System.UI
         public void HideRoundStartPanel() => _roundStartPanel.Hide();
         public void ShowGameOverPanel(GameOverType gameOverType) => _gameOverPanel.Show(gameOverType);
         public void HideGameOverPanel() => _gameOverPanel.Hide();
+
+        public void ShowNewGamePanel() => _newGamePanel.Show(null);
+        public void HideNewGamePanel() => _newGamePanel.Hide();
     }
 }
 

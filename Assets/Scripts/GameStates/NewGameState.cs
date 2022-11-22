@@ -9,15 +9,17 @@ namespace NovemberProject.GameStates
         {
             Game.Instance.TimeSystem.ResetTimers();
             Game.Instance.TimeSystem.ResetTimeScale();
+            Game.Instance.TimeSystem.PauseTime();
             Game.Instance.RoundSystem.ResetRounds();
             Game.Instance.CoreGameplay.InitializeGameData();
             Game.Instance.MoneyController.InitializeGameData();
             Game.Instance.FoodController.InitializeGameData();
-            Game.Instance.GameStateMachine.StartRound();
+            Game.Instance.UIManager.ShowNewGamePanel();
         }
 
         protected override void OnExit()
         {
+            Game.Instance.UIManager.HideNewGamePanel();
         }
     }
 }
