@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d9b79cf86845ec807115a323798afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: {fileID: 0}
+  _title: {fileID: 6142460786508425648}
   _titleText: How did you do on Day [value]
   _nextRound: {fileID: 384691281602080920}
 --- !u!1 &1323595551557002080
