@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: {fileID: 0}
-  _titleText: Round [value] has ended
+  _titleText: How did you do on Day [value]
   _nextRound: {fileID: 384691281602080920}
 --- !u!1 &1323595551557002080
 GameObject:

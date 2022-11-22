@@ -352,8 +352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28973a48d4e846b8bf9a84d9d42b781e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: {fileID: 0}
-  _titleText: Start of round [value]
+  _title: {fileID: 8342239630992205594}
+  _titleText: Welcome to Day [value]
   _nextRound: {fileID: 3154317004862507537}
 --- !u!1 &4381592388432206313
 GameObject:

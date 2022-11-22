@@ -36,6 +36,7 @@ namespace NovemberProject.Cheats
             {
                 return;
             }
+
             Debug.LogWarning("No cheat buttons to show");
             Hide();
         }
@@ -86,7 +87,8 @@ namespace NovemberProject.Cheats
 
         private static void AddMarketWorker()
         {
-            if (Game.Instance.FolkManager.MarketFolk.Value == 1)
+            if (Game.Instance.FolkManager.MarketFolk.Value == 1
+                || Game.Instance.CoreGameplay.FolkManager.IdleFolk.Value == 0)
             {
                 return;
             }
