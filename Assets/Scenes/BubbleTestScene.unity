@@ -5183,7 +5183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3611490740572796898, guid: 0b01424ab76a61942bc18074b39601e8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -1.254
       objectReference: {fileID: 0}
     - target: {fileID: 3611490740572796898, guid: 0b01424ab76a61942bc18074b39601e8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14223,6 +14223,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1026466380247412332, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026466380247412332, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1183158946172742219, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
