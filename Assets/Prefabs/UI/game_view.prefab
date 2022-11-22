@@ -354,6 +354,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: game_over_panel
       objectReference: {fileID: 0}
+    - target: {fileID: 3951327650764735596, guid: dc79a275ad968c64b9e0480e1568c031, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627060988272941152, guid: dc79a275ad968c64b9e0480e1568c031, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1993.158
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627060988272941152, guid: dc79a275ad968c64b9e0480e1568c031, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1252.1367
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627060988272941152, guid: dc79a275ad968c64b9e0480e1568c031, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.4551
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627060988272941152, guid: dc79a275ad968c64b9e0480e1568c031, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc79a275ad968c64b9e0480e1568c031, type: 3}
 --- !u!114 &2418965048840219462 stripped
@@ -978,6 +998,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6393288298931917076}
     m_Modifications:
+    - target: {fileID: 474444071174841588, guid: 7ed99034003931c48b8285b80e5a1153, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2010.3718
+      objectReference: {fileID: 0}
+    - target: {fileID: 474444071174841588, guid: 7ed99034003931c48b8285b80e5a1153, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1256.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 474444071174841588, guid: 7ed99034003931c48b8285b80e5a1153, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.4551
+      objectReference: {fileID: 0}
+    - target: {fileID: 474444071174841588, guid: 7ed99034003931c48b8285b80e5a1153, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1517
+      objectReference: {fileID: 0}
     - target: {fileID: 3136689911680691292, guid: 7ed99034003931c48b8285b80e5a1153, type: 3}
       propertyPath: m_Name
       value: round_start_panel
@@ -1178,6 +1214,26 @@ PrefabInstance:
     - target: {fileID: 366782713025156821, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
       propertyPath: m_Name
       value: end_of_round_panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 366782713025156821, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601103116757248621, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2010.3713
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601103116757248621, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1265.0469
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601103116757248621, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.1518
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601103116757248621, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.1517
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
