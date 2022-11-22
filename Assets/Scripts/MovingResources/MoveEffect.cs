@@ -1,6 +1,10 @@
 ﻿#nullable enable
 using System;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Core.PathCore;
+using DG.Tweening.Plugins.Options;
+using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 
@@ -16,6 +20,8 @@ namespace NovemberProject.MovingResources
         private readonly float _time;
 
         private Ease _ease = Ease.Linear;
+        private Tweener _tweener;
+        private IDisposable? _timeScaleSub;
 
         public GameObject MovingObject { get; }
         public IObservable<MoveEffect> OnFinished => _onFinished;
@@ -37,13 +43,23 @@ namespace NovemberProject.MovingResources
             MovingObject.transform.position = _start;
             Vector3 medianPoint = (_start + _finish) / 2;
             medianPoint.y += 1;
-            MovingObject.transform.DOPath(new[] { _start, medianPoint, _finish }, _time, PathType.CatmullRom)
+            _tweener = MovingObject.transform.DOPath(new[] { _start, medianPoint, _finish }, _time, PathType.CatmullRom)
                 .SetEase(_ease)
                 .OnComplete(MoveFinished);
+            _timeScaleSub = Game.Instance.TimeSystem.TimeScale.Subscribe(OnTimeScaleChanged);
+        }
+
+        private void OnTimeScaleChanged(float timeScale)
+        {
+            if (_tweener != null)
+            {
+                _tweener.timeScale = timeScale == 0 ? 1f : timeScale;
+            }
         }
 
         private void MoveFinished()
         {
+            _timeScaleSub?.Dispose();
             _onFinished.OnNext(this);
             _onReadyToDestroy.OnNext(this);
         }
