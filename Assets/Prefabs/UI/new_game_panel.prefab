@@ -66,7 +66,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: new game text
+  m_text: You should know that government pays salary to the army and collects taxes
+    from peasants. This way peasants will have to satisfy the needs of your army.
+    Your job is to keep this cycle going. Can you do that for me?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
@@ -173,7 +175,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -29, y: 29}
-  m_SizeDelta: {x: 200, y: 56}
+  m_SizeDelta: {x: 390, y: 56}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &2155482245103831598
 CanvasRenderer:
@@ -495,7 +497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start game
+  m_text: Sure, I think I can do that
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cd965b179c8b6de4e83d4a52062a274a, type: 2}
   m_sharedMaterial: {fileID: 5402854647406217180, guid: cd965b179c8b6de4e83d4a52062a274a, type: 2}
@@ -630,7 +632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bf9563d2c3c8544bbfc1807b06d4a58, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -782,7 +784,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: new game
+  m_text: Hold on a sec!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
