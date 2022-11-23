@@ -15,13 +15,11 @@ namespace NovemberProject.System.UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             _isMouseOver.Value = true;
-            Debug.Log("enter");
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             _isMouseOver.Value = false;
-            Debug.Log("exit");
         }
     }
 }

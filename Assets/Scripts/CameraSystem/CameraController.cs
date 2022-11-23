@@ -1,6 +1,7 @@
 #nullable enable
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.CameraSystem
 {
@@ -13,6 +14,9 @@ namespace NovemberProject.CameraSystem
 
         [SerializeField]
         private Camera _mainCamera = null!;
+
+        [SerializeField, Range(0, 1)]
+        private float _startingZoom = .6f;
 
         public float KeysZoomModifier => _cameraZoom.KeysZoomModifier;
         public float MouseMoveSpeed => _cameraMovement.MouseMoveSpeed;
@@ -33,5 +37,10 @@ namespace NovemberProject.CameraSystem
         public void MoveCamera(Vector2 direction) => _cameraMovement.MoveCamera(direction);
         public void ZoomCamera(float zoomDif) => _cameraZoom.ZoomCamera(zoomDif);
         public void SetBounds(Rect bounds) => _cameraMovement.SetBounds(bounds);
+
+        public void InitializeGameData()
+        {
+            _cameraZoom.SetCameraZoom(_startingZoom);
+        }
     }
 }
