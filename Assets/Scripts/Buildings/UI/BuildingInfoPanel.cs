@@ -23,6 +23,9 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private ResourceStoragePanel _resourceStoragePanel = null!;
 
+        [SerializeField]
+        private BuyUnitPanel _buyUnitPanel = null!;
+
         public Building Building { get; private set; } = null!;
 
         protected override void OnShow(Building building)
@@ -31,23 +34,9 @@ namespace NovemberProject.Buildings.UI
             _title.text = Building.Title;
             _description.text = Building.Description;
             _image.sprite = Building.Image;
-            if (building is IWorkerManipulator workerManipulator)
-            {
-                _workerManagementPanel.Show(workerManipulator);
-            }
-            else
-            {
-                _workerManagementPanel.Hide();
-            }
-
-            if (building is IResourceStorage resourceStorage)
-            {
-                _resourceStoragePanel.Show(resourceStorage);
-            }
-            else
-            {
-                _resourceStoragePanel.Hide();
-            }
+            ShowWorkerManagement(building);
+            ShowResourceStorage(building);
+            ShowBuyUnit(building);
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
         }
@@ -56,6 +45,43 @@ namespace NovemberProject.Buildings.UI
         {
             _workerManagementPanel.Hide();
             _resourceStoragePanel.Hide();
+            _buyUnitPanel.Hide();
+        }
+
+        private void ShowBuyUnit(Building building)
+        {
+            if (building is IBuyUnit buyUnit)
+            {
+                _buyUnitPanel.Show(buyUnit);
+            }
+            else
+            {
+                _buyUnitPanel.Hide();
+            }
+        }
+
+        private void ShowResourceStorage(Building building)
+        {
+            if (building is IResourceStorage resourceStorage)
+            {
+                _resourceStoragePanel.Show(resourceStorage);
+            }
+            else
+            {
+                _resourceStoragePanel.Hide();
+            }
+        }
+
+        private void ShowWorkerManagement(Building building)
+        {
+            if (building is IWorkerManipulator workerManipulator)
+            {
+                _workerManagementPanel.Show(workerManipulator);
+            }
+            else
+            {
+                _workerManagementPanel.Hide();
+            }
         }
     }
 }
