@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class FarmBuilding : Building
+    public sealed class FarmBuilding : Building, IWorkerManipulator
     {
         private FolkManager _folkManager = null!;
         private Timer? _productionTimer;
@@ -26,7 +26,14 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private int _productionPerFolk = 3;
 
+        [SerializeField]
+        private string _workersTitle = "Farmers";
+
         public override BuildingType BuildingType => BuildingType.Farm;
+        public IReadOnlyReactiveProperty<int> WorkerCount => Game.Instance.FolkManager.FarmFolk;
+        public int MaxWorkerCount => 0;
+        public bool HasMaxWorkerCount => false;
+        public string WorkersTitle => _workersTitle;
 
         protected override void OnInitialized()
         {
@@ -35,6 +42,26 @@ namespace NovemberProject.Buildings
             _folkManager.FarmFolk
                 .TakeUntilDisable(this)
                 .Subscribe(OnFarmCountChanged);
+        }
+        
+        public void AddWorker()
+        {
+            Game.Instance.FolkManager.AddFolkToFarm();
+        }
+
+        public void RemoveWorker()
+        {
+            Game.Instance.FolkManager.RemoveFolkFromFarm();
+        }
+
+        public bool CanAddWorker()
+        {
+            return Game.Instance.FolkManager.IdleFolk.Value > 0;
+        }
+
+        public bool CanRemoveWorker()
+        {
+            return Game.Instance.FolkManager.FarmFolk.Value > 0;
         }
 
         private void OnFarmCountChanged(int farmWorkers)

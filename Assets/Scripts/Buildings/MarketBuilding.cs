@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class MarketBuilding : Building
+    public sealed class MarketBuilding : Building, IWorkerManipulator
     {
         private Timer? _productionTimer;
         private bool _isProducing;
@@ -25,7 +25,14 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private int _foodChangedPerTrade = 1;
 
+        [SerializeField]
+        private string _workersTitle = "Traders";
+
         public override BuildingType BuildingType => BuildingType.Market;
+        public IReadOnlyReactiveProperty<int> WorkerCount => Game.Instance.FolkManager.MarketFolk;
+        public int MaxWorkerCount => Game.Instance.FolkManager.MaxMarkerWorkers;
+        public bool HasMaxWorkerCount => true;
+        public string WorkersTitle => _workersTitle;
 
         protected override void OnInitialized()
         {
@@ -39,6 +46,27 @@ namespace NovemberProject.Buildings
             Game.Instance.MoneyController.ArmyMoney
                 .TakeUntilDisable(this)
                 .Subscribe(_ => UpdateProduction());
+        }
+        
+        public void AddWorker()
+        {
+            Game.Instance.FolkManager.AddFolkToMarket();
+        }
+
+        public void RemoveWorker()
+        {
+            Game.Instance.FolkManager.RemoveFolkFromMarket();
+        }
+        
+        public bool CanAddWorker()
+        {
+            return Game.Instance.FolkManager.IdleFolk.Value > 0
+                   && Game.Instance.FolkManager.FarmFolk.Value < Game.Instance.FolkManager.MaxMarkerWorkers;
+        }
+
+        public bool CanRemoveWorker()
+        {
+            return Game.Instance.FolkManager.MarketFolk.Value > 0;
         }
 
         private void UpdateProduction()
@@ -95,5 +123,6 @@ namespace NovemberProject.Buildings
             _isProducing = false;
             StartProduction();
         }
+
     }
 }

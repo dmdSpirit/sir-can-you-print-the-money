@@ -17,6 +17,9 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private Image _image = null!;
 
+        [SerializeField]
+        private WorkerManagementPanel _workerManagementPanel = null!;
+
         public Building Building { get; private set; } = null!;
 
         protected override void OnShow(Building building)
@@ -25,10 +28,21 @@ namespace NovemberProject.Buildings.UI
             _title.text = Building.Title;
             _description.text = Building.Description;
             _image.sprite = Building.Image;
+            if (building is IWorkerManipulator workerManipulator)
+            {
+                _workerManagementPanel.Show(workerManipulator);
+            }
+            else
+            {
+                _workerManagementPanel.Hide();
+            }
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
         }
 
         protected override void OnHide()
         {
+            _workerManagementPanel.Hide();
         }
     }
 }

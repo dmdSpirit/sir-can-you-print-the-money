@@ -10,7 +10,6 @@ using NovemberProject.Time.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System.UI
 {
@@ -122,6 +121,7 @@ namespace NovemberProject.System.UI
 
         public void ShowSystemInfoPanel() => _systemInfoPanel.Show(null);
         public void HideCheatPanel() => _cheatMenu.Hide();
+        public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
         public void ShowRoundStartPanel() => _roundStartPanel.Show(null);
         public void HideRoundStartPanel() => _roundStartPanel.Hide();
         public void ShowGameOverPanel(GameOverType gameOverType) => _gameOverPanel.Show(gameOverType);
