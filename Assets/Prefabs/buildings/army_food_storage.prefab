@@ -501,6 +501,8 @@ MonoBehaviour:
     of the round each armymen has to eat 1 food, otherwise they starve.
   _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
   _foodText: {fileID: 3272818714190228769}
+  _foodSprite: {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  _foodTitle: Food
 --- !u!1001 &7867909130857463367
 PrefabInstance:
   m_ObjectHideFlags: 0

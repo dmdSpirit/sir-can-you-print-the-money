@@ -204,7 +204,7 @@ namespace NovemberProject.CoreGameplay
             Assert.IsTrue(_folkCount.Value >= numberToExecute);
             _folkCount.Value -= numberToExecute;
 
-            KillFolk(_folkCount, ref numberToExecute);
+            KillFolk(_idleFolk, ref numberToExecute);
             KillFolk(_farmFolk, ref numberToExecute);
             KillFolk(_marketFolk, ref numberToExecute);
             Assert.IsTrue(ValidateTotalCount());

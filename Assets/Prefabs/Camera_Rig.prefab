@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 1764124195811928274}
+  _startingZoom: 0.75
 --- !u!114 &1934851830503507672
 MonoBehaviour:
   m_ObjectHideFlags: 0

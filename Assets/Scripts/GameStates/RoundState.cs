@@ -12,6 +12,7 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.UnlockTimeControls();
             Game.Instance.TimeSystem.RestoreAfterPause();
             Game.Instance.UIManager.UnlockTimeControls();
+            Game.Instance.CoreGameplay.StartRound();
         }
 
         protected override void OnExit()

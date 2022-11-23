@@ -8,5 +8,6 @@ namespace NovemberProject.Buildings
     {
         public Sprite SpriteIcon { get; }
         public IReadOnlyReactiveProperty<int> ResourceCount { get; }
+        public string ResourceTitle { get; }
     }
 }

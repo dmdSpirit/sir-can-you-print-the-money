@@ -46,6 +46,12 @@ namespace NovemberProject.CameraSystem
         {
             _zoomDif += zoomDif;
         }
+        
+        public void SetCameraZoom(float zoom)
+        {
+            _zoom = zoom;
+            SetCameraPosition();
+        }
 
         public void SetCamera(Camera cameraToSet)
         {
@@ -61,6 +67,12 @@ namespace NovemberProject.CameraSystem
         private void UpdateCameraPosition()
         {
             _zoom += _zoomDif * _zoomSpeed * UnityEngine.Time.deltaTime;
+            _zoomDif = 0;
+            SetCameraPosition();
+        }
+
+        private void SetCameraPosition()
+        {
             _zoom = Mathf.Clamp(_zoom, 0, 1);
             float cameraHeight = Mathf.Lerp(_maxHeight, _minHeight, _zoom);
             float cameraDistance = Mathf.Lerp(-_maxDistance, 0, _zoom);
@@ -68,7 +80,6 @@ namespace NovemberProject.CameraSystem
             var cameraRotation = new Vector3(Mathf.Lerp(60, 0, _zoom), 0, 0);
             _camera.transform.localPosition = cameraPosition;
             _camera.transform.localRotation = Quaternion.Euler(cameraRotation);
-            _zoomDif = 0;
         }
     }
 }

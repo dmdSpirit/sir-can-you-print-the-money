@@ -148,6 +148,8 @@ MonoBehaviour:
     to jail.
   _image: {fileID: 21300000, guid: f769a7f41957e7444aa7f0d122e58dce, type: 3}
   _moneyText: {fileID: 5144040263797057310}
+  _moneySprite: {fileID: 1166264754, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  _moneyTitle: Money
 --- !u!4 &6347464873161866717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
