@@ -28,11 +28,16 @@ namespace NovemberProject.CoreGameplay
         [SerializeField]
         private int _startingMarketWorkers = 1;
 
+        [SerializeField]
+        private int _maxMarketWorkers = 1;
+
         public IReadOnlyReactiveProperty<int> FolkCount => _folkCount;
         public IReadOnlyReactiveProperty<int> FarmFolk => _farmFolk;
         public IReadOnlyReactiveProperty<int> IdleFolk => _idleFolk;
         public IReadOnlyReactiveProperty<int> MarketFolk => _marketFolk;
         public IReadOnlyReactiveProperty<int> Tax => _tax;
+
+        public int MaxMarkerWorkers => _maxMarketWorkers;
 
         public void InitializeGameData()
         {
@@ -66,29 +71,46 @@ namespace NovemberProject.CoreGameplay
 
         public void AddFolkToFarm()
         {
-            Assert.IsTrue(_idleFolk.Value >= 0);
+            if (_idleFolk.Value <= 0)
+            {
+                return;
+            }
+
             _idleFolk.Value--;
             _farmFolk.Value++;
         }
 
         public void RemoveFolkFromFarm()
         {
-            Assert.IsTrue(_farmFolk.Value >= 0);
+            if (_farmFolk.Value <= 0)
+            {
+                return;
+            }
+
             _farmFolk.Value--;
             _idleFolk.Value++;
         }
 
         public void AddFolkToMarket()
         {
-            Assert.IsTrue(_idleFolk.Value >= 0);
-            Assert.IsTrue(_marketFolk.Value == 0);
+            if (CanAddWorkerToMarket())
+            {
+                return;
+            }
+
             _idleFolk.Value--;
             _marketFolk.Value++;
+
+            bool CanAddWorkerToMarket() => _idleFolk.Value <= 0 || _marketFolk.Value >= _maxMarketWorkers;
         }
 
         public void RemoveFolkFromMarket()
         {
-            Assert.IsTrue(_marketFolk.Value >= 0);
+            if (_marketFolk.Value <= 0)
+            {
+                return;
+            }
+
             _marketFolk.Value--;
             _idleFolk.Value++;
         }
@@ -100,7 +122,11 @@ namespace NovemberProject.CoreGameplay
 
         public void LowerTax()
         {
-            Assert.IsTrue(_tax.Value > 1);
+            if (_tax.Value <= 1)
+            {
+                return;
+            }
+
             _tax.Value--;
         }
 
@@ -156,7 +182,8 @@ namespace NovemberProject.CoreGameplay
             {
                 return 0;
             }
-            return _folkCount.Value-maxFolkToEat;
+
+            return _folkCount.Value - maxFolkToEat;
         }
 
         private int CalculatePoorFolk()
@@ -185,8 +212,7 @@ namespace NovemberProject.CoreGameplay
 
         private static void KillFolk(IReactiveProperty<int> folkCount, ref int numberToKill)
         {
-            // ReSharper disable once ComplexConditionExpression
-            if (numberToKill <= 0 || folkCount.Value == 0)
+            if (HasNoOneToKill(numberToKill))
             {
                 return;
             }
@@ -199,6 +225,8 @@ namespace NovemberProject.CoreGameplay
 
             numberToKill -= folkCount.Value;
             folkCount.Value = 0;
+
+            bool HasNoOneToKill(int numberToKill) => numberToKill <= 0 || folkCount.Value == 0;
         }
 
         private bool ValidateTotalCount()

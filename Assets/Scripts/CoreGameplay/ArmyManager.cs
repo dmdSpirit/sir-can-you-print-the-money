@@ -10,6 +10,8 @@ namespace NovemberProject.CoreGameplay
 {
     public sealed class ArmyManager : InitializableBehaviour
     {
+        private const int MINIMAL_SALARY = 1;
+
         private readonly ReactiveProperty<int> _armyCount = new();
         private readonly ReactiveProperty<int> _salary = new();
 
@@ -44,7 +46,6 @@ namespace NovemberProject.CoreGameplay
         {
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int newArmyCost = coreGameplay.NewArmyForFoodCost;
-            Assert.IsTrue(Game.Instance.FoodController.ArmyFood.Value >= newArmyCost);
             Game.Instance.FoodController.SpendArmyFood(newArmyCost);
             _armyCount.Value++;
         }
@@ -56,6 +57,12 @@ namespace NovemberProject.CoreGameplay
 
         public void LowerSalary()
         {
+            if (_salary.Value <= MINIMAL_SALARY)
+            {
+                Debug.LogWarning($"Can not lower salary less than {MINIMAL_SALARY}");
+                return;
+            }
+
             Assert.IsTrue(_salary.Value > 1);
             _salary.Value--;
         }
