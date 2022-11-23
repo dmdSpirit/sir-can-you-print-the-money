@@ -7,14 +7,24 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class ArmyTreasuryBuilding : Building
+    public sealed class ArmyTreasuryBuilding : Building, IResourceStorage
     {
         private MoneyController _moneyController = null!;
 
         [SerializeField]
         private TMP_Text _moneyText = null!;
 
+        [SerializeField]
+        private Sprite _moneySprite = null!;
+
+        [SerializeField]
+        private string _moneyTitle = "Money";
+
         public override BuildingType BuildingType => BuildingType.ArmyTreasury;
+        public Sprite SpriteIcon => _moneySprite;
+        public string ResourceTitle => _moneyTitle;
+        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.ArmyMoney;
+
 
         protected override void OnInitialized()
         {

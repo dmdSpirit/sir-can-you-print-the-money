@@ -20,6 +20,9 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private WorkerManagementPanel _workerManagementPanel = null!;
 
+        [SerializeField]
+        private ResourceStoragePanel _resourceStoragePanel = null!;
+
         public Building Building { get; private set; } = null!;
 
         protected override void OnShow(Building building)
@@ -37,12 +40,22 @@ namespace NovemberProject.Buildings.UI
                 _workerManagementPanel.Hide();
             }
 
+            if (building is IResourceStorage resourceStorage)
+            {
+                _resourceStoragePanel.Show(resourceStorage);
+            }
+            else
+            {
+                _resourceStoragePanel.Hide();
+            }
+
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
         }
 
         protected override void OnHide()
         {
             _workerManagementPanel.Hide();
+            _resourceStoragePanel.Hide();
         }
     }
 }
