@@ -598,9 +598,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7611082601889492729, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+--- !u!1 &1035655372318391332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7289910620209232537, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+  m_PrefabInstance: {fileID: 7743257892406953661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3272818714190228769 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
@@ -638,9 +647,12 @@ MonoBehaviour:
   _description: This is the place where folks store their food. At the end of each
     round, each folk has to eat 1 food. Otherwise they'll starve.
   _image: {fileID: 21300000, guid: 747a863ab9c770545b7fcc7bf4395650, type: 3}
+  _selectionBorder: {fileID: 1035655372318391332}
   _foodText: {fileID: 3272818714190228769}
   _foodSprite: {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _foodTitle: Food
+  _buyUnitTitle: Buy a folk
+  _buyUnitButtonText: Buy
 --- !u!1001 &7867909130857463367
 PrefabInstance:
   m_ObjectHideFlags: 0

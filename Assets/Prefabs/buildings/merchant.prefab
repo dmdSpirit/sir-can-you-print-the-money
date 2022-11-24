@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7611082601889492729, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
@@ -247,6 +251,7 @@ MonoBehaviour:
   _description: It takes 2 seconds for 1 merchant to trade 1 food for 5 gold coins.
     1 merchant is working right now.
   _image: {fileID: 21300000, guid: 2c1c3a87d1971be4a915b7400683c9f4, type: 3}
+  _selectionBorder: {fileID: 3231119466756911826}
   _workerText: {fileID: 1144827295470003159}
   _tradeDuration: 2
   _foodCostPerUnit: 5
@@ -255,5 +260,10 @@ MonoBehaviour:
 --- !u!4 &1195365584608573716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+  m_PrefabInstance: {fileID: 5331638659379497035}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3231119466756911826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7289910620209232537, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_PrefabInstance: {fileID: 5331638659379497035}
   m_PrefabAsset: {fileID: 0}

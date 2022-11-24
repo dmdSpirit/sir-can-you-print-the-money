@@ -22,8 +22,17 @@ namespace NovemberProject.Buildings
                 return;
             }
 
+            if (_selectedBuilding is ISelectable previousSelectable)
+            {
+                previousSelectable.Unselect();
+            }
             _selectedBuilding = building;
             _isSelected = true;
+            if (building is ISelectable selectable)
+            {
+                selectable.Select();
+            }
+
             Game.Instance.UIManager.ShowBuildingInfo(building);
         }
 
@@ -32,6 +41,11 @@ namespace NovemberProject.Buildings
             if (!_isSelected)
             {
                 return;
+            }
+
+            if (_selectedBuilding is ISelectable selectable)
+            {
+                selectable.Unselect();
             }
 
             _selectedBuilding = null;
