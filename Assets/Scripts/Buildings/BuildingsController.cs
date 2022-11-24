@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
 
@@ -21,6 +22,19 @@ namespace NovemberProject.Buildings
         public Building GetBuilding(BuildingType buildingType)
         {
             return _buildings[buildingType];
+        }
+
+        public T GetBuilding<T>() where T : Building
+        {
+            foreach (Building building in _buildings.Values)
+            {
+                if (building is T typedBuilding)
+                {
+                    return typedBuilding;
+                }
+            }
+
+            throw new Exception($"No building of type {typeof(T)} registered");
         }
     }
 }
