@@ -220,6 +220,7 @@ namespace NovemberProject.CoreGameplay
             if (folkCount.Value >= numberToKill)
             {
                 folkCount.Value -= numberToKill;
+                numberToKill = 0;
                 return;
             }
 

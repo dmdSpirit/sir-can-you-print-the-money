@@ -11,7 +11,7 @@ namespace NovemberProject.Buildings.UI
     public sealed class WorkerManagementPanel : UIElement<IWorkerManipulator>
     {
         private IWorkerManipulator _workerManipulator = null!;
-        private IDisposable? _workerCountSub;
+        private readonly CompositeDisposable _workerCountSub = new();
 
         [SerializeField]
         private Button _addWorkerButton = null!;
@@ -38,15 +38,16 @@ namespace NovemberProject.Buildings.UI
 
         protected override void OnShow(IWorkerManipulator workerManipulator)
         {
-            _workerCountSub?.Dispose();
+            _workerCountSub.Clear();
             _workerManipulator = workerManipulator;
-            _workerCountSub = _workerManipulator.WorkerCount.Subscribe(OnWorkerCountChanged);
+            _workerManipulator.WorkerCount.Subscribe(OnWorkerCountChanged).AddTo(_workerCountSub);
+            _workerManipulator.PotentialWorkerCount.Subscribe(OnPotentialWorkerCountChanged).AddTo(_workerCountSub);
             _title.text = _workerManipulator.WorkersTitle;
         }
 
         protected override void OnHide()
         {
-            _workerCountSub?.Dispose();
+            _workerCountSub.Clear();
         }
 
         private void OnWorkerCountChanged(int workerCount)
@@ -60,6 +61,12 @@ namespace NovemberProject.Buildings.UI
                 _numberOfWorkersText.text = workerCount.ToString();
             }
 
+            _addWorkerButton.interactable = _workerManipulator.CanAddWorker();
+            _removeWorkerButton.interactable = _workerManipulator.CanRemoveWorker();
+        }
+
+        private void OnPotentialWorkerCountChanged(int potentialWorkerCount)
+        {
             _addWorkerButton.interactable = _workerManipulator.CanAddWorker();
             _removeWorkerButton.interactable = _workerManipulator.CanRemoveWorker();
         }

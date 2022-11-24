@@ -8,10 +8,12 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class MarketBuilding : Building, IWorkerManipulator
+    public sealed class MarketBuilding : Building, IWorkerManipulator, IProducer
     {
+        private readonly ReactiveProperty<bool> _isProducing = new();
+        private readonly ReactiveProperty<int> _producedValue = new();
+        
         private Timer? _productionTimer;
-        private bool _isProducing;
 
         [SerializeField]
         private TMP_Text _workerText = null!;
@@ -30,9 +32,15 @@ namespace NovemberProject.Buildings
 
         public override BuildingType BuildingType => BuildingType.Market;
         public IReadOnlyReactiveProperty<int> WorkerCount => Game.Instance.FolkManager.MarketFolk;
+        public IReadOnlyReactiveProperty<int> PotentialWorkerCount => Game.Instance.FolkManager.IdleFolk;
         public int MaxWorkerCount => Game.Instance.FolkManager.MaxMarkerWorkers;
         public bool HasMaxWorkerCount => true;
         public string WorkersTitle => _workersTitle;
+        
+        public IReadOnlyReactiveProperty<int> ProducedValue => _producedValue;
+        public IReadOnlyReactiveProperty<bool> IsProducing => _isProducing;
+        public Timer? ProductionTimer => _productionTimer;
+
 
         protected override void OnInitialized()
         {
@@ -61,7 +69,7 @@ namespace NovemberProject.Buildings
         public bool CanAddWorker()
         {
             return Game.Instance.FolkManager.IdleFolk.Value > 0
-                   && Game.Instance.FolkManager.FarmFolk.Value < Game.Instance.FolkManager.MaxMarkerWorkers;
+                   && Game.Instance.FolkManager.MarketFolk.Value < Game.Instance.FolkManager.MaxMarkerWorkers;
         }
 
         public bool CanRemoveWorker()
@@ -72,13 +80,13 @@ namespace NovemberProject.Buildings
         private void UpdateProduction()
         {
             _workerText.text = Game.Instance.FolkManager.MarketFolk.Value.ToString();
-            if (_isProducing && !IsAbleToTrade())
+            if (_isProducing.Value && !IsAbleToTrade())
             {
                 StopProduction();
                 return;
             }
 
-            if (!_isProducing && IsAbleToTrade())
+            if (!_isProducing.Value && IsAbleToTrade())
             {
                 StartProduction();
             }
@@ -97,30 +105,32 @@ namespace NovemberProject.Buildings
             Assert.IsTrue(_productionTimer == null);
             _productionTimer = Game.Instance.TimeSystem.CreateTimer(_tradeDuration, OnTradeFinished);
             _productionTimer.Start();
-            _isProducing = true;
+            _producedValue.Value = _foodChangedPerTrade * Game.Instance.FolkManager.MarketFolk.Value;
+            _isProducing.Value = true;
         }
 
         private void StopProduction()
         {
-            if (!_isProducing)
+            if (!_isProducing.Value)
             {
                 return;
             }
 
             _productionTimer?.Cancel();
             _productionTimer = null;
-            _isProducing = false;
+            _producedValue.Value = 0;
+            _isProducing.Value = false;
         }
 
         private void OnTradeFinished(Timer _)
         {
             Assert.IsTrue(_productionTimer != null);
-            Assert.IsTrue(_isProducing);
+            Assert.IsTrue(_isProducing.Value);
             Assert.IsTrue(Game.Instance.FolkManager.MarketFolk.Value > 0);
             Game.Instance.MoneyController.TransferMoneyFromArmyToFolk(_foodCostPerUnit * _foodChangedPerTrade);
             Game.Instance.FoodController.TransferFoodFromFolkToArmy(_foodChangedPerTrade);
             _productionTimer = null;
-            _isProducing = false;
+            _isProducing.Value = false;
             StartProduction();
         }
 
