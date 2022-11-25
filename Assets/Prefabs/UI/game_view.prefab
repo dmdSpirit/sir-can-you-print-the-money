@@ -134,6 +134,7 @@ MonoBehaviour:
   _timeControlsPanel: {fileID: 8195963758099638503}
   _gameOverPanel: {fileID: 2418965048840219462}
   _newGamePanel: {fileID: 1032951704544229322}
+  _techTreePanel: {fileID: 5497994373559018278}
   _layerMask:
     serializedVersion: 2
     m_Bits: 32
@@ -761,6 +762,11 @@ PrefabInstance:
 --- !u!224 &5202537338326542422 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8630269141532470839, guid: d95ec7dddf4d6c9418f0bbb98e97f377, type: 3}
+  m_PrefabInstance: {fileID: 4609364031275664993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5497994373559018278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8339273338223519047, guid: d95ec7dddf4d6c9418f0bbb98e97f377, type: 3}
   m_PrefabInstance: {fileID: 4609364031275664993}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5856128279012022817

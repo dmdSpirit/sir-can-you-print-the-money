@@ -10,6 +10,7 @@ using NovemberProject.Time.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System.UI
 {
@@ -47,6 +48,9 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private NewGamePanel _newGamePanel = null!;
+
+        [SerializeField]
+        private GameObject _techTreePanel = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
@@ -129,6 +133,11 @@ namespace NovemberProject.System.UI
 
         public void ShowNewGamePanel() => _newGamePanel.Show(null);
         public void HideNewGamePanel() => _newGamePanel.Hide();
+
+        public void HideTechTreePanel()
+        {
+            _techTreePanel.SetActive(false);
+        }
     }
 }
 
