@@ -507,7 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Army food
   _description: Storage of army food. They have to buy it from folks. At the end
-    of the round each armymen has to eat 1 food, otherwise they starve.
+    of the week each armymen has to eat 1 food. Otherwise they starve and die.
   _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
   _selectionBorder: {fileID: 1035655372318391332}
   _foodText: {fileID: 3272818714190228769}

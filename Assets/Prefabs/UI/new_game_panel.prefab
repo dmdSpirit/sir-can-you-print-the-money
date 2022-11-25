@@ -66,9 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You should know that government pays salary to the army and collects taxes
-    from peasants. This way peasants will have to satisfy the needs of your army.
-    Your job is to keep this cycle going. Can you do that for me?
+  m_text: Let me tell you about the cycle of life. If you pay salary to the army
+    and collect taxes from your peasants, you should no longer worry about supporting
+    your soldiers. Your peasants will support them for you. Beautiful, isn't it?
+    You job is to keep this cycle going!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
@@ -175,7 +176,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -29, y: 29}
-  m_SizeDelta: {x: 390, y: 56}
+  m_SizeDelta: {x: 250, y: 56}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &2155482245103831598
 CanvasRenderer:
@@ -497,7 +498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sure, I think I can do that
+  m_text: Let's start!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cd965b179c8b6de4e83d4a52062a274a, type: 2}
   m_sharedMaterial: {fileID: 5402854647406217180, guid: cd965b179c8b6de4e83d4a52062a274a, type: 2}
@@ -784,7 +785,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hold on a sec!
+  m_text: Hold on a sec, sir!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}

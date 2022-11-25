@@ -644,8 +644,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Folk food
-  _description: This is the place where folks store their food. At the end of each
-    round, each folk has to eat 1 food. Otherwise they'll starve.
+  _description: Storage of food for your folks. At the end of each week, each folk
+    has to eat 1 food. Otherwise they'll starve and die.
   _image: {fileID: 21300000, guid: 747a863ab9c770545b7fcc7bf4395650, type: 3}
   _selectionBorder: {fileID: 1035655372318391332}
   _foodText: {fileID: 3272818714190228769}

@@ -151,8 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Guardians
-  _description: 2 soldiers are sleeping on duty. They are guardians, they prevent
-    you from outside attacks.
+  _description: They fight like a dairy farmer and prevent you from incoming attacks.
   _image: {fileID: 21300000, guid: a1817c4db3dfc274a9f0eff971287479, type: 3}
   _selectionBorder: {fileID: 2749169707142526705}
   _armyText: {fileID: 365639419248682996}

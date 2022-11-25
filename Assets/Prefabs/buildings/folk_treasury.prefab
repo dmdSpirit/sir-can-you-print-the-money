@@ -148,8 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Folk money
   _description: Folks store some money here. They don't have much. At the end of
-    the round they have to pay 8 coins per person as taxes. Otherwise they'll go
-    to jail.
+    each round they pay 8 coins per person as taxes. Otherwise they go to jail.
   _image: {fileID: 21300000, guid: f769a7f41957e7444aa7f0d122e58dce, type: 3}
   _selectionBorder: {fileID: 7230332426216683035}
   _moneyText: {fileID: 5144040263797057310}
