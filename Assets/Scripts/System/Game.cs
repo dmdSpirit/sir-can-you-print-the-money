@@ -9,7 +9,9 @@ using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
 using NovemberProject.System.Messages;
 using NovemberProject.System.UI;
+using NovemberProject.TechTree;
 using NovemberProject.Time;
+using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
 
@@ -35,8 +37,10 @@ namespace NovemberProject.System
         public BuildingSelector BuildingSelector { get; private set; } = null!;
         public MoneyController MoneyController { get; private set; } = null!;
         public FoodController FoodController { get; private set; } = null!;
+        public TreasureController TreasureController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public BuildingsController BuildingsController { get; private set; } = null!;
+        public TechController TechController { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
         public FolkManager FolkManager => CoreGameplay.FolkManager;
         public ArmyManager ArmyManager => CoreGameplay.ArmyManager;
@@ -87,6 +91,8 @@ namespace NovemberProject.System
             BuildingsController = FindObjectOfType<BuildingsController>();
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
             FoodController = FindObjectOfType<FoodController>();
+            TreasureController = FindObjectOfType<TreasureController>();
+            TechController = FindObjectOfType<TechController>();
         }
 
         private void Initialize()

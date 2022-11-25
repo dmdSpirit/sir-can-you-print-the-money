@@ -15,6 +15,7 @@ namespace NovemberProject.GameStates
             Game.Instance.MoneyController.InitializeGameData();
             Game.Instance.FoodController.InitializeGameData();
             Game.Instance.CameraController.InitializeGameData();
+            // Game.Instance.TreasureController.InitializeGameData();
             Game.Instance.UIManager.ShowNewGamePanel();
         }
 

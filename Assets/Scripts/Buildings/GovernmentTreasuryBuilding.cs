@@ -4,6 +4,7 @@ using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.Buildings
 {
@@ -24,6 +25,7 @@ namespace NovemberProject.Buildings
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.GovernmentMoney;
+        public ChangeSalaryAbility ChangeSalaryAbility { get; private set; }
 
         protected override void OnInitialized()
         {
