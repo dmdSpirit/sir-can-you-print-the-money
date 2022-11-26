@@ -4,7 +4,6 @@ using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.Buildings
 {

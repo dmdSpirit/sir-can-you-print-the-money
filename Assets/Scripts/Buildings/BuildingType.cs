@@ -12,6 +12,7 @@ namespace NovemberProject.Buildings
         FolkFoodStorage = 6,
         Market = 7,
         GuardTower = 8,
-        Expeditions = 9
+        Expeditions = 9,
+        TreasureTower = 10
     }
 }

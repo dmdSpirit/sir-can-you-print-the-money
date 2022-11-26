@@ -2,6 +2,7 @@
 using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace NovemberProject.Treasures
 {
@@ -18,7 +19,16 @@ namespace NovemberProject.Treasures
         {
             _treasures.Value = _startingTreasures;
         }
-        
-        
+
+        public void AddTreasures(int treasures)
+        {
+            _treasures.Value += treasures;
+        }
+
+        public void SpendTreasures(int cost)
+        {
+            Assert.IsTrue(_treasures.Value>=cost);
+            _treasures.Value -= cost;
+        }
     }
 }
