@@ -12,16 +12,21 @@ namespace NovemberProject.System.UI
         [SerializeField]
         private GameStatePanel _gameStatePanel = null!;
 
+        [SerializeField]
+        private FPSPanel _fpsPanel = null!;
+
         protected override void OnShow(object? _)
         {
             _timeScalePanel.Show(null);
             _gameStatePanel.Show(null);
+            _fpsPanel.Show(null);
         }
 
         protected override void OnHide()
         {
             _timeScalePanel.Hide();
             _gameStatePanel.Hide();
+            _fpsPanel.Hide();
         }
     }
 }
