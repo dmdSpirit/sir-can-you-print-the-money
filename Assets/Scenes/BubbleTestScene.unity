@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 32209916}
   - component: {fileID: 32209915}
   - component: {fileID: 32209917}
+  - component: {fileID: 32209918}
   m_Layer: 0
   m_Name: money_controller
   m_TagString: Untagged
@@ -453,6 +454,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingArmyFood: 20
   _startingFolkFood: 20
+--- !u!114 &32209918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32209914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efb90de3f214a5aa8993eee8e964faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingTreasures: 0
 --- !u!1001 &34367906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14300,7 +14314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 380
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.y

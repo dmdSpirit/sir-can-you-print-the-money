@@ -67,6 +67,7 @@ namespace NovemberProject.CoreGameplay
             _isExpeditionActive.Value = false;
             var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, _expeditionReward);
             Game.Instance.GameStateMachine.ExpeditionFinished(expeditionResult);
+            Game.Instance.TreasureController.AddTreasures(_expeditionReward);
         }
     }
 }
