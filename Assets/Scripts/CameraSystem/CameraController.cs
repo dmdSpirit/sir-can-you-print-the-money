@@ -42,5 +42,15 @@ namespace NovemberProject.CameraSystem
         {
             _cameraZoom.SetCameraZoom(_startingZoom);
         }
+
+        public void TurnCameraOff()
+        {
+            _mainCamera.enabled = false;
+        }
+        
+        public void TurnCameraOn()
+        {
+            _mainCamera.enabled = true;
+        }
     }
 }

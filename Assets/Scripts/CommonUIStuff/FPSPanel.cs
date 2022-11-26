@@ -1,6 +1,8 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace NovemberProject.CommonUIStuff
     public sealed class FPSPanel : UIElement<object?>
     {
         private IDisposable? _sub;
+        private readonly List<float> _fpsList = new();
 
         [SerializeField]
         private TMP_Text _current = null!;
@@ -28,11 +31,17 @@ namespace NovemberProject.CommonUIStuff
             _sub?.Dispose();
         }
 
+        private void Update()
+        {
+            _fpsList.Add(1f / UnityEngine.Time.unscaledDeltaTime);
+        }
+
         private void UpdateFPS(long _)
         {
-            _current.text = (1f / UnityEngine.Time.unscaledDeltaTime).ToString(CultureInfo.InvariantCulture);
+            _current.text = $"{_fpsList.Min():0.##}/{_fpsList.Average():0.##}";
             _average.text =
-                (UnityEngine.Time.frameCount / UnityEngine.Time.unscaledTime).ToString(CultureInfo.InvariantCulture);
+                $"{(UnityEngine.Time.frameCount / UnityEngine.Time.unscaledTime):0.##}";
+            _fpsList.Clear();
         }
     }
 }

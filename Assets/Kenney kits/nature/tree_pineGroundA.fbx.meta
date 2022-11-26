@@ -3,7 +3,12 @@ guid: cfcd40211dd800b4dbe8caeb10265077
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leafsDark
+    second: {fileID: 2100000, guid: aba6ec6ea1a0e364d811de3545154217, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

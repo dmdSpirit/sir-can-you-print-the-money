@@ -3,7 +3,17 @@ guid: 68e77a59b994c31459a31a7c9ff225bf
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leafsFall
+    second: {fileID: 2100000, guid: c8d44ff8782417a4f89c4d09b74331f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodBirch
+    second: {fileID: 2100000, guid: d1de9e3ed2244f140aa956c86fb82290, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
