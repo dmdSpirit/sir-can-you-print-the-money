@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.CoreGameplay;
 using NovemberProject.InputSystem;
 using NovemberProject.System;
 using UniRx;
@@ -19,6 +20,7 @@ namespace NovemberProject.GameStates
 
         private readonly Subject<State> _onStateChanged = new();
 
+        private ExpeditionFinishedState? _expeditionFinishedState;
         private State? _currentState;
 
         public IObservable<State> OnStateChanged => _onStateChanged;
@@ -52,6 +54,15 @@ namespace NovemberProject.GameStates
         public void FinishRound() => ChangeState(_roundEndState);
         public void StartRound() => ChangeState(_roundStartState);
         public void GameOver() => ChangeState(_gameOverState);
+
+        // FIXME (Stas): Ugly
+        public void ExpeditionFinished(ExpeditionResult expeditionResult)
+        {
+            _expeditionFinishedState = new ExpeditionFinishedState(expeditionResult);
+            _expeditionFinishedState.Enter();
+        }
+
+        public void ExpeditionFinishedExit() => _expeditionFinishedState?.Exit();
 
         private void ChangeState(State state)
         {

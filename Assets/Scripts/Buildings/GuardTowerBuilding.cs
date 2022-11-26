@@ -16,7 +16,7 @@ namespace NovemberProject.Buildings
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Game.Instance.ArmyManager.ArmyCount
+            Game.Instance.ArmyManager.GuardsCount
                 .TakeUntilDisable(this)
                 .Subscribe(OnArmyCountChanged);
         }

@@ -40,7 +40,8 @@ namespace NovemberProject.Buildings
 
         public IReadOnlyReactiveProperty<int> ProducedValue => _producedValue;
         public IReadOnlyReactiveProperty<bool> IsProducing => _isProducing;
-        public Timer? ProductionTimer => _productionTimer;
+        public IReadOnlyTimer? ProductionTimer => _productionTimer;
+        public bool ShowProducedValue => true;
 
         protected override void OnInitialized()
         {

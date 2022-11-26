@@ -6,8 +6,9 @@ namespace NovemberProject.Buildings
 {
     public interface IProducer
     {
-        public IReadOnlyReactiveProperty<int> ProducedValue { get; }
+        public bool ShowProducedValue { get; }
+        public IReadOnlyReactiveProperty<int>? ProducedValue { get; }
         public IReadOnlyReactiveProperty<bool> IsProducing { get; }
-        public Timer? ProductionTimer { get; }
+        public IReadOnlyTimer? ProductionTimer { get; }
     }
 }

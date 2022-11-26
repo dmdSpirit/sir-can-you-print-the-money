@@ -5,6 +5,7 @@ using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.CoreGameplay
 {
@@ -13,21 +14,26 @@ namespace NovemberProject.CoreGameplay
         private const int MINIMAL_SALARY = 1;
 
         private readonly ReactiveProperty<int> _armyCount = new();
+        private readonly ReactiveProperty<int> _guardsCount = new();
         private readonly ReactiveProperty<int> _salary = new();
+        private readonly ReactiveProperty<int> _explorersCount = new();
 
         [SerializeField]
         private int _startingArmySalary = 5;
 
         [SerializeField]
-        private int _startingArmyCount = 2;
+        private int _startingGuardsCount = 2;
 
         public IReactiveProperty<int> ArmyCount => _armyCount;
+        public IReactiveProperty<int> GuardsCount => _guardsCount;
+        public IReactiveProperty<int> ExplorersCount => _explorersCount;
         public IReactiveProperty<int> Salary => _salary;
 
         public void InitializeGameData()
         {
             _salary.Value = _startingArmySalary;
-            _armyCount.Value = _startingArmyCount;
+            _guardsCount.Value = _startingGuardsCount;
+            _armyCount.Value = _startingGuardsCount;
         }
 
         public void StartRound()
@@ -47,7 +53,30 @@ namespace NovemberProject.CoreGameplay
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int newArmyCost = coreGameplay.NewArmyForFoodCost;
             Game.Instance.FoodController.SpendArmyFood(newArmyCost);
+            _guardsCount.Value++;
             _armyCount.Value++;
+        }
+
+        public void AddArmyToExplorers()
+        {
+            if (_guardsCount.Value == 0)
+            {
+                return;
+            }
+
+            _guardsCount.Value--;
+            _explorersCount.Value++;
+        }
+
+        public void RemoveArmyFromExplorers()
+        {
+            if (_explorersCount.Value == 0)
+            {
+                return;
+            }
+
+            _guardsCount.Value++;
+            _explorersCount.Value--;
         }
 
         public void RaiseSalary()
@@ -67,9 +96,18 @@ namespace NovemberProject.CoreGameplay
             _salary.Value--;
         }
 
+        public void ReturnExplorersToGuard()
+        {
+            while (_explorersCount.Value > 0)
+            {
+                RemoveArmyFromExplorers();
+            }
+        }
+
         private void PaySalary()
         {
-            int salaryToPay = _salary.Value * _armyCount.Value;
+            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
+            int salaryToPay = _salary.Value * armyCount;
             if (salaryToPay == 0)
             {
                 return;
@@ -81,18 +119,20 @@ namespace NovemberProject.CoreGameplay
 
         private void EatFood()
         {
+            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
-            int foodToEat = _armyCount.Value * coreGameplay.FoodPerPerson;
+            int foodToEat = armyCount * coreGameplay.FoodPerPerson;
             Assert.IsTrue(Game.Instance.FoodController.ArmyFood.Value >= foodToEat);
             Game.Instance.FoodController.SpendArmyFood(foodToEat);
         }
 
         private void KillStarved()
         {
+            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             FoodController foodController = Game.Instance.FoodController;
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int maxArmyToFeed = foodController.ArmyFood.Value / coreGameplay.FoodPerPerson;
-            int starvedArmy = _armyCount.Value - maxArmyToFeed;
+            int starvedArmy = armyCount - maxArmyToFeed;
             if (starvedArmy <= 0)
             {
                 return;
@@ -106,14 +146,26 @@ namespace NovemberProject.CoreGameplay
         {
             Assert.IsTrue(_armyCount.Value >= delta);
             _armyCount.Value -= delta;
+            if (_guardsCount.Value >= delta)
+            {
+                _guardsCount.Value -= delta;
+                return;
+            }
+
+            delta -= _guardsCount.Value;
+            _guardsCount.Value = 0;
+            Assert.IsTrue(delta <= _explorersCount.Value);
+            Assert.IsFalse(Game.Instance.Expeditions.IsExpeditionActive.Value);
+            _explorersCount.Value -= delta;
         }
 
         private void DesertUnpaid()
         {
+            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             MoneyController moneyController = Game.Instance.MoneyController;
             int governmentMoney = moneyController.GovernmentMoney.Value;
             int maxAffordableArmy = governmentMoney / _salary.Value;
-            int numberToDesert = _armyCount.Value - maxAffordableArmy;
+            int numberToDesert = armyCount - maxAffordableArmy;
             if (numberToDesert <= 0)
             {
                 return;

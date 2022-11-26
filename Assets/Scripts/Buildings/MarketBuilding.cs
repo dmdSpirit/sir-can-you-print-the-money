@@ -36,10 +36,10 @@ namespace NovemberProject.Buildings
         public int MaxWorkerCount => Game.Instance.FolkManager.MaxMarkerWorkers;
         public bool HasMaxWorkerCount => true;
         public string WorkersTitle => _workersTitle;
-        
+        public bool ShowProducedValue => true;
         public IReadOnlyReactiveProperty<int> ProducedValue => _producedValue;
         public IReadOnlyReactiveProperty<bool> IsProducing => _isProducing;
-        public Timer? ProductionTimer => _productionTimer;
+        public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
 
         protected override void OnInitialized()

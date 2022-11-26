@@ -26,6 +26,9 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private BuyUnitPanel _buyUnitPanel = null!;
 
+        [SerializeField]
+        private ExpeditionSenderPanel _expeditionSenderPanel = null!;
+
         public Building Building { get; private set; } = null!;
 
         protected override void OnShow(Building building)
@@ -46,6 +49,7 @@ namespace NovemberProject.Buildings.UI
             _workerManagementPanel.Hide();
             _resourceStoragePanel.Hide();
             _buyUnitPanel.Hide();
+            _expeditionSenderPanel.Hide();
         }
 
         private void ShowBuyUnit(Building building)
@@ -74,6 +78,14 @@ namespace NovemberProject.Buildings.UI
 
         private void ShowWorkerManagement(Building building)
         {
+            if (building is IExpeditionSender expeditionSender)
+            {
+                _expeditionSenderPanel.Show(expeditionSender);
+                _workerManagementPanel.Hide();
+                return;
+            }
+
+            _expeditionSenderPanel.Hide();
             if (building is IWorkerManipulator workerManipulator)
             {
                 _workerManagementPanel.Show(workerManipulator);

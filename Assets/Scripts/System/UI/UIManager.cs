@@ -3,6 +3,7 @@ using NovemberProject.Buildings;
 using NovemberProject.Buildings.UI;
 using NovemberProject.Cheats;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.GameStates;
 using NovemberProject.GameStates.UI;
 using NovemberProject.Rounds.UI;
@@ -51,6 +52,9 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private GameObject _techTreePanel = null!;
+
+        [SerializeField]
+        private ExpeditionResultPanel _expeditionResultPanel = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
@@ -137,6 +141,16 @@ namespace NovemberProject.System.UI
         public void HideTechTreePanel()
         {
             _techTreePanel.SetActive(false);
+        }
+
+        public void ShowExpeditionResult(ExpeditionResult expeditionResult)
+        {
+            _expeditionResultPanel.Show(expeditionResult);
+        }
+
+        public void HideExpeditionResult()
+        {
+            _expeditionResultPanel.Hide();
         }
     }
 }

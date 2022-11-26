@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.System;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.GameStates
 {

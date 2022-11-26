@@ -35,6 +35,7 @@ namespace NovemberProject.Buildings
             _producer.IsProducing
                 .TakeUntilDisable(this)
                 .Subscribe(OnIsProducingChanged);
+            _producedValue.gameObject.SetActive(_producer.ShowProducedValue);
         }
 
         private void Update()
@@ -57,7 +58,7 @@ namespace NovemberProject.Buildings
 
             _productionSub?.Dispose();
             _progressBar.SetActive(isProducing);
-            if (isProducing)
+            if (isProducing && _producer.ShowProducedValue)
             {
                 _productionSub = _producer.ProducedValue.Subscribe(OnProducedValueChanged);
             }

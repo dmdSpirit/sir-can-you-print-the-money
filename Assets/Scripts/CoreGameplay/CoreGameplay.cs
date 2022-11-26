@@ -83,8 +83,9 @@ namespace NovemberProject.CoreGameplay
         private bool IsNoArmyLeft()
         {
             FoodController foodController = Game.Instance.FoodController;
-            var armyCount = ArmyManager.ArmyCount;
+            var armyCount = ArmyManager.GuardsCount;
             return armyCount.Value == 0
+                   && ArmyManager.ExplorersCount.Value == 0
                    && foodController.ArmyFood.Value < _newArmyForFoodCost;
         }
     }

@@ -14,7 +14,6 @@ namespace NovemberProject.GameStates
             Game.Instance.RoundSystem.EndRound();
             Game.Instance.TimeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
-            Game.Instance.UIManager.HideBuildingInfo();
             if (Game.Instance.ResourceMoveEffectSpawner.MoveEffects.Count == 0)
             {
                 FinishRound();
