@@ -7,6 +7,7 @@ namespace NovemberProject.GameStates
     {
         protected override void OnEnter()
         {
+            Game.Instance.CameraController.TurnCameraOff();
             Game.Instance.UIManager.HideRoundTimer();
             Game.Instance.UIManager.HideTimeControls();
             Game.Instance.UIManager.ShowMainMenu();
@@ -15,6 +16,7 @@ namespace NovemberProject.GameStates
 
         protected override void OnExit()
         {
+            Game.Instance.CameraController.TurnCameraOn();
             Game.Instance.UIManager.HideMainMenu();
         }
     }

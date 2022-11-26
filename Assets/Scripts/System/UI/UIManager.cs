@@ -11,7 +11,6 @@ using NovemberProject.Time.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System.UI
 {
