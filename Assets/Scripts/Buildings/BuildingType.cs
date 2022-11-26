@@ -11,6 +11,7 @@ namespace NovemberProject.Buildings
         ArmyFoodStorage = 5,
         FolkFoodStorage = 6,
         Market = 7,
-        GuardTower = 8
+        GuardTower = 8,
+        Expeditions = 9
     }
 }

@@ -17,6 +17,7 @@ namespace NovemberProject.GameStates
 
         protected override void OnExit()
         {
+            Game.Instance.BuildingSelector.Unselect();
             Game.Instance.UIManager.LockTimeControls();
             Game.Instance.UIManager.HideRoundTimer();
         }

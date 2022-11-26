@@ -147,6 +147,22 @@ namespace NovemberProject.Time
             return (timer.Duration - timer.Progress) * _timeScale.Value;
         }
 
+        public int EstimateSecondsLeft(Timer timer)
+        {
+            float unscaledTimeLeft = timer.Duration - timer.Progress;
+            if (_unscaledTimers.Contains(timer))
+            {
+                return (int)unscaledTimeLeft;
+            }
+
+            if (_timeScale.Value == 0)
+            {
+                return (int)unscaledTimeLeft;
+            }
+
+            return (int)(unscaledTimeLeft / _timeScale.Value);
+        }
+
         private void AddProgressToTimers(IEnumerable<Timer> timers, float deltaTime)
         {
             foreach (Timer timer in timers)
