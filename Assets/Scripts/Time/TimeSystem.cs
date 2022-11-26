@@ -147,10 +147,10 @@ namespace NovemberProject.Time
             return (timer.Duration - timer.Progress) * _timeScale.Value;
         }
 
-        public int EstimateSecondsLeft(Timer timer)
+        public int EstimateSecondsLeft(IReadOnlyTimer timer)
         {
             float unscaledTimeLeft = timer.Duration - timer.Progress;
-            if (_unscaledTimers.Contains(timer))
+            if (_unscaledTimers.Contains((Timer)timer))
             {
                 return (int)unscaledTimeLeft;
             }

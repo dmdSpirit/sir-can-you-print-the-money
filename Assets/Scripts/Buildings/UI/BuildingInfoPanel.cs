@@ -49,6 +49,7 @@ namespace NovemberProject.Buildings.UI
             _workerManagementPanel.Hide();
             _resourceStoragePanel.Hide();
             _buyUnitPanel.Hide();
+            _expeditionSenderPanel.Hide();
         }
 
         private void ShowBuyUnit(Building building)
@@ -80,6 +81,7 @@ namespace NovemberProject.Buildings.UI
             if (building is IExpeditionSender expeditionSender)
             {
                 _expeditionSenderPanel.Show(expeditionSender);
+                _workerManagementPanel.Hide();
                 return;
             }
 

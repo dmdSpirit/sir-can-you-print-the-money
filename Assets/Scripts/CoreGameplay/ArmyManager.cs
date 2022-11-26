@@ -5,6 +5,7 @@ using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.CoreGameplay
 {
@@ -93,6 +94,14 @@ namespace NovemberProject.CoreGameplay
 
             Assert.IsTrue(_salary.Value > 1);
             _salary.Value--;
+        }
+
+        public void ReturnExplorersToGuard()
+        {
+            while (_explorersCount.Value > 0)
+            {
+                RemoveArmyFromExplorers();
+            }
         }
 
         private void PaySalary()

@@ -7,14 +7,14 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings.UI
 {
-    public sealed class ExpeditionTimerPanel : UIElement<Timer>
+    public sealed class ExpeditionTimerPanel : UIElement<IReadOnlyTimer>
     {
-        private Timer _timer = null!;
+        private IReadOnlyTimer _timer = null!;
 
         [SerializeField]
         private TMP_Text _timeLeft = null!;
 
-        protected override void OnShow(Timer timer)
+        protected override void OnShow(IReadOnlyTimer timer)
         {
             _timer = timer;
         }
@@ -31,7 +31,7 @@ namespace NovemberProject.Buildings.UI
                 return;
             }
 
-            _timeLeft.text = Game.Instance.TimeSystem.EstimateSecondsLeft(_timer).ToString()+"s";
+            _timeLeft.text = Game.Instance.TimeSystem.EstimateSecondsLeft(_timer)+"s";
         }
     }
 }

@@ -10,7 +10,6 @@ namespace NovemberProject.Buildings
 {
     public sealed class ExpeditionsBuilding : Building, IExpeditionSender
     {
-        private readonly ReactiveProperty<bool> _isExpeditionActive = new();
         private readonly ReactiveProperty<bool> _canBeSentToExpedition = new();
 
         private static ArmyManager ArmyManager => Game.Instance.ArmyManager;
@@ -35,9 +34,11 @@ namespace NovemberProject.Buildings
         public int MaxWorkerCount => 0;
         public bool HasMaxWorkerCount => false;
         public string WorkersTitle => _workerTitle;
-        public IReadOnlyReactiveProperty<bool> IsExpeditionActive => _isExpeditionActive;
+        public IReadOnlyReactiveProperty<bool> IsExpeditionActive => Game.Instance.Expeditions.IsExpeditionActive;
         public IReadOnlyReactiveProperty<bool> CanBeSentToExpedition => _canBeSentToExpedition;
-        public Timer? ExpeditionTimer { get; } = null;
+        public IReadOnlyTimer? ExpeditionTimer => Game.Instance.Expeditions.Timer;
+        public int ExpeditionFoodPerPersonCost => _expeditionFoodPerPersonCost;
+        public int ExpeditionMoneyPerPersonCost => _expeditionMoneyPerPersonCost;
 
         protected override void OnInitialized()
         {
@@ -48,14 +49,14 @@ namespace NovemberProject.Buildings
             Game.Instance.FoodController.ArmyFood
                 .TakeUntilDisable(this)
                 .Subscribe(_ => UpdateCanBeSentStatus());
-            _isExpeditionActive
+            Game.Instance.Expeditions.IsExpeditionActive
                 .TakeUntilDisable(this)
                 .Subscribe(_ => UpdateCanBeSentStatus());
             ArmyManager.ExplorersCount
                 .TakeUntilDisable(this)
                 .Subscribe(OnExplorersCountChanged);
         }
-
+        
         public void AddWorker()
         {
             ArmyManager.AddArmyToExplorers();
@@ -78,7 +79,7 @@ namespace NovemberProject.Buildings
 
         private void UpdateCanBeSentStatus()
         {
-            if (_isExpeditionActive.Value)
+            if (IsExpeditionActive.Value)
             {
                 if (_canBeSentToExpedition.Value)
                 {
@@ -90,13 +91,21 @@ namespace NovemberProject.Buildings
 
             int workersCount = ArmyManager.ExplorersCount.Value;
             _canBeSentToExpedition.Value =
-                MoneyController.ArmyMoney.Value >= workersCount * _expeditionMoneyPerPersonCost
-                && FoodController.ArmyFood.Value >= workersCount * _expeditionFoodPerPersonCost;
+                workersCount > 0
+                && IsEnoughMoneyForExpedition()
+                && IsEnoughFoodForExpedition();
+
+            bool IsEnoughMoneyForExpedition() =>
+                MoneyController.ArmyMoney.Value >= workersCount * _expeditionMoneyPerPersonCost;
+
+            bool IsEnoughFoodForExpedition() =>
+                FoodController.ArmyFood.Value >= workersCount * _expeditionFoodPerPersonCost;
         }
 
         private void OnExplorersCountChanged(int explorersCount)
         {
             _numberOfExplorersText.text = explorersCount.ToString();
+            UpdateCanBeSentStatus();
         }
     }
 }

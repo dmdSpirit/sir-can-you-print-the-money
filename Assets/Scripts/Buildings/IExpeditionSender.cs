@@ -8,6 +8,6 @@ namespace NovemberProject.Buildings
     {
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive { get; }
         public IReadOnlyReactiveProperty<bool> CanBeSentToExpedition { get; }
-        public Timer? ExpeditionTimer { get; }
+        public IReadOnlyTimer? ExpeditionTimer { get; }
     }
 }

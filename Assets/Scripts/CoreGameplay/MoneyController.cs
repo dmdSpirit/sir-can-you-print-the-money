@@ -73,7 +73,7 @@ namespace NovemberProject.CoreGameplay
             Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
             Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
             _armyMoney.Value -= money;
-            ShowCoinMove(armyTreasury.transform, folkTreasury.transform,() => _folkMoney.Value += money);
+            ShowCoinMove(armyTreasury.transform, folkTreasury.transform, () => _folkMoney.Value += money);
         }
 
         public void TransferMoneyFromFolkToGovernmentSilent(int money)
@@ -92,6 +92,12 @@ namespace NovemberProject.CoreGameplay
             _folkMoney.Value -= money;
             ShowCoinMove(folkTreasury.transform, governmentTreasury.transform,
                 () => _governmentMoney.Value += money);
+        }
+
+        public void SpedArmyMoney(int money)
+        {
+            Assert.IsTrue(_armyMoney.Value >= money);
+            _armyMoney.Value -= money;
         }
 
         private void ShowCoinMove(Transform start, Transform finish, Action callback)

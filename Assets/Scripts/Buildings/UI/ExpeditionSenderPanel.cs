@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -94,6 +95,7 @@ namespace NovemberProject.Buildings.UI
 
         private void SendExpeditionHandler(Unit _)
         {
+            Game.Instance.Expeditions.StartExpedition();
         }
 
         private void OnExpeditionStatusChanged(bool isExpeditionActive)
@@ -104,6 +106,7 @@ namespace NovemberProject.Buildings.UI
                 _expeditionTimerPanel.Show(_expeditionSender.ExpeditionTimer);
                 return;
             }
+
             _expeditionTimerPanel.Hide();
         }
 
