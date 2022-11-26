@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class ExpeditionsBuilding : Building, IExpeditionSender
+    public sealed class ExpeditionsBuilding : Building, IExpeditionSender, IProducer
     {
         private readonly ReactiveProperty<bool> _canBeSentToExpedition = new();
 
@@ -39,6 +39,10 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ExpeditionTimer => Game.Instance.Expeditions.Timer;
         public int ExpeditionFoodPerPersonCost => _expeditionFoodPerPersonCost;
         public int ExpeditionMoneyPerPersonCost => _expeditionMoneyPerPersonCost;
+        public bool ShowProducedValue => false;
+        public IReadOnlyReactiveProperty<int>? ProducedValue => null;
+        public IReadOnlyReactiveProperty<bool> IsProducing => Game.Instance.Expeditions.IsExpeditionActive;
+        public IReadOnlyTimer? ProductionTimer => Game.Instance.Expeditions.Timer;
 
         protected override void OnInitialized()
         {
@@ -56,7 +60,7 @@ namespace NovemberProject.Buildings
                 .TakeUntilDisable(this)
                 .Subscribe(OnExplorersCountChanged);
         }
-        
+
         public void AddWorker()
         {
             ArmyManager.AddArmyToExplorers();
