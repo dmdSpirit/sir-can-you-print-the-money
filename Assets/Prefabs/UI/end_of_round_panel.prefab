@@ -67,7 +67,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Not bad! At least someone is alive and pays you taxes. That's quite an
-    achievment if you ask. Keep figuring out!
+    achievment if you ask. Keep figuring things out!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: {fileID: 6142460786508425648}
-  _titleText: How did you do on Day [value]
+  _titleText: How did you do on Week [value]
   _nextRound: {fileID: 384691281602080920}
 --- !u!1 &1323595551557002080
 GameObject:
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: How did you do on Day 1
+  m_text: How did you do on Week 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}

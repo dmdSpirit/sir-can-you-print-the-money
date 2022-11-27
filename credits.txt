@@ -1,4 +1,3 @@
-"money trees"
 
 game by Dima Vesnin & Stas Volkov
 november 2022
@@ -7,33 +6,15 @@ made for GitHub Game Off 2022, https://itch.io/jam/game-off-2022
 
 ### CREDITS
 
-Monogram is a free and CC0 pixel font, made by Vinícius Menézio (@vmenezio).
-
-https://datagoblin.itch.io/monogram
-
-#
-
-PT Serif is a free and Open Font License font, made by Paratype.
-
-https://fonts.google.com/specimen/PT+Serif/about
-
-#
-
-PT Serif Caption is a free and OFL font, made by Paratype.
-
-https://fonts.google.com/specimen/PT+Serif+Caption/about
-
-#
-
 Cascadia Code is a free and OFL font, made by Microsoft Corporation.
 
 https://github.com/microsoft/cascadia-code
 
 #
 
-Forager is a free and CC0 sample pack, made by Luke Holizna.
+Medieval Theme 02 is a free and Attribution-NoDerivatives 4.0 International music track by Strobotone .
 
-https://holizna.com/product/forager/
+https://freemusicarchive.org/music/Strobotone/game-and-broadcast-music/medieval-theme-02-1/
 
 #
 

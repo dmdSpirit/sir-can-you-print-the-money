@@ -4058,6 +4058,26 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5720239062205557392, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
@@ -16140,6 +16160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 2243828583067338671, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bb95ea6243fedab448f3dc6b651f78b6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
 --- !u!1001 &1648232669

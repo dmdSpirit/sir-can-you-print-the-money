@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A strategic town management simulator made for a Github Game Off 2022 game
+  m_text: A strategic town management simulator made for GitHub Game Off 2022 game
     jam.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cd965b179c8b6de4e83d4a52062a274a, type: 2}

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Army money
-  _description: Your soldiers earned these money by sleeping all day.
+  _description: Earned by fighting slimes all day.
   _image: {fileID: 21300000, guid: 7890cf833bc863c428347fcc8776d2dd, type: 3}
   _selectionBorder: {fileID: 7230332426216683035}
   _moneyText: {fileID: 5144040263797057310}

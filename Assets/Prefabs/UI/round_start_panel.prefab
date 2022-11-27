@@ -66,7 +66,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nothing special, just try to survive for another week.
+  m_text: Nothing special, just try to survive for another week. And don't forget
+    to set up a merchant!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
