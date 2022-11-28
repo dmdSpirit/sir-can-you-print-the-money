@@ -18,6 +18,8 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideNewGamePanel();
             Game.Instance.UIManager.HideTechTreePanel();
             Game.Instance.UIManager.HideExpeditionResult();
+            Game.Instance.UIManager.HideCreditsScreen();
+            Game.Instance.UIManager.HideVictoryScreen();
 #if UNITY_EDITOR || DEV_BUILD
             Game.Instance.InputSystem.AddGlobalInputHandler<ToggleCheatMenuInputHandler>();
             Game.Instance.InputSystem.AddGlobalInputHandler<ToggleSystemPanelInputHandler>();

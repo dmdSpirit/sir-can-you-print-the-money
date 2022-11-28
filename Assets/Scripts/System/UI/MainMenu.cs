@@ -12,6 +12,9 @@ namespace NovemberProject.System.UI
         private Button _newGame = null!;
 
         [SerializeField]
+        private Button _credits = null!;
+
+        [SerializeField]
         private Button _exitGame = null!;
 
         [SerializeField]
@@ -30,6 +33,9 @@ namespace NovemberProject.System.UI
             _continue.OnClickAsObservable()
                 .TakeUntilDisable(this)
                 .Subscribe(OnExitGame);
+            _credits.OnClickAsObservable()
+                .TakeUntilDisable(this)
+                .Subscribe(OnCredits);
         }
 
         protected override void OnShow(object? _)
@@ -48,6 +54,11 @@ namespace NovemberProject.System.UI
         private static void OnExitGame(Unit _)
         {
             Game.Instance.GameStateMachine.ExitGame();
+        }
+
+        private static void OnCredits(Unit _)
+        {
+            Game.Instance.GameStateMachine.Credits();
         }
     }
 }

@@ -11,6 +11,7 @@ using NovemberProject.Time.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.System.UI
 {
@@ -54,6 +55,12 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private ExpeditionResultPanel _expeditionResultPanel = null!;
+        
+        [SerializeField]
+        private VictoryScreen _victoryScreen = null!;
+
+        [SerializeField]
+        private CreditsScreen _creditsScreen = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
@@ -151,6 +158,19 @@ namespace NovemberProject.System.UI
         {
             _expeditionResultPanel.Hide();
         }
+
+        public void ShowVictoryScreen()
+        {
+            _victoryScreen.Show(null);
+        }
+
+        public void ShowCreditsScreen()
+        {
+            _creditsScreen.Show(null);
+        }
+
+        public void HideVictoryScreen() => _victoryScreen.Hide();
+        public void HideCreditsScreen() => _creditsScreen.Hide();
     }
 }
 
