@@ -12,7 +12,12 @@ namespace NovemberProject.MovingResources
         [SerializeField]
         private GameObject _foodPrefab = null!;
 
+        [SerializeField]
+        private GameObject _stonePrefab = null!;
+
         public GameObject Coin() => Instantiate(_coinPrefab, transform);
         public GameObject Food() => Instantiate(_foodPrefab, transform);
+
+        public GameObject Stone() => Instantiate(_stonePrefab, transform);
     }
 }

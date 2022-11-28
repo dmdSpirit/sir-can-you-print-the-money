@@ -29,6 +29,11 @@ namespace NovemberProject.MovingResources
         public IReadOnlyList<MoveEffect> MoveEffects => _moveEffects;
         public IObservable<Unit> OnEffectsFinished => _onEffectsFinished;
 
+        public MoveEffect ShowMovingStone(Vector3 start, Vector3 finish)
+        {
+            return ShowMovingEffect(start, finish, _resourceObjectFactory.Stone());
+        }
+        
         public MoveEffect ShowMovingCoin(Vector3 start, Vector3 finish)
         {
             return ShowMovingEffect(start, finish, _resourceObjectFactory.Coin());
