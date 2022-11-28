@@ -5,7 +5,6 @@ using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.CoreGameplay
 {
@@ -24,6 +23,9 @@ namespace NovemberProject.CoreGameplay
         [SerializeField]
         private int _startingGuardsCount = 2;
 
+        [SerializeField]
+        private int _startingExplorersCount = 0;
+
         public IReactiveProperty<int> ArmyCount => _armyCount;
         public IReactiveProperty<int> GuardsCount => _guardsCount;
         public IReactiveProperty<int> ExplorersCount => _explorersCount;
@@ -34,6 +36,7 @@ namespace NovemberProject.CoreGameplay
             _salary.Value = _startingArmySalary;
             _guardsCount.Value = _startingGuardsCount;
             _armyCount.Value = _startingGuardsCount;
+            _explorersCount.Value = _startingExplorersCount;
         }
 
         public void StartRound()

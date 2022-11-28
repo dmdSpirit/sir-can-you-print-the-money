@@ -2,6 +2,7 @@
 using NovemberProject.Buildings;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
@@ -25,6 +26,14 @@ namespace NovemberProject.CoreGameplay
         public IReadOnlyTimer? Timer => _expeditionTimer;
 
         public int ExpeditionReward => _expeditionReward;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            Game.Instance.MessageBroker.Receive<NewGameMessage>()
+                .TakeUntilDisable(this)
+                .Subscribe(OnNewGame);
+        }
 
         public void StartExpedition()
         {
@@ -68,6 +77,12 @@ namespace NovemberProject.CoreGameplay
             var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, _expeditionReward);
             Game.Instance.GameStateMachine.ExpeditionFinished(expeditionResult);
             Game.Instance.TreasureController.AddTreasures(_expeditionReward);
+        }
+
+        private void OnNewGame(NewGameMessage _)
+        {
+            _isExpeditionActive.Value = false;
+            _expeditionTimer?.Cancel();
         }
     }
 }

@@ -314,7 +314,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -322,6 +322,27 @@ TextureImporter:
       bones: []
       spriteID: c33384fb0645b2d4bbad49e889b903f2
       internalID: 386283011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stone
+      rect:
+        serializedVersion: 2
+        x: 2176
+        y: 1408
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9157b561205a235449efcf493d16ee1b
+      internalID: -1483917680
       vertices: []
       indices: 
       edges: []
@@ -347,7 +368,7 @@ TextureImporter:
       castle: 1292768485
       lock: -477202142
       death: 1837668925
-      iconsDouble_1: 1378114989
+      stone: 1378114989
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

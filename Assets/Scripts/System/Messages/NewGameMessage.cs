@@ -1,8 +1,7 @@
 ﻿#nullable enable
-
 namespace NovemberProject.System.Messages
 {
-    public interface IMessage
+    public sealed class NewGameMessage : IMessage
     {
     }
 }

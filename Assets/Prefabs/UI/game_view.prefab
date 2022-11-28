@@ -951,6 +951,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_info_panel
       objectReference: {fileID: 0}
+    - target: {fileID: 2926730416547837536, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926730416547837536, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926730416547837536, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926730416547837536, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3436296734694211400, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
       propertyPath: m_Pivot.x
       value: 1

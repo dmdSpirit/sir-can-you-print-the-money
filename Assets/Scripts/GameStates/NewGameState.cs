@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.System;
-using NotImplementedException = System.NotImplementedException;
+using NovemberProject.System.Messages;
 
 namespace NovemberProject.GameStates
 {
@@ -15,9 +15,11 @@ namespace NovemberProject.GameStates
             Game.Instance.CoreGameplay.InitializeGameData();
             Game.Instance.MoneyController.InitializeGameData();
             Game.Instance.FoodController.InitializeGameData();
+            Game.Instance.StoneController.InitializeGameData();
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
             Game.Instance.UIManager.ShowNewGamePanel();
+            Game.Instance.MessageBroker.Publish(new NewGameMessage());
         }
 
         protected override void OnExit()
