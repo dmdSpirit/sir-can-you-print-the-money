@@ -13,6 +13,8 @@ namespace NovemberProject.Buildings
         Market = 7,
         GuardTower = 8,
         Expeditions = 9,
-        TreasureTower = 10
+        TreasureTower = 10,
+        Mine,
+        Arena
     }
 }

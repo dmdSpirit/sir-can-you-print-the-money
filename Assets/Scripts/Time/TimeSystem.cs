@@ -163,6 +163,12 @@ namespace NovemberProject.Time
             return (int)(unscaledTimeLeft / _timeScale.Value);
         }
 
+        public int EstimateSecondsLeftUnscaled(IReadOnlyTimer timer)
+        {
+            float unscaledTimeLeft = timer.Duration - timer.Progress;
+            return (int)unscaledTimeLeft;
+        }
+
         private void AddProgressToTimers(IEnumerable<Timer> timers, float deltaTime)
         {
             foreach (Timer timer in timers)

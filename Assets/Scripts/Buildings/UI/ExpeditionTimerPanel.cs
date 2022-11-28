@@ -31,7 +31,7 @@ namespace NovemberProject.Buildings.UI
                 return;
             }
 
-            _timeLeft.text = Game.Instance.TimeSystem.EstimateSecondsLeft(_timer)+"s";
+            _timeLeft.text = Game.Instance.TimeSystem.EstimateSecondsLeftUnscaled(_timer)+"s";
         }
     }
 }

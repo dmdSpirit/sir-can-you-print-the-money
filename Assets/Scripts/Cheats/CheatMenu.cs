@@ -48,6 +48,7 @@ namespace NovemberProject.Cheats
         private void PrepareButtonsList()
         {
             _cheatButtons.Add(new CheatButtonInfo("Print 10 Money", Print10Money));
+            _cheatButtons.Add(new CheatButtonInfo("Add 10 stone", Add10Stone));
         }
 
         private static void Print10Money()
@@ -55,9 +56,9 @@ namespace NovemberProject.Cheats
             Game.Instance.MoneyController.AddGovernmentMoney(10);
         }
 
-        private static void AddTreasure()
+        private static void Add10Stone()
         {
-            
+            Game.Instance.StoneController.AddStone(10);
         }
 
 

@@ -29,6 +29,9 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private ExpeditionSenderPanel _expeditionSenderPanel = null!;
 
+        [SerializeField]
+        private BuildingConstructionPanel _buildingConstructionPanel = null!;
+
         public Building Building { get; private set; } = null!;
 
         protected override void OnShow(Building building)
@@ -37,9 +40,18 @@ namespace NovemberProject.Buildings.UI
             _title.text = Building.Title;
             _description.text = Building.Description;
             _image.sprite = Building.Image;
-            ShowWorkerManagement(building);
-            ShowResourceStorage(building);
-            ShowBuyUnit(building);
+            if (building is IConstructableBuilding constructableBuilding &&
+                constructableBuilding.ConstructableState.Value != ConstructableState.Constructed)
+            {
+                ShowBuildingConstructionPanel(constructableBuilding);
+            }
+            else
+            {
+                _buildingConstructionPanel.Hide();
+                ShowWorkerManagement(building);
+                ShowResourceStorage(building);
+                ShowBuyUnit(building);
+            }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
         }
@@ -50,6 +62,7 @@ namespace NovemberProject.Buildings.UI
             _resourceStoragePanel.Hide();
             _buyUnitPanel.Hide();
             _expeditionSenderPanel.Hide();
+            _buildingConstructionPanel.Hide();
         }
 
         private void ShowBuyUnit(Building building)
@@ -94,6 +107,15 @@ namespace NovemberProject.Buildings.UI
             {
                 _workerManagementPanel.Hide();
             }
+        }
+
+        private void ShowBuildingConstructionPanel(IConstructableBuilding constructableBuilding)
+        {
+            _workerManagementPanel.Hide();
+            _resourceStoragePanel.Hide();
+            _buyUnitPanel.Hide();
+            _expeditionSenderPanel.Hide();
+            _buildingConstructionPanel.Show(constructableBuilding);
         }
     }
 }
