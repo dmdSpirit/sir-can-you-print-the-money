@@ -19,6 +19,7 @@ namespace NovemberProject.GameStates
         private readonly GameOverState _gameOverState;
         private readonly VictoryState _victoryState;
         private readonly CreditsScreenState _creditsScreenState;
+        private readonly TutorialState _tutorialState;
 
         private readonly Subject<State> _onStateChanged = new();
 
@@ -46,6 +47,7 @@ namespace NovemberProject.GameStates
             _gameOverState = new GameOverState();
             _victoryState = new VictoryState();
             _creditsScreenState = new CreditsScreenState();
+            _tutorialState = new TutorialState();
 
             Game.Instance.InputSystem.OnHandleInput.Subscribe(_ => HandleInput());
         }
@@ -60,6 +62,7 @@ namespace NovemberProject.GameStates
         public void GameOver() => ChangeState(_gameOverState);
         public void Victory() => ChangeState(_victoryState);
         public void Credits() => ChangeState(_creditsScreenState);
+        public void Tutorial() => ChangeState(_tutorialState);
 
         // FIXME (Stas): Ugly
         public void ExpeditionFinished(ExpeditionResult expeditionResult)

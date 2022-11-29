@@ -1,23 +1,27 @@
 ﻿#nullable enable
+using System;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class NewGamePanel : UIElement<object?>
+    public sealed class TutorialStepScreen : UIElement<object?>
     {
+        private readonly Subject<Unit> _onNext = new();
+
         [SerializeField]
-        private Button _startGameButton = null!;
+        private Button _nextButton = null!;
+
+        public IObservable<Unit> OnNext => _onNext;
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            _startGameButton.OnClickAsObservable()
+            _nextButton.OnClickAsObservable()
                 .TakeUntilDisable(this)
-                .Subscribe(OnStartGameClicked);
+                .Subscribe(OnNextButton);
         }
 
         protected override void OnShow(object? value)
@@ -28,9 +32,6 @@ namespace NovemberProject.Rounds.UI
         {
         }
 
-        private void OnStartGameClicked(Unit _)
-        {
-            Game.Instance.GameStateMachine.StartRound();
-        }
+        private void OnNextButton(Unit _) => _onNext.OnNext(Unit.Default);
     }
 }

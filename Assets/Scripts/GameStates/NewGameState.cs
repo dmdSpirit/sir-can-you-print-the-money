@@ -18,13 +18,12 @@ namespace NovemberProject.GameStates
             Game.Instance.StoneController.InitializeGameData();
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
-            Game.Instance.UIManager.ShowNewGamePanel();
             Game.Instance.MessageBroker.Publish(new NewGameMessage());
+            Game.Instance.GameStateMachine.Tutorial();
         }
 
         protected override void OnExit()
         {
-            Game.Instance.UIManager.HideNewGamePanel();
         }
     }
 }
