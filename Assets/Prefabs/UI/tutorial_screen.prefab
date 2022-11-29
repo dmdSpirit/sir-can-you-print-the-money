@@ -89,8 +89,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -327, y: 101}
-  m_SizeDelta: {x: 340.1923, y: 134.9306}
+  m_AnchoredPosition: {x: -321.3, y: 111}
+  m_SizeDelta: {x: 354.3512, y: 136.2603}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &2155482245103831598
 CanvasRenderer:
@@ -307,8 +307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -327, y: 101}
-  m_SizeDelta: {x: 340.1923, y: 134.9306}
+  m_AnchoredPosition: {x: -339.4, y: 152.3}
+  m_SizeDelta: {x: 340.1923, y: 104.614}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &7782955160795586270
 CanvasRenderer:
@@ -429,8 +429,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -327, y: 101}
-  m_SizeDelta: {x: 340.1923, y: 134.9306}
+  m_AnchoredPosition: {x: -296.7467, y: 57}
+  m_SizeDelta: {x: 371.8479, y: 160.4916}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &4506744524721112668
 CanvasRenderer:
@@ -601,7 +601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.0000305}
+  m_AnchoredPosition: {x: 0, y: 1.0000381}
   m_SizeDelta: {x: -24, y: -22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8925484877243464389
@@ -634,8 +634,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: I Acknowledge That I Have Read And Understand This
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
-  m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447737d40bb51164b81c637760c40ba7, type: 2}
+  m_sharedMaterial: {fileID: -6144928857512059544, guid: 447737d40bb51164b81c637760c40ba7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -659,8 +659,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -819,10 +819,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: Makes sense, I'll figure out the rest!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
-  m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447737d40bb51164b81c637760c40ba7, type: 2}
+  m_sharedMaterial: {fileID: -6144928857512059544, guid: 447737d40bb51164b81c637760c40ba7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -846,8 +846,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -954,7 +954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d8664403237b292449ba455f59524cfa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5ac3c523246566445ad4aefcc2aee5a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d8664403237b292449ba455f59524cfa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 757ac8b1397456d40bc6c151e79a2f4f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d8664403237b292449ba455f59524cfa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 205f5475812e9624b870892d04e17315, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1182,10 +1182,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: There are 4 different events during the week and they happen automatically,
+    I get it.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
-  m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447737d40bb51164b81c637760c40ba7, type: 2}
+  m_sharedMaterial: {fileID: -6144928857512059544, guid: 447737d40bb51164b81c637760c40ba7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1209,13 +1210,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

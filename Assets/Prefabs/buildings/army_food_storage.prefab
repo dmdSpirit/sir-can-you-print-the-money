@@ -514,15 +514,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Army food
-  _description: Storage of army food. They have to buy it from folks. At the end
-    of the week each armymen has to eat 1 food. Otherwise they starve and die.
+  _description: Storage of army food. They buy it from folks. Once a week each knight
+    has to eat 1 food or they'll starve.
   _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
   _selectionBorder: {fileID: 1035655372318391332}
   _foodText: {fileID: 3272818714190228769}
   _foodSprite: {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _foodTitle: Food
-  _buyUnitTitle: Buy an army
-  _buyUnitButtonText: Buy
+  _buyUnitTitle: Buy knights
+  _buyUnitButtonText: Buy 1 for 5 food
 --- !u!1001 &7867909130857463367
 PrefabInstance:
   m_ObjectHideFlags: 0

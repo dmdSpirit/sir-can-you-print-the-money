@@ -256,7 +256,7 @@ MonoBehaviour:
   _tradeDuration: 2
   _foodCostPerUnit: 5
   _foodChangedPerTrade: 1
-  _workersTitle: Traders
+  _workersTitle: Merchants
 --- !u!4 &1195365584608573716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
