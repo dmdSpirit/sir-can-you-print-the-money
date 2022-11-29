@@ -164,13 +164,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246913711181426580e39b8698785ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Treasure tower
-  _description: Description
+  _title: Royal Tower
+  _description: This is where you store all your trophies.
   _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
   _selectionBorder: {fileID: 9050540909009794239}
   _treasureIcon: {fileID: 1365771222, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _treasureCountText: {fileID: 6822385350810756538}
-  _treasureTitle: Treasures
+  _treasureTitle: Trophies
 --- !u!114 &6822385350810756538 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}

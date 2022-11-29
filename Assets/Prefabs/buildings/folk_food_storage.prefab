@@ -656,7 +656,7 @@ MonoBehaviour:
   _foodSprite: {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _foodTitle: Food
   _buyUnitTitle: Buy a folk
-  _buyUnitButtonText: Buy
+  _buyUnitButtonText: Buy 1 for 1 food
 --- !u!1001 &7867909130857463367
 PrefabInstance:
   m_ObjectHideFlags: 0

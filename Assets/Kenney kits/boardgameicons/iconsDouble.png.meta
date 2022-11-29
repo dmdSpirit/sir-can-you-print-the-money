@@ -335,7 +335,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -343,6 +343,27 @@ TextureImporter:
       bones: []
       spriteID: 9157b561205a235449efcf493d16ee1b
       internalID: -1483917680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chess
+      rect:
+        serializedVersion: 2
+        x: 1784
+        y: 1277
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba34993317f187e4fa78225e1123ead1
+      internalID: 812256196
       vertices: []
       indices: 
       edges: []
@@ -365,6 +386,7 @@ TextureImporter:
       money: 1542654287
       crown: 1365771222
       food: -700532128
+      chess: 812256196
       castle: 1292768485
       lock: -477202142
       death: 1837668925
