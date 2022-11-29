@@ -16,7 +16,7 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideTimeControls();
             Game.Instance.UIManager.HideGameOverPanel();
             Game.Instance.UIManager.HideTutorialScreen();
-            Game.Instance.UIManager.HideTechTreePanel();
+            Game.Instance.UIManager.HideTechTreeScreen();
             Game.Instance.UIManager.HideExpeditionResult();
             Game.Instance.UIManager.HideCreditsScreen();
             Game.Instance.UIManager.HideVictoryScreen();
