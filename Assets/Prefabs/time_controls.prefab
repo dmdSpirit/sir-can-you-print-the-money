@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 24
     m_Right: 24
-    m_Top: 12
+    m_Top: 0
     m_Bottom: 12
   m_ChildAlignment: 4
   m_Spacing: 12
@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_Group
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8356420722523590887, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
+      propertyPath: m_text
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
 --- !u!114 &440904001060822068 stripped
@@ -371,6 +375,10 @@ PrefabInstance:
     - target: {fileID: 7366877693438253062, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8356420722523590887, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}
+      propertyPath: m_text
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3818e41b2247ae14d99e8bb536f7f205, type: 3}

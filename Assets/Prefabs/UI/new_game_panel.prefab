@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3469615563719579225}
   - component: {fileID: 3054605276690174311}
   m_Layer: 5
-  m_Name: next round button
+  m_Name: go further
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1402.2812, y: 101}
-  m_SizeDelta: {x: 325.7188, y: 90}
+  m_AnchoredPosition: {x: -327, y: 101}
+  m_SizeDelta: {x: 340.1923, y: 134.9306}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &2155482245103831598
 CanvasRenderer:
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Let's begin!
+  m_text: I Acknowledge That I Have Read And Understand This
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
@@ -307,8 +307,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46
-  m_fontSizeBase: 46
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
