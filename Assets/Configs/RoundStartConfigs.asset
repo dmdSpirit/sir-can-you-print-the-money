@@ -12,8 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9daa1921e84f0d96b7e27c42cb4e23, type: 3}
   m_Name: RoundStartConfigs
   m_EditorClassIdentifier: 
-  _roundStartConfigs: []
+  _roundStartConfigs:
+  - Title: Astrologers proclaim...
+    Description: The week of New Beginnings. Let your crops be bountiful and your
+      ankles merry and dancing.
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - Title: Astrologers proclaim...
+    Description: The week of figuring out. You can buy more folks and knights in
+      their food storages.
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - Title: Astrologers proclaim...
+    Description: "The week of figuring out how to unlock the mine. Make sure your
+      folks don\u2019t starve!"
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - Title: Astrologers proclaim...
+    Description: The week of expeditions. Send your knights to fight the snails and
+      bring back the trophies!
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - Title: Astrologers proclaim...
+    Description: "Did you know that this game has a hard mode? Drink every time you
+      notice a clich\xE9!"
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - Title: Astrologers proclaim...
+    Description: The week of curiosity. Check out the tech tree and invent something.
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   _defaultStartConfig:
-    Title: 
-    Description: 
-    Image: {fileID: 0}
+    Title: Astrologers proclaim...
+    Description: Week of long commitments. Thank you for playing our game!
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
