@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2609678386862502023}
   - component: {fileID: 256315026519820041}
   m_Layer: 5
-  m_Name: text
+  m_Name: description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -431,10 +431,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: {fileID: 8342239630992205594}
-  _titleText: Astrologers proclaim... Week #[value]
+  _description: {fileID: 256315026519820041}
+  _image: {fileID: 4881278125416212195}
   _nextRound: {fileID: 3154317004862507537}
   _desertedArmyText: 'Army deserted:'
   _desertedArmy: {fileID: 9062715132486912518}
+  _roundStartConfigs: {fileID: 11400000, guid: 1d299d9488478f04584ff58a2ae471c8, type: 2}
 --- !u!1 &4381592388432206313
 GameObject:
   m_ObjectHideFlags: 0

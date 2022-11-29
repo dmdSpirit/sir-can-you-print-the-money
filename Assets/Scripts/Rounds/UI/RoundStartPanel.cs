@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
@@ -14,16 +15,22 @@ namespace NovemberProject.Rounds.UI
         private TMP_Text _title = null!;
 
         [SerializeField]
-        private string _titleText = null!;
+        private TMP_Text _description = null!;
+
+        [SerializeField]
+        private Image _image = null!;
 
         [SerializeField]
         private Button _nextRound = null!;
 
         [SerializeField]
         private string _desertedArmyText = null!;
-        
+
         [SerializeField]
         private TMP_Text _desertedArmy = null!;
+
+        [SerializeField]
+        private RoundStartConfigs _roundStartConfigs = null!;
 
         protected override void OnInitialized()
         {
@@ -36,7 +43,11 @@ namespace NovemberProject.Rounds.UI
 
         protected override void OnShow(RoundStartResult roundStartResult)
         {
-            _title.text = _titleText.Replace("[value]", Game.Instance.RoundSystem.Round.Value.ToString());
+            int round = Game.Instance.RoundSystem.Round.Value;
+            RoundStartConfig config = _roundStartConfigs.GetRoundStartConfig(round);
+            _title.text = config.Title;
+            _description.text = config.Description;
+            _image.sprite = config.Image;
             if (roundStartResult.ArmyDeserted != 0)
             {
                 _desertedArmy.gameObject.SetActive(true);
