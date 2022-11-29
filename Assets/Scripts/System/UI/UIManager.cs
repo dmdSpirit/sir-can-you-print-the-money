@@ -91,7 +91,7 @@ namespace NovemberProject.System.UI
         public void UnlockTimeControls() => _timeControlsPanel.Unlock();
         public void ShowTimeControls() => _timeControlsPanel.Show(null);
         public void HideTimeControls() => _timeControlsPanel.Hide();
-        public void ShowRoundEndPanel() => _roundEndPanel.Show(null);
+        public void ShowRoundEndPanel(RoundResult roundResult) => _roundEndPanel.Show(roundResult);
         public void HideEndOfRoundPanel() => _roundEndPanel.Hide();
 
         public void ShowBuildingInfo(Building building)
@@ -136,7 +136,7 @@ namespace NovemberProject.System.UI
         public void ShowSystemInfoPanel() => _systemInfoPanel.Show(null);
         public void HideCheatPanel() => _cheatMenu.Hide();
         public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
-        public void ShowRoundStartPanel() => _roundStartPanel.Show(null);
+        public void ShowRoundStartPanel(RoundStartResult roundStartResult) => _roundStartPanel.Show(roundStartResult);
         public void HideRoundStartPanel() => _roundStartPanel.Hide();
         public void ShowGameOverPanel(GameOverType gameOverType) => _gameOverPanel.Show(gameOverType);
         public void HideGameOverPanel() => _gameOverPanel.Hide();

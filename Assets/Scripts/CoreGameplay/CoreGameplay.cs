@@ -11,6 +11,9 @@ namespace NovemberProject.CoreGameplay
     [RequireComponent(typeof(ArmyManager))]
     public sealed class CoreGameplay : InitializableBehaviour
     {
+        private readonly RoundResult _roundResult = new();
+        private readonly RoundStartResult _roundStartResult = new();
+        
         private GameOverType _gameOverType;
 
         [SerializeField]
@@ -29,6 +32,8 @@ namespace NovemberProject.CoreGameplay
         public FolkManager FolkManager { get; private set; } = null!;
         public ArmyManager ArmyManager { get; private set; } = null!;
         public GameOverType GameOverType => _gameOverType;
+        public RoundResult RoundResult => _roundResult;
+        public RoundStartResult RoundStartResult => _roundStartResult;
 
         private void Awake()
         {
@@ -47,12 +52,14 @@ namespace NovemberProject.CoreGameplay
         {
             FolkManager.StartRound();
             ArmyManager.StartRound();
+            _roundResult.Reset();
         }
 
         public void EndRound()
         {
             FolkManager.EndRound();
             ArmyManager.EndRound();
+            _roundStartResult.Reset();
         }
 
         public bool IsGameOver()
@@ -71,6 +78,11 @@ namespace NovemberProject.CoreGameplay
             _gameOverType = GameOverType.NoFolk;
             return true;
         }
+
+        public void OnFolkStarved(int count) => _roundResult.FolkStarved += count;
+        public void OnArmyStarved(int count) => _roundResult.ArmyStarved += count;
+        public void OnFolkExecuted(int count) => _roundResult.FolkExecuted += count;
+        public void OnArmyDeserted(int count) => _roundStartResult.ArmyDeserted += count;
 
         private bool IsNoFolkLeft()
         {

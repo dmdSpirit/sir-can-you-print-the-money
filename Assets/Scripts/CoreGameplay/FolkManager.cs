@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay.Messages;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
@@ -155,13 +154,13 @@ namespace NovemberProject.CoreGameplay
             int starvedFolk = CalculateStarvingFolk();
             if (starvedFolk > 0)
             {
-                Game.PublishMessage(new FolkStarvedMessage(starvedFolk));
+                Game.Instance.CoreGameplay.OnFolkStarved(starvedFolk);
             }
 
             int executedFolk = CalculatePoorFolk();
             if (executedFolk > 0)
             {
-                Game.PublishMessage(new FolkExecutedMessage(executedFolk));
+                Game.Instance.CoreGameplay.OnFolkExecuted(executedFolk);
             }
 
             int folkToKill = Mathf.Max(starvedFolk, executedFolk);

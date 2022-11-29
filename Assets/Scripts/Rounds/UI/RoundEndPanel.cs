@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class RoundEndPanel : UIElement<object?>
+    public sealed class RoundEndPanel : UIElement<RoundResult>
     {
         [SerializeField]
         private TMP_Text _title = null!;
@@ -19,6 +19,9 @@ namespace NovemberProject.Rounds.UI
         [SerializeField]
         private Button _nextRound = null!;
 
+        [SerializeField]
+        private RoundResultPanel _roundResultPanel = null!;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -28,16 +31,18 @@ namespace NovemberProject.Rounds.UI
                 .Subscribe(OnNextRound);
         }
 
-        protected override void OnShow(object? _)
+        protected override void OnShow(RoundResult roundResult)
         {
             _title.text = _titleText.Replace("[value]", Game.Instance.RoundSystem.Round.Value.ToString());
+            _roundResultPanel.Show(roundResult);
         }
 
         protected override void OnHide()
         {
+            _roundResultPanel.Hide();
         }
 
-        private static void OnNextRound(Unit _)
+        private void OnNextRound(Unit _)
         {
             Game.Instance.GameStateMachine.StartRound();
         }

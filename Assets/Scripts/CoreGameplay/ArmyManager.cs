@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay.Messages;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
@@ -141,7 +140,7 @@ namespace NovemberProject.CoreGameplay
                 return;
             }
 
-            Game.PublishMessage(new ArmyStarvedMessage(starvedArmy));
+            Game.Instance.CoreGameplay.OnArmyStarved(starvedArmy);
             ReduceArmy(starvedArmy);
         }
 
@@ -174,7 +173,7 @@ namespace NovemberProject.CoreGameplay
                 return;
             }
 
-            Game.PublishMessage(new ArmyDesertedMessage(numberToDesert));
+            Game.Instance.CoreGameplay.OnArmyDeserted(numberToDesert);
             ReduceArmy(numberToDesert);
         }
     }

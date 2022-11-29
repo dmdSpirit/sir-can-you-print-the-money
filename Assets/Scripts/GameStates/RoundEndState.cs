@@ -39,7 +39,7 @@ namespace NovemberProject.GameStates
                 return;
             }
 
-            Game.Instance.UIManager.ShowRoundEndPanel();
+            Game.Instance.UIManager.ShowRoundEndPanel(Game.Instance.CoreGameplay.RoundResult);
         }
     }
 }
