@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using TMPro;

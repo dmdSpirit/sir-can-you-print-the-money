@@ -1,49 +1,81 @@
 #nullable enable
 using System;
-using System.Collections.Generic;
-using NovemberProject.Buildings;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
-using UnityEngine;
+using UniRx;
 
 namespace NovemberProject.TechTree
 {
     public class TechController : InitializableBehaviour
     {
-        private readonly Dictionary<TechType, TechTreeNode> _techTreeNodes = new();
-        private readonly Dictionary<TechType, TechTreeNodePanel> _techTreeNodePanels = new();
+        private readonly Subject<Unit> _onTechUnlocked = new();
+        private readonly ReactiveProperty<bool> _canRaiseSalary = new();
+        private readonly ReactiveProperty<bool> _canLowerSalary = new();
+        private readonly ReactiveProperty<bool> _canRaiseTax = new();
+        private readonly ReactiveProperty<bool> _canLowerTax = new();
+        private readonly ReactiveProperty<bool> _canPrintMoney = new();
+        private readonly ReactiveProperty<bool> _canBurnMoney = new();
+        private readonly ReactiveProperty<bool> _canBuildArena = new();
 
-        [SerializeField]
-        private int _unlockSalaryCost = 1;
+        public IReadOnlyReactiveProperty<bool> CanRaiseSalary => _canRaiseSalary;
+        public IReadOnlyReactiveProperty<bool> CanLowerSalary => _canLowerSalary;
+        public IReadOnlyReactiveProperty<bool> CanRaiseTax => _canRaiseTax;
+        public IReadOnlyReactiveProperty<bool> CanLowerTax => _canLowerTax;
+        public IReadOnlyReactiveProperty<bool> CanPrintMoney => _canPrintMoney;
+        public IReadOnlyReactiveProperty<bool> CanBurnMoney => _canBurnMoney;
+        public IReadOnlyReactiveProperty<bool> CanBuildArena => _canBuildArena;
+        public IObservable<Unit> OnTechUnlocked => _onTechUnlocked;
 
         public void InitializeGameData()
         {
-            InitializeTechNodes();
+            _canRaiseSalary.Value = false;
+            _canLowerSalary.Value = false;
+            _canRaiseTax.Value = false;
+            _canLowerTax.Value = false;
+            _canPrintMoney.Value = false;
+            _canBurnMoney.Value = false;
+            _canBuildArena.Value = false;
         }
 
-        public void RegisterTechNodePanel(TechTreeNodePanel techTreeNodePanel)
+        public void UnlockRaiseSalary()
         {
-            if (techTreeNodePanel.TechType == TechType.None ||
-                _techTreeNodePanels.ContainsKey(techTreeNodePanel.TechType))
-            {
-                return;
-            }
-
-            _techTreeNodePanels.Add(techTreeNodePanel.TechType, techTreeNodePanel);
-            techTreeNodePanel.SetTechNode(_techTreeNodes[techTreeNodePanel.TechType]);
+            _canRaiseSalary.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
         }
 
-        private void InitializeTechNodes()
+        public void UnlockLowerSalary()
         {
-            _techTreeNodes.Add(TechType.Salary, SalaryNode());
+            _canLowerSalary.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
         }
 
-        private TechTreeNode SalaryNode()
+        public void UnlockRaiseTax()
         {
-            var treasuryBuilding = Game.Instance.BuildingsController.GetBuilding<GovernmentTreasuryBuilding>();
-            var salaryNode = new TechTreeNode(Array.Empty<TechTreeNode>(),
-                treasuryBuilding.ChangeSalaryAbility, _unlockSalaryCost, TechType.Salary);
-            return salaryNode;
+            _canRaiseTax.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
+        }
+
+        public void UnlockLowerTax()
+        {
+            _canLowerTax.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
+        }
+
+        public void UnlockPrintMoney()
+        {
+            _canPrintMoney.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
+        }
+
+        public void UnlockBurnMoney()
+        {
+            _canBurnMoney.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
+        }
+
+        public void UnlockBuildArena()
+        {
+            _canBuildArena.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
         }
     }
 }

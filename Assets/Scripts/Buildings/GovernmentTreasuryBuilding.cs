@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.Buildings.UI;
 using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class GovernmentTreasuryBuilding : Building, IResourceStorage
+    public sealed class GovernmentTreasuryBuilding : Building, IResourceStorage, ISalaryController, ITaxController
     {
         private MoneyController _moneyController = null!;
 
@@ -24,7 +25,11 @@ namespace NovemberProject.Buildings
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.GovernmentMoney;
-        public ChangeSalaryAbility ChangeSalaryAbility { get; private set; }
+        public IReadOnlyReactiveProperty<bool> CanRaiseSalary => Game.Instance.TechController.CanRaiseSalary;
+        public IReadOnlyReactiveProperty<bool> CanLowerSalary => Game.Instance.TechController.CanLowerSalary;
+        public IReadOnlyReactiveProperty<bool> CanRaiseTax => Game.Instance.TechController.CanRaiseTax;
+        public IReadOnlyReactiveProperty<bool> CanLowerTax => Game.Instance.TechController.CanLowerTax;
+
 
         protected override void OnInitialized()
         {
@@ -39,5 +44,11 @@ namespace NovemberProject.Buildings
         {
             _moneyText.text = money.ToString();
         }
+
+        public void RaiseSalary() => Game.Instance.ArmyManager.RaiseSalary();
+        public void LowerSalary() => Game.Instance.ArmyManager.LowerSalary();
+
+        public void RaiseTax() => Game.Instance.FolkManager.RaiseTax();
+        public void LowerTax() => Game.Instance.FolkManager.LowerTax();
     }
 }

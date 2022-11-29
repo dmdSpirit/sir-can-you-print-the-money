@@ -30,6 +30,12 @@ namespace NovemberProject.Buildings.UI
         private ExpeditionSenderPanel _expeditionSenderPanel = null!;
 
         [SerializeField]
+        private SalaryControlPanel _salaryControlPanel = null!;
+
+        [SerializeField]
+        private TaxControlPanel _taxControlPanel = null!;
+
+        [SerializeField]
         private BuildingConstructionPanel _buildingConstructionPanel = null!;
 
         public Building Building { get; private set; } = null!;
@@ -51,6 +57,8 @@ namespace NovemberProject.Buildings.UI
                 ShowWorkerManagement(building);
                 ShowResourceStorage(building);
                 ShowBuyUnit(building);
+                ShowSalaryController(building);
+                ShowTaxController(building);
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
@@ -63,6 +71,8 @@ namespace NovemberProject.Buildings.UI
             _buyUnitPanel.Hide();
             _expeditionSenderPanel.Hide();
             _buildingConstructionPanel.Hide();
+            _salaryControlPanel.Hide();
+            _taxControlPanel.Hide();
         }
 
         private void ShowBuyUnit(Building building)
@@ -74,6 +84,30 @@ namespace NovemberProject.Buildings.UI
             else
             {
                 _buyUnitPanel.Hide();
+            }
+        }
+
+        private void ShowSalaryController(Building building)
+        {
+            if (building is ISalaryController salaryController)
+            {
+                _salaryControlPanel.Show(salaryController);
+            }
+            else
+            {
+                _salaryControlPanel.Hide();
+            }
+        }
+
+        private void ShowTaxController(Building building)
+        {
+            if (building is ITaxController taxController)
+            {
+                _taxControlPanel.Show(taxController);
+            }
+            else
+            {
+                _taxControlPanel.Hide();
             }
         }
 
@@ -115,6 +149,8 @@ namespace NovemberProject.Buildings.UI
             _resourceStoragePanel.Hide();
             _buyUnitPanel.Hide();
             _expeditionSenderPanel.Hide();
+            _salaryControlPanel.Hide();
+            _taxControlPanel.Hide();
             _buildingConstructionPanel.Show(constructableBuilding);
         }
     }

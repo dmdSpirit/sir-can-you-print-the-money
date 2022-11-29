@@ -18,6 +18,7 @@ namespace NovemberProject.GameStates
             Game.Instance.StoneController.InitializeGameData();
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
+            Game.Instance.TechController.InitializeGameData();
             Game.Instance.MessageBroker.Publish(new NewGameMessage());
             Game.Instance.GameStateMachine.Tutorial();
         }

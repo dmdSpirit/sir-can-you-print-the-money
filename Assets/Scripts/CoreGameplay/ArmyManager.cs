@@ -90,7 +90,6 @@ namespace NovemberProject.CoreGameplay
         {
             if (_salary.Value <= MINIMAL_SALARY)
             {
-                Debug.LogWarning($"Can not lower salary less than {MINIMAL_SALARY}");
                 return;
             }
 

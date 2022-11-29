@@ -47,7 +47,7 @@ namespace NovemberProject.System.UI
         private GameOverPanel _gameOverPanel = null!;
 
         [SerializeField]
-        private GameObject _techTreePanel = null!;
+        private TechTreeScreen _techTreeScreen = null!;
 
         [SerializeField]
         private ExpeditionResultPanel _expeditionResultPanel = null!;
@@ -140,9 +140,14 @@ namespace NovemberProject.System.UI
         public void ShowGameOverPanel(GameOverType gameOverType) => _gameOverPanel.Show(gameOverType);
         public void HideGameOverPanel() => _gameOverPanel.Hide();
 
-        public void HideTechTreePanel()
+        public void HideTechTreeScreen()
         {
-            _techTreePanel.SetActive(false);
+            _techTreeScreen.Hide();
+        }
+
+        public void ShowTechTreeScreen()
+        {
+            _techTreeScreen.Show(null);
         }
 
         public void ShowExpeditionResult(ExpeditionResult expeditionResult)

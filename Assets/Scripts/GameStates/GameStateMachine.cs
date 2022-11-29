@@ -20,6 +20,7 @@ namespace NovemberProject.GameStates
         private readonly VictoryState _victoryState;
         private readonly CreditsScreenState _creditsScreenState;
         private readonly TutorialState _tutorialState;
+        private readonly TechTreeState _techTreeState;
 
         private readonly Subject<State> _onStateChanged = new();
 
@@ -27,6 +28,7 @@ namespace NovemberProject.GameStates
         private State? _currentState;
 
         public IObservable<State> OnStateChanged => _onStateChanged;
+        public State CurrentState => _currentState;
 
         public GameStateMachine()
         {
@@ -48,6 +50,7 @@ namespace NovemberProject.GameStates
             _victoryState = new VictoryState();
             _creditsScreenState = new CreditsScreenState();
             _tutorialState = new TutorialState();
+            _techTreeState = new TechTreeState();
 
             Game.Instance.InputSystem.OnHandleInput.Subscribe(_ => HandleInput());
         }
@@ -72,6 +75,8 @@ namespace NovemberProject.GameStates
         }
 
         public void ExpeditionFinishedExit() => _expeditionFinishedState?.Exit();
+        public void ShowTechTree() => _techTreeState.Enter();
+        public void HideTechTree() => _techTreeState.Exit();
 
         private void ChangeState(State state)
         {
