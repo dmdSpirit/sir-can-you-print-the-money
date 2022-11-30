@@ -25,6 +25,7 @@ namespace NovemberProject.GameStates
         private readonly Subject<State> _onStateChanged = new();
 
         private ExpeditionFinishedState? _expeditionFinishedState;
+        private AttackState? _attackState;
         private State? _currentState;
 
         public IObservable<State> OnStateChanged => _onStateChanged;
@@ -77,6 +78,14 @@ namespace NovemberProject.GameStates
         public void ExpeditionFinishedExit() => _expeditionFinishedState?.Exit();
         public void ShowTechTree() => _techTreeState.Enter();
         public void HideTechTree() => _techTreeState.Exit();
+
+        public void ShowAttackResult(AttackData attackData)
+        {
+            _attackState = new AttackState(attackData);
+            _attackState.Enter();
+        }
+
+        public void HideAttackResult() => _attackState?.Exit();
 
         private void ChangeState(State state)
         {

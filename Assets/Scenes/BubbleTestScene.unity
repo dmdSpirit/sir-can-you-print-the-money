@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1397782429}
-  m_IndirectSpecularColor: {r: 0.11257973, g: 0.41770256, b: 0.72310334, a: 1}
+  m_IndirectSpecularColor: {r: 0.113207415, g: 0.4190117, b: 0.72492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16374,7 +16374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 380
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -18473,6 +18473,7 @@ GameObject:
   - component: {fileID: 1985125196}
   - component: {fileID: 1985125195}
   - component: {fileID: 1985125199}
+  - component: {fileID: 1985125200}
   m_Layer: 0
   m_Name: CareGameplay
   m_TagString: Untagged
@@ -18554,6 +18555,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b60475f9d94917915feb5455f7d39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1985125200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985125194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1e0eabf8a3424b9cae6135d6f2c59f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackersCount: 01000000020000000300000004000000050000000600000007000000070000000700000007000000
+  _attackDuration: 40
 --- !u!1001 &1987735403
 PrefabInstance:
   m_ObjectHideFlags: 0
