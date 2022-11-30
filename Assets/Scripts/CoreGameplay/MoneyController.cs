@@ -36,9 +36,15 @@ namespace NovemberProject.CoreGameplay
             _armyMoney.Value = _startingArmyMoney;
         }
 
-        public void AddGovernmentMoney(int money)
+        public void PrintMoney(int money)
         {
             _governmentMoney.Value += money;
+        }
+
+        public void BurnMoney(int money)
+        {
+            int moneyToBurn = Mathf.Min(money, _governmentMoney.Value);
+            _governmentMoney.Value -= moneyToBurn;
         }
 
         public void TransferMoneyFromGovernmentToArmySilent(int money)

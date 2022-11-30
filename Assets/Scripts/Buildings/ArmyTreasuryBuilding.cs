@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.Buildings.UI;
 using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class ArmyTreasuryBuilding : Building, IResourceStorage
+    public sealed class ArmyTreasuryBuilding : Building, IResourceStorage, ISalaryController
     {
         private MoneyController _moneyController = null!;
 
@@ -24,6 +25,8 @@ namespace NovemberProject.Buildings
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.ArmyMoney;
+        public IReadOnlyReactiveProperty<bool> CanRaiseSalary => Game.Instance.TechController.CanRaiseSalary;
+        public IReadOnlyReactiveProperty<bool> CanLowerSalary => Game.Instance.TechController.CanLowerSalary;
 
 
         protected override void OnInitialized()
@@ -39,5 +42,8 @@ namespace NovemberProject.Buildings
         {
             _moneyText.text = money.ToString();
         }
+        
+        public void RaiseSalary() => Game.Instance.ArmyManager.RaiseSalary();
+        public void LowerSalary() => Game.Instance.ArmyManager.LowerSalary();
     }
 }

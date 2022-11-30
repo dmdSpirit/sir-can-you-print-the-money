@@ -32,7 +32,7 @@ namespace NovemberProject.Buildings
 
         public override BuildingType BuildingType => BuildingType.Market;
         public IReadOnlyReactiveProperty<int> WorkerCount => Game.Instance.FolkManager.MarketFolk;
-        public IReadOnlyReactiveProperty<int> PotentialWorkerCount => Game.Instance.FolkManager.IdleFolk;
+        public IReadOnlyReactiveProperty<int> PotentialWorkerCount => Game.Instance.FolkManager.FarmFolk;
         public int MaxWorkerCount => Game.Instance.FolkManager.MaxMarkerWorkers;
         public bool HasMaxWorkerCount => true;
         public string WorkersTitle => _workersTitle;
@@ -68,7 +68,7 @@ namespace NovemberProject.Buildings
         
         public bool CanAddWorker()
         {
-            return Game.Instance.FolkManager.IdleFolk.Value > 0
+            return Game.Instance.FolkManager.FarmFolk.Value > 0
                    && Game.Instance.FolkManager.MarketFolk.Value < Game.Instance.FolkManager.MaxMarkerWorkers;
         }
 

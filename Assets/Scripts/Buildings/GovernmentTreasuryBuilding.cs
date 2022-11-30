@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class GovernmentTreasuryBuilding : Building, IResourceStorage, ISalaryController, ITaxController
+    public sealed class GovernmentTreasuryBuilding : Building, IMoneyPrinter
     {
         private MoneyController _moneyController = null!;
 
@@ -16,20 +16,11 @@ namespace NovemberProject.Buildings
         private TMP_Text _moneyText = null!;
 
         [SerializeField]
-        private Sprite _moneySprite = null!;
-
-        [SerializeField]
-        private string _moneyTitle = "Money";
+        private int _moneyToPrint = 10;
 
         public override BuildingType BuildingType => BuildingType.GovernmentTreasury;
-        public Sprite SpriteIcon => _moneySprite;
-        public string ResourceTitle => _moneyTitle;
-        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.GovernmentMoney;
-        public IReadOnlyReactiveProperty<bool> CanRaiseSalary => Game.Instance.TechController.CanRaiseSalary;
-        public IReadOnlyReactiveProperty<bool> CanLowerSalary => Game.Instance.TechController.CanLowerSalary;
-        public IReadOnlyReactiveProperty<bool> CanRaiseTax => Game.Instance.TechController.CanRaiseTax;
-        public IReadOnlyReactiveProperty<bool> CanLowerTax => Game.Instance.TechController.CanLowerTax;
-
+        public IReadOnlyReactiveProperty<bool> CanPrintMoney => Game.Instance.TechController.CanPrintMoney;
+        public IReadOnlyReactiveProperty<bool> CanBurnMoney => Game.Instance.TechController.CanBurnMoney;
 
         protected override void OnInitialized()
         {
@@ -45,10 +36,7 @@ namespace NovemberProject.Buildings
             _moneyText.text = money.ToString();
         }
 
-        public void RaiseSalary() => Game.Instance.ArmyManager.RaiseSalary();
-        public void LowerSalary() => Game.Instance.ArmyManager.LowerSalary();
-
-        public void RaiseTax() => Game.Instance.FolkManager.RaiseTax();
-        public void LowerTax() => Game.Instance.FolkManager.LowerTax();
+        public void PrintMoney() => Game.Instance.MoneyController.PrintMoney(_moneyToPrint);
+        public void BurnMoney() => Game.Instance.MoneyController.BurnMoney(_moneyToPrint);
     }
 }

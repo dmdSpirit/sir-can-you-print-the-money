@@ -44,7 +44,6 @@ namespace NovemberProject.System
         public TechController TechController { get; private set; } = null!;
         public Expeditions Expeditions { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
-        public IdleFolkSpawner IdleFolkSpawner { get; private set; } = null!;
         public FolkManager FolkManager => CoreGameplay.FolkManager;
         public ArmyManager ArmyManager => CoreGameplay.ArmyManager;
         public bool IsInitialized { get; private set; }
@@ -98,7 +97,6 @@ namespace NovemberProject.System
             TreasureController = FindObjectOfType<TreasureController>();
             TechController = FindObjectOfType<TechController>();
             Expeditions = FindObjectOfType<Expeditions>();
-            IdleFolkSpawner = FindObjectOfType<IdleFolkSpawner>();
         }
 
         private void Initialize()

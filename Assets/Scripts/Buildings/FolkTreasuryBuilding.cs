@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.Buildings.UI;
 using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class FolkTreasuryBuilding : Building, IResourceStorage
+    public sealed class FolkTreasuryBuilding : Building, IResourceStorage, ITaxController
     {
         private MoneyController _moneyController = null!;
         
@@ -24,6 +25,8 @@ namespace NovemberProject.Buildings
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.FolkMoney;
+        public IReadOnlyReactiveProperty<bool> CanRaiseTax => Game.Instance.TechController.CanRaiseTax;
+        public IReadOnlyReactiveProperty<bool> CanLowerTax => Game.Instance.TechController.CanLowerTax;
 
         protected override void OnInitialized()
         {
@@ -38,5 +41,8 @@ namespace NovemberProject.Buildings
         {
             _moneyText.text = money.ToString();
         }
+        
+        public void RaiseTax() => Game.Instance.FolkManager.RaiseTax();
+        public void LowerTax() => Game.Instance.FolkManager.LowerTax();
     }
 }

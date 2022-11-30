@@ -316,7 +316,8 @@ MonoBehaviour:
   _numberOfWorkersText: {fileID: 803239951602069668}
   _productionTime: 8
   _productionPerFolk: 1
-  _workersTitle: Farmers
+  _farmerImage: {fileID: -718504556, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  _farmerTitle: Farmers
 --- !u!4 &1463769438726629991 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}

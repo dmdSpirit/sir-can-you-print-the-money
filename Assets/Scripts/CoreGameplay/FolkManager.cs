@@ -11,15 +11,12 @@ namespace NovemberProject.CoreGameplay
     {
         private readonly ReactiveProperty<int> _folkCount = new();
         private readonly ReactiveProperty<int> _farmFolk = new();
-        private readonly ReactiveProperty<int> _idleFolk = new();
         private readonly ReactiveProperty<int> _marketFolk = new();
+        private readonly ReactiveProperty<int> _mineFolk = new();
         private readonly ReactiveProperty<int> _tax = new();
 
         [SerializeField]
         private int _startingFolkTax = 2;
-
-        [SerializeField]
-        private int _startingFolkCount = 3;
 
         [SerializeField]
         private int _startingFarmWorkers = 1;
@@ -28,23 +25,26 @@ namespace NovemberProject.CoreGameplay
         private int _startingMarketWorkers = 1;
 
         [SerializeField]
+        private int _startingMineWorkers = 0;
+
+        [SerializeField]
         private int _maxMarketWorkers = 1;
 
         public IReadOnlyReactiveProperty<int> FolkCount => _folkCount;
         public IReadOnlyReactiveProperty<int> FarmFolk => _farmFolk;
-        public IReadOnlyReactiveProperty<int> IdleFolk => _idleFolk;
         public IReadOnlyReactiveProperty<int> MarketFolk => _marketFolk;
+        public IReadOnlyReactiveProperty<int> MineFolk => _mineFolk;
         public IReadOnlyReactiveProperty<int> Tax => _tax;
 
         public int MaxMarkerWorkers => _maxMarketWorkers;
 
         public void InitializeGameData()
         {
-            _folkCount.Value = _startingFolkCount;
-            _idleFolk.Value = _startingFolkCount - _startingFarmWorkers - _startingMarketWorkers;
             _tax.Value = _startingFolkTax;
             _farmFolk.Value = _startingFarmWorkers;
             _marketFolk.Value = _startingMarketWorkers;
+            _mineFolk.Value = _startingMineWorkers;
+            _folkCount.Value = _farmFolk.Value + _marketFolk.Value + _mineFolk.Value;
         }
 
         public void StartRound()
@@ -65,42 +65,20 @@ namespace NovemberProject.CoreGameplay
             Assert.IsTrue(Game.Instance.FoodController.FolkFood.Value >= newFolkCost);
             Game.Instance.FoodController.SpendFolkFood(newFolkCost);
             _folkCount.Value++;
-            _idleFolk.Value++;
-        }
-
-        public void AddFolkToFarm()
-        {
-            if (_idleFolk.Value <= 0)
-            {
-                return;
-            }
-
-            _idleFolk.Value--;
             _farmFolk.Value++;
         }
 
-        public void RemoveFolkFromFarm()
+        public void AddFolkToMarket()
         {
-            if (_farmFolk.Value <= 0)
+            if (!CanAddWorkerToMarket())
             {
                 return;
             }
 
             _farmFolk.Value--;
-            _idleFolk.Value++;
-        }
-
-        public void AddFolkToMarket()
-        {
-            if (CanAddWorkerToMarket())
-            {
-                return;
-            }
-
-            _idleFolk.Value--;
             _marketFolk.Value++;
 
-            bool CanAddWorkerToMarket() => _idleFolk.Value <= 0 || _marketFolk.Value >= _maxMarketWorkers;
+            bool CanAddWorkerToMarket() => _farmFolk.Value > 0 && _marketFolk.Value < _maxMarketWorkers;
         }
 
         public void RemoveFolkFromMarket()
@@ -111,7 +89,31 @@ namespace NovemberProject.CoreGameplay
             }
 
             _marketFolk.Value--;
-            _idleFolk.Value++;
+            _farmFolk.Value++;
+        }
+
+        public void AddFolkToMine()
+        {
+            if (!CanAddWorkerToMine())
+            {
+                return;
+            }
+
+            _farmFolk.Value--;
+            _mineFolk.Value++;
+
+            bool CanAddWorkerToMine() => _farmFolk.Value > 0 && Game.Instance.TechController.CanUseMine.Value;
+        }
+
+        public void RemoveFolkFromMine()
+        {
+            if (_mineFolk.Value <= 0)
+            {
+                return;
+            }
+
+            _mineFolk.Value--;
+            _farmFolk.Value++;
         }
 
         public void RaiseTax()
@@ -203,9 +205,9 @@ namespace NovemberProject.CoreGameplay
             Assert.IsTrue(_folkCount.Value >= numberToExecute);
             _folkCount.Value -= numberToExecute;
 
-            KillFolk(_idleFolk, ref numberToExecute);
             KillFolk(_farmFolk, ref numberToExecute);
             KillFolk(_marketFolk, ref numberToExecute);
+            KillFolk(_mineFolk, ref numberToExecute);
             Assert.IsTrue(ValidateTotalCount());
         }
 
@@ -231,7 +233,7 @@ namespace NovemberProject.CoreGameplay
 
         private bool ValidateTotalCount()
         {
-            return _idleFolk.Value + _farmFolk.Value + _marketFolk.Value == _folkCount.Value;
+            return _mineFolk.Value + _farmFolk.Value + _marketFolk.Value == _folkCount.Value;
         }
     }
 }
