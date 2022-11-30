@@ -17,7 +17,6 @@ namespace NovemberProject.GameStates
         protected override void OnExit()
         {
             Game.Instance.UIManager.HideTechTreeScreen();
-            Game.Instance.TimeSystem.RestoreAfterPause();
             Game.Instance.UIManager.UnlockTimeControls();
         }
     }

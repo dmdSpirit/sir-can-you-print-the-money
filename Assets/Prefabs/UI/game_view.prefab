@@ -1144,7 +1144,7 @@ MonoBehaviour:
   _timeControlsPanel: {fileID: 8195963758099638503}
   _gameOverPanel: {fileID: 2418965048840219462}
   _techTreeScreen: {fileID: 1842647804646464899}
-  _expeditionResultPanel: {fileID: 8209465256641742932}
+  _expeditionResultsPanel: {fileID: 8209465256641742932}
   _victoryScreen: {fileID: 463167061671539692}
   _creditsScreen: {fileID: 3722431427025351079}
   _tutorialScreen: {fileID: 5913805128455123651}
@@ -2419,6 +2419,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 354652081058001742, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755747792036066158, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755747792036066158, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755747792036066158, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755747792036066158, guid: d910e10630ccba94bb7c9cf25f352985, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
