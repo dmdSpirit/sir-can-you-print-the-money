@@ -8525,6 +8525,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 3348369767844311518, guid: 1fe1e6350dbaaf748ab3042317133ffb, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4901481895720969610, guid: 1fe1e6350dbaaf748ab3042317133ffb, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
@@ -16358,11 +16362,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_SizeDelta.y
@@ -16374,7 +16378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1026466380247412332, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.x
