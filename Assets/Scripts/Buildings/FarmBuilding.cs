@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class FarmBuilding : Building, IWorkerManipulator, IProducer
+    public sealed class FarmBuilding : Building, IProducer
     {
         private readonly ReactiveProperty<bool> _isProducing = new();
         private readonly ReactiveProperty<int> _producedValue = new();
@@ -28,15 +28,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private int _productionPerFolk = 3;
 
-        [SerializeField]
-        private string _workersTitle = "Farmers";
-
         public override BuildingType BuildingType => BuildingType.Farm;
-        public IReadOnlyReactiveProperty<int> WorkerCount => Game.Instance.FolkManager.FarmFolk;
-        public IReadOnlyReactiveProperty<int> PotentialWorkerCount => Game.Instance.FolkManager.IdleFolk;
-        public int MaxWorkerCount => 0;
-        public bool HasMaxWorkerCount => false;
-        public string WorkersTitle => _workersTitle;
 
         public IReadOnlyReactiveProperty<int> ProducedValue => _producedValue;
         public IReadOnlyReactiveProperty<bool> IsProducing => _isProducing;
@@ -50,26 +42,6 @@ namespace NovemberProject.Buildings
             _folkManager.FarmFolk
                 .TakeUntilDisable(this)
                 .Subscribe(OnFarmCountChanged);
-        }
-
-        public void AddWorker()
-        {
-            Game.Instance.FolkManager.AddFolkToFarm();
-        }
-
-        public void RemoveWorker()
-        {
-            Game.Instance.FolkManager.RemoveFolkFromFarm();
-        }
-
-        public bool CanAddWorker()
-        {
-            return Game.Instance.FolkManager.IdleFolk.Value > 0;
-        }
-
-        public bool CanRemoveWorker()
-        {
-            return Game.Instance.FolkManager.FarmFolk.Value > 0;
         }
 
         private void OnFarmCountChanged(int farmWorkers)

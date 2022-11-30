@@ -14,6 +14,7 @@ namespace NovemberProject.TechTree
         private readonly ReactiveProperty<bool> _canLowerTax = new();
         private readonly ReactiveProperty<bool> _canPrintMoney = new();
         private readonly ReactiveProperty<bool> _canBurnMoney = new();
+        private readonly ReactiveProperty<bool> _canUseMine = new();
         private readonly ReactiveProperty<bool> _canBuildArena = new();
 
         public IReadOnlyReactiveProperty<bool> CanRaiseSalary => _canRaiseSalary;
@@ -22,6 +23,7 @@ namespace NovemberProject.TechTree
         public IReadOnlyReactiveProperty<bool> CanLowerTax => _canLowerTax;
         public IReadOnlyReactiveProperty<bool> CanPrintMoney => _canPrintMoney;
         public IReadOnlyReactiveProperty<bool> CanBurnMoney => _canBurnMoney;
+        public IReadOnlyReactiveProperty<bool> CanUseMine => _canUseMine;
         public IReadOnlyReactiveProperty<bool> CanBuildArena => _canBuildArena;
         public IObservable<Unit> OnTechUnlocked => _onTechUnlocked;
 
@@ -34,6 +36,7 @@ namespace NovemberProject.TechTree
             _canPrintMoney.Value = false;
             _canBurnMoney.Value = false;
             _canBuildArena.Value = false;
+            _canUseMine.Value = false;
         }
 
         public void UnlockRaiseSalary()
@@ -75,6 +78,12 @@ namespace NovemberProject.TechTree
         public void UnlockBuildArena()
         {
             _canBuildArena.Value = true;
+            _onTechUnlocked.OnNext(Unit.Default);
+        }
+
+        public void UnlockMine()
+        {
+            _canUseMine.Value = true;
             _onTechUnlocked.OnNext(Unit.Default);
         }
     }
