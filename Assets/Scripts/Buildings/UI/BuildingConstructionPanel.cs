@@ -29,6 +29,15 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private TMP_Text _stoneCountText = null!;
 
+        [SerializeField]
+        private TMP_Text _constructButtonText = null!;
+
+        [SerializeField]
+        private string _constructText = "Build";
+
+        [SerializeField]
+        private string _lockedText = "Not learned";
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -43,6 +52,7 @@ namespace NovemberProject.Buildings.UI
             _building = building;
             _building.ConstructableState.Subscribe(UpdateState).AddTo(_sub);
             Game.Instance.StoneController.Stone.Subscribe(OnStoneCountChanged).AddTo(_sub);
+            Game.Instance.TechController.CanBuildArena.Subscribe(OnCanBuildArenaChanged).AddTo(_sub);
         }
 
         protected override void OnHide()
@@ -100,9 +110,22 @@ namespace NovemberProject.Buildings.UI
 
         private void OnStoneCountChanged(int stone)
         {
-            _startConstructionButton.interactable = stone >= _building.ConstructionCost;
             _stoneCountText.text =
                 $"{Game.Instance.StoneController.Stone.Value}/{_building.ConstructionCost.ToString()}";
+            UpdateConstructionButton();
         }
+
+        private void OnCanBuildArenaChanged(bool canBuild)
+        {
+            UpdateConstructionButton();
+        }
+
+        private void UpdateConstructionButton()
+        {
+            bool constructLearned = Game.Instance.TechController.CanBuildArena.Value;
+            _constructButtonText.text = constructLearned ? _constructText : _lockedText;
+            _startConstructionButton.interactable = Game.Instance.StoneController.Stone.Value >= _building.ConstructionCost && constructLearned;
+        }
+        
     }
 }

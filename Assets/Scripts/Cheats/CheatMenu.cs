@@ -55,7 +55,7 @@ namespace NovemberProject.Cheats
 
         private static void Print10Money()
         {
-            Game.Instance.MoneyController.AddGovernmentMoney(10);
+            Game.Instance.MoneyController.PrintMoney(10);
         }
 
         private static void Add10Stone()

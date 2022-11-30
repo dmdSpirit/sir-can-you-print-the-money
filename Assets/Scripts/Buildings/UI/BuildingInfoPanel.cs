@@ -36,6 +36,9 @@ namespace NovemberProject.Buildings.UI
         private TaxControlPanel _taxControlPanel = null!;
 
         [SerializeField]
+        private MoneyPrinterPanel _moneyPrinterPanel = null!;
+
+        [SerializeField]
         private BuildingConstructionPanel _buildingConstructionPanel = null!;
 
         public Building Building { get; private set; } = null!;
@@ -59,6 +62,7 @@ namespace NovemberProject.Buildings.UI
                 ShowBuyUnit(building);
                 ShowSalaryController(building);
                 ShowTaxController(building);
+                ShowMoneyPrinter(building);
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
@@ -73,6 +77,7 @@ namespace NovemberProject.Buildings.UI
             _buildingConstructionPanel.Hide();
             _salaryControlPanel.Hide();
             _taxControlPanel.Hide();
+            _moneyPrinterPanel.Hide();
         }
 
         private void ShowBuyUnit(Building building)
@@ -108,6 +113,18 @@ namespace NovemberProject.Buildings.UI
             else
             {
                 _taxControlPanel.Hide();
+            }
+        }
+        
+        private void ShowMoneyPrinter(Building building)
+        {
+            if (building is IMoneyPrinter moneyPrinter)
+            {
+                _moneyPrinterPanel.Show(moneyPrinter);
+            }
+            else
+            {
+                _moneyPrinterPanel.Hide();
             }
         }
 
@@ -151,6 +168,7 @@ namespace NovemberProject.Buildings.UI
             _expeditionSenderPanel.Hide();
             _salaryControlPanel.Hide();
             _taxControlPanel.Hide();
+            _moneyPrinterPanel.Hide();
             _buildingConstructionPanel.Show(constructableBuilding);
         }
     }
