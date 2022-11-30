@@ -43,6 +43,7 @@ namespace NovemberProject.System
         public BuildingsController BuildingsController { get; private set; } = null!;
         public TechController TechController { get; private set; } = null!;
         public Expeditions Expeditions { get; private set; } = null!;
+        public CombatController CombatController { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
         public FolkManager FolkManager => CoreGameplay.FolkManager;
         public ArmyManager ArmyManager => CoreGameplay.ArmyManager;
@@ -97,6 +98,7 @@ namespace NovemberProject.System
             TreasureController = FindObjectOfType<TreasureController>();
             TechController = FindObjectOfType<TechController>();
             Expeditions = FindObjectOfType<Expeditions>();
+            CombatController = FindObjectOfType<CombatController>();
         }
 
         private void Initialize()

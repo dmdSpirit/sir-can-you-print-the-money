@@ -4,6 +4,7 @@ using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.CoreGameplay
 {
@@ -174,6 +175,17 @@ namespace NovemberProject.CoreGameplay
 
             Game.Instance.CoreGameplay.OnArmyDeserted(numberToDesert);
             ReduceArmy(numberToDesert);
+        }
+
+        public void KillGuards()
+        {
+            if (_guardsCount.Value == 0)
+            {
+                return;
+            }
+
+            _armyCount.Value -= _guardsCount.Value;
+            _guardsCount.Value = 0;
         }
     }
 }

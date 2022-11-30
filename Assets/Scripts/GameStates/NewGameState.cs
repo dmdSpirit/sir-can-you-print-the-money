@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using NovemberProject.System;
 using NovemberProject.System.Messages;
+using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.GameStates
 {
@@ -19,6 +20,7 @@ namespace NovemberProject.GameStates
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
             Game.Instance.TechController.InitializeGameData();
+            Game.Instance.CombatController.InitializeGameData();
             Game.Instance.MessageBroker.Publish(new NewGameMessage());
             Game.Instance.GameStateMachine.Tutorial();
         }

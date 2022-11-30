@@ -62,6 +62,9 @@ namespace NovemberProject.System.UI
         private TutorialScreen _tutorialScreen = null!;
 
         [SerializeField]
+        private AttackResultsPanel _attackResultsPanel = null!;
+
+        [SerializeField]
         private LayerMask _layerMask;
 
         public LayerMask LayerMask => _layerMask;
@@ -174,6 +177,8 @@ namespace NovemberProject.System.UI
         public void HideCreditsScreen() => _creditsScreen.Hide();
         public void ShowTutorialScreen() => _tutorialScreen.Show(null);
         public void HideTutorialScreen() => _tutorialScreen.Hide();
+        public void ShowAttackResultsPanel(AttackData attackData) => _attackResultsPanel.Show(attackData);
+        public void HideAttackResultsPanel() => _attackResultsPanel.Hide();
     }
 }
 

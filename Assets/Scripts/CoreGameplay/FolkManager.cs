@@ -200,7 +200,7 @@ namespace NovemberProject.CoreGameplay
             return _folkCount.Value - maxFolkToPay;
         }
 
-        private void KillFolk(int numberToExecute)
+        public void KillFolk(int numberToExecute)
         {
             Assert.IsTrue(_folkCount.Value >= numberToExecute);
             _folkCount.Value -= numberToExecute;

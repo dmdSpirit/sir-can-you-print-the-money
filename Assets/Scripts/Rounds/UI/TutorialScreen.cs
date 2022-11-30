@@ -22,6 +22,9 @@ namespace NovemberProject.Rounds.UI
                 tutorialStepScreen.OnNext
                     .TakeUntilDisable(this)
                     .Subscribe(OnNext);
+                tutorialStepScreen.OnPrevious?
+                    .TakeUntilDisable(this)
+                    .Subscribe(OnPrevious);
             }
         }
 
@@ -54,6 +57,19 @@ namespace NovemberProject.Rounds.UI
                 Game.Instance.GameStateMachine.StartRound();
                 return;
             }
+
+            _tutorialStepScreens[_currentStep].Show(null);
+        }
+
+        private void OnPrevious(Unit _)
+        {
+            if (_currentStep == 0)
+            {
+                return;
+            }
+
+            _tutorialStepScreens[_currentStep].Hide();
+            _currentStep--;
 
             _tutorialStepScreens[_currentStep].Show(null);
         }

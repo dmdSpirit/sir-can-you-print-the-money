@@ -12,26 +12,21 @@ namespace NovemberProject.Rounds.UI
         private readonly Subject<Unit> _onNext = new();
 
         [SerializeField]
-        private Button _nextButton = null!;
+        private Button? _nextButton;
 
-        public IObservable<Unit> OnNext => _onNext;
+        [SerializeField]
+        private Button? _previousButton;
 
-        protected override void OnInitialized()
+        public IObservable<Unit>? OnNext => _nextButton?.OnClickAsObservable();
+        public IObservable<Unit>? OnPrevious => _previousButton?.OnClickAsObservable();
+
+        protected override void OnShow(object? _)
         {
-            base.OnInitialized();
-            _nextButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
-                .Subscribe(OnNextButton);
-        }
-
-        protected override void OnShow(object? value)
-        {
+            
         }
 
         protected override void OnHide()
         {
         }
-
-        private void OnNextButton(Unit _) => _onNext.OnNext(Unit.Default);
     }
 }
