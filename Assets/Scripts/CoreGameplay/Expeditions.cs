@@ -15,17 +15,16 @@ namespace NovemberProject.CoreGameplay
         private Timer? _expeditionTimer;
         private readonly ReactiveProperty<bool> _isExpeditionActive = new();
         private int _explorersLeftForExpedition;
+        private int _expeditionIndex;
 
         [SerializeField]
         private int _expeditionDuration = 20;
 
         [SerializeField]
-        private int _expeditionReward = 1;
+        private ExpeditionData[] _expeditionDatas = null!;
 
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive => _isExpeditionActive;
         public IReadOnlyTimer? Timer => _expeditionTimer;
-
-        public int ExpeditionReward => _expeditionReward;
 
         protected override void OnInitialized()
         {
@@ -33,6 +32,32 @@ namespace NovemberProject.CoreGameplay
             Game.Instance.MessageBroker.Receive<NewGameMessage>()
                 .TakeUntilDisable(this)
                 .Subscribe(OnNewGame);
+        }
+
+        public float GetExpeditionWinProbability()
+        {
+            ExpeditionData data = GetCurrentExpeditionData();
+            return Game.Instance.CombatController.GetAttackersWinProbability(
+                Game.Instance.ArmyManager.ExplorersCount.Value,
+                data.Defenders);
+        }
+
+        public ExpeditionData GetCurrentExpeditionData()
+        {
+            int maxIndex = _expeditionDatas.Length - 1;
+            if (_expeditionIndex < maxIndex)
+            {
+                return _expeditionDatas[_expeditionIndex];
+            }
+
+            return _expeditionDatas[maxIndex];
+        }
+
+        private bool RollExpeditionResult()
+        {
+            float probability = GetExpeditionWinProbability();
+            float roll = Random.value;
+            return roll <= probability;
         }
 
         public void StartExpedition()
@@ -74,15 +99,22 @@ namespace NovemberProject.CoreGameplay
         private void OnExpeditionFinished(Timer timer)
         {
             _isExpeditionActive.Value = false;
-            var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, _expeditionReward);
+            bool isSuccess = RollExpeditionResult();
+            int reward = isSuccess ? GetCurrentExpeditionData().Reward : 0;
+            var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, reward, isSuccess, GetCurrentExpeditionData().Defenders);
             Game.Instance.GameStateMachine.ExpeditionFinished(expeditionResult);
-            Game.Instance.TreasureController.AddTreasures(_expeditionReward);
+            if (isSuccess)
+            {
+                Game.Instance.TreasureController.AddTreasures(reward);
+                _expeditionIndex++;
+            }
         }
 
         private void OnNewGame(NewGameMessage _)
         {
             _isExpeditionActive.Value = false;
             _expeditionTimer?.Cancel();
+            _expeditionIndex = 0;
         }
     }
 }

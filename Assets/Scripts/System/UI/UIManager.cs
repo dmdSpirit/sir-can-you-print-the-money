@@ -50,7 +50,7 @@ namespace NovemberProject.System.UI
         private TechTreeScreen _techTreeScreen = null!;
 
         [SerializeField]
-        private ExpeditionResultPanel _expeditionResultPanel = null!;
+        private ExpeditionResultsPanel _expeditionResultsPanel = null!;
         
         [SerializeField]
         private VictoryScreen _victoryScreen = null!;
@@ -155,12 +155,12 @@ namespace NovemberProject.System.UI
 
         public void ShowExpeditionResult(ExpeditionResult expeditionResult)
         {
-            _expeditionResultPanel.Show(expeditionResult);
+            _expeditionResultsPanel.Show(expeditionResult);
         }
 
         public void HideExpeditionResult()
         {
-            _expeditionResultPanel.Hide();
+            _expeditionResultsPanel.Hide();
         }
 
         public void ShowVictoryScreen()

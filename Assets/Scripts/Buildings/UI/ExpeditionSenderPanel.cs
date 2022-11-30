@@ -30,6 +30,15 @@ namespace NovemberProject.Buildings.UI
         private ExpeditionTimerPanel _expeditionTimerPanel = null!;
 
         [SerializeField]
+        private TMP_Text _winChance = null!;
+
+        [SerializeField]
+        private TMP_Text _defenders = null!;
+
+        [SerializeField]
+        private TMP_Text _rewards = null!;
+
+        [SerializeField]
         private TMP_Text _title = null!;
 
         protected override void OnInitialized()
@@ -75,6 +84,14 @@ namespace NovemberProject.Buildings.UI
 
             _addWorkerButton.interactable = _expeditionSender.CanAddWorker();
             _removeWorkerButton.interactable = _expeditionSender.CanRemoveWorker();
+            UpdateData();
+        }
+
+        private void UpdateData()
+        {
+            _defenders.text = _expeditionSender.Defenders.ToString();
+            _winChance.text = $"{_expeditionSender.WinProbability * 100}%";
+            _rewards.text = _expeditionSender.Reward.ToString();
         }
 
         private void OnPotentialWorkerCountChanged(int potentialWorkerCount)
@@ -108,6 +125,7 @@ namespace NovemberProject.Buildings.UI
             }
 
             _expeditionTimerPanel.Hide();
+            UpdateData();
         }
 
         private void OnCanBeSentToExpeditionChanged(bool canBeSentToExpedition)
