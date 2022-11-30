@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 12, y: -146.6}
+  m_AnchoredPosition: {x: 12, y: -151.1}
   m_SizeDelta: {x: 286.2563, y: 23}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2052231327592716020
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 2650623907661921162}
   - component: {fileID: 2604672907197250803}
   m_Layer: 0
-  m_Name: text line 4 (1)
+  m_Name: text line 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 12, y: -175.3}
+  m_AnchoredPosition: {x: 12, y: -181.3}
   m_SizeDelta: {x: 286.2563, y: 23}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2650623907661921162
@@ -1322,7 +1322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 12, y: -117.799965}
+  m_AnchoredPosition: {x: 12, y: -120.8}
   m_SizeDelta: {x: 286.2563, y: 23}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5187645533044789052
@@ -3167,7 +3167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 101610314665188773, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 700
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 101610314665188773, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3216,6 +3216,18 @@ PrefabInstance:
     - target: {fileID: 101610314665188773, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261340989479289817, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: _starvedArmyText
+      value: 'Knights starved:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 261340989479289817, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: _starvedFolkText
+      value: 'Folks starved:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 261340989479289817, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
+      propertyPath: _executedFolkText
+      value: 'Folks executed:'
       objectReference: {fileID: 0}
     - target: {fileID: 366782713025156821, guid: f9def00778ab21f488eaabc0c0494360, type: 3}
       propertyPath: m_Name
