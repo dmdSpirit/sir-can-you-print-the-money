@@ -377,7 +377,7 @@ TextureImporter:
         width: 122
         height: 117
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -398,7 +398,7 @@ TextureImporter:
         width: 122
         height: 117
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -406,6 +406,132 @@ TextureImporter:
       bones: []
       spriteID: 541e9cedc486d1f478d81723db12bb8f
       internalID: -1060441429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: minus money
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 393
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dbfa39e98aeb6441bc0f477d9f44dcb
+      internalID: -918560852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plus money
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 393
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ca3cd284448844b85a3fdb097aae22
+      internalID: 1858017014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: defence
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 1414
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f55503b82847f234fa03304cf6623748
+      internalID: -1982214555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iconsDouble_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 517
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0745a1a3b3c43ca4c9f3717035a539a0
+      internalID: 1179613732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ston
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 257
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f60bf3a75130f9d4d8c1da3b2b21fe64
+      internalID: 2016613285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fame
+      rect:
+        serializedVersion: 2
+        x: 2051
+        y: 897
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73092a644ee39a348bc6c8a96ce6fb6b
+      internalID: -474872999
       vertices: []
       indices: 
       edges: []
@@ -422,6 +548,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       iconsDouble_0: 386283011
+      fame: -474872999
       sword: -370356706
       human: -718504556
       coins: 1166264754
@@ -432,8 +559,13 @@ TextureImporter:
       income: -463464534
       castle: 1292768485
       lock: -477202142
+      plus money: 1858017014
       death: 1837668925
+      minus money: -918560852
+      ston: 2016613285
       stone: 1378114989
+      defence: -1982214555
+      iconsDouble_2: 1179613732
       iconsDouble_1: -1060441429
   spritePackingTag: 
   pSDRemoveMatte: 0
