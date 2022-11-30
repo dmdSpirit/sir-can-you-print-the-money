@@ -67,7 +67,10 @@ namespace NovemberProject.Rounds.UI
         private Button _useMineButton = null!;
 
         [SerializeField]
-        private string _toInventText = "Invent for [value] trophies";
+        private string _toInventMultipleTrophyText = "Invent for [value] trophies";
+
+        [SerializeField]
+        private string _toInventSingleTrophyText = "Invent for 1 trophy";
 
         [SerializeField]
         private string _inventedText = "Invented";
@@ -161,7 +164,11 @@ namespace NovemberProject.Rounds.UI
         private void UpdateButtonText(Button button, bool isInvented, int cost)
         {
             var text = button.GetComponentInChildren<TMP_Text>();
-            text.text = isInvented ? _inventedText : _toInventText.Replace("[value]", cost.ToString());
+            text.text = isInvented
+                ? _inventedText
+                : (cost == 1
+                    ? _toInventSingleTrophyText
+                    : _toInventMultipleTrophyText.Replace("[value]", cost.ToString()));
         }
 
         private void OnClose(Unit _)
