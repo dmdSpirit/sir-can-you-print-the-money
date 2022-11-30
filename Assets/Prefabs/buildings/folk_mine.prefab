@@ -120,11 +120,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7611082601889492729, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
 --- !u!4 &5576681593138059762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+  m_PrefabInstance: {fileID: 1445472868915226797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5576681593138059765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+  m_PrefabInstance: {fileID: 1445472868915226797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5337596301724106562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5576681593138059765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb77c8855d54a7d90504c53bfa5f12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: Mine
+  _description: It takes 6 seconds for 1 miner to produce some stone. 0 miners are
+    working right now.
+  _image: {fileID: 21300000, guid: ddf148f8baf6ec34594d39700de1f41c, type: 3}
+  _selectionBorder: {fileID: 8153115113176633908}
+  _minersTitle: Miners
+  _minersCount: {fileID: 5913699833776898865}
+--- !u!114 &5913699833776898865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+  m_PrefabInstance: {fileID: 1445472868915226797}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8153115113176633908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7289910620209232537, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_PrefabInstance: {fileID: 1445472868915226797}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6883927400247254847

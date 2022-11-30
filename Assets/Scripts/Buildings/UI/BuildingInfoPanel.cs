@@ -39,6 +39,9 @@ namespace NovemberProject.Buildings.UI
         private MoneyPrinterPanel _moneyPrinterPanel = null!;
 
         [SerializeField]
+        private MineWorkerManagementPanel _mineWorkerManagementPanel = null!;
+
+        [SerializeField]
         private BuildingConstructionPanel _buildingConstructionPanel = null!;
 
         public Building Building { get; private set; } = null!;
@@ -63,6 +66,7 @@ namespace NovemberProject.Buildings.UI
                 ShowSalaryController(building);
                 ShowTaxController(building);
                 ShowMoneyPrinter(building);
+                ShowMineWorkers(building);
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
@@ -78,6 +82,7 @@ namespace NovemberProject.Buildings.UI
             _salaryControlPanel.Hide();
             _taxControlPanel.Hide();
             _moneyPrinterPanel.Hide();
+            _mineWorkerManagementPanel.Hide();
         }
 
         private void ShowBuyUnit(Building building)
@@ -115,7 +120,7 @@ namespace NovemberProject.Buildings.UI
                 _taxControlPanel.Hide();
             }
         }
-        
+
         private void ShowMoneyPrinter(Building building)
         {
             if (building is IMoneyPrinter moneyPrinter)
@@ -137,6 +142,18 @@ namespace NovemberProject.Buildings.UI
             else
             {
                 _resourceStoragePanel.Hide();
+            }
+        }
+
+        private void ShowMineWorkers(Building building)
+        {
+            if (building is IMineWorkerManipulator mineWorkerManipulator)
+            {
+                _mineWorkerManagementPanel.Show(mineWorkerManipulator);
+            }
+            else
+            {
+                _mineWorkerManagementPanel.Hide();
             }
         }
 
@@ -169,6 +186,7 @@ namespace NovemberProject.Buildings.UI
             _salaryControlPanel.Hide();
             _taxControlPanel.Hide();
             _moneyPrinterPanel.Hide();
+            _mineWorkerManagementPanel.Hide();
             _buildingConstructionPanel.Show(constructableBuilding);
         }
     }
