@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
-using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
