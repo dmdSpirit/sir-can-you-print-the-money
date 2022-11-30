@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class FarmBuilding : Building, IProducer
+    public sealed class FarmBuilding : Building, IProducer, IResourceStorage
     {
         private readonly ReactiveProperty<bool> _isProducing = new();
         private readonly ReactiveProperty<int> _producedValue = new();
@@ -28,12 +28,21 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private int _productionPerFolk = 3;
 
+        [SerializeField]
+        private Sprite _farmerImage = null!;
+
+        [SerializeField]
+        private string _farmerTitle = "Farmers";
+
         public override BuildingType BuildingType => BuildingType.Farm;
 
         public IReadOnlyReactiveProperty<int> ProducedValue => _producedValue;
         public IReadOnlyReactiveProperty<bool> IsProducing => _isProducing;
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
         public bool ShowProducedValue => true;
+        public Sprite SpriteIcon => _farmerImage;
+        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.FolkManager.FarmFolk;
+        public string ResourceTitle => _farmerTitle;
 
         protected override void OnInitialized()
         {
@@ -102,5 +111,6 @@ namespace NovemberProject.Buildings
             _isProducing.Value = false;
             StartProduction();
         }
+
     }
 }

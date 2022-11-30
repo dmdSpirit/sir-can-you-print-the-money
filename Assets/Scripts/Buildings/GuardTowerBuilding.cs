@@ -6,13 +6,23 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class GuardTowerBuilding : Building
+    public sealed class GuardTowerBuilding : Building, IResourceStorage
     {
         [SerializeField]
         private TMP_Text _armyText = null!;
 
+        [SerializeField]
+        private Sprite _guardImage = null!;
+
+        [SerializeField]
+        private string _guardTitle = "Guards";
+
         public override BuildingType BuildingType => BuildingType.GuardTower;
 
+        public Sprite SpriteIcon => _guardImage;
+        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.ArmyManager.GuardsCount;
+        public string ResourceTitle => _guardTitle;
+        
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -25,5 +35,6 @@ namespace NovemberProject.Buildings
         {
             _armyText.text = army.ToString();
         }
+
     }
 }
