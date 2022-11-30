@@ -356,7 +356,7 @@ TextureImporter:
         width: 144
         height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -364,6 +364,48 @@ TextureImporter:
       bones: []
       spriteID: ba34993317f187e4fa78225e1123ead1
       internalID: 812256196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: income
+      rect:
+        serializedVersion: 2
+        x: 1543
+        y: 1547
+        width: 122
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b59a3dd1b44fcf4b85d7465ce9cc0ae
+      internalID: -463464534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iconsDouble_1
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 1547
+        width: 122
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 541e9cedc486d1f478d81723db12bb8f
+      internalID: -1060441429
       vertices: []
       indices: 
       edges: []
@@ -387,10 +429,12 @@ TextureImporter:
       crown: 1365771222
       food: -700532128
       chess: 812256196
+      income: -463464534
       castle: 1292768485
       lock: -477202142
       death: 1837668925
       stone: 1378114989
+      iconsDouble_1: -1060441429
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
