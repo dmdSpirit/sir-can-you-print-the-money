@@ -15,7 +15,7 @@ MonoBehaviour:
   _roundStartConfigs:
   - Title: Astrologers proclaim...
     Description: The week of New Beginnings. Let your crops be bountiful and your
-      ankles merry and dancing.
+      ankles be merry and dancing.
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   - Title: Astrologers proclaim...
     Description: The week of figuring out. You can buy more folks and knights in
