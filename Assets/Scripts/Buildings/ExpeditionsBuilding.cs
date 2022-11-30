@@ -37,6 +37,9 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive => Game.Instance.Expeditions.IsExpeditionActive;
         public IReadOnlyReactiveProperty<bool> CanBeSentToExpedition => _canBeSentToExpedition;
         public IReadOnlyTimer? ExpeditionTimer => Game.Instance.Expeditions.Timer;
+        public float WinProbability => Game.Instance.Expeditions.GetExpeditionWinProbability();
+        public int Defenders => Game.Instance.Expeditions.GetCurrentExpeditionData().Defenders;
+        public int Reward => Game.Instance.Expeditions.GetCurrentExpeditionData().Reward;
         public int ExpeditionFoodPerPersonCost => _expeditionFoodPerPersonCost;
         public int ExpeditionMoneyPerPersonCost => _expeditionMoneyPerPersonCost;
         public bool ShowProducedValue => false;

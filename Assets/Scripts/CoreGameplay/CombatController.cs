@@ -1,9 +1,12 @@
 ﻿#nullable enable
+using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using NovemberProject.Time;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Random = UnityEngine.Random;
 
 namespace NovemberProject.CoreGameplay
 {
@@ -25,6 +28,8 @@ namespace NovemberProject.CoreGameplay
             { 0f, 0f, .03f, .09f, .16f, .26f, .36f }
         };
 
+        private readonly Subject<Unit> _onNewAttack = new();
+
         private Timer? _attackTimer;
         private int _attackIndex;
 
@@ -35,6 +40,7 @@ namespace NovemberProject.CoreGameplay
         private float _attackDuration = 40f;
 
         public IReadOnlyTimer? AttackTimer => _attackTimer;
+        public IObservable<Unit> OnNewAttack => _onNewAttack;
 
         public void InitializeGameData()
         {
@@ -58,6 +64,7 @@ namespace NovemberProject.CoreGameplay
         {
             _attackTimer = Game.Instance.TimeSystem.CreateTimer(_attackDuration, OnAttack);
             _attackTimer.Start();
+            _onNewAttack.OnNext(Unit.Default);
         }
 
         private void OnAttack(Timer _)
@@ -86,16 +93,23 @@ namespace NovemberProject.CoreGameplay
 
         public bool CalculateAttackResult(int attackers, int defenders)
         {
-            float probability = GetWinProbability(attackers, defenders);
+            float probability = GetAttackersWinProbability(attackers, defenders);
             float roll = Random.value;
             return roll <= probability;
         }
 
-        private float GetWinProbability(int attackers, int defenders)
+        public float GetAttackersWinProbability(int attackers, int defenders)
         {
-            Assert.IsTrue(attackers <= MAX_ATTACKERS);
-            Assert.IsTrue(defenders <= MAX_DEFENDERS);
-            return _winProbability[defenders, attackers];
+            if (defenders == 0)
+            {
+                return 1;
+            }
+
+            if (attackers == 0)
+            {
+                return 0;
+            }
+            return _winProbability[Mathf.Min(defenders, MAX_DEFENDERS), Mathf.Min(attackers, MAX_ATTACKERS)];
         }
     }
 }

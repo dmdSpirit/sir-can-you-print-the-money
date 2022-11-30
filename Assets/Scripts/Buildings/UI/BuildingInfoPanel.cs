@@ -44,6 +44,9 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private BuildingConstructionPanel _buildingConstructionPanel = null!;
 
+        [SerializeField]
+        private IncomingAttackPanel _incomingAttack = null!;
+
         public Building Building { get; private set; } = null!;
 
         protected override void OnShow(Building building)
@@ -67,6 +70,7 @@ namespace NovemberProject.Buildings.UI
                 ShowTaxController(building);
                 ShowMoneyPrinter(building);
                 ShowMineWorkers(building);
+                ShowIncomingAttack(building);
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
@@ -83,6 +87,7 @@ namespace NovemberProject.Buildings.UI
             _taxControlPanel.Hide();
             _moneyPrinterPanel.Hide();
             _mineWorkerManagementPanel.Hide();
+            _incomingAttack.Hide();
         }
 
         private void ShowBuyUnit(Building building)
@@ -157,6 +162,18 @@ namespace NovemberProject.Buildings.UI
             }
         }
 
+        private void ShowIncomingAttack(Building building)
+        {
+            if (building is IIncomingAttack incomingAttack)
+            {
+                _incomingAttack.Show(incomingAttack);
+            }
+            else
+            {
+                _incomingAttack.Hide();
+            }
+        }
+
         private void ShowWorkerManagement(Building building)
         {
             if (building is IExpeditionSender expeditionSender)
@@ -187,6 +204,7 @@ namespace NovemberProject.Buildings.UI
             _taxControlPanel.Hide();
             _moneyPrinterPanel.Hide();
             _mineWorkerManagementPanel.Hide();
+            _incomingAttack.Hide();
             _buildingConstructionPanel.Show(constructableBuilding);
         }
     }

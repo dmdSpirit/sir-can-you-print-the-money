@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
 using NovemberProject.System;
@@ -17,33 +18,25 @@ namespace NovemberProject.GameStates.UI
         private TMP_Text _explorersCount = null!;
 
         [SerializeField]
-        private TMP_Text _rewardsCount = null!;
+        private TMP_Text? _rewardsCount;
 
         [SerializeField]
         private Button _closeButton = null!;
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            _closeButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
-                .Subscribe(OnCloseClicked);
-        }
+        public IObservable<Unit> OnClose => _closeButton.OnClickAsObservable();
 
         protected override void OnShow(ExpeditionResult expeditionResult)
         {
             _expeditionResult = expeditionResult;
             _explorersCount.text = expeditionResult.Explorers.ToString();
-            _rewardsCount.text = expeditionResult.Rewards.ToString();
+            if (_rewardsCount != null)
+            {
+                _rewardsCount.text = expeditionResult.Rewards.ToString();
+            }
         }
 
         protected override void OnHide()
         {
-        }
-
-        private void OnCloseClicked(Unit _)
-        {
-            Game.Instance.GameStateMachine.ExpeditionFinishedExit();
         }
     }
 }
