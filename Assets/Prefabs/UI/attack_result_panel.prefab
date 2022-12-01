@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackersCount: {fileID: 2038462466113322615}
-  _defendersCount: {fileID: 8580826773223893156}
+  _defendersCount: {fileID: 0}
   _closeButton: {fileID: 6423219238708457364}
 --- !u!1 &2056240708064800118
 GameObject:

@@ -33,6 +33,11 @@ namespace NovemberProject.Rounds.UI
 
         protected override void OnShow(RoundResult roundResult)
         {
+            if (roundResult.NothingHappened())
+            {
+                Game.Instance.GameStateMachine.StartRound();
+                return;
+            }
             _title.text = _titleText.Replace("[value]", Game.Instance.RoundSystem.Round.Value.ToString());
             _roundResultPanel.Show(roundResult);
         }

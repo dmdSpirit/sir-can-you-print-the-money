@@ -15,8 +15,9 @@ namespace NovemberProject.GameStates.UI
 
         [SerializeField]
         private TMP_Text _attackersCount = null!;
+
         [SerializeField]
-        private TMP_Text _defendersCount = null!;
+        private TMP_Text? _defendersCount;
 
         [SerializeField]
         private Button _closeButton = null!;
@@ -26,7 +27,10 @@ namespace NovemberProject.GameStates.UI
         protected override void OnShow(AttackData attackData)
         {
             _attackersCount.text = attackData.Attackers.ToString();
-            _defendersCount.text = attackData.Defenders.ToString();
+            if (_defendersCount != null)
+            {
+                _defendersCount.text = attackData.Defenders.ToString();
+            }
         }
 
         protected override void OnHide()

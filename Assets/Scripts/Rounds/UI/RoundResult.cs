@@ -13,6 +13,15 @@ namespace NovemberProject.Rounds.UI
             FolkExecuted = 0;
             ArmyStarved = 0;
             FolkStarved = 0;
+            ArmyDeserted = 0;
+        }
+
+        public bool NothingHappened()
+        {
+            return FolkExecuted == 0 &&
+                   ArmyStarved == 0 &&
+                   FolkStarved == 0 &&
+                   ArmyDeserted == 0;
         }
     }
 }
