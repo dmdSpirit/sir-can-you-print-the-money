@@ -1,4 +1,5 @@
 #nullable enable
+using DG.Tweening;
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
@@ -51,6 +52,12 @@ namespace NovemberProject.CameraSystem
         public void TurnCameraOn()
         {
             _mainCamera.enabled = true;
+        }
+
+        public Tween MoveTo(Transform cameraPosition,float cameraMoveDuration, float cameraZoom)
+        {
+            _cameraZoom.TweenZoom(cameraZoom, cameraMoveDuration);
+            return transform.DOMove(cameraPosition.position, cameraMoveDuration);
         }
     }
 }

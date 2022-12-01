@@ -14,6 +14,8 @@ namespace NovemberProject.Buildings
     {
         private readonly ReactiveProperty<ConstructableState> _constructableState = new();
         private Timer? _constructionTimer;
+        
+        private Vector3 _initialPosition;
 
         [SerializeField]
         private int _constructionCost;
@@ -43,12 +45,21 @@ namespace NovemberProject.Buildings
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            _initialPosition = transform.position;
             Game.Instance.MessageBroker.Receive<NewGameMessage>()
                 .TakeUntilDisable(this)
                 .Subscribe(OnNewGame);
             Game.Instance.StoneController.Stone
                 .TakeUntilDisable(this)
                 .Subscribe(OnStoneCountChanged);
+            Game.Instance.MessageBroker.Receive<NewGameMessage>()
+                .TakeUntilDisable(this)
+                .Subscribe(ResetPosition);
+        }
+
+        private void ResetPosition(NewGameMessage _)
+        {
+            transform.position = _initialPosition;
         }
 
         public void StartConstruction()
