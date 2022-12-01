@@ -29,6 +29,7 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private ExpeditionTimerPanel _expeditionTimerPanel = null!;
 
+
         [SerializeField]
         private TMP_Text _winChance = null!;
 
@@ -120,7 +121,8 @@ namespace NovemberProject.Buildings.UI
             if (isExpeditionActive)
             {
                 Assert.IsTrue(_expeditionSender.ExpeditionTimer != null);
-                _expeditionTimerPanel.Show(_expeditionSender.ExpeditionTimer);
+                _expeditionTimerPanel.Show(_expeditionSender);
+                
                 return;
             }
 
