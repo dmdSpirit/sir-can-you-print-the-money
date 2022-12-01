@@ -167,15 +167,17 @@ namespace NovemberProject.CoreGameplay
             ReduceArmy(numberToDesert);
         }
 
-        public void KillGuards()
+        public void KillGuards(int maxKilled)
         {
             if (_guardsCount.Value == 0)
             {
                 return;
             }
 
-            _armyCount.Value -= _guardsCount.Value;
-            _guardsCount.Value = 0;
+            int ableToKill = Mathf.Min(maxKilled, _guardsCount.Value);
+
+            _armyCount.Value -= ableToKill;
+            _guardsCount.Value -= ableToKill;
         }
     }
 }
