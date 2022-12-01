@@ -25,10 +25,10 @@ namespace NovemberProject.Buildings
         private float _constructionDuration;
 
         [SerializeField]
-        private TMP_Text _panelText=null!;
+        private TMP_Text _panelText = null!;
 
         [SerializeField]
-        private Image _panelImage=null!;
+        private Image _panelImage = null!;
 
         [SerializeField]
         private GameObject _panel = null!;
@@ -67,7 +67,6 @@ namespace NovemberProject.Buildings
             _constructableState.Value = Buildings.ConstructableState.NotConstructed;
             _panel.SetActive(true);
             _panelImage.sprite = _stoneResourceImage;
-            
         }
 
         private void OnConstructionFinished(Timer _)
@@ -76,6 +75,7 @@ namespace NovemberProject.Buildings
             _constructableState.Value = Buildings.ConstructableState.Constructed;
             _constructionTimer = null;
             _panel.SetActive(false);
+            Game.Instance.GameStateMachine.Victory();
         }
 
         private void OnStoneCountChanged(int stone)
