@@ -349,7 +349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 878, y: 518}
+  m_AnchoredPosition: {x: 631, y: 518}
   m_SizeDelta: {x: 177, y: 56}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &7212727130292229343
@@ -1782,6 +1782,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6393288298931917076}
     m_Modifications:
+    - target: {fileID: 3420542207453376881, guid: e2c162c52ba7d5f4687258cfc37ef128, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000022888184
+      objectReference: {fileID: 0}
     - target: {fileID: 6179014759966651038, guid: e2c162c52ba7d5f4687258cfc37ef128, type: 3}
       propertyPath: m_Name
       value: notification_panel
@@ -1820,7 +1824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6725374163088046913, guid: e2c162c52ba7d5f4687258cfc37ef128, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 313.6102
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6725374163088046913, guid: e2c162c52ba7d5f4687258cfc37ef128, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1852,11 +1856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6725374163088046913, guid: e2c162c52ba7d5f4687258cfc37ef128, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6725374163088046913, guid: e2c162c52ba7d5f4687258cfc37ef128, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -324
+      value: -264
       objectReference: {fileID: 0}
     - target: {fileID: 6725374163088046913, guid: e2c162c52ba7d5f4687258cfc37ef128, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2996,7 +3000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1259994256688059364, guid: 54166636c81b5b04182d52ae5a78d022, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 563
+      value: 880.00006
       objectReference: {fileID: 0}
     - target: {fileID: 1259994256688059364, guid: 54166636c81b5b04182d52ae5a78d022, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -363,9 +363,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4340420cb42f40d5a3e8592cc15cea28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Arena
+  _title: Spaceship
   _description: Invent and build it to win the game!
-  _image: {fileID: 21300000, guid: 76746ec097296f1479ea0f3af028be13, type: 3}
+  _image: {fileID: 21300000, guid: 6ca6c5c1263ddd34d930c5d2952dab0f, type: 3}
   _selectionBorder: {fileID: 4736668533541048098}
   _constructionCost: 20
   _stoneResourceImage: {fileID: 2016613285, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
