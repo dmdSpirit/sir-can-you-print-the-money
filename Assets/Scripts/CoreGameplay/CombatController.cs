@@ -57,7 +57,7 @@ namespace NovemberProject.CoreGameplay
 
         public void InitializeGameData()
         {
-            _attackIndex = -1;
+            _attackIndex = 0;
             _attackTimer?.Cancel();
             _isActive.Value = false;
         }
@@ -75,7 +75,6 @@ namespace NovemberProject.CoreGameplay
 
         public void PlanNextAttack()
         {
-            _attackIndex++;
             _attackTimer = Game.Instance.TimeSystem.CreateTimer(_attackDuration, OnAttack);
             _attackTimer.Start();
             _onNewAttack.OnNext(Unit.Default);
@@ -99,6 +98,12 @@ namespace NovemberProject.CoreGameplay
                     attackStatus = AttackStatus.FolkKilled;
                     Game.Instance.FolkManager.KillFolk(1);
                 }
+
+                _attackIndex = 0;
+            }
+            else
+            {
+                _attackIndex++;
             }
 
             Game.Instance.GameStateMachine.ShowAttackResult(new AttackData(defenders, attackers, attackStatus));

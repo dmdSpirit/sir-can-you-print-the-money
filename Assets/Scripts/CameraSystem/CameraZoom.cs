@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using DG.Tweening;
 using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ namespace NovemberProject.CameraSystem
         private float _keysZoomModifier = .02f;
 
         public float KeysZoomModifier => _keysZoomModifier;
+        public float Zoom => _zoom;
 
         private void LateUpdate()
         {
@@ -80,6 +82,17 @@ namespace NovemberProject.CameraSystem
             var cameraRotation = new Vector3(Mathf.Lerp(60, 0, _zoom), 0, 0);
             _camera.transform.localPosition = cameraPosition;
             _camera.transform.localRotation = Quaternion.Euler(cameraRotation);
+        }
+
+        public void TweenZoom(float targetZoom, float duration)
+        {
+            targetZoom = Mathf.Clamp(targetZoom, 0, 1);
+            float cameraHeight = Mathf.Lerp(_maxHeight, _minHeight, targetZoom);
+            float cameraDistance = Mathf.Lerp(-_maxDistance, 0, targetZoom);
+            var cameraPosition = new Vector3(0, cameraHeight, cameraDistance);
+            var cameraRotation = new Vector3(Mathf.Lerp(60, 0, targetZoom), 0, 0);
+            _camera.transform.DOLocalMove(cameraPosition, duration);
+            _camera.transform.DOLocalRotate(cameraRotation, duration);
         }
     }
 }
