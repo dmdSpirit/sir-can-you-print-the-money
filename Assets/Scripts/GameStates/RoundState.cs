@@ -23,6 +23,7 @@ namespace NovemberProject.GameStates
             Game.Instance.BuildingSelector.Unselect();
             Game.Instance.UIManager.LockTimeControls();
             Game.Instance.UIManager.HideRoundTimer();
+            Game.Instance.BuildingNameHover.HidePanel();
         }
     }
 }
