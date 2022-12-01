@@ -188,7 +188,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,6 +196,48 @@ TextureImporter:
       bones: []
       spriteID: d7584258123c0514fa5105d3cd037502
       internalID: -2058257001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: check
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 1858
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d847e0351afc71c4e84cdbe0cc18dbc6
+      internalID: -860844958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arrow up
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 1859
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75a7082dd2392bc4097755145aa72590
+      internalID: 919436451
       vertices: []
       indices: 
       edges: []
@@ -222,6 +264,7 @@ TextureImporter:
       sheet_black2x_3: -163638999
       sheet_black2x_46: -903738843
       sheet_black2x_7: 752640890
+      check: -860844958
       sheet_black2x_28: -1045465537
       sheet_black2x_16: 1757563359
       sheet_black2x_37: -1363754632
@@ -267,6 +310,7 @@ TextureImporter:
       sheet_black2x_14: 172753185
       sheet_black2x_90: -1170671216
       sheet_black2x_35: -1484169134
+      arrow up: 919436451
       sheet_black2x_30: 1388102665
       sheet_black2x_1: -1552739101
       sheet_black2x_10: -218161728

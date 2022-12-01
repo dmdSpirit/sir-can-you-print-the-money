@@ -524,7 +524,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -532,6 +532,69 @@ TextureImporter:
       bones: []
       spriteID: 73092a644ee39a348bc6c8a96ce6fb6b
       internalID: -474872999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arrow up
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 1202
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a97806deb2703e8479bb821abe62ff8a
+      internalID: -1826791967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: check yes
+      rect:
+        serializedVersion: 2
+        x: 2118
+        y: 3
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58937620f5300104bb9876dc9aa2d59c
+      internalID: 1588863792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: check no
+      rect:
+        serializedVersion: 2
+        x: 1990
+        y: 3
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a4e8cacbf7421d4c94d462d22f69fe8
+      internalID: -938882610
       vertices: []
       indices: 
       edges: []
@@ -552,10 +615,13 @@ TextureImporter:
       sword: -370356706
       human: -718504556
       coins: 1166264754
+      arrow up: -1826791967
       money: 1542654287
       crown: 1365771222
       food: -700532128
       chess: 812256196
+      check no: -938882610
+      check yes: 1588863792
       income: -463464534
       castle: 1292768485
       lock: -477202142

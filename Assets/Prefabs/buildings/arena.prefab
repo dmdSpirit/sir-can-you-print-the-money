@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
-      value: govt_arena
+      value: arena
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_RootOrder
@@ -364,9 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Arena
-  _description: It takes 2 soldiers to fight on the arena. Folks pay 10 coins per
-    battle. 4 coins goes to govermnent fund, 6 coins goes to army fund. Each fight
-    lasts for 4 seconds.
+  _description: Invent and build it to win the game!
   _image: {fileID: 21300000, guid: 76746ec097296f1479ea0f3af028be13, type: 3}
   _selectionBorder: {fileID: 4736668533541048098}
   _constructionCost: 20

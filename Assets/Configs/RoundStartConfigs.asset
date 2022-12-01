@@ -38,5 +38,5 @@ MonoBehaviour:
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   _defaultStartConfig:
     Title: Astrologers proclaim...
-    Description: Week of long commitments. Thank you for playing our game!
+    Description: Your goal is to invent and build the arena. Let's go!
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
