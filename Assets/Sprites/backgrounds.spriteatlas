@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: backgrounds
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: cb4a0c6bc1857b84dbe8597d0731f199, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 523f2220874b15c469d38d39d6a7071b, type: 3}
+  - {fileID: 21300000, guid: eb45f1c08f6b60d418480d84d061b6ef, type: 3}
+  - {fileID: 21300000, guid: 39525bf053fe6164581d9f2c0fac23c7, type: 3}
+  - {fileID: 21300000, guid: 757ac8b1397456d40bc6c151e79a2f4f, type: 3}
+  - {fileID: 21300000, guid: d8664403237b292449ba455f59524cfa, type: 3}
+  - {fileID: 21300000, guid: 5ac3c523246566445ad4aefcc2aee5a2, type: 3}
+  - {fileID: 21300000, guid: 205f5475812e9624b870892d04e17315, type: 3}
+  - {fileID: 21300000, guid: 56fa30e568650414a928cf22dc872e92, type: 3}
+  - {fileID: 21300000, guid: fabb411eb67005a4695cac261f330f68, type: 3}
+  - {fileID: 21300000, guid: 148145bf91cb99448a2e4347ce471a7c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - credits
+  - main menu
+  - paper from unsplash
+  - tutorial step 3
+  - new game 3
+  - tutorial step 1
+  - tutorial step 2
+  - tech tree
+  - jolly dancing
+  - medieval cat
+  m_RenderDataMap: {}
+  m_Tag: backgrounds
+  m_IsVariant: 0

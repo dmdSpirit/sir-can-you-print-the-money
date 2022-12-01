@@ -7,6 +7,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_Size.x
+      value: 0.92607856
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_Size.y
+      value: 0.41098678
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_Size.z
+      value: 0.789384
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0005506277
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_Center.y
+      value: 0.38903832
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0011011958
+      objectReference: {fileID: 0}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

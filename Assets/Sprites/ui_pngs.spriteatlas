@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ui_pngs
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 9d0ef6e6ed8cca244a9fa941c4dad7fe, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f5cf0470860801142bd0a0a0860975a0, type: 3}
+  - {fileID: 21300000, guid: 2d29ad215adcc7b448ac4bfa7ba399fb, type: 3}
+  - {fileID: 21300000, guid: 725f68d1e3ec950438b6bc97eff18f38, type: 3}
+  - {fileID: 21300000, guid: c5352f2234751cd469abdd480468ffd0, type: 3}
+  - {fileID: 21300000, guid: 57821272da28e8a4182fad0153553be8, type: 3}
+  - {fileID: 21300000, guid: 29f215f29b3211a4095297a74a1ee103, type: 3}
+  - {fileID: 21300000, guid: ff8dec33f6f254241852384865a4cc7a, type: 3}
+  - {fileID: 21300000, guid: e0dee293e44507a41b01cd92e05042ad, type: 3}
+  - {fileID: 21300000, guid: ab2e6204eddb1be4ba65d3f7472404af, type: 3}
+  - {fileID: 21300000, guid: d1e46f64a01c419439a41c9e5c5b2f12, type: 3}
+  - {fileID: 21300000, guid: b577ebd7f48505c49a34d54242d7465a, type: 3}
+  - {fileID: 21300000, guid: 7766aed7de2bf6441ba93f3e44e87ad9, type: 3}
+  - {fileID: 21300000, guid: 01816c598eb0ef346ac959576823c621, type: 3}
+  - {fileID: 21300000, guid: efe132c9793bb864bb9eaea5f2de806c, type: 3}
+  - {fileID: 21300000, guid: c89228ab82898c54893c26f1324d5929, type: 3}
+  - {fileID: 21300000, guid: 380c8bfbb81b40a4c90b9850ab58b88b, type: 3}
+  - {fileID: 21300000, guid: fd33f72c912dc244a8df90fb6ee82824, type: 3}
+  - {fileID: 21300000, guid: 00386e9c647f4d1409bfce61388df285, type: 3}
+  - {fileID: 21300000, guid: 057730bc2fdaf99489dbe09115a1d28b, type: 3}
+  - {fileID: 21300000, guid: 0a678e2da202b0942915646437a997a6, type: 3}
+  - {fileID: 21300000, guid: 14f5c10ef16306544afe9422ec7c98d7, type: 3}
+  - {fileID: 21300000, guid: bbbf6dbf0de36bc4293d9a2539989f51, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - panelInset_beigeLight
+  - arrowSilver_left
+  - buttonSquare_brown
+  - buttonSquare_grey
+  - panelInset_beige
+  - buttonSquare_brown_pressed
+  - buttonSquare_grey_pressed
+  - panel_blue
+  - panelInset_brown
+  - buttonSquare_beige_pressed
+  - panelInset_blue
+  - panel_brown
+  - buttonSquare_blue
+  - panel_beige
+  - buttonLong_grey
+  - buttonLong_beige
+  - buttonSquare_beige
+  - panel_beigeLight
+  - arrowBlue_left
+  - buttonLong_brown
+  - buttonSquare_blue_pressed
+  - arrowBeige_left
+  m_RenderDataMap: {}
+  m_Tag: ui_pngs
+  m_IsVariant: 0

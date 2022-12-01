@@ -32,7 +32,7 @@ namespace NovemberProject.Buildings
             _panel.position = Input.mousePosition + _offset;
             if (_building == null || _building != building)
             {
-                _text.text = building.gameObject.name;
+                _text.text = building.Title;
                 _building = building;
             }
         }
