@@ -517,9 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38977d840bd42f1b707f158b703b12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Army food
-  _description: Storage of army food. They buy it from folks. Once a week each knight
-    has to eat 1 food or they'll starve.
+  _title: Food of knights
+  _description: Buy some, eat some, store some.
   _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
   _selectionBorder: {fileID: 1035655372318391332}
   _foodText: {fileID: 3272818714190228769}

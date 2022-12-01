@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5788ccbb399472bb4c585e7f8ffa969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Army money
-  _description: Earned by fighting slimes all day.
+  _title: Knights money
+  _description: Earned by fighting slimes all day. Use it to buy food.
   _image: {fileID: 21300000, guid: 7890cf833bc863c428347fcc8776d2dd, type: 3}
   _selectionBorder: {fileID: 7230332426216683035}
   _moneyText: {fileID: 5144040263797057310}

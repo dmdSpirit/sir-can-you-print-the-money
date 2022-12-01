@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeLeft: {fileID: 4185931125185203933}
+  _explorersCountText: {fileID: 0}
 --- !u!1 &3305829498504443580
 GameObject:
   m_ObjectHideFlags: 0
