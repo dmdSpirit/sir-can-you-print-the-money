@@ -1,6 +1,9 @@
 #nullable enable
 using DG.Tweening;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
+using NovemberProject.System.Messages;
+using UniRx;
 using UnityEngine;
 using NotImplementedException = System.NotImplementedException;
 
@@ -10,6 +13,7 @@ namespace NovemberProject.CameraSystem
     [RequireComponent(typeof(CameraZoom))]
     public sealed class CameraController : InitializableBehaviour
     {
+        private Vector3 _initialPosition;
         private CameraMovement _cameraMovement = null!;
         private CameraZoom _cameraZoom = null!;
 
@@ -33,6 +37,15 @@ namespace NovemberProject.CameraSystem
         {
             base.OnInitialized();
             _cameraZoom.SetCamera(_mainCamera);
+            _initialPosition = transform.position;
+            Game.Instance.MessageBroker.Receive<NewGameMessage>()
+                .TakeUntilDisable(this)
+                .Subscribe(ResetPosition);
+        }
+
+        private void ResetPosition(NewGameMessage _)
+        {
+            transform.position = _initialPosition;
         }
 
         public void MoveCamera(Vector2 direction) => _cameraMovement.MoveCamera(direction);
