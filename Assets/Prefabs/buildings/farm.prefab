@@ -463,7 +463,7 @@ MonoBehaviour:
   _selectionBorder: {fileID: 2887280356395360673}
   _numberOfWorkersText: {fileID: 803239951602069668}
   _productionTime: 17
-  _productionPerFolk: 1
+  _productionPerFolk: 2
   _farmerImage: {fileID: -718504556, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _farmerTitle: Farmers
 --- !u!4 &1463769438726629991 stripped

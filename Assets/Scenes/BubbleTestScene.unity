@@ -467,9 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada54ba3f9e04789a6bf46a6c31ba86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingGovernmentMoney: 40
-  _startingArmyMoney: 10
-  _startingFolkMoney: 10
+  _startingGovernmentMoney: 100
+  _startingArmyMoney: 20
+  _startingFolkMoney: 20
 --- !u!4 &32209916
 Transform:
   m_ObjectHideFlags: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f978e992288d46b88b748365cf54c671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingArmyFood: 5
+  _startingArmyFood: 15
   _startingFolkFood: 13
 --- !u!114 &32209918
 MonoBehaviour:
@@ -3729,7 +3729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4d9fbfac5d442ea6231c2f6a597058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _expeditionDuration: 20
+  _expeditionDuration: 25
   _expeditionDatas:
   - Reward: 1
     Defenders: 1
@@ -10082,38 +10082,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1094725333}
     m_Modifications:
-    - target: {fileID: 314759557661021830, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 314759557661021830, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 867144082887622346, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 867144082887622346, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846569416525580682, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846569416525580682, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 3733913176229274567, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3733913176229274567, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 4744559396415897465, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -10162,14 +10130,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: army_expedition
       objectReference: {fileID: 0}
-    - target: {fileID: 5898137547915808058, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5898137547915808058, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 6822385348954226266, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -10213,22 +10173,6 @@ PrefabInstance:
     - target: {fileID: 6822385350810756536, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7155490727473579133, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7155490727473579133, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838457711183993795, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838457711183993795, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b2d7c6467c66f24eb30dc90decf25ff, type: 3}
@@ -18535,7 +18479,7 @@ MonoBehaviour:
   _startingFarmWorkers: 1
   _startingMarketWorkers: 1
   _startingMineWorkers: 0
-  _maxMarketWorkers: 3
+  _maxMarketWorkers: 5
 --- !u!4 &1985125198
 Transform:
   m_ObjectHideFlags: 0
@@ -18575,8 +18519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1e0eabf8a3424b9cae6135d6f2c59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackersCount: 01000000010000000200000002000000030000000300000004000000040000000500000005000000060000000600000007000000070000000800000008000000
-  _attackDuration: 26
+  _attackersCount: 01000000010000000100000002000000020000000200000003000000030000000400000004000000050000000500000006000000060000000700000007000000
+  _attackDuration: 47
   _attacksFromWeek: 2
 --- !u!1001 &1987735403
 PrefabInstance:
