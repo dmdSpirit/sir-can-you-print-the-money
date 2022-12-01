@@ -287,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
-      value: merchant
+      value: folk_merchant
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_RootOrder
@@ -295,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.58
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.y
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.335
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalRotation.w
@@ -373,7 +373,7 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 2c1c3a87d1971be4a915b7400683c9f4, type: 3}
   _selectionBorder: {fileID: 3231119466756911826}
   _workerText: {fileID: 1144827295470003159}
-  _tradeDuration: 2
+  _tradeDuration: 8
   _foodCostPerUnit: 5
   _foodChangedPerTrade: 1
   _workersTitle: Merchants

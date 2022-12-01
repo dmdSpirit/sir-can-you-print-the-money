@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00abef4ec04e41dcb1a242251c3bb06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roundDuration: 60
+  _roundDuration: 50
 --- !u!82 &2243828583067338671
 AudioSource:
   m_ObjectHideFlags: 0

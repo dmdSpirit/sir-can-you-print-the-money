@@ -467,9 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada54ba3f9e04789a6bf46a6c31ba86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingGovernmentMoney: 100
-  _startingArmyMoney: 50
-  _startingFolkMoney: 50
+  _startingGovernmentMoney: 40
+  _startingArmyMoney: 10
+  _startingFolkMoney: 10
 --- !u!4 &32209916
 Transform:
   m_ObjectHideFlags: 0
@@ -497,8 +497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f978e992288d46b88b748365cf54c671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingArmyFood: 20
-  _startingFolkFood: 20
+  _startingArmyFood: 5
+  _startingFolkFood: 13
 --- !u!114 &32209918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3732,14 +3732,22 @@ MonoBehaviour:
   _expeditionDatas:
   - Reward: 1
     Defenders: 1
-  - Reward: 1
+  - Reward: 2
     Defenders: 2
-  - Reward: 1
-    Defenders: 2
-  - Reward: 1
-    Defenders: 2
-  - Reward: 1
-    Defenders: 2
+  - Reward: 3
+    Defenders: 3
+  - Reward: 4
+    Defenders: 4
+  - Reward: 5
+    Defenders: 5
+  - Reward: 6
+    Defenders: 6
+  - Reward: 7
+    Defenders: 7
+  - Reward: 8
+    Defenders: 8
+  - Reward: 9
+    Defenders: 9
 --- !u!4 &411097142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 007310bdc51f88b46b282a13bc8e9ecd, type: 3}
@@ -3900,14 +3908,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1094725333}
     m_Modifications:
-    - target: {fileID: 344464699056504210, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 344464699056504210, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 803239949821094724, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3999,58 +3999,6 @@ PrefabInstance:
     - target: {fileID: 1463769438726629991, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907716346580206258, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907716346580206258, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 3849812384173869525, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3849812384173869525, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4020663339784651270, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5720239062205557392, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5720239062205557392, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6315664534122284157, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6315664534122284157, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac7efc1f4922a31429e288d5a2579807, type: 3}
@@ -6444,46 +6392,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1094725333}
     m_Modifications:
-    - target: {fileID: 1052475094878556574, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1052475094878556574, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2354054280536171364, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2354054280536171364, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 3466191887617702404, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3466191887617702404, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4334913576754921607, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4334913576754921607, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107386841395320110, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107386841395320110, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 5576681593138059762, guid: fa9474295074d9c47acdf4a078014620, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6532,10 +6440,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: folk_mine
       objectReference: {fileID: 0}
-    - target: {fileID: 5913699833696196802, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5913699833776898867, guid: fa9474295074d9c47acdf4a078014620, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6579,30 +6483,6 @@ PrefabInstance:
     - target: {fileID: 5913699834544953553, guid: fa9474295074d9c47acdf4a078014620, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6001599208105042542, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6001599208105042542, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 7822970377605168995, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7822970377605168995, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 8354972105302050046, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8354972105302050046, guid: fa9474295074d9c47acdf4a078014620, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa9474295074d9c47acdf4a078014620, type: 3}
@@ -16003,10 +15883,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
-    - target: {fileID: 2243828583067338671, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: bb95ea6243fedab448f3dc6b651f78b6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
 --- !u!1001 &1648232669
@@ -18623,10 +18499,10 @@ MonoBehaviour:
   _foodPerPerson: 1
   _newFolkForFoodCost: 5
   _newArmyForFoodCost: 5
-  _folkEatTime: 48
-  _folkPayTime: 36
-  _armyEatTime: 24
-  _armyPayTime: 12
+  _folkEatTime: 40
+  _folkPayTime: 30
+  _armyEatTime: 20
+  _armyPayTime: 10
 --- !u!114 &1985125196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18658,7 +18534,7 @@ MonoBehaviour:
   _startingFarmWorkers: 1
   _startingMarketWorkers: 1
   _startingMineWorkers: 0
-  _maxMarketWorkers: 1
+  _maxMarketWorkers: 3
 --- !u!4 &1985125198
 Transform:
   m_ObjectHideFlags: 0
@@ -18698,8 +18574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1e0eabf8a3424b9cae6135d6f2c59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackersCount: 01000000020000000300000004000000050000000600000007000000070000000700000007000000
-  _attackDuration: 40
+  _attackersCount: 01000000010000000200000002000000030000000300000004000000040000000500000005000000060000000600000007000000070000000800000008000000
+  _attackDuration: 26
   _attacksFromWeek: 2
 --- !u!1001 &1987735403
 PrefabInstance:

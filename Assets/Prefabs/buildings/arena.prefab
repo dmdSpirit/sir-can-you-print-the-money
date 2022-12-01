@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
-      value: arena
+      value: govt_arena
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_RootOrder
@@ -385,7 +385,7 @@ MonoBehaviour:
   _selectionBorder: {fileID: 4736668533541048098}
   _constructionCost: 20
   _stoneResourceImage: {fileID: 2016613285, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
-  _constructionDuration: 40
+  _constructionDuration: 30
   _panelText: {fileID: 7099932209711160871}
   _panelImage: {fileID: 7099932209555539397}
   _panel: {fileID: 7099932209590601174}

@@ -127,9 +127,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7890534246471761295, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7890534246471761295, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -2331986720359856962, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2331986720359856962, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
       propertyPath: m_Name
       value: building_farm
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425885007998142742, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425885007998142742, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144516082554563155, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144516082554563155, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 413b8976da22dc74695f65ba28969df7, type: 3}
@@ -336,7 +376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
-      value: farm
+      value: folk_farm
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_RootOrder
@@ -344,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.y
@@ -352,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalRotation.w
@@ -422,7 +462,7 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 8030c79a6f42fb7409567fd8b4970993, type: 3}
   _selectionBorder: {fileID: 2887280356395360673}
   _numberOfWorkersText: {fileID: 803239951602069668}
-  _productionTime: 8
+  _productionTime: 17
   _productionPerFolk: 1
   _farmerImage: {fileID: -718504556, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _farmerTitle: Farmers
