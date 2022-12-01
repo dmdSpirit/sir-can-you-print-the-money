@@ -6,6 +6,7 @@ namespace NovemberProject.Buildings
 {
     public interface IExpeditionSender : IWorkerManipulator
     {
+        public IReadOnlyReactiveProperty<bool> IsActive { get; }
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive { get; }
         public IReadOnlyReactiveProperty<bool> CanBeSentToExpedition { get; }
         public IReadOnlyTimer? ExpeditionTimer { get; }

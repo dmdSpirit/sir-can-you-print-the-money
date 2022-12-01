@@ -1,13 +1,18 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System;
 using TMPro;
+using UniRx;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 namespace NovemberProject.Buildings.UI
 {
     public sealed class BuildingInfoPanel : UIElement<Building>
     {
+        private readonly CompositeDisposable _subs = new();
+
         [SerializeField]
         private TMP_Text _title = null!;
 
@@ -51,6 +56,7 @@ namespace NovemberProject.Buildings.UI
 
         protected override void OnShow(Building building)
         {
+            _subs.Clear();
             Building = building;
             _title.text = Building.Title;
             _description.text = Building.Description;
@@ -78,6 +84,7 @@ namespace NovemberProject.Buildings.UI
 
         protected override void OnHide()
         {
+            _subs.Clear();
             _workerManagementPanel.Hide();
             _resourceStoragePanel.Hide();
             _buyUnitPanel.Hide();
@@ -166,7 +173,13 @@ namespace NovemberProject.Buildings.UI
         {
             if (building is IIncomingAttack incomingAttack)
             {
-                _incomingAttack.Show(incomingAttack);
+                if (Game.Instance.CombatController.IsActive.Value)
+                {
+                    _incomingAttack.Show(incomingAttack);
+                    return;
+                }
+
+                Game.Instance.CombatController.IsActive.Subscribe(UpdateIncomingAttack).AddTo(_subs);
             }
             else
             {
@@ -174,12 +187,40 @@ namespace NovemberProject.Buildings.UI
             }
         }
 
+        private void UpdateIncomingAttack(bool isActive)
+        {
+            if (!isActive)
+            {
+                _incomingAttack.Hide();
+                return;
+            }
+
+            if (_incomingAttack.IsShown)
+            {
+                return;
+            }
+
+            Assert.IsTrue(Building is IIncomingAttack);
+            var incomingAttack = (IIncomingAttack)Building;
+            _incomingAttack.Show(incomingAttack);
+            
+        }
+
         private void ShowWorkerManagement(Building building)
         {
             if (building is IExpeditionSender expeditionSender)
             {
-                _expeditionSenderPanel.Show(expeditionSender);
                 _workerManagementPanel.Hide();
+                if (expeditionSender.IsActive.Value)
+                {
+                    _expeditionSenderPanel.Show(expeditionSender);
+                }
+                else
+                {
+                    _expeditionSenderPanel.Hide();
+                    expeditionSender.IsActive.Subscribe(UpdateExpeditionSender).AddTo(_subs);
+                }
+
                 return;
             }
 
@@ -192,6 +233,24 @@ namespace NovemberProject.Buildings.UI
             {
                 _workerManagementPanel.Hide();
             }
+        }
+
+        private void UpdateExpeditionSender(bool isActive)
+        {
+            if (!isActive)
+            {
+                _expeditionSenderPanel.Hide();
+                return;
+            }
+
+            if (_expeditionSenderPanel.IsShown)
+            {
+                return;
+            }
+
+            Assert.IsTrue(Building is IExpeditionSender);
+            var expeditionSender = (IExpeditionSender)Building;
+            _expeditionSenderPanel.Show(expeditionSender);
         }
 
         private void ShowBuildingConstructionPanel(IConstructableBuilding constructableBuilding)
