@@ -411,6 +411,7 @@ MonoBehaviour:
   _numberOfExplorersText: {fileID: 6822385350810756538}
   _expeditionFoodPerPersonCost: 3
   _expeditionMoneyPerPersonCost: 0
+  _activeFromWeek: 3
 --- !u!114 &6822385350810756538 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}

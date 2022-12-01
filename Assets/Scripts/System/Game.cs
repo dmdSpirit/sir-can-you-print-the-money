@@ -47,6 +47,7 @@ namespace NovemberProject.System
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
         public FolkManager FolkManager => CoreGameplay.FolkManager;
         public ArmyManager ArmyManager => CoreGameplay.ArmyManager;
+        public AudioManager AudioManager { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
@@ -99,6 +100,7 @@ namespace NovemberProject.System
             TechController = FindObjectOfType<TechController>();
             Expeditions = FindObjectOfType<Expeditions>();
             CombatController = FindObjectOfType<CombatController>();
+            AudioManager = FindObjectOfType<AudioManager>();
         }
 
         private void Initialize()

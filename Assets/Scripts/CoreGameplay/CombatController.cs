@@ -29,6 +29,7 @@ namespace NovemberProject.CoreGameplay
         };
 
         private readonly Subject<Unit> _onNewAttack = new();
+        private readonly ReactiveProperty<bool> _isActive = new();
 
         private Timer? _attackTimer;
         private int _attackIndex;
@@ -39,14 +40,26 @@ namespace NovemberProject.CoreGameplay
         [SerializeField]
         private float _attackDuration = 40f;
 
+        [SerializeField]
+        private int _attacksFromWeek = 2;
+
         public IReadOnlyTimer? AttackTimer => _attackTimer;
         public IObservable<Unit> OnNewAttack => _onNewAttack;
+        public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            Game.Instance.RoundSystem.Round
+                .TakeUntilDisable(this)
+                .Subscribe(OnRoundChanged);
+        }
 
         public void InitializeGameData()
         {
             _attackIndex = 0;
             _attackTimer?.Cancel();
-            PlanNextAttack();
+            _isActive.Value = false;
         }
 
         public int NextAttackersCount()
@@ -110,6 +123,15 @@ namespace NovemberProject.CoreGameplay
                 return 0;
             }
             return _winProbability[Mathf.Min(defenders, MAX_DEFENDERS), Mathf.Min(attackers, MAX_ATTACKERS)];
+        }
+
+        private void OnRoundChanged(int round)
+        {
+            _isActive.Value = round >= _attacksFromWeek;
+            if (round == _attacksFromWeek)
+            {
+                PlanNextAttack();
+            }
         }
     }
 }

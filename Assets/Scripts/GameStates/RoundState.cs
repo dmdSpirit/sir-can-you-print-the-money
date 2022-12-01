@@ -10,7 +10,10 @@ namespace NovemberProject.GameStates
             Game.Instance.RoundSystem.StartRound();
             Game.Instance.UIManager.ShowRoundTimer();
             Game.Instance.UIManager.UnlockTimeControls();
-            Game.Instance.TimeSystem.RestoreAfterPause();
+            if (Game.Instance.RoundSystem.Round.Value != 1)
+            {
+                Game.Instance.TimeSystem.RestoreAfterPause();
+            }
             Game.Instance.UIManager.UnlockTimeControls();
             Game.Instance.CoreGameplay.StartRound();
         }
