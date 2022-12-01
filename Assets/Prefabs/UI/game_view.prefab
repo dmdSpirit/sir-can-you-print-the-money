@@ -2021,10 +2021,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3469539765143489717, guid: 549bce9374b797c47b41943241820bbd, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3469539765143489717, guid: 549bce9374b797c47b41943241820bbd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -2048,10 +2044,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5224095161141740938, guid: 549bce9374b797c47b41943241820bbd, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f5cf0470860801142bd0a0a0860975a0, type: 3}
     - target: {fileID: 8285451060948529484, guid: 549bce9374b797c47b41943241820bbd, type: 3}
       propertyPath: m_Name
       value: round panel
