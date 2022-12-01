@@ -460,8 +460,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _starvedFolkText: 'Folks starved:'
   _starvedArmyText: 'Knights starved:'
-  _executedFolkText: 'Folks executed:'
-  _armyDesertedText: 'Army deserted:'
+  _executedFolkText: 'Folks disappeared:'
+  _armyDesertedText: 'Knights deserted:'
   _starvedFolk: {fileID: 434807566963907936}
   _starvedArmy: {fileID: 3634168799097535590}
   _executedFolk: {fileID: 7698847418375210926}
