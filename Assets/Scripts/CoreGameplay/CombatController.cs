@@ -57,7 +57,7 @@ namespace NovemberProject.CoreGameplay
 
         public void InitializeGameData()
         {
-            _attackIndex = 0;
+            _attackIndex = -1;
             _attackTimer?.Cancel();
             _isActive.Value = false;
         }
@@ -75,6 +75,7 @@ namespace NovemberProject.CoreGameplay
 
         public void PlanNextAttack()
         {
+            _attackIndex++;
             _attackTimer = Game.Instance.TimeSystem.CreateTimer(_attackDuration, OnAttack);
             _attackTimer.Start();
             _onNewAttack.OnNext(Unit.Default);
@@ -122,6 +123,7 @@ namespace NovemberProject.CoreGameplay
             {
                 return 0;
             }
+
             return _winProbability[Mathf.Min(defenders, MAX_DEFENDERS), Mathf.Min(attackers, MAX_ATTACKERS)];
         }
 
