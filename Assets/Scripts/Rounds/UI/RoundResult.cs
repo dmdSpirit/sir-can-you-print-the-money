@@ -6,6 +6,7 @@ namespace NovemberProject.Rounds.UI
         public int FolkExecuted;
         public int ArmyStarved;
         public int FolkStarved;
+        public int ArmyDeserted;
 
         public void Reset()
         {

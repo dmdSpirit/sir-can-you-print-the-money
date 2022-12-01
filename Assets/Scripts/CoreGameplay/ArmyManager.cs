@@ -39,18 +39,6 @@ namespace NovemberProject.CoreGameplay
             _explorersCount.Value = _startingExplorersCount;
         }
 
-        public void StartRound()
-        {
-            DesertUnpaid();
-            PaySalary();
-        }
-
-        public void EndRound()
-        {
-            KillStarved();
-            EatFood();
-        }
-
         public void BuyArmyForFood()
         {
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
@@ -106,8 +94,9 @@ namespace NovemberProject.CoreGameplay
             }
         }
 
-        private void PaySalary()
+        public void PaySalary()
         {
+            DesertUnpaid();
             int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             int salaryToPay = _salary.Value * armyCount;
             if (salaryToPay == 0)
@@ -119,8 +108,9 @@ namespace NovemberProject.CoreGameplay
             Game.Instance.MoneyController.TransferMoneyFromGovernmentToArmy(salaryToPay);
         }
 
-        private void EatFood()
+        public void EatFood()
         {
+            KillStarved();
             int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int foodToEat = armyCount * coreGameplay.FoodPerPerson;

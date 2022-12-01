@@ -7,16 +7,19 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings.UI
 {
-    public sealed class ExpeditionTimerPanel : UIElement<IReadOnlyTimer>
+    public sealed class ExpeditionTimerPanel : UIElement<IExpeditionSender>
     {
         private IReadOnlyTimer _timer = null!;
 
         [SerializeField]
         private TMP_Text _timeLeft = null!;
+        [SerializeField]
+        private TMP_Text _explorersCountText = null!;
 
-        protected override void OnShow(IReadOnlyTimer timer)
+        protected override void OnShow(IExpeditionSender expeditionSender)
         {
-            _timer = timer;
+            _timer = expeditionSender.ExpeditionTimer;
+            _explorersCountText.text = expeditionSender.WorkerCount.Value.ToString();
         }
 
         protected override void OnHide()
