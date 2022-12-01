@@ -2065,10 +2065,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5181587893108283656, guid: 549bce9374b797c47b41943241820bbd, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.6000061
-      objectReference: {fileID: 0}
     - target: {fileID: 8285451060948529484, guid: 549bce9374b797c47b41943241820bbd, type: 3}
       propertyPath: m_Name
       value: round panel
@@ -2107,7 +2103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8540013683181648444, guid: 549bce9374b797c47b41943241820bbd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 8540013683181648444, guid: 549bce9374b797c47b41943241820bbd, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: other
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: a6f89375e8fecf84c81aeac916652fb4, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -860844958, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
+  - {fileID: -1138297432, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
+  - {fileID: 919436451, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
+  - {fileID: -2058257001, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
+  - {fileID: -1886227456, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
+  - {fileID: 1548976178, guid: 8cd3eda15d8e7f14e92edf267d880354, type: 3}
+  - {fileID: 21300000, guid: 7ffb7178a1d625c478ee209822cea472, type: 3}
+  - {fileID: 21300000, guid: d12894cce0fb78842896b46819bc5958, type: 3}
+  - {fileID: 1166264754, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -1982214555, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 1292768485, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 812256196, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -1060441429, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 386283011, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 1179613732, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 1837668925, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -1483917680, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -1826791967, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 2016613285, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 1542654287, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 1858017014, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -477202142, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -474872999, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -370356706, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -938882610, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 1365771222, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 1588863792, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -918560852, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -718504556, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: -463464534, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
+  - {fileID: 21300000, guid: a009212ddcc1bac4fa188cc8285140ff, type: 3}
+  - {fileID: 21300000, guid: 609616ddb4235304989b1a2ca9c3605f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - check
+  - play
+  - arrow up
+  - close
+  - speed_up
+  - pause
+  - progress_bar_fill_grey
+  - rectangle
+  - coins
+  - defence
+  - castle
+  - chess
+  - iconsDouble_1
+  - iconsDouble_0
+  - iconsDouble_2
+  - death
+  - stone
+  - arrow up
+  - ston
+  - money
+  - plus money
+  - lock
+  - fame
+  - sword
+  - check no
+  - crown
+  - food
+  - check yes
+  - minus money
+  - human
+  - income
+  - circle_with_hole
+  - circle
+  m_RenderDataMap: {}
+  m_Tag: other
+  m_IsVariant: 0
