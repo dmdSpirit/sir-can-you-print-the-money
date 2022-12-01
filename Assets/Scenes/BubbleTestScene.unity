@@ -18664,6 +18664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackersCount: 01000000020000000300000004000000050000000600000007000000070000000700000007000000
   _attackDuration: 40
+  _attacksFromWeek: 2
 --- !u!1001 &1987735403
 PrefabInstance:
   m_ObjectHideFlags: 0
