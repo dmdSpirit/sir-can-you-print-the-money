@@ -18,6 +18,14 @@ MonoBehaviour:
       ankles be merry and dancing.
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   - Title: Astrologers proclaim...
+    Description: Starting from this week, snails will attack you from time to time.
+      Make sure that you have enough guardians to fight them off.
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - Title: Astrologers proclaim...
+    Description: Starting from this week, you can send your knights to faraway expeditions
+      to earn you some trophies.
+    Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - Title: Astrologers proclaim...
     Description: The week of figuring out. You can buy more folks and knights in
       their food storages.
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
@@ -26,17 +34,17 @@ MonoBehaviour:
       folks don\u2019t starve!"
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   - Title: Astrologers proclaim...
-    Description: The week of expeditions. Send your knights to fight the snails and
-      bring back the trophies!
+    Description: Try sending more expeditions. Send your knights to fight the snails
+      and bring back the trophies!
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   - Title: Astrologers proclaim...
     Description: "Did you know that this game has a hard mode? Drink every time you
-      notice a clich\xE9!"
+      see a clich\xE9!"
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   - Title: Astrologers proclaim...
-    Description: The week of curiosity. Check out the tech tree and invent something.
+    Description: Your goal is to invent and build a spaceship. Let's go!
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
   _defaultStartConfig:
     Title: Astrologers proclaim...
-    Description: Your goal is to invent and build the arena. Let's go!
+    Description: Your goal is to invent and build a spaceship. Let's go! (to space)
     Image: {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
