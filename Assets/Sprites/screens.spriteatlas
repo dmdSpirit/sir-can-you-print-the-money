@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: screens
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: fcdcd2b807c45d34ab8d380a3fb9f1ab, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c43e5bb3b14ee594690cf6e8447b81c5, type: 3}
+  - {fileID: 21300000, guid: 36c56e356d530894c9a5eafcebccaee4, type: 3}
+  - {fileID: 21300000, guid: ce0730f55d3808e47b9fcf9ac1002e01, type: 3}
+  - {fileID: 21300000, guid: 3c678996a42f3394ba2e6beb2313b7b3, type: 3}
+  - {fileID: 21300000, guid: c866cc37b552c6d49af7456517b6b9bd, type: 3}
+  - {fileID: 21300000, guid: ea715f47b4f210443a8c0e4f2c88c4cd, type: 3}
+  - {fileID: 21300000, guid: d303b8ac9eef5dd479b07e9a061d33fe, type: 3}
+  - {fileID: 21300000, guid: 7bf9563d2c3c8544bbfc1807b06d4a58, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - im ok
+  - sleeping folks
+  - dead folks
+  - expedition results
+  - wait what
+  - new day
+  - icon
+  - new game
+  m_RenderDataMap: {}
+  m_Tag: screens
+  m_IsVariant: 0
