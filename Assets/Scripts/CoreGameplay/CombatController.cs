@@ -90,7 +90,7 @@ namespace NovemberProject.CoreGameplay
             {
                 if (defenders > 0)
                 {
-                    Game.Instance.ArmyManager.KillGuards();
+                    Game.Instance.ArmyManager.KillGuards(attackers);
                     attackStatus = AttackStatus.GuardsKilled;
                 }
                 else if (Game.Instance.FolkManager.FolkCount.Value > 0)
