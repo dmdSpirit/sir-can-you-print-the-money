@@ -14,8 +14,13 @@ namespace NovemberProject.InputSystem
 
         public override void HandleInput()
         {
-            if (!Input.GetMouseButtonDown(LEFT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
+            if (Game.Instance.UIManager.IsMouseOver.Value)
             {
+                if (Game.Instance.BuildingNameHover.IsShowing)
+                {
+                    Game.Instance.BuildingNameHover.HidePanel();
+                }
+
                 return;
             }
 
@@ -24,7 +29,8 @@ namespace NovemberProject.InputSystem
             RaycastBuildingSelection(cameraController, buildingSelector);
         }
 
-        private static void RaycastBuildingSelection(CameraController cameraController, BuildingSelector buildingSelector)
+        private static void RaycastBuildingSelection(CameraController cameraController,
+            BuildingSelector buildingSelector)
         {
             Ray ray = cameraController.MainCamera.ScreenPointToRay(Input.mousePosition);
             UIManager uiManager = Game.Instance.UIManager;
@@ -35,13 +41,22 @@ namespace NovemberProject.InputSystem
                 var building = hitObject.GetComponent<Building>();
                 if (building != null)
                 {
-                    Game.Instance.BuildingSelector.Select(building);
+                    if (Input.GetMouseButton(LEFT_MOUSE_BUTTON))
+                    {
+                        Game.Instance.BuildingSelector.Select(building);
+                    }
+
+                    Game.Instance.BuildingNameHover.ShowName(building);
                 }
 
                 return;
             }
 
-            Game.Instance.BuildingSelector.Unselect();
+            Game.Instance.BuildingNameHover.HidePanel();
+            if (Input.GetMouseButton(LEFT_MOUSE_BUTTON))
+            {
+                Game.Instance.BuildingSelector.Unselect();
+            }
         }
     }
 }
