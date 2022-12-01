@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Explorers returned:'
+  m_text: 'Knights slacked:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -71.86494, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Expedition was a success
+  m_text: Expedition was a success!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Great!
+  m_text: I will!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
@@ -754,8 +754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1111755, y: -17}
-  m_SizeDelta: {x: 130.59, y: 0}
+  m_AnchoredPosition: {x: 65.330826, y: -17}
+  m_SizeDelta: {x: 110.7123, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &4729783178955455358
 CanvasRenderer:
@@ -785,7 +785,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: NONE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -0.000013292558, y: 0, z: 24.464527, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -890,7 +890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -127.5, y: -534}
+  m_AnchoredPosition: {x: -127.5, y: -552}
   m_SizeDelta: {x: -344.99997, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4770966148682515821
@@ -967,7 +967,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Your glorious soldiers fought some snails, came back and brought some trophies.
+  m_text: They could find something, but here we decided that their success is random,
+    so they found nothing. Better luck next time!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
@@ -1030,7 +1031,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -1.5291281, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1071,8 +1072,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12, y: -408}
-  m_SizeDelta: {x: -114, y: 48}
+  m_AnchoredPosition: {x: -26.528284, y: -408}
+  m_SizeDelta: {x: -143.0565, y: 44.3679}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2407704477194047614
 CanvasRenderer:
@@ -1102,7 +1103,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Your glorious soldiers fought some snails, came back and brought some trophies.
+  m_text: We decide this randomly, and now the luck is on your side. Your knights
+    actually found some trophies. Spend them in a tech tree to invent something!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
   m_sharedMaterial: {fileID: -2779419974898957079, guid: 7b21d21089d06834d9135e31114133c3, type: 2}
@@ -1302,7 +1304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -127.5, y: -486}
+  m_AnchoredPosition: {x: -127.5, y: -517}
   m_SizeDelta: {x: -345, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1445337983267159814
@@ -1501,7 +1503,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 130.59, y: 0}
+  m_SizeDelta: {x: 61.5808, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &831493379211418289
 CanvasRenderer:
@@ -1594,7 +1596,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 27.380165, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1851,7 +1853,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 93.72442, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1923,7 +1925,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Expedition was a fail
+  m_text: Expeditors found nothing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
@@ -2121,7 +2123,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 105.503845, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2163,7 +2165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -127.5, y: -534}
+  m_AnchoredPosition: {x: -127.5, y: -546}
   m_SizeDelta: {x: -344.99997, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5279004623330168003
@@ -2303,7 +2305,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -24.464645, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2375,7 +2377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Great!
+  m_text: Ouch
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
@@ -2573,7 +2575,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -59.929054, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2708,7 +2710,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -44.229507, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2750,7 +2752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -127.5, y: -486}
+  m_AnchoredPosition: {x: -127.5, y: -509}
   m_SizeDelta: {x: -345, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6393341954731087374
@@ -2827,7 +2829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c678996a42f3394ba2e6beb2313b7b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c43e5bb3b14ee594690cf6e8447b81c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
