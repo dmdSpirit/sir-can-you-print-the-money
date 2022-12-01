@@ -11,6 +11,7 @@ namespace NovemberProject.Buildings
     public sealed class ExpeditionsBuilding : Building, IExpeditionSender, IProducer
     {
         private readonly ReactiveProperty<bool> _canBeSentToExpedition = new();
+        private readonly ReactiveProperty<bool> _expeditionsActive = new();
 
         private static ArmyManager ArmyManager => Game.Instance.ArmyManager;
         private static MoneyController MoneyController => Game.Instance.MoneyController;
@@ -27,6 +28,9 @@ namespace NovemberProject.Buildings
 
         [SerializeField]
         private int _expeditionMoneyPerPersonCost = 0;
+
+        [SerializeField]
+        private int _activeFromWeek = 3;
 
         public override BuildingType BuildingType => BuildingType.Expeditions;
         public IReadOnlyReactiveProperty<int> WorkerCount => ArmyManager.ExplorersCount;
@@ -46,6 +50,7 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<int>? ProducedValue => null;
         public IReadOnlyReactiveProperty<bool> IsProducing => Game.Instance.Expeditions.IsExpeditionActive;
         public IReadOnlyTimer? ProductionTimer => Game.Instance.Expeditions.Timer;
+        public IReadOnlyReactiveProperty<bool> IsActive => _expeditionsActive;
 
         protected override void OnInitialized()
         {
@@ -62,6 +67,14 @@ namespace NovemberProject.Buildings
             ArmyManager.ExplorersCount
                 .TakeUntilDisable(this)
                 .Subscribe(OnExplorersCountChanged);
+            Game.Instance.RoundSystem.Round
+                .TakeUntilDisable(this)
+                .Subscribe(OnRoundChanged);
+        }
+
+        private void OnRoundChanged(int round)
+        {
+            _expeditionsActive.Value = round >= _activeFromWeek;
         }
 
         public void AddWorker()

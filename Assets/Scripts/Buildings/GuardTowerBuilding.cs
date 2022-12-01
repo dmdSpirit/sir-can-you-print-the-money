@@ -46,5 +46,6 @@ namespace NovemberProject.Buildings
         {
             _armyText.text = army.ToString();
         }
+
     }
 }
