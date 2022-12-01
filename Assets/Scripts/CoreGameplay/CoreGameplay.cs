@@ -1,8 +1,10 @@
 ﻿#nullable enable
+using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.GameStates;
 using NovemberProject.Rounds.UI;
 using NovemberProject.System;
+using NovemberProject.Time;
 using UnityEngine;
 
 namespace NovemberProject.CoreGameplay
@@ -12,8 +14,8 @@ namespace NovemberProject.CoreGameplay
     public sealed class CoreGameplay : InitializableBehaviour
     {
         private readonly RoundResult _roundResult = new();
-        private readonly RoundStartResult _roundStartResult = new();
-        
+        private readonly List<Timer> _timers = new();
+
         private GameOverType _gameOverType;
 
         [SerializeField]
@@ -25,6 +27,18 @@ namespace NovemberProject.CoreGameplay
         [SerializeField]
         private int _newArmyForFoodCost = 10;
 
+        [SerializeField]
+        private float _folkEatTime = 20f;
+
+        [SerializeField]
+        private float _folkPayTime = 20f;
+
+        [SerializeField]
+        private float _armyEatTime = 20f;
+
+        [SerializeField]
+        private float _armyPayTime = 20f;
+
         public int FoodPerPerson => _foodPerPerson;
         public int NewFolkForFoodCost => _newFolkForFoodCost;
         public int NewArmyForFoodCost => _newArmyForFoodCost;
@@ -33,7 +47,6 @@ namespace NovemberProject.CoreGameplay
         public ArmyManager ArmyManager { get; private set; } = null!;
         public GameOverType GameOverType => _gameOverType;
         public RoundResult RoundResult => _roundResult;
-        public RoundStartResult RoundStartResult => _roundStartResult;
 
         private void Awake()
         {
@@ -50,16 +63,65 @@ namespace NovemberProject.CoreGameplay
 
         public void StartRound()
         {
-            FolkManager.StartRound();
-            ArmyManager.StartRound();
             _roundResult.Reset();
+            StopTimers();
+            StartTimers();
+        }
+
+        private void StartTimers()
+        {
+            TimeSystem timeSystem = Game.Instance.TimeSystem;
+            Timer folkEatTimer = timeSystem.CreateTimer(_folkEatTime, OnFolkEat);
+            folkEatTimer.Start();
+            _timers.Add(folkEatTimer);
+            Timer armyEatTimer = timeSystem.CreateTimer(_armyEatTime, OnArmyEat);
+            armyEatTimer.Start();
+            _timers.Add(armyEatTimer);
+            Timer folkPayTimer = timeSystem.CreateTimer(_folkPayTime, OnFolkPay);
+            folkPayTimer.Start();
+            _timers.Add(folkPayTimer);
+            Timer armyPayTimer = timeSystem.CreateTimer(_armyPayTime, OnArmyPay);
+            armyPayTimer.Start();
+            _timers.Add(armyPayTimer);
+            folkEatTimer.Start();
+        }
+
+        private void OnFolkEat(Timer timer)
+        {
+            _timers.Remove(timer);
+            Game.Instance.FolkManager.EatFood();
+        }
+
+        private void OnArmyEat(Timer timer)
+        {
+            _timers.Remove(timer);
+            Game.Instance.ArmyManager.EatFood();
+        }
+
+        private void OnFolkPay(Timer timer)
+        {
+            _timers.Remove(timer);
+            Game.Instance.FolkManager.PayTaxes();
+        }
+
+        private void OnArmyPay(Timer timer)
+        {
+            _timers.Remove(timer);
+            Game.Instance.ArmyManager.PaySalary();
+        }
+
+        private void StopTimers()
+        {
+            foreach (Timer timer in _timers)
+            {
+                timer.Cancel();
+            }
+
+            _timers.Clear();
         }
 
         public void EndRound()
         {
-            FolkManager.EndRound();
-            ArmyManager.EndRound();
-            _roundStartResult.Reset();
         }
 
         public bool IsGameOver()
@@ -67,6 +129,7 @@ namespace NovemberProject.CoreGameplay
             if (IsNoArmyLeft())
             {
                 _gameOverType = GameOverType.NoArmy;
+                StopTimers();
                 return true;
             }
 
@@ -76,13 +139,49 @@ namespace NovemberProject.CoreGameplay
             }
 
             _gameOverType = GameOverType.NoFolk;
+            StopTimers();
             return true;
         }
 
-        public void OnFolkStarved(int count) => _roundResult.FolkStarved += count;
-        public void OnArmyStarved(int count) => _roundResult.ArmyStarved += count;
-        public void OnFolkExecuted(int count) => _roundResult.FolkExecuted += count;
-        public void OnArmyDeserted(int count) => _roundStartResult.ArmyDeserted += count;
+        public void OnFolkStarved(int count)
+        {
+            if (count > 0)
+            {
+                Game.Instance.UIManager.ShowNotification(NotificationType.FolkStarved, count);
+            }
+
+            _roundResult.FolkStarved += count;
+        }
+
+        public void OnArmyStarved(int count)
+        {
+            if (count > 0)
+            {
+                Game.Instance.UIManager.ShowNotification(NotificationType.ArmyStarved, count);
+            }
+
+            _roundResult.ArmyStarved += count;
+        }
+
+        public void OnFolkExecuted(int count)
+        {
+            if (count > 0)
+            {
+                Game.Instance.UIManager.ShowNotification(NotificationType.FolkExecuted, count);
+            }
+
+            _roundResult.FolkExecuted += count;
+        }
+
+        public void OnArmyDeserted(int count)
+        {
+            if (count > 0)
+            {
+                Game.Instance.UIManager.ShowNotification(NotificationType.ArmyDeserted, count);
+            }
+
+            _roundResult.ArmyDeserted += count;
+        }
 
         private bool IsNoFolkLeft()
         {

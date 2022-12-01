@@ -47,17 +47,6 @@ namespace NovemberProject.CoreGameplay
             _folkCount.Value = _farmFolk.Value + _marketFolk.Value + _mineFolk.Value;
         }
 
-        public void StartRound()
-        {
-        }
-
-        public void EndRound()
-        {
-            KillPoorAndHungry();
-            PayTaxes();
-            EatFood();
-        }
-
         public void BuyFolkForFood()
         {
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
@@ -130,9 +119,10 @@ namespace NovemberProject.CoreGameplay
 
             _tax.Value--;
         }
-
-        private void PayTaxes()
+        
+        public void PayTaxes()
         {
+            KillPoor();
             int taxesToPay = _folkCount.Value * _tax.Value;
             if (taxesToPay <= 0)
             {
@@ -143,33 +133,37 @@ namespace NovemberProject.CoreGameplay
             Game.Instance.MoneyController.TransferMoneyFromFolkToGovernment(taxesToPay);
         }
 
-        private void EatFood()
+        public void EatFood()
         {
+            KillHungry();
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int foodToEat = _folkCount.Value * coreGameplay.FoodPerPerson;
             Assert.IsTrue(Game.Instance.FoodController.FolkFood.Value >= foodToEat);
             Game.Instance.FoodController.SpendFolkFood(foodToEat);
         }
 
-        private void KillPoorAndHungry()
+        private void KillHungry()
         {
             int starvedFolk = CalculateStarvingFolk();
-            if (starvedFolk > 0)
+            if (starvedFolk <= 0)
             {
-                Game.Instance.CoreGameplay.OnFolkStarved(starvedFolk);
+                return;
             }
 
+            Game.Instance.CoreGameplay.OnFolkStarved(starvedFolk);
+            KillFolk(starvedFolk);
+        }
+
+        private void KillPoor()
+        {
             int executedFolk = CalculatePoorFolk();
-            if (executedFolk > 0)
+            if (executedFolk <= 0)
             {
-                Game.Instance.CoreGameplay.OnFolkExecuted(executedFolk);
+                return;
             }
 
-            int folkToKill = Mathf.Max(starvedFolk, executedFolk);
-            if (folkToKill > 0)
-            {
-                KillFolk(folkToKill);
-            }
+            Game.Instance.CoreGameplay.OnFolkExecuted(executedFolk);
+            KillFolk(executedFolk);
         }
 
         private int CalculateStarvingFolk()

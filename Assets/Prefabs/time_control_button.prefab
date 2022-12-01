@@ -347,5 +347,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7195301e7eba48e79530cb64b4327197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedColor: {r: 1, g: 0.5803922, b: 0.38431376, a: 1}
-  _targetGraphic: {fileID: 6119954749919405144}
+  _selectedColor: {r: 0.764151, g: 0.6437188, b: 0.5594162, a: 1}
+  _targetGraphic: {fileID: 1523333461544907180}

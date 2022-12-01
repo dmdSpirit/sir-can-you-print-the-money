@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class RoundStartPanel : UIElement<RoundStartResult>
+    public sealed class RoundStartPanel : UIElement<object?>
     {
         [SerializeField]
         private TMP_Text _title = null!;
@@ -24,12 +24,6 @@ namespace NovemberProject.Rounds.UI
         private Button _nextRound = null!;
 
         [SerializeField]
-        private string _desertedArmyText = null!;
-
-        [SerializeField]
-        private TMP_Text _desertedArmy = null!;
-
-        [SerializeField]
         private RoundStartConfigs _roundStartConfigs = null!;
 
         protected override void OnInitialized()
@@ -41,22 +35,13 @@ namespace NovemberProject.Rounds.UI
                 .Subscribe(OnNextRound);
         }
 
-        protected override void OnShow(RoundStartResult roundStartResult)
+        protected override void OnShow(object? _)
         {
             int round = Game.Instance.RoundSystem.Round.Value;
             RoundStartConfig config = _roundStartConfigs.GetRoundStartConfig(round);
             _title.text = config.Title;
             _description.text = config.Description;
             _image.sprite = config.Image;
-            if (roundStartResult.ArmyDeserted != 0)
-            {
-                _desertedArmy.gameObject.SetActive(true);
-                _desertedArmy.text = $"{_desertedArmyText}: {roundStartResult.ArmyDeserted}";
-            }
-            else
-            {
-                _desertedArmy.gameObject.SetActive(false);
-            }
         }
 
         protected override void OnHide()

@@ -51,7 +51,7 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private ExpeditionResultsPanel _expeditionResultsPanel = null!;
-        
+
         [SerializeField]
         private VictoryScreen _victoryScreen = null!;
 
@@ -63,6 +63,9 @@ namespace NovemberProject.System.UI
 
         [SerializeField]
         private AttackResultsPanel _attackResultsPanel = null!;
+
+        [SerializeField]
+        private NotificationsPanel _notificationsPanel = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
@@ -138,7 +141,7 @@ namespace NovemberProject.System.UI
         public void ShowSystemInfoPanel() => _systemInfoPanel.Show(null);
         public void HideCheatPanel() => _cheatMenu.Hide();
         public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
-        public void ShowRoundStartPanel(RoundStartResult roundStartResult) => _roundStartPanel.Show(roundStartResult);
+        public void ShowRoundStartPanel() => _roundStartPanel.Show(null);
         public void HideRoundStartPanel() => _roundStartPanel.Hide();
         public void ShowGameOverPanel(GameOverType gameOverType) => _gameOverPanel.Show(gameOverType);
         public void HideGameOverPanel() => _gameOverPanel.Hide();
@@ -179,6 +182,17 @@ namespace NovemberProject.System.UI
         public void HideTutorialScreen() => _tutorialScreen.Hide();
         public void ShowAttackResultsPanel(AttackData attackData) => _attackResultsPanel.Show(attackData);
         public void HideAttackResultsPanel() => _attackResultsPanel.Hide();
+        public void HideNotificationsPanel() => _notificationsPanel.Hide();
+
+        public void ShowNotification(NotificationType notificationType, int count)
+        {
+            if (!_notificationsPanel.IsShown)
+            {
+                _notificationsPanel.Show(null);
+            }
+
+            _notificationsPanel.ShowNotification(notificationType, count);
+        }
     }
 }
 

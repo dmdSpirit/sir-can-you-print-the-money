@@ -132,9 +132,9 @@ namespace NovemberProject.Time
             return timer;
         }
 
-        public Timer CreateUnscaledTimer(float duration)
+        public Timer CreateUnscaledTimer(float duration, Action<Timer>? callback = null)
         {
-            var timer = new Timer(duration);
+            var timer = new Timer(duration, callback);
             timer.OnTimerCanceled.Subscribe(RemoveTimer).AddTo(_timerSubs);
             timer.OnTimerFinished.Subscribe(RemoveTimer).AddTo(_timerSubs);
             _unscaledTimers.Add(timer);
