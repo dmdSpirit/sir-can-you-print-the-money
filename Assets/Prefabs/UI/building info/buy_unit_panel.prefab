@@ -25,7 +25,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792029964694924744}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -311,7 +311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 36, y: -25}
+  m_AnchoredPosition: {x: 25, y: -25}
   m_SizeDelta: {x: 250, y: 36}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &157784491826870249
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Peasants
+  m_text: Folks
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
   m_sharedMaterial: {fileID: -3853857829637981268, guid: 1cc1872b9633f6d43a54d711d9c08e0c, type: 2}
@@ -572,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2156736348604114875, guid: 503277fc6c5cec54d8e5c542dca95a6b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 218
+      value: 232
       objectReference: {fileID: 0}
     - target: {fileID: 2156736348604114875, guid: 503277fc6c5cec54d8e5c542dca95a6b, type: 3}
       propertyPath: m_AnchoredPosition.y

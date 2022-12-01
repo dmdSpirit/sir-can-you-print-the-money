@@ -348,9 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbad3045bf3e496698838122fdd1824f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Market
-  _description: Merchants sell your food to the army. 1 food costs 5 gold. 1 merchant
-    is working right now.
+  _title: Marketplace
+  _description: 'Merchant sells food to knights. Current price: 5 gold.'
   _image: {fileID: 21300000, guid: 2c1c3a87d1971be4a915b7400683c9f4, type: 3}
   _selectionBorder: {fileID: 3231119466756911826}
   _workerText: {fileID: 1144827295470003159}

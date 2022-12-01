@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Spaceship
-  _description: Invent and build it to win the game!
+  _description: Invent the spaceship, build it from stone and win the game!
   _image: {fileID: 21300000, guid: 6ca6c5c1263ddd34d930c5d2952dab0f, type: 3}
   _selectionBorder: {fileID: 4736668533541048098}
   _constructionCost: 20

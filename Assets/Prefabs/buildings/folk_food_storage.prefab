@@ -648,15 +648,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Folk food
-  _description: Storage of food for your folks. At the end of each week, each folk
-    has to eat 1 food. Otherwise they'll starve and die.
+  _description: Farm some, eat some, sell some, store some.
   _image: {fileID: 21300000, guid: 747a863ab9c770545b7fcc7bf4395650, type: 3}
   _selectionBorder: {fileID: 1035655372318391332}
   _foodText: {fileID: 3272818714190228769}
   _foodSprite: {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _foodTitle: Food
-  _buyUnitTitle: Buy a folk
-  _buyUnitButtonText: Buy 1 for 1 food
+  _buyUnitTitle: Buy more folks
+  _buyUnitButtonText: Buy 1 for 5 food
 --- !u!1001 &7867909130857463367
 PrefabInstance:
   m_ObjectHideFlags: 0

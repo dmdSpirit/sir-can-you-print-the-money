@@ -147,13 +147,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Treasury
-  _description: Storage of taxes that you collected. You use this money to pay salary
-    to your army.
+  _description: Taxes collected from folks. You used them to pay salary to your knights.
   _image: {fileID: 21300000, guid: f0b7daffc19fbea46acbd1be073f2797, type: 3}
   _selectionBorder: {fileID: 7230332426216683035}
   _moneyText: {fileID: 5144040263797057310}
-  _moneySprite: {fileID: 1166264754, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
-  _moneyTitle: Money
+  _moneyToPrint: 10
 --- !u!4 &6347464873161866717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}

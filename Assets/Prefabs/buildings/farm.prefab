@@ -398,8 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Farm
-  _description: It takes 8 seconds for 1 farmer to produce 1 amount of food. 2 farmers
-    are working here.
+  _description: Farming food so folks and knights won't starve.
   _image: {fileID: 21300000, guid: 8030c79a6f42fb7409567fd8b4970993, type: 3}
   _selectionBorder: {fileID: 2887280356395360673}
   _numberOfWorkersText: {fileID: 803239951602069668}
