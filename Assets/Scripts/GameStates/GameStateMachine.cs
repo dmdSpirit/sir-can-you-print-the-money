@@ -39,7 +39,6 @@ namespace NovemberProject.GameStates
             _mainMenuState.AddInputHandler(inputSystem.GetInputHandler<EscapeToExitGameHandler>());
             _newGameState = new NewGameState();
             _roundState = new RoundState();
-            _roundState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
             _roundState.AddInputHandler(inputSystem.GetInputHandler<MoveCameraHandler>());
             _roundState.AddInputHandler(inputSystem.GetInputHandler<TimeControlsHandler>());
             _roundState.AddInputHandler(inputSystem.GetInputHandler<MouseSelectionHandler>());
