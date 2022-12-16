@@ -445,7 +445,6 @@ GameObject:
   m_Component:
   - component: {fileID: 32209916}
   - component: {fileID: 32209915}
-  - component: {fileID: 32209917}
   - component: {fileID: 32209918}
   - component: {fileID: 32209919}
   m_Layer: 0
@@ -485,20 +484,6 @@ Transform:
   m_Father: {fileID: 119136397}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &32209917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32209914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f978e992288d46b88b748365cf54c671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingArmyFood: 15
-  _startingFolkFood: 13
 --- !u!114 &32209918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15892,6 +15877,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _techController
+      value: 
+      objectReference: {fileID: 1985125199}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _moneyController
+      value: 
+      objectReference: {fileID: 32209915}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _buildingsController
+      value: 
+      objectReference: {fileID: 1094725332}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _resourceMoveEffectSpawner
+      value: 
+      objectReference: {fileID: 1445167903}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
 --- !u!114 &1629718553 stripped
@@ -16245,7 +16246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 380
       objectReference: {fileID: 0}
     - target: {fileID: 625074716627804678, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
       propertyPath: m_AnchoredPosition.y

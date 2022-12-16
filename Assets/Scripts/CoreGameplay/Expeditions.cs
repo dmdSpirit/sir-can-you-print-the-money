@@ -7,6 +7,7 @@ using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.CoreGameplay
 {
@@ -14,6 +15,9 @@ namespace NovemberProject.CoreGameplay
     {
         private Timer? _expeditionTimer;
         private readonly ReactiveProperty<bool> _isExpeditionActive = new();
+
+        private FoodController _foodController = null!;
+        
         private int _explorersLeftForExpedition;
         private int _expeditionIndex;
 
@@ -25,6 +29,12 @@ namespace NovemberProject.CoreGameplay
 
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive => _isExpeditionActive;
         public IReadOnlyTimer? Timer => _expeditionTimer;
+
+        [Inject]
+        private void Construct(FoodController foodController)
+        {
+            _foodController = foodController;
+        }
 
         protected override void OnInitialized()
         {
@@ -80,8 +90,7 @@ namespace NovemberProject.CoreGameplay
                 return;
             }
 
-            FoodController foodController = Game.Instance.FoodController;
-            foodController.SpendArmyFood(foodCost);
+            _foodController.SpendArmyFood(foodCost);
         }
 
         private void PayMoney(ExpeditionsBuilding building, int explorers)

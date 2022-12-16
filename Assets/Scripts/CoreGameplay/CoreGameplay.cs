@@ -18,6 +18,7 @@ namespace NovemberProject.CoreGameplay
         private readonly List<Timer> _timers = new();
 
         private FolkManager _folkManager = null!;
+        private FoodController _foodController = null!;
 
         private GameOverType _gameOverType;
 
@@ -47,9 +48,10 @@ namespace NovemberProject.CoreGameplay
         public RoundResult RoundResult => _roundResult;
 
         [Inject]
-        private void Construct(FolkManager folkManager)
+        private void Construct(FolkManager folkManager, FoodController foodController)
         {
             _folkManager = folkManager;
+            _foodController = foodController;
         }
 
         private void Awake()
@@ -189,11 +191,10 @@ namespace NovemberProject.CoreGameplay
 
         private bool IsNoArmyLeft()
         {
-            FoodController foodController = Game.Instance.FoodController;
             var armyCount = ArmyManager.GuardsCount;
             return armyCount.Value == 0
                    && ArmyManager.ExplorersCount.Value == 0
-                   && foodController.ArmyFood.Value < _newArmyForFoodCost;
+                   && _foodController.ArmyFood.Value < _newArmyForFoodCost;
         }
     }
 }

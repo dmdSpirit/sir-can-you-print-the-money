@@ -4,6 +4,7 @@ using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.CoreGameplay
@@ -16,6 +17,8 @@ namespace NovemberProject.CoreGameplay
         private readonly ReactiveProperty<int> _guardsCount = new();
         private readonly ReactiveProperty<int> _salary = new();
         private readonly ReactiveProperty<int> _explorersCount = new();
+
+        private FoodController _foodController = null!;
 
         [SerializeField]
         private int _startingArmySalary = 5;
@@ -31,6 +34,12 @@ namespace NovemberProject.CoreGameplay
         public IReactiveProperty<int> ExplorersCount => _explorersCount;
         public IReactiveProperty<int> Salary => _salary;
 
+        [Inject]
+        private void Construct(FoodController foodController)
+        {
+            _foodController = foodController;
+        }
+
         public void InitializeGameData()
         {
             _salary.Value = _startingArmySalary;
@@ -43,7 +52,7 @@ namespace NovemberProject.CoreGameplay
         {
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int newArmyCost = coreGameplay.NewArmyForFoodCost;
-            Game.Instance.FoodController.SpendArmyFood(newArmyCost);
+            _foodController.SpendArmyFood(newArmyCost);
             _guardsCount.Value++;
             _armyCount.Value++;
         }
@@ -114,16 +123,15 @@ namespace NovemberProject.CoreGameplay
             int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int foodToEat = armyCount * coreGameplay.FoodPerPerson;
-            Assert.IsTrue(Game.Instance.FoodController.ArmyFood.Value >= foodToEat);
-            Game.Instance.FoodController.SpendArmyFood(foodToEat);
+            Assert.IsTrue(_foodController.ArmyFood.Value >= foodToEat);
+            _foodController.SpendArmyFood(foodToEat);
         }
 
         private void KillStarved()
         {
             int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
-            FoodController foodController = Game.Instance.FoodController;
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
-            int maxArmyToFeed = foodController.ArmyFood.Value / coreGameplay.FoodPerPerson;
+            int maxArmyToFeed = _foodController.ArmyFood.Value / coreGameplay.FoodPerPerson;
             int starvedArmy = armyCount - maxArmyToFeed;
             if (starvedArmy <= 0)
             {

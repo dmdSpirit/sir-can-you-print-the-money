@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CoreGameplay;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using NovemberProject.Time;
@@ -16,6 +17,7 @@ namespace NovemberProject.Buildings
         private readonly ReactiveProperty<int> _producedValue = new();
 
         private FolkManager _folkManager = null!;
+        private FoodController _foodController = null!;
         
         private Timer? _productionTimer;
 
@@ -46,18 +48,18 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
         [Inject]
-        private void Construct(FolkManager folkManager)
+        private void Construct(FolkManager folkManager, FoodController foodController)
         {
             _folkManager = folkManager;
+            _foodController = foodController;
+
+            _foodController.FolkFood.Subscribe(_ => UpdateProduction());
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
             _folkManager.MarketFolk
-                .TakeUntilDisable(this)
-                .Subscribe(_ => UpdateProduction());
-            Game.Instance.FoodController.FolkFood
                 .TakeUntilDisable(this)
                 .Subscribe(_ => UpdateProduction());
             Game.Instance.MoneyController.ArmyMoney
@@ -96,7 +98,7 @@ namespace NovemberProject.Buildings
 
         private bool IsAbleToTrade()
         {
-            return Game.Instance.FoodController.FolkFood.Value >= _foodChangedPerTrade
+            return _foodController.FolkFood.Value >= _foodChangedPerTrade
                    && _folkManager.MarketFolk.Value >= 1
                    && Game.Instance.MoneyController.ArmyMoney.Value >= _foodChangedPerTrade * _foodCostPerUnit;
         }
@@ -130,7 +132,7 @@ namespace NovemberProject.Buildings
             Assert.IsTrue(_isProducing.Value);
             Assert.IsTrue(_folkManager.MarketFolk.Value > 0);
             Game.Instance.MoneyController.TransferMoneyFromArmyToFolk(_foodCostPerUnit * _foodChangedPerTrade);
-            Game.Instance.FoodController.TransferFoodFromFolkToArmy(_foodChangedPerTrade);
+            _foodController.TransferFoodFromFolkToArmy(_foodChangedPerTrade);
             _productionTimer = null;
             _isProducing.Value = false;
             StartProduction();

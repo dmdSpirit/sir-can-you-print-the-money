@@ -208,3 +208,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _folkManagerSettings: {fileID: 11400000, guid: 9ef8921aeb06e02448d420d0d6fd60d8, type: 2}
+  _foodControllerSettings: {fileID: 11400000, guid: 095a441caa227ad42b93873a254bd87f, type: 2}

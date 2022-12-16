@@ -5,6 +5,7 @@ using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
@@ -13,9 +14,10 @@ namespace NovemberProject.Buildings
         private readonly ReactiveProperty<bool> _canBeSentToExpedition = new();
         private readonly ReactiveProperty<bool> _expeditionsActive = new();
 
+        private FoodController _foodController = null!;
+
         private static ArmyManager ArmyManager => Game.Instance.ArmyManager;
         private static MoneyController MoneyController => Game.Instance.MoneyController;
-        private static FoodController FoodController => Game.Instance.FoodController;
 
         [SerializeField]
         private string _workerTitle = "Explorers";
@@ -52,13 +54,17 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => Game.Instance.Expeditions.Timer;
         public IReadOnlyReactiveProperty<bool> IsActive => _expeditionsActive;
 
+        [Inject]
+        private void Construct(FoodController foodController)
+        {
+            _foodController = foodController;
+            _foodController.ArmyFood.Subscribe(_ => UpdateCanBeSentStatus());
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
             Game.Instance.MoneyController.ArmyMoney
-                .TakeUntilDisable(this)
-                .Subscribe(_ => UpdateCanBeSentStatus());
-            Game.Instance.FoodController.ArmyFood
                 .TakeUntilDisable(this)
                 .Subscribe(_ => UpdateCanBeSentStatus());
             Game.Instance.Expeditions.IsExpeditionActive
@@ -119,7 +125,7 @@ namespace NovemberProject.Buildings
                 MoneyController.ArmyMoney.Value >= workersCount * _expeditionMoneyPerPersonCost;
 
             bool IsEnoughFoodForExpedition() =>
-                FoodController.ArmyFood.Value >= workersCount * _expeditionFoodPerPersonCost;
+                _foodController.ArmyFood.Value >= workersCount * _expeditionFoodPerPersonCost;
         }
 
         private void OnExplorersCountChanged(int explorersCount)

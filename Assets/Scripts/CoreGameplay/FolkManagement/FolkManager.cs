@@ -1,12 +1,9 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.TechTree;
 using UniRx;
 using UnityEngine.Assertions;
-using Zenject;
-using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.CoreGameplay.FolkManagement
 {

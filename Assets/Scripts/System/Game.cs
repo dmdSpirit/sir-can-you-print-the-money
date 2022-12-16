@@ -15,6 +15,7 @@ using NovemberProject.Time;
 using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.System
 {
@@ -25,6 +26,8 @@ namespace NovemberProject.System
         private readonly Subject<Unit> _onInitialized = new();
 
         private static Game _instance = null!;
+
+        private MessageBroker _messageBroker = null!;
 
         public static Game Instance => GetInstance();
 
@@ -37,7 +40,6 @@ namespace NovemberProject.System
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
         public MoneyController MoneyController { get; private set; } = null!;
-        public FoodController FoodController { get; private set; } = null!;
         public StoneController StoneController { get; private set; } = null!;
         public TreasureController TreasureController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
@@ -53,7 +55,13 @@ namespace NovemberProject.System
 
         public IObservable<Unit> OnInitialized => _onInitialized;
         public IObservable<State> OnStateChanged => GameStateMachine.OnStateChanged;
-        public MessageBroker MessageBroker { get; } = new();
+        public MessageBroker MessageBroker =>_messageBroker;
+
+        [Inject]
+        private void Construct(MessageBroker messageBroker)
+        {
+            _messageBroker = messageBroker;
+        }
 
         private void Start()
         {
@@ -95,7 +103,6 @@ namespace NovemberProject.System
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             BuildingsController = FindObjectOfType<BuildingsController>();
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
-            FoodController = FindObjectOfType<FoodController>();
             StoneController = FindObjectOfType<StoneController>();
             TreasureController = FindObjectOfType<TreasureController>();
             TechController = FindObjectOfType<TechController>();

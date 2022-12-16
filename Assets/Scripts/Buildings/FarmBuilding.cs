@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CoreGameplay;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using NovemberProject.Time;
@@ -16,6 +17,7 @@ namespace NovemberProject.Buildings
         private readonly ReactiveProperty<int> _producedValue = new();
 
         private FolkManager _folkManager = null!;
+        private FoodController _foodController = null!;
         private Timer? _productionTimer;
 
         private int _folkProducing;
@@ -46,17 +48,11 @@ namespace NovemberProject.Buildings
         public string ResourceTitle => _farmerTitle;
 
         [Inject]
-        private void Construct(FolkManager folkManager)
+        private void Construct(FolkManager folkManager, FoodController foodController)
         {
             _folkManager = folkManager;
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            _folkManager.FarmFolk
-                .TakeUntilDisable(this)
-                .Subscribe(OnFarmCountChanged);
+            _foodController = foodController;
+            _folkManager.FarmFolk.Subscribe(OnFarmCountChanged);
         }
 
         private void OnFarmCountChanged(int farmWorkers)
@@ -112,7 +108,7 @@ namespace NovemberProject.Buildings
             Assert.IsTrue(_isProducing.Value);
             Assert.IsTrue(_folkManager.FarmFolk.Value > 0);
             Assert.IsTrue(_folkProducing > 0);
-            Game.Instance.FoodController.ProduceFoodFromFarm(_productionPerFolk * _folkProducing);
+            _foodController.ProduceFoodFromFarm(_productionPerFolk * _folkProducing);
             _productionTimer = null;
             _isProducing.Value = false;
             StartProduction();

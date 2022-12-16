@@ -1,33 +1,41 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.Buildings;
-using NovemberProject.CommonUIStuff;
 using NovemberProject.MovingResources;
-using NovemberProject.System;
+using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NovemberProject.CoreGameplay
 {
-    public sealed class FoodController : InitializableBehaviour
+    public sealed class FoodController
     {
         private readonly ReactiveProperty<int> _armyFood = new();
         private readonly ReactiveProperty<int> _folkFood = new();
 
-        [SerializeField]
-        private int _startingArmyFood = 30;
-
-        [SerializeField]
-        private int _startingFolkFood = 30;
+        private readonly BuildingsController _buildingsController;
+        private readonly ResourceMoveEffectSpawner _resourceMoveEffectSpawner;
+        private readonly MessageBroker _messageBroker;
+        private readonly FoodControllerSettings _settings;
 
         public IReadOnlyReactiveProperty<int> ArmyFood => _armyFood;
         public IReadOnlyReactiveProperty<int> FolkFood => _folkFood;
 
-        public void InitializeGameData()
+        public FoodController(FoodControllerSettings foodControllerSettings, BuildingsController buildingsController,
+            ResourceMoveEffectSpawner resourceMoveEffectSpawner, MessageBroker messageBroker)
         {
-            _armyFood.Value = _startingArmyFood;
-            _folkFood.Value = _startingFolkFood;
+            _settings = foodControllerSettings;
+            _buildingsController = buildingsController;
+            _resourceMoveEffectSpawner = resourceMoveEffectSpawner;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+        }
+
+        private void OnNewGame(NewGameMessage message)
+        {
+            _armyFood.Value = _settings.StartingArmyFood;
+            _folkFood.Value = _settings.StartingFolkFood;
         }
 
         public void SpendArmyFood(int food)
@@ -45,9 +53,8 @@ namespace NovemberProject.CoreGameplay
         public void TransferFoodFromFolkToArmy(int food)
         {
             Assert.IsTrue(_folkFood.Value >= food);
-            BuildingsController buildingsController = Game.Instance.BuildingsController;
-            Building folkFoodStorage = buildingsController.GetBuilding(BuildingType.FolkFoodStorage);
-            Building armyFoodStorage = buildingsController.GetBuilding(BuildingType.ArmyFoodStorage);
+            Building folkFoodStorage = _buildingsController.GetBuilding(BuildingType.FolkFoodStorage);
+            Building armyFoodStorage = _buildingsController.GetBuilding(BuildingType.ArmyFoodStorage);
             ShowFoodMove(folkFoodStorage.transform, armyFoodStorage.transform, () =>
             {
                 _folkFood.Value -= food;
@@ -57,16 +64,14 @@ namespace NovemberProject.CoreGameplay
 
         public void ProduceFoodFromFarm(int food)
         {
-            BuildingsController buildingsController = Game.Instance.BuildingsController;
-            Building farm = buildingsController.GetBuilding(BuildingType.Farm);
-            Building folkFoodStorage = buildingsController.GetBuilding(BuildingType.FolkFoodStorage);
+            Building farm = _buildingsController.GetBuilding(BuildingType.Farm);
+            Building folkFoodStorage = _buildingsController.GetBuilding(BuildingType.FolkFoodStorage);
             ShowFoodMove(farm.transform, folkFoodStorage.transform, () => _folkFood.Value += food);
         }
 
         private void ShowFoodMove(Transform start, Transform finish, Action callback)
         {
-            ResourceMoveEffectSpawner moveEffectSpawner = Game.Instance.ResourceMoveEffectSpawner;
-            MoveEffect effect = moveEffectSpawner.ShowMovingFood(start.position, finish.position);
+            MoveEffect effect = _resourceMoveEffectSpawner.ShowMovingFood(start.position, finish.position);
             effect.OnFinished.Subscribe(_ => callback.Invoke());
         }
     }
