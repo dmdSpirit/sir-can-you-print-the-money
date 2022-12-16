@@ -1,11 +1,13 @@
 ﻿#nullable enable
 using NovemberProject.CoreGameplay;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
@@ -33,42 +35,32 @@ namespace NovemberProject.Buildings
         public override BuildingType BuildingType => BuildingType.Mine;
 
         public IReadOnlyReactiveProperty<bool> CanUseMine => Game.Instance.TechController.CanUseMine;
-        public IReadOnlyReactiveProperty<int> WorkerCount => Game.Instance.FolkManager.MineFolk;
+        public IReadOnlyReactiveProperty<int> WorkerCount => _folkManager.MineFolk;
         public string WorkersTitle => _minersTitle;
         public bool ShowProducedValue => true;
         public IReadOnlyReactiveProperty<int> ProducedValue => _producedValue;
         public IReadOnlyReactiveProperty<bool> IsProducing => _isProducing;
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
+        [Inject]
+        private void Construct(FolkManager folkManager)
+        {
+            _folkManager = folkManager;
+        }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            _folkManager = Game.Instance.FolkManager;
-            Game.Instance.FolkManager.MineFolk
+            _folkManager.MineFolk
                 .TakeUntilDisable(this)
                 .Subscribe(OnMinersCountChanged);
         }
 
-        public void AddWorker()
-        {
-            Game.Instance.FolkManager.AddFolkToMine();
-        }
+        public void AddWorker() => _folkManager.AddFolkToMine();
+        public void RemoveWorker() => _folkManager.RemoveFolkFromMine();
+        public bool CanAddWorker() => _folkManager.CanAddWorkerToMine();
 
-        public void RemoveWorker()
-        {
-            Game.Instance.FolkManager.RemoveFolkFromMine();
-        }
-
-        public bool CanAddWorker()
-        {
-            return Game.Instance.FolkManager.FarmFolk.Value > 0 && Game.Instance.TechController.CanUseMine.Value;
-        }
-
-        public bool CanRemoveWorker()
-        {
-            return Game.Instance.FolkManager.MineFolk.Value > 0 && Game.Instance.TechController.CanUseMine.Value;
-        }
+        public bool CanRemoveWorker() => _folkManager.CanRemoveMineWorker();
 
         private void OnMinersCountChanged(int miners)
         {

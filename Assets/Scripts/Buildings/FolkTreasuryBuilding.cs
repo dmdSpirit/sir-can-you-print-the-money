@@ -1,16 +1,19 @@
 ﻿#nullable enable
 using NovemberProject.Buildings.UI;
 using NovemberProject.CoreGameplay;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
     public sealed class FolkTreasuryBuilding : Building, IResourceStorage, ITaxController
     {
         private MoneyController _moneyController = null!;
+        private FolkManager _folkManager = null!;
         
         [SerializeField]
         private TMP_Text _moneyText = null!;
@@ -28,6 +31,12 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<bool> CanRaiseTax => Game.Instance.TechController.CanRaiseTax;
         public IReadOnlyReactiveProperty<bool> CanLowerTax => Game.Instance.TechController.CanLowerTax;
 
+        [Inject]
+        private void Construct(FolkManager folkManager)
+        {
+            _folkManager = folkManager;
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -42,7 +51,7 @@ namespace NovemberProject.Buildings
             _moneyText.text = money.ToString();
         }
         
-        public void RaiseTax() => Game.Instance.FolkManager.RaiseTax();
-        public void LowerTax() => Game.Instance.FolkManager.LowerTax();
+        public void RaiseTax() => _folkManager.RaiseTax();
+        public void LowerTax() => _folkManager.LowerTax();
     }
 }

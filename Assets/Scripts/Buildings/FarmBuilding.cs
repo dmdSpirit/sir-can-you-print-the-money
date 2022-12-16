@@ -1,11 +1,12 @@
 ﻿#nullable enable
-using NovemberProject.CoreGameplay;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
@@ -41,13 +42,18 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
         public bool ShowProducedValue => true;
         public Sprite SpriteIcon => _farmerImage;
-        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.FolkManager.FarmFolk;
+        public IReadOnlyReactiveProperty<int> ResourceCount => _folkManager.FarmFolk;
         public string ResourceTitle => _farmerTitle;
+
+        [Inject]
+        private void Construct(FolkManager folkManager)
+        {
+            _folkManager = folkManager;
+        }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            _folkManager = Game.Instance.FolkManager;
             _folkManager.FarmFolk
                 .TakeUntilDisable(this)
                 .Subscribe(OnFarmCountChanged);

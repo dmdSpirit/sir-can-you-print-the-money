@@ -1,11 +1,13 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace NovemberProject.CoreGameplay
@@ -31,6 +33,8 @@ namespace NovemberProject.CoreGameplay
         private readonly Subject<Unit> _onNewAttack = new();
         private readonly ReactiveProperty<bool> _isActive = new();
 
+        private FolkManager _folkManager = null!;
+
         private Timer? _attackTimer;
         private int _attackIndex;
 
@@ -46,6 +50,12 @@ namespace NovemberProject.CoreGameplay
         public IReadOnlyTimer? AttackTimer => _attackTimer;
         public IObservable<Unit> OnNewAttack => _onNewAttack;
         public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
+
+        [Inject]
+        private void Construct(FolkManager folkManager)
+        {
+            _folkManager = folkManager;
+        }
 
         protected override void OnInitialized()
         {
@@ -93,10 +103,10 @@ namespace NovemberProject.CoreGameplay
                     Game.Instance.ArmyManager.KillGuards(attackers);
                     attackStatus = AttackStatus.GuardsKilled;
                 }
-                else if (Game.Instance.FolkManager.FolkCount.Value > 0)
+                else if (_folkManager.FolkCount.Value > 0)
                 {
                     attackStatus = AttackStatus.FolkKilled;
-                    Game.Instance.FolkManager.KillFolk(1);
+                    _folkManager.KillFolk(1);
                 }
 
                 _attackIndex = 0;

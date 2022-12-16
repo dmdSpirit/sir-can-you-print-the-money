@@ -1,14 +1,18 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
     public sealed class FolkFoodStorageBuilding : Building, IResourceStorage, IBuyUnit
     {
+        private FolkManager _folkManager = null!;
+        
         [SerializeField]
         private TMP_Text _foodText = null!;
 
@@ -29,11 +33,16 @@ namespace NovemberProject.Buildings
         public string ResourceTitle => _foodTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.FoodController.FolkFood;
 
-        public bool CanBuyUnit =>
-            Game.Instance.FoodController.FolkFood.Value >= Game.Instance.CoreGameplay.NewFolkForFoodCost;
+        public bool CanBuyUnit => _folkManager.IsEnoughFoodForNewFolk();
 
         public string BuyUnitTitle => _buyUnitTitle;
         public string BuyUnitButtonText => _buyUnitButtonText;
+        
+        [Inject]
+        private void Construct(FolkManager folkManager)
+        {
+            _folkManager = folkManager;
+        }
 
         protected override void OnInitialized()
         {
@@ -49,7 +58,7 @@ namespace NovemberProject.Buildings
             {
                 return;
             }
-            Game.Instance.FolkManager.BuyFolkForFood();
+            _folkManager.BuyFolkForFood();
         }
 
         private void OnFoodChanged(int money)

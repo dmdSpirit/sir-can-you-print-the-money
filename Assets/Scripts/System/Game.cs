@@ -4,6 +4,7 @@ using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.CoreGameplay;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
 using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
@@ -45,7 +46,6 @@ namespace NovemberProject.System
         public Expeditions Expeditions { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
-        public FolkManager FolkManager => CoreGameplay.FolkManager;
         public ArmyManager ArmyManager => CoreGameplay.ArmyManager;
         public AudioManager AudioManager { get; private set; } = null!;
         public BuildingNameHover BuildingNameHover { get; private set; } = null!;

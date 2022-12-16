@@ -1,28 +1,28 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
 using NovemberProject.Rounds.UI;
 using NovemberProject.System;
 using NovemberProject.Time;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.CoreGameplay
 {
-    [RequireComponent(typeof(FolkManager))]
     [RequireComponent(typeof(ArmyManager))]
     public sealed class CoreGameplay : InitializableBehaviour
     {
         private readonly RoundResult _roundResult = new();
         private readonly List<Timer> _timers = new();
 
+        private FolkManager _folkManager = null!;
+
         private GameOverType _gameOverType;
 
         [SerializeField]
         private int _foodPerPerson = 2;
-
-        [SerializeField]
-        private int _newFolkForFoodCost = 10;
 
         [SerializeField]
         private int _newArmyForFoodCost = 10;
@@ -40,23 +40,25 @@ namespace NovemberProject.CoreGameplay
         private float _armyPayTime = 20f;
 
         public int FoodPerPerson => _foodPerPerson;
-        public int NewFolkForFoodCost => _newFolkForFoodCost;
         public int NewArmyForFoodCost => _newArmyForFoodCost;
 
-        public FolkManager FolkManager { get; private set; } = null!;
         public ArmyManager ArmyManager { get; private set; } = null!;
         public GameOverType GameOverType => _gameOverType;
         public RoundResult RoundResult => _roundResult;
 
+        [Inject]
+        private void Construct(FolkManager folkManager)
+        {
+            _folkManager = folkManager;
+        }
+
         private void Awake()
         {
-            FolkManager = GetComponent<FolkManager>();
             ArmyManager = GetComponent<ArmyManager>();
         }
 
         public void InitializeGameData()
         {
-            FolkManager.InitializeGameData();
             ArmyManager.InitializeGameData();
             _gameOverType = GameOverType.None;
         }
@@ -89,7 +91,7 @@ namespace NovemberProject.CoreGameplay
         private void OnFolkEat(Timer timer)
         {
             _timers.Remove(timer);
-            Game.Instance.FolkManager.EatFood();
+            _folkManager.EatFood();
         }
 
         private void OnArmyEat(Timer timer)
@@ -101,7 +103,7 @@ namespace NovemberProject.CoreGameplay
         private void OnFolkPay(Timer timer)
         {
             _timers.Remove(timer);
-            Game.Instance.FolkManager.PayTaxes();
+            _folkManager.PayTaxes();
         }
 
         private void OnArmyPay(Timer timer)
@@ -183,13 +185,7 @@ namespace NovemberProject.CoreGameplay
             _roundResult.ArmyDeserted += count;
         }
 
-        private bool IsNoFolkLeft()
-        {
-            FoodController foodController = Game.Instance.FoodController;
-            var folkCount = FolkManager.FolkCount;
-            return folkCount.Value == 0
-                   && foodController.FolkFood.Value < _newFolkForFoodCost;
-        }
+        private bool IsNoFolkLeft() => _folkManager.IsNoFolkLeft();
 
         private bool IsNoArmyLeft()
         {
