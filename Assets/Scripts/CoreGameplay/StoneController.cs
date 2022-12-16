@@ -4,9 +4,11 @@ using NovemberProject.Buildings;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.MovingResources;
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.CoreGameplay
 {
@@ -14,12 +16,23 @@ namespace NovemberProject.CoreGameplay
     {
         private readonly ReactiveProperty<int> _stone = new();
 
+        private BuildingsController _buildingsController = null!;
+        private MessageBroker _messageBroker = null!;
+
         [SerializeField]
         private int _startingStone = 0;
 
         public IReadOnlyReactiveProperty<int> Stone => _stone;
 
-        public void InitializeGameData()
+        [Inject]
+        private void Construct(BuildingsController buildingsController, MessageBroker messageBroker)
+        {
+            _buildingsController = buildingsController;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+        }
+
+        private void OnNewGame(NewGameMessage message)
         {
             _stone.Value = _startingStone;
         }
@@ -28,18 +41,17 @@ namespace NovemberProject.CoreGameplay
         {
             _stone.Value += stone;
         }
-        
+
         public void SpendStone(int stone)
         {
-            Assert.IsTrue(_stone.Value>=stone);
-            _stone.Value-=stone;
+            Assert.IsTrue(_stone.Value >= stone);
+            _stone.Value -= stone;
         }
 
         public void MineStone(int stone)
         {
-            BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building mine = buildingController.GetBuilding<MineBuilding>();
-            Building stoneStorage = buildingController.GetBuilding<ArenaBuilding>();
+            Building mine = _buildingsController.GetBuilding<MineBuilding>();
+            Building stoneStorage = _buildingsController.GetBuilding<ArenaBuilding>();
             ShowStoneMove(mine.transform, stoneStorage.transform,
                 () => AddStone(stone));
         }

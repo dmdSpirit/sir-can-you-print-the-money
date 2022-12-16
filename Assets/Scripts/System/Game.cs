@@ -42,7 +42,6 @@ namespace NovemberProject.System
         public StoneController StoneController { get; private set; } = null!;
         public TreasureController TreasureController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
-        public BuildingsController BuildingsController { get; private set; } = null!;
         public TechController TechController { get; private set; } = null!;
         public Expeditions Expeditions { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
@@ -99,7 +98,6 @@ namespace NovemberProject.System
             CameraController = FindObjectOfType<CameraController>();
             BuildingSelector = FindObjectOfType<BuildingSelector>();
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
-            BuildingsController = FindObjectOfType<BuildingsController>();
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
             StoneController = FindObjectOfType<StoneController>();
             TreasureController = FindObjectOfType<TreasureController>();

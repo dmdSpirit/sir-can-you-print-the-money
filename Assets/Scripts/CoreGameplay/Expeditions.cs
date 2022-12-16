@@ -13,11 +13,13 @@ namespace NovemberProject.CoreGameplay
 {
     public sealed class Expeditions : InitializableBehaviour
     {
-        private Timer? _expeditionTimer;
         private readonly ReactiveProperty<bool> _isExpeditionActive = new();
+
+        private Timer? _expeditionTimer;
 
         private FoodController _foodController = null!;
         private MoneyController _moneyController = null!;
+        private BuildingsController _buildingsController = null!;
         private MessageBroker _messageBroker = null!;
 
         private int _explorersLeftForExpedition;
@@ -34,10 +36,12 @@ namespace NovemberProject.CoreGameplay
 
         [Inject]
         private void Construct(FoodController foodController, MoneyController moneyController,
+            BuildingsController buildingsController,
             MessageBroker messageBroker)
         {
             _foodController = foodController;
             _moneyController = moneyController;
+            _buildingsController = buildingsController;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
@@ -71,7 +75,7 @@ namespace NovemberProject.CoreGameplay
         public void StartExpedition()
         {
             Assert.IsFalse(_isExpeditionActive.Value);
-            var expeditionsBuilding = Game.Instance.BuildingsController.GetBuilding<ExpeditionsBuilding>();
+            var expeditionsBuilding = _buildingsController.GetBuilding<ExpeditionsBuilding>();
             _explorersLeftForExpedition = Game.Instance.ArmyManager.ExplorersCount.Value;
             PayFood(expeditionsBuilding, _explorersLeftForExpedition);
             PayMoney(expeditionsBuilding, _explorersLeftForExpedition);

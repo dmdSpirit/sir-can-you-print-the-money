@@ -13,7 +13,6 @@ namespace NovemberProject.GameStates
             Game.Instance.TimeSystem.PauseTime();
             Game.Instance.RoundSystem.ResetRounds();
             Game.Instance.CoreGameplay.InitializeGameData();
-            Game.Instance.StoneController.InitializeGameData();
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
             Game.Instance.TechController.InitializeGameData();

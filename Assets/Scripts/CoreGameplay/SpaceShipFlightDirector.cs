@@ -6,12 +6,15 @@ using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.CoreGameplay
 {
     public sealed class SpaceShipFlightDirector : InitializableBehaviour
     {
         private readonly Subject<Unit> _onFinishedPlaying = new();
+
+        private BuildingsController _buildingsController = null!;
 
         [SerializeField]
         private Transform _cameraPosition = null!;
@@ -33,6 +36,12 @@ namespace NovemberProject.CoreGameplay
 
         public IObservable<Unit> OnFinishedPlaying => _onFinishedPlaying;
 
+        [Inject]
+        private void Construct(BuildingsController buildingsController)
+        {
+            _buildingsController = buildingsController;
+        }
+
         public void StartSequence()
         {
             Tween cameraTween =
@@ -42,7 +51,7 @@ namespace NovemberProject.CoreGameplay
 
         private void OnMoveFinished()
         {
-            Building arena = Game.Instance.BuildingsController.GetBuilding(BuildingType.Arena);
+            Building arena = _buildingsController.GetBuilding(BuildingType.Arena);
 
             var tween = arena.transform.DOMove(_castlePosition.position, _castleFlightDuration);
             tween.SetEase(Ease.InQuad);

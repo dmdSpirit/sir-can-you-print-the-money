@@ -4,20 +4,16 @@ using NovemberProject.System;
 using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
+using Zenject;
 using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.Buildings
 {
-    public interface ISelectable
-    {
-        public IReadOnlyReactiveProperty<bool> IsSelected { get; }
-        public void Select();
-        public void Unselect();
-    }
-
     public class Building : InitializableBehaviour, ISelectable
     {
         private readonly ReactiveProperty<bool> _isSelected = new();
+
+        private BuildingsController _buildingsController = null!;
 
         [SerializeField]
         private string _title = null!;
@@ -37,21 +33,12 @@ namespace NovemberProject.Buildings
         public virtual BuildingType BuildingType { get; } = BuildingType.None;
         public IReadOnlyReactiveProperty<bool> IsSelected => _isSelected;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(BuildingsController buildingsController)
         {
-            base.OnInitialized();
-            _selectionBorder.SetActive(false);
-            if (Game.Instance.BuildingsController != null)
-            {
-                Game.Instance.BuildingsController.RegisterBuilding(this);
-            }
-            else
-            {
-                Game.Instance.MessageBroker.Receive<BehaviourIsInitializedMessage>()
-                    .TakeUntilDisable(this)
-                    .Where(message => message.InitializableBehaviour is BuildingsController)
-                    .Subscribe(OnBuildingControllerInitialized);
-            }
+            _buildingsController = buildingsController;
+            // TODO (Stas): I think this can also be done with DI.
+            _buildingsController.RegisterBuilding(this);
         }
 
         public void Select()
@@ -64,12 +51,6 @@ namespace NovemberProject.Buildings
         {
             _isSelected.Value = false;
             _selectionBorder.SetActive(false);
-        }
-
-        private void OnBuildingControllerInitialized(BehaviourIsInitializedMessage message)
-        {
-            var controller = (BuildingsController)message.InitializableBehaviour;
-            controller.RegisterBuilding(this);
         }
     }
 }
