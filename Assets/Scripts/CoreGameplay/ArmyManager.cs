@@ -19,6 +19,7 @@ namespace NovemberProject.CoreGameplay
         private readonly ReactiveProperty<int> _explorersCount = new();
 
         private FoodController _foodController = null!;
+        private MoneyController _moneyController = null!;
 
         [SerializeField]
         private int _startingArmySalary = 5;
@@ -35,9 +36,10 @@ namespace NovemberProject.CoreGameplay
         public IReactiveProperty<int> Salary => _salary;
 
         [Inject]
-        private void Construct(FoodController foodController)
+        private void Construct(FoodController foodController, MoneyController moneyController)
         {
             _foodController = foodController;
+            _moneyController = moneyController;
         }
 
         public void InitializeGameData()
@@ -113,8 +115,7 @@ namespace NovemberProject.CoreGameplay
                 return;
             }
 
-            Assert.IsTrue(Game.Instance.MoneyController.GovernmentMoney.Value >= salaryToPay);
-            Game.Instance.MoneyController.TransferMoneyFromGovernmentToArmy(salaryToPay);
+            _moneyController.TransferMoneyFromGovernmentToArmy(salaryToPay);
         }
 
         public void EatFood()
@@ -162,8 +163,7 @@ namespace NovemberProject.CoreGameplay
         private void DesertUnpaid()
         {
             int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
-            MoneyController moneyController = Game.Instance.MoneyController;
-            int governmentMoney = moneyController.GovernmentMoney.Value;
+            int governmentMoney = _moneyController.GovernmentMoney.Value;
             int maxAffordableArmy = governmentMoney / _salary.Value;
             int numberToDesert = armyCount - maxAffordableArmy;
             if (numberToDesert <= 0)

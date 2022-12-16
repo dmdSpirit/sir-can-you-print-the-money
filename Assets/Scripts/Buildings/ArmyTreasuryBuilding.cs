@@ -5,6 +5,7 @@ using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
@@ -24,18 +25,15 @@ namespace NovemberProject.Buildings
         public override BuildingType BuildingType => BuildingType.ArmyTreasury;
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
-        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.ArmyMoney;
+        public IReadOnlyReactiveProperty<int> ResourceCount => _moneyController.ArmyMoney;
         public IReadOnlyReactiveProperty<bool> CanRaiseSalary => Game.Instance.TechController.CanRaiseSalary;
         public IReadOnlyReactiveProperty<bool> CanLowerSalary => Game.Instance.TechController.CanLowerSalary;
 
-
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(MoneyController moneyController)
         {
-            base.OnInitialized();
-            _moneyController = Game.Instance.MoneyController;
-            _moneyController.ArmyMoney
-                .TakeUntilDisable(this)
-                .Subscribe(OnMoneyChanged);
+            _moneyController = moneyController;
+            _moneyController.ArmyMoney.Subscribe(OnMoneyChanged);
         }
 
         private void OnMoneyChanged(int money)

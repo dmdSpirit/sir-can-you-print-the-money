@@ -1,10 +1,12 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
@@ -12,6 +14,7 @@ namespace NovemberProject.Buildings.UI
     {
         private readonly CompositeDisposable _sub = new();
         private IMoneyPrinter _moneyPrinter = null!;
+        private MoneyController _moneyController = null!;
 
         [SerializeField]
         private string _lockedText = "Not learned";
@@ -37,24 +40,28 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private TMP_Text _moneyText = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(MoneyController moneyController)
         {
-            base.OnInitialized();
+            _moneyController = moneyController;
+        }
+
+        private void Start()
+        {
             _printButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnPrint);
             _burnButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnBurn);
         }
 
+        // TODO (Stas): Move to DI.
         protected override void OnShow(IMoneyPrinter moneyPrinter)
         {
             _sub.Clear();
             _moneyPrinter = moneyPrinter;
             _moneyPrinter.CanPrintMoney.Subscribe(UpdatePrintButtonState).AddTo(_sub);
             _moneyPrinter.CanBurnMoney.Subscribe(UpdateBurnButtonState).AddTo(_sub);
-            Game.Instance.MoneyController.GovernmentMoney.Subscribe(OnMoneyChanged).AddTo(_sub);
+            _moneyController.GovernmentMoney.Subscribe(OnMoneyChanged).AddTo(_sub);
         }
 
         protected override void OnHide()

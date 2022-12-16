@@ -17,7 +17,9 @@ namespace NovemberProject.CoreGameplay
         private readonly ReactiveProperty<bool> _isExpeditionActive = new();
 
         private FoodController _foodController = null!;
-        
+        private MoneyController _moneyController = null!;
+        private MessageBroker _messageBroker = null!;
+
         private int _explorersLeftForExpedition;
         private int _expeditionIndex;
 
@@ -31,17 +33,13 @@ namespace NovemberProject.CoreGameplay
         public IReadOnlyTimer? Timer => _expeditionTimer;
 
         [Inject]
-        private void Construct(FoodController foodController)
+        private void Construct(FoodController foodController, MoneyController moneyController,
+            MessageBroker messageBroker)
         {
             _foodController = foodController;
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            Game.Instance.MessageBroker.Receive<NewGameMessage>()
-                .TakeUntilDisable(this)
-                .Subscribe(OnNewGame);
+            _moneyController = moneyController;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
 
         public float GetExpeditionWinProbability()
@@ -101,8 +99,7 @@ namespace NovemberProject.CoreGameplay
                 return;
             }
 
-            MoneyController moneyController = Game.Instance.MoneyController;
-            moneyController.SpedArmyMoney(moneyCost);
+            _moneyController.SpedArmyMoney(moneyCost);
         }
 
         private void OnExpeditionFinished(Timer timer)
@@ -110,7 +107,8 @@ namespace NovemberProject.CoreGameplay
             _isExpeditionActive.Value = false;
             bool isSuccess = RollExpeditionResult();
             int reward = isSuccess ? GetCurrentExpeditionData().Reward : 0;
-            var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, reward, isSuccess, GetCurrentExpeditionData().Defenders);
+            var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, reward, isSuccess,
+                GetCurrentExpeditionData().Defenders);
             Game.Instance.GameStateMachine.ExpeditionFinished(expeditionResult);
             if (isSuccess)
             {

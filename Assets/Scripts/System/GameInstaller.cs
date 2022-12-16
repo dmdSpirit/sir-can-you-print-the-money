@@ -18,12 +18,12 @@ namespace NovemberProject.System
         [SerializeField]
         private FoodControllerSettings _foodControllerSettings = null!;
 
+        [SerializeField]
+        private MoneyControllerSettings _moneyControllerSettings = null!;
+
         // Temporary references.
         [SerializeField]
         private BuildingsController _buildingsController = null!;
-
-        [SerializeField]
-        private MoneyController _moneyController = null!;
 
         [SerializeField]
         private TechController _techController = null!;
@@ -35,12 +35,13 @@ namespace NovemberProject.System
         {
             Container.Bind<FolkManager>().AsSingle();
             Container.Bind<FoodController>().AsSingle();
+            Container.Bind<MoneyController>().AsSingle();
             Container.Bind<MessageBroker>().AsSingle();
             Container.Bind<FolkManagerSettings>().FromInstance(_folkManagerSettings);
             Container.Bind<FoodControllerSettings>().FromInstance(_foodControllerSettings);
+            Container.Bind<MoneyControllerSettings>().FromInstance(_moneyControllerSettings);
 
             // Unfinished.
-            Container.Bind<MoneyController>().FromInstance(_moneyController);
             Container.Bind<TechController>().FromInstance(_techController);
             Container.Bind<BuildingsController>().FromInstance(_buildingsController);
             Container.Bind<ResourceMoveEffectSpawner>().FromInstance(_resourceMoveEffectSpawner);

@@ -444,7 +444,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 32209916}
-  - component: {fileID: 32209915}
   - component: {fileID: 32209918}
   - component: {fileID: 32209919}
   m_Layer: 0
@@ -454,21 +453,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &32209915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32209914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada54ba3f9e04789a6bf46a6c31ba86c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingGovernmentMoney: 100
-  _startingArmyMoney: 20
-  _startingFolkMoney: 20
 --- !u!4 &32209916
 Transform:
   m_ObjectHideFlags: 0
@@ -15884,7 +15868,7 @@ PrefabInstance:
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _moneyController
       value: 
-      objectReference: {fileID: 32209915}
+      objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _buildingsController
       value: 

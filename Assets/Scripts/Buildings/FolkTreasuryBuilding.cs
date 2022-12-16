@@ -12,9 +12,9 @@ namespace NovemberProject.Buildings
 {
     public sealed class FolkTreasuryBuilding : Building, IResourceStorage, ITaxController
     {
-        private MoneyController _moneyController = null!;
         private FolkManager _folkManager = null!;
-        
+        private MoneyController _moneyController = null!;
+
         [SerializeField]
         private TMP_Text _moneyText = null!;
 
@@ -27,30 +27,23 @@ namespace NovemberProject.Buildings
         public override BuildingType BuildingType => BuildingType.FolkTreasury;
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
-        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.FolkMoney;
+        public IReadOnlyReactiveProperty<int> ResourceCount => _moneyController.FolkMoney;
         public IReadOnlyReactiveProperty<bool> CanRaiseTax => Game.Instance.TechController.CanRaiseTax;
         public IReadOnlyReactiveProperty<bool> CanLowerTax => Game.Instance.TechController.CanLowerTax;
 
         [Inject]
-        private void Construct(FolkManager folkManager)
+        private void Construct(FolkManager folkManager, MoneyController moneyController)
         {
             _folkManager = folkManager;
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            _moneyController = Game.Instance.MoneyController;
-            _moneyController.FolkMoney
-                .TakeUntilDisable(this)
-                .Subscribe(OnMoneyChanged);
+            _moneyController = moneyController;
+            _moneyController.FolkMoney.Subscribe(OnMoneyChanged);
         }
 
         private void OnMoneyChanged(int money)
         {
             _moneyText.text = money.ToString();
         }
-        
+
         public void RaiseTax() => _folkManager.RaiseTax();
         public void LowerTax() => _folkManager.LowerTax();
     }

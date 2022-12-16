@@ -5,6 +5,7 @@ using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
@@ -22,13 +23,11 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<bool> CanPrintMoney => Game.Instance.TechController.CanPrintMoney;
         public IReadOnlyReactiveProperty<bool> CanBurnMoney => Game.Instance.TechController.CanBurnMoney;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(MoneyController moneyController)
         {
-            base.OnInitialized();
-            _moneyController = Game.Instance.MoneyController;
-            _moneyController.GovernmentMoney
-                .TakeUntilDisable(this)
-                .Subscribe(OnMoneyChanged);
+            _moneyController = moneyController;
+            _moneyController.GovernmentMoney.Subscribe(OnMoneyChanged);
         }
 
         private void OnMoneyChanged(int money)
@@ -36,7 +35,7 @@ namespace NovemberProject.Buildings
             _moneyText.text = money.ToString();
         }
 
-        public void PrintMoney() => Game.Instance.MoneyController.PrintMoney(_moneyToPrint);
-        public void BurnMoney() => Game.Instance.MoneyController.BurnMoney(_moneyToPrint);
+        public void PrintMoney() => _moneyController.PrintMoney(_moneyToPrint);
+        public void BurnMoney() => _moneyController.BurnMoney(_moneyToPrint);
     }
 }

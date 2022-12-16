@@ -15,9 +15,9 @@ namespace NovemberProject.Buildings
         private readonly ReactiveProperty<bool> _expeditionsActive = new();
 
         private FoodController _foodController = null!;
+        private MoneyController _moneyController = null!;
 
         private static ArmyManager ArmyManager => Game.Instance.ArmyManager;
-        private static MoneyController MoneyController => Game.Instance.MoneyController;
 
         [SerializeField]
         private string _workerTitle = "Explorers";
@@ -55,18 +55,17 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<bool> IsActive => _expeditionsActive;
 
         [Inject]
-        private void Construct(FoodController foodController)
+        private void Construct(FoodController foodController, MoneyController moneyController)
         {
             _foodController = foodController;
+            _moneyController = moneyController;
             _foodController.ArmyFood.Subscribe(_ => UpdateCanBeSentStatus());
+            _moneyController.ArmyMoney.Subscribe(_ => UpdateCanBeSentStatus());
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Game.Instance.MoneyController.ArmyMoney
-                .TakeUntilDisable(this)
-                .Subscribe(_ => UpdateCanBeSentStatus());
             Game.Instance.Expeditions.IsExpeditionActive
                 .TakeUntilDisable(this)
                 .Subscribe(_ => UpdateCanBeSentStatus());
@@ -122,7 +121,7 @@ namespace NovemberProject.Buildings
                 && IsEnoughFoodForExpedition();
 
             bool IsEnoughMoneyForExpedition() =>
-                MoneyController.ArmyMoney.Value >= workersCount * _expeditionMoneyPerPersonCost;
+                _moneyController.ArmyMoney.Value >= workersCount * _expeditionMoneyPerPersonCost;
 
             bool IsEnoughFoodForExpedition() =>
                 _foodController.ArmyFood.Value >= workersCount * _expeditionFoodPerPersonCost;

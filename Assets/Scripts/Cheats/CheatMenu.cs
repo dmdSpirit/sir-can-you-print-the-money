@@ -1,9 +1,11 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Cheats
 {
@@ -13,6 +15,8 @@ namespace NovemberProject.Cheats
         private readonly List<CheatButtonInfo> _cheatButtons = new();
         private readonly List<CheatButton> _generatedButtons = new();
 
+        private MoneyController _moneyController = null!;
+
         [SerializeField]
         private CheatButton _buttonPrefab = null!;
 
@@ -21,10 +25,14 @@ namespace NovemberProject.Cheats
 
         private bool _isSizeFitterRefreshNeeded;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(MoneyController moneyController)
         {
-            base.OnInitialized();
+            _moneyController = moneyController;
+        }
 
+        private void Start()
+        {
             ClearOldButtons();
             PrepareButtonsList();
             GenerateButtons();
@@ -53,22 +61,22 @@ namespace NovemberProject.Cheats
             _cheatButtons.Add(new CheatButtonInfo("Add treasure", AddTreasure));
         }
 
-        private static void Print10Money()
+        private void Print10Money()
         {
-            Game.Instance.MoneyController.PrintMoney(10);
+            _moneyController.PrintMoney(10);
         }
 
-        private static void Add10Stone()
+        private void Add10Stone()
         {
             Game.Instance.StoneController.AddStone(10);
         }
 
-        private static void AddTreasure()
+        private void AddTreasure()
         {
             Game.Instance.TreasureController.AddTreasures(1);
         }
 
-        private static void Win()
+        private void Win()
         {
             Game.Instance.GameStateMachine.Victory();
         }

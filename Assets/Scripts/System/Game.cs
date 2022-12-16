@@ -39,7 +39,6 @@ namespace NovemberProject.System
         public GameStateMachine GameStateMachine { get; private set; } = null!;
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
-        public MoneyController MoneyController { get; private set; } = null!;
         public StoneController StoneController { get; private set; } = null!;
         public TreasureController TreasureController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
@@ -99,7 +98,6 @@ namespace NovemberProject.System
             UIManager = FindObjectOfType<UIManager>();
             CameraController = FindObjectOfType<CameraController>();
             BuildingSelector = FindObjectOfType<BuildingSelector>();
-            MoneyController = FindObjectOfType<MoneyController>();
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             BuildingsController = FindObjectOfType<BuildingsController>();
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();

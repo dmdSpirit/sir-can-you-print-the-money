@@ -209,3 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _folkManagerSettings: {fileID: 11400000, guid: 9ef8921aeb06e02448d420d0d6fd60d8, type: 2}
   _foodControllerSettings: {fileID: 11400000, guid: 095a441caa227ad42b93873a254bd87f, type: 2}
+  _moneyControllerSettings: {fileID: 11400000, guid: 161ccd77b2000a949815870e1bac313d, type: 2}
+  _buildingsController: {fileID: 0}
+  _techController: {fileID: 0}
+  _resourceMoveEffectSpawner: {fileID: 0}

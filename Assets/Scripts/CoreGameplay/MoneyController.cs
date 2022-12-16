@@ -1,39 +1,44 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.Buildings;
-using NovemberProject.CommonUIStuff;
 using NovemberProject.MovingResources;
-using NovemberProject.System;
+using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NovemberProject.CoreGameplay
 {
-    public sealed class MoneyController : InitializableBehaviour
+    public sealed class MoneyController
     {
         private readonly ReactiveProperty<int> _governmentMoney = new();
         private readonly ReactiveProperty<int> _armyMoney = new();
         private readonly ReactiveProperty<int> _folkMoney = new();
 
-        [SerializeField]
-        private int _startingGovernmentMoney = 100;
-
-        [SerializeField]
-        private int _startingArmyMoney = 0;
-
-        [SerializeField]
-        private int _startingFolkMoney = 13;
+        private readonly BuildingsController _buildingsController;
+        private readonly ResourceMoveEffectSpawner _resourceMoveEffectSpawner;
+        private readonly MoneyControllerSettings _settings;
+        private readonly MessageBroker _messageBroker;
 
         public IReadOnlyReactiveProperty<int> GovernmentMoney => _governmentMoney;
         public IReadOnlyReactiveProperty<int> ArmyMoney => _armyMoney;
         public IReadOnlyReactiveProperty<int> FolkMoney => _folkMoney;
 
-        public void InitializeGameData()
+        public MoneyController(MoneyControllerSettings moneyControllerSettings, BuildingsController buildingsController,
+            ResourceMoveEffectSpawner resourceMoveEffectSpawner, MessageBroker messageBroker)
         {
-            _governmentMoney.Value = _startingGovernmentMoney;
-            _folkMoney.Value = _startingFolkMoney;
-            _armyMoney.Value = _startingArmyMoney;
+            _settings = moneyControllerSettings;
+            _buildingsController = buildingsController;
+            _resourceMoveEffectSpawner = resourceMoveEffectSpawner;
+            _messageBroker = messageBroker;
+            messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+        }
+
+        private void OnNewGame(NewGameMessage message)
+        {
+            _governmentMoney.Value = _settings.GovernmentMoney;
+            _folkMoney.Value = _settings.FolkMoney;
+            _armyMoney.Value = _settings.ArmyMoney;
         }
 
         public void PrintMoney(int money)
@@ -57,9 +62,8 @@ namespace NovemberProject.CoreGameplay
         public void TransferMoneyFromGovernmentToArmy(int money)
         {
             Assert.IsTrue(_governmentMoney.Value >= money);
-            BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
-            Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
+            Building governmentTreasury = _buildingsController.GetBuilding(BuildingType.GovernmentTreasury);
+            Building armyTreasury = _buildingsController.GetBuilding(BuildingType.ArmyTreasury);
             _governmentMoney.Value -= money;
             ShowCoinMove(governmentTreasury.transform, armyTreasury.transform,
                 () => _armyMoney.Value += money);
@@ -75,9 +79,8 @@ namespace NovemberProject.CoreGameplay
         public void TransferMoneyFromArmyToFolk(int money)
         {
             Assert.IsTrue(_armyMoney.Value >= money);
-            BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building armyTreasury = buildingController.GetBuilding(BuildingType.ArmyTreasury);
-            Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
+            Building armyTreasury = _buildingsController.GetBuilding(BuildingType.ArmyTreasury);
+            Building folkTreasury = _buildingsController.GetBuilding(BuildingType.FolkTreasury);
             _armyMoney.Value -= money;
             ShowCoinMove(armyTreasury.transform, folkTreasury.transform, () => _folkMoney.Value += money);
         }
@@ -92,9 +95,8 @@ namespace NovemberProject.CoreGameplay
         public void TransferMoneyFromFolkToGovernment(int money)
         {
             Assert.IsTrue(_folkMoney.Value >= money);
-            BuildingsController buildingController = Game.Instance.BuildingsController;
-            Building folkTreasury = buildingController.GetBuilding(BuildingType.FolkTreasury);
-            Building governmentTreasury = buildingController.GetBuilding(BuildingType.GovernmentTreasury);
+            Building folkTreasury = _buildingsController.GetBuilding(BuildingType.FolkTreasury);
+            Building governmentTreasury = _buildingsController.GetBuilding(BuildingType.GovernmentTreasury);
             _folkMoney.Value -= money;
             ShowCoinMove(folkTreasury.transform, governmentTreasury.transform,
                 () => _governmentMoney.Value += money);
@@ -108,8 +110,7 @@ namespace NovemberProject.CoreGameplay
 
         private void ShowCoinMove(Transform start, Transform finish, Action callback)
         {
-            ResourceMoveEffectSpawner moveEffectSpawner = Game.Instance.ResourceMoveEffectSpawner;
-            MoveEffect effect = moveEffectSpawner.ShowMovingCoin(start.position, finish.position);
+            MoveEffect effect = _resourceMoveEffectSpawner.ShowMovingCoin(start.position, finish.position);
             effect.OnFinished.Subscribe(_ => callback.Invoke());
         }
     }

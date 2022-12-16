@@ -18,6 +18,7 @@ namespace NovemberProject.Buildings
 
         private FolkManager _folkManager = null!;
         private FoodController _foodController = null!;
+        private MoneyController _moneyController = null!;
         
         private Timer? _productionTimer;
 
@@ -48,25 +49,16 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
         [Inject]
-        private void Construct(FolkManager folkManager, FoodController foodController)
+        private void Construct(FolkManager folkManager, FoodController foodController, MoneyController moneyController)
         {
             _folkManager = folkManager;
             _foodController = foodController;
-
+            _moneyController = moneyController;
+            _folkManager.MarketFolk.Subscribe(_ => UpdateProduction());
             _foodController.FolkFood.Subscribe(_ => UpdateProduction());
+            _moneyController.ArmyMoney.Subscribe(_ => UpdateProduction());
         }
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            _folkManager.MarketFolk
-                .TakeUntilDisable(this)
-                .Subscribe(_ => UpdateProduction());
-            Game.Instance.MoneyController.ArmyMoney
-                .TakeUntilDisable(this)
-                .Subscribe(_ => UpdateProduction());
-        }
-        
         public void AddWorker()
         {
             _folkManager.AddFolkToMarket();
@@ -100,7 +92,7 @@ namespace NovemberProject.Buildings
         {
             return _foodController.FolkFood.Value >= _foodChangedPerTrade
                    && _folkManager.MarketFolk.Value >= 1
-                   && Game.Instance.MoneyController.ArmyMoney.Value >= _foodChangedPerTrade * _foodCostPerUnit;
+                   && _moneyController.ArmyMoney.Value >= _foodChangedPerTrade * _foodCostPerUnit;
         }
 
         private void StartProduction()
@@ -131,7 +123,7 @@ namespace NovemberProject.Buildings
             Assert.IsTrue(_productionTimer != null);
             Assert.IsTrue(_isProducing.Value);
             Assert.IsTrue(_folkManager.MarketFolk.Value > 0);
-            Game.Instance.MoneyController.TransferMoneyFromArmyToFolk(_foodCostPerUnit * _foodChangedPerTrade);
+            _moneyController.TransferMoneyFromArmyToFolk(_foodCostPerUnit * _foodChangedPerTrade);
             _foodController.TransferFoodFromFolkToArmy(_foodChangedPerTrade);
             _productionTimer = null;
             _isProducing.Value = false;
