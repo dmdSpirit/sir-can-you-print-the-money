@@ -16,6 +16,7 @@ namespace NovemberProject.Buildings
 
         private FoodController _foodController = null!;
         private MoneyController _moneyController = null!;
+        private Expeditions _expeditions = null!;
 
         private static ArmyManager ArmyManager => Game.Instance.ArmyManager;
 
@@ -40,35 +41,34 @@ namespace NovemberProject.Buildings
         public int MaxWorkerCount => 0;
         public bool HasMaxWorkerCount => false;
         public string WorkersTitle => _workerTitle;
-        public IReadOnlyReactiveProperty<bool> IsExpeditionActive => Game.Instance.Expeditions.IsExpeditionActive;
+        public IReadOnlyReactiveProperty<bool> IsExpeditionActive => _expeditions.IsExpeditionActive;
         public IReadOnlyReactiveProperty<bool> CanBeSentToExpedition => _canBeSentToExpedition;
-        public IReadOnlyTimer? ExpeditionTimer => Game.Instance.Expeditions.Timer;
-        public float WinProbability => Game.Instance.Expeditions.GetExpeditionWinProbability();
-        public int Defenders => Game.Instance.Expeditions.GetCurrentExpeditionData().Defenders;
-        public int Reward => Game.Instance.Expeditions.GetCurrentExpeditionData().Reward;
+        public IReadOnlyTimer? ExpeditionTimer => _expeditions.Timer;
+        public float WinProbability => _expeditions.GetExpeditionWinProbability();
+        public int Defenders => _expeditions.GetCurrentExpeditionData().Defenders;
+        public int Reward => _expeditions.GetCurrentExpeditionData().Reward;
         public int ExpeditionFoodPerPersonCost => _expeditionFoodPerPersonCost;
         public int ExpeditionMoneyPerPersonCost => _expeditionMoneyPerPersonCost;
         public bool ShowProducedValue => false;
         public IReadOnlyReactiveProperty<int>? ProducedValue => null;
-        public IReadOnlyReactiveProperty<bool> IsProducing => Game.Instance.Expeditions.IsExpeditionActive;
-        public IReadOnlyTimer? ProductionTimer => Game.Instance.Expeditions.Timer;
+        public IReadOnlyReactiveProperty<bool> IsProducing => _expeditions.IsExpeditionActive;
+        public IReadOnlyTimer? ProductionTimer => _expeditions.Timer;
         public IReadOnlyReactiveProperty<bool> IsActive => _expeditionsActive;
 
         [Inject]
-        private void Construct(FoodController foodController, MoneyController moneyController)
+        private void Construct(FoodController foodController, MoneyController moneyController, Expeditions expeditions)
         {
             _foodController = foodController;
             _moneyController = moneyController;
+            _expeditions = expeditions;
             _foodController.ArmyFood.Subscribe(_ => UpdateCanBeSentStatus());
             _moneyController.ArmyMoney.Subscribe(_ => UpdateCanBeSentStatus());
+            _expeditions.IsExpeditionActive.Subscribe(_ => UpdateCanBeSentStatus());
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Game.Instance.Expeditions.IsExpeditionActive
-                .TakeUntilDisable(this)
-                .Subscribe(_ => UpdateCanBeSentStatus());
             ArmyManager.ExplorersCount
                 .TakeUntilDisable(this)
                 .Subscribe(OnExplorersCountChanged);

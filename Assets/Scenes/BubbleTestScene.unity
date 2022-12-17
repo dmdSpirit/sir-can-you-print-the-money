@@ -1444,7 +1444,6 @@ Transform:
   - {fileID: 32209916}
   - {fileID: 1985125198}
   - {fileID: 1445167904}
-  - {fileID: 410280191}
   - {fileID: 1832996815375187180}
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -3654,70 +3653,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 648a8dc08e5b5bb44bb3dd044d4fa3ec, type: 3}
   m_PrefabInstance: {fileID: 394849409}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &410280190
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 410280191}
-  - component: {fileID: 410280192}
-  m_Layer: 0
-  m_Name: expeditions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &410280191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410280190}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 119136397}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &410280192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410280190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4d9fbfac5d442ea6231c2f6a597058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _expeditionDuration: 25
-  _expeditionDatas:
-  - Reward: 1
-    Defenders: 1
-  - Reward: 2
-    Defenders: 2
-  - Reward: 3
-    Defenders: 3
-  - Reward: 4
-    Defenders: 4
-  - Reward: 5
-    Defenders: 5
-  - Reward: 6
-    Defenders: 6
-  - Reward: 7
-    Defenders: 7
-  - Reward: 8
-    Defenders: 8
-  - Reward: 9
-    Defenders: 9
 --- !u!4 &411097142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 007310bdc51f88b46b282a13bc8e9ecd, type: 3}
@@ -10442,7 +10377,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1094725333}
-  - component: {fileID: 1094725332}
   m_Layer: 0
   m_Name: buildings
   m_TagString: Untagged
@@ -10450,18 +10384,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1094725332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094725331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca268e575ac64b8a9ed12add50fffac7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1094725333
 Transform:
   m_ObjectHideFlags: 0
@@ -15872,7 +15794,7 @@ PrefabInstance:
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _buildingsController
       value: 
-      objectReference: {fileID: 1094725332}
+      objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _resourceMoveEffectSpawner
       value: 

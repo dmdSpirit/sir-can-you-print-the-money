@@ -1,44 +1,37 @@
 ﻿#nullable enable
 using NovemberProject.Buildings;
-using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using Zenject;
 
 namespace NovemberProject.CoreGameplay
 {
-    public sealed class Expeditions : InitializableBehaviour
+    public sealed class Expeditions
     {
         private readonly ReactiveProperty<bool> _isExpeditionActive = new();
 
+        private readonly FoodController _foodController;
+        private readonly MoneyController _moneyController;
+        private readonly BuildingsController _buildingsController;
+        private readonly MessageBroker _messageBroker;
+        private readonly ExpeditionSettings _settings;
+
         private Timer? _expeditionTimer;
-
-        private FoodController _foodController = null!;
-        private MoneyController _moneyController = null!;
-        private BuildingsController _buildingsController = null!;
-        private MessageBroker _messageBroker = null!;
-
         private int _explorersLeftForExpedition;
         private int _expeditionIndex;
-
-        [SerializeField]
-        private int _expeditionDuration = 20;
-
-        [SerializeField]
-        private ExpeditionData[] _expeditionDatas = null!;
 
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive => _isExpeditionActive;
         public IReadOnlyTimer? Timer => _expeditionTimer;
 
-        [Inject]
-        private void Construct(FoodController foodController, MoneyController moneyController,
+        public Expeditions(ExpeditionSettings expeditionSettings, FoodController foodController,
+            MoneyController moneyController,
             BuildingsController buildingsController,
             MessageBroker messageBroker)
         {
+            _settings = expeditionSettings;
             _foodController = foodController;
             _moneyController = moneyController;
             _buildingsController = buildingsController;
@@ -56,13 +49,13 @@ namespace NovemberProject.CoreGameplay
 
         public ExpeditionData GetCurrentExpeditionData()
         {
-            int maxIndex = _expeditionDatas.Length - 1;
+            int maxIndex = _settings.ExpeditionDatas.Count - 1;
             if (_expeditionIndex < maxIndex)
             {
-                return _expeditionDatas[_expeditionIndex];
+                return _settings.ExpeditionDatas[_expeditionIndex];
             }
 
-            return _expeditionDatas[maxIndex];
+            return _settings.ExpeditionDatas[maxIndex];
         }
 
         private bool RollExpeditionResult()
@@ -79,7 +72,7 @@ namespace NovemberProject.CoreGameplay
             _explorersLeftForExpedition = Game.Instance.ArmyManager.ExplorersCount.Value;
             PayFood(expeditionsBuilding, _explorersLeftForExpedition);
             PayMoney(expeditionsBuilding, _explorersLeftForExpedition);
-            _expeditionTimer = Game.Instance.TimeSystem.CreateTimer(_expeditionDuration, OnExpeditionFinished);
+            _expeditionTimer = Game.Instance.TimeSystem.CreateTimer(_settings.ExpeditionDuration, OnExpeditionFinished);
             _expeditionTimer.Start();
             _isExpeditionActive.Value = true;
         }

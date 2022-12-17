@@ -21,6 +21,9 @@ namespace NovemberProject.System
         [SerializeField]
         private MoneyControllerSettings _moneyControllerSettings = null!;
 
+        [SerializeField]
+        private ExpeditionSettings _expeditionSettings = null!;
+
         // Temporary references.
         [SerializeField]
         private TechController _techController = null!;
@@ -35,9 +38,11 @@ namespace NovemberProject.System
             Container.Bind<MoneyController>().AsSingle();
             Container.Bind<BuildingsController>().AsSingle();
             Container.Bind<MessageBroker>().AsSingle();
+            Container.Bind<Expeditions>().AsSingle();
             Container.Bind<FolkManagerSettings>().FromInstance(_folkManagerSettings);
             Container.Bind<FoodControllerSettings>().FromInstance(_foodControllerSettings);
             Container.Bind<MoneyControllerSettings>().FromInstance(_moneyControllerSettings);
+            Container.Bind<ExpeditionSettings>().FromInstance(_expeditionSettings);
 
             // Unfinished.
             Container.Bind<TechController>().FromInstance(_techController);

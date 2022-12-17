@@ -20,6 +20,7 @@ namespace NovemberProject.CoreGameplay
 
         private FoodController _foodController = null!;
         private MoneyController _moneyController = null!;
+        private Expeditions _expeditions = null!;
 
         [SerializeField]
         private int _startingArmySalary = 5;
@@ -36,10 +37,11 @@ namespace NovemberProject.CoreGameplay
         public IReactiveProperty<int> Salary => _salary;
 
         [Inject]
-        private void Construct(FoodController foodController, MoneyController moneyController)
+        private void Construct(FoodController foodController, MoneyController moneyController, Expeditions expeditions)
         {
             _foodController = foodController;
             _moneyController = moneyController;
+            _expeditions = expeditions;
         }
 
         public void InitializeGameData()
@@ -108,7 +110,7 @@ namespace NovemberProject.CoreGameplay
         public void PaySalary()
         {
             DesertUnpaid();
-            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
+            int armyCount = _expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             int salaryToPay = _salary.Value * armyCount;
             if (salaryToPay == 0)
             {
@@ -121,7 +123,7 @@ namespace NovemberProject.CoreGameplay
         public void EatFood()
         {
             KillStarved();
-            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
+            int armyCount = _expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int foodToEat = armyCount * coreGameplay.FoodPerPerson;
             Assert.IsTrue(_foodController.ArmyFood.Value >= foodToEat);
@@ -130,7 +132,7 @@ namespace NovemberProject.CoreGameplay
 
         private void KillStarved()
         {
-            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
+            int armyCount = _expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             CoreGameplay coreGameplay = Game.Instance.CoreGameplay;
             int maxArmyToFeed = _foodController.ArmyFood.Value / coreGameplay.FoodPerPerson;
             int starvedArmy = armyCount - maxArmyToFeed;
@@ -156,13 +158,13 @@ namespace NovemberProject.CoreGameplay
             delta -= _guardsCount.Value;
             _guardsCount.Value = 0;
             Assert.IsTrue(delta <= _explorersCount.Value);
-            Assert.IsFalse(Game.Instance.Expeditions.IsExpeditionActive.Value);
+            Assert.IsFalse(_expeditions.IsExpeditionActive.Value);
             _explorersCount.Value -= delta;
         }
 
         private void DesertUnpaid()
         {
-            int armyCount = Game.Instance.Expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
+            int armyCount = _expeditions.IsExpeditionActive.Value ? _guardsCount.Value : _armyCount.Value;
             int governmentMoney = _moneyController.GovernmentMoney.Value;
             int maxAffordableArmy = governmentMoney / _salary.Value;
             int numberToDesert = armyCount - maxAffordableArmy;
