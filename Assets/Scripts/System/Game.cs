@@ -6,6 +6,7 @@ using NovemberProject.ClicheSpeech;
 using NovemberProject.CoreGameplay;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
+using NovemberProject.Input;
 using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
 using NovemberProject.System.Messages;
@@ -35,9 +36,7 @@ namespace NovemberProject.System
         public ClicheBible ClicheBible { get; private set; } = null!;
         public RoundSystem RoundSystem { get; private set; } = null!;
         public TimeSystem TimeSystem { get; private set; } = null!;
-        public InputSystem.InputSystem InputSystem { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
-        public GameStateMachine GameStateMachine { get; private set; } = null!;
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
         public StoneController StoneController { get; private set; } = null!;
@@ -51,8 +50,6 @@ namespace NovemberProject.System
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
-        public IObservable<State> OnStateChanged => GameStateMachine.OnStateChanged;
-        public MessageBroker MessageBroker =>_messageBroker;
 
         [Inject]
         private void Construct(MessageBroker messageBroker, GameStateMachine gameStateMachine)
@@ -66,10 +63,8 @@ namespace NovemberProject.System
             DontDestroyOnLoad(this);
             CreateComponents();
             Initialize();
-            GameStateMachine.InitializeGame();
+            _gameStateMachine.InitializeGame();
         }
-
-        public static void PublishMessage(IMessage message) => Instance.MessageBroker.Publish(message);
 
         private static Game GetInstance()
         {
@@ -93,7 +88,6 @@ namespace NovemberProject.System
         {
             RoundSystem = GetComponent<RoundSystem>();
             TimeSystem = gameObject.AddComponent<TimeSystem>();
-            InputSystem = gameObject.AddComponent<InputSystem.InputSystem>();
             UIManager = FindObjectOfType<UIManager>();
             CameraController = FindObjectOfType<CameraController>();
             BuildingSelector = FindObjectOfType<BuildingSelector>();

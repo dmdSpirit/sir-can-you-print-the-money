@@ -2,6 +2,7 @@
 using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay.FolkManagement;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
@@ -35,6 +36,7 @@ namespace NovemberProject.CoreGameplay
 
         private FolkManager _folkManager = null!;
         private ArmyManager _armyManager = null!;
+        private GameStateMachine _gameStateMachine = null!;
 
         private Timer? _attackTimer;
         private int _attackIndex;
@@ -117,7 +119,7 @@ namespace NovemberProject.CoreGameplay
                 _attackIndex++;
             }
 
-            Game.Instance.GameStateMachine.ShowAttackResult(new AttackData(defenders, attackers, attackStatus));
+            _gameStateMachine.ShowAttackResult(new AttackData(defenders, attackers, attackStatus));
             PlanNextAttack();
         }
 

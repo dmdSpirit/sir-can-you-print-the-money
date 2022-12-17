@@ -1,16 +1,17 @@
 ﻿#nullable enable
+using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
 using NovemberProject.System;
-using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
     public sealed class ExpeditionResultsPanel : UIElement<ExpeditionResult>
     {
+        private GameStateMachine _gameStateMachine = null!;
         private ExpeditionResult _expeditionResult;
 
         [SerializeField]
@@ -19,14 +20,17 @@ namespace NovemberProject.GameStates.UI
         [SerializeField]
         private ExpeditionResultPanel _failPanel = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
             _successPanel.OnClose
-                .TakeUntilDisable(this)
                 .Subscribe(OnCloseClicked);
             _failPanel.OnClose
-                .TakeUntilDisable(this)
                 .Subscribe(OnCloseClicked);
         }
 
@@ -53,7 +57,7 @@ namespace NovemberProject.GameStates.UI
 
         private void OnCloseClicked(Unit _)
         {
-            Game.Instance.GameStateMachine.ExpeditionFinishedExit();
+            _gameStateMachine.ExpeditionFinishedExit();
         }
     }
 }

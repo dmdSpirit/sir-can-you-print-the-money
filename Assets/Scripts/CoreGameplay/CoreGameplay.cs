@@ -49,6 +49,10 @@ namespace NovemberProject.CoreGameplay
             _armyManager = armyManager;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+            _messageBroker.Receive<ArmyStarvedMessage>().Subscribe(OnArmyStarved);
+            _messageBroker.Receive<ArmyDesertedMessage>().Subscribe(OnArmyDeserted);
+            _messageBroker.Receive<FolkStarvedMessage>().Subscribe(OnFolkStarved);
+            _messageBroker.Receive<FolkExecutedMessage>().Subscribe(OnFolkExecuted);
         }
 
         private void OnNewGame(NewGameMessage message)
@@ -138,44 +142,44 @@ namespace NovemberProject.CoreGameplay
             return true;
         }
 
-        public void OnFolkStarved(int count)
+        private void OnFolkStarved(FolkStarvedMessage message)
         {
-            if (count > 0)
+            if (message.Count > 0)
             {
-                Game.Instance.UIManager.ShowNotification(NotificationType.FolkStarved, count);
+                Game.Instance.UIManager.ShowNotification(NotificationType.FolkStarved, message.Count);
             }
 
-            _roundResult.FolkStarved += count;
+            _roundResult.FolkStarved += message.Count;
         }
 
-        public void OnArmyStarved(int count)
+        private void OnArmyStarved(ArmyStarvedMessage message)
         {
-            if (count > 0)
+            if (message.Count > 0)
             {
-                Game.Instance.UIManager.ShowNotification(NotificationType.ArmyStarved, count);
+                Game.Instance.UIManager.ShowNotification(NotificationType.ArmyStarved, message.Count);
             }
 
-            _roundResult.ArmyStarved += count;
+            _roundResult.ArmyStarved += message.Count;
         }
 
-        public void OnFolkExecuted(int count)
+        private void OnFolkExecuted(FolkExecutedMessage message)
         {
-            if (count > 0)
+            if (message.Count > 0)
             {
-                Game.Instance.UIManager.ShowNotification(NotificationType.FolkExecuted, count);
+                Game.Instance.UIManager.ShowNotification(NotificationType.FolkExecuted, message.Count);
             }
 
-            _roundResult.FolkExecuted += count;
+            _roundResult.FolkExecuted += message.Count;
         }
 
-        public void OnArmyDeserted(int count)
+        private void OnArmyDeserted(ArmyDesertedMessage message)
         {
-            if (count > 0)
+            if (message.Count > 0)
             {
-                Game.Instance.UIManager.ShowNotification(NotificationType.ArmyDeserted, count);
+                Game.Instance.UIManager.ShowNotification(NotificationType.ArmyDeserted, message.Count);
             }
 
-            _roundResult.ArmyDeserted += count;
+            _roundResult.ArmyDeserted += message.Count;
         }
 
         private bool IsNoFolkLeft() => _folkManager.IsNoFolkLeft();

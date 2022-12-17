@@ -1,24 +1,33 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
     public sealed class VictoryScreen : UIElement<object?>
     {
+        private GameStateMachine _gameStateMachine = null!;
+
         [SerializeField]
         private Button _toMainMenuButton = null!;
-        
-        protected override void OnInitialized()
+
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
             _toMainMenuButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnToMainMenuButtonClicked);
         }
+
         protected override void OnShow(object? value)
         {
         }
@@ -26,10 +35,10 @@ namespace NovemberProject.Rounds.UI
         protected override void OnHide()
         {
         }
-        
+
         private void OnToMainMenuButtonClicked(Unit _)
         {
-            Game.Instance.GameStateMachine.MainMenu();
+            _gameStateMachine.MainMenu();
         }
     }
 }

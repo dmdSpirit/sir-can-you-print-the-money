@@ -5,7 +5,7 @@ using NovemberProject.System;
 using NovemberProject.System.UI;
 using UnityEngine;
 
-namespace NovemberProject.InputSystem
+namespace NovemberProject.Input
 {
     public sealed class MouseSelectionHandler : InputHandler
     {
@@ -32,7 +32,7 @@ namespace NovemberProject.InputSystem
         private static void RaycastBuildingSelection(CameraController cameraController,
             BuildingSelector buildingSelector)
         {
-            Ray ray = cameraController.MainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = cameraController.MainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
             UIManager uiManager = Game.Instance.UIManager;
             LayerMask layerMask = buildingSelector.LayerMask | uiManager.LayerMask;
             if (Physics.Raycast(ray, out RaycastHit hit, RAYCAST_MAX_DISTANCE, layerMask: layerMask))
@@ -41,7 +41,7 @@ namespace NovemberProject.InputSystem
                 var building = hitObject.GetComponent<Building>();
                 if (building != null)
                 {
-                    if (Input.GetMouseButton(LEFT_MOUSE_BUTTON))
+                    if (UnityEngine.Input.GetMouseButton(LEFT_MOUSE_BUTTON))
                     {
                         Game.Instance.BuildingSelector.Select(building);
                     }
@@ -53,7 +53,7 @@ namespace NovemberProject.InputSystem
             }
 
             Game.Instance.BuildingNameHover.HidePanel();
-            if (Input.GetMouseButton(LEFT_MOUSE_BUTTON))
+            if (UnityEngine.Input.GetMouseButton(LEFT_MOUSE_BUTTON))
             {
                 Game.Instance.BuildingSelector.Unselect();
             }

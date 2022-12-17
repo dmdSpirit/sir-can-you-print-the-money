@@ -5,7 +5,7 @@ using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
 
-namespace NovemberProject.InputSystem
+namespace NovemberProject.Input
 {
     public sealed class InputSystem : InitializableBehaviour
     {
@@ -17,10 +17,8 @@ namespace NovemberProject.InputSystem
 
         public IObservable<Unit> OnHandleInput => _onHandleInput;
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
-
             _isActive = true;
         }
 

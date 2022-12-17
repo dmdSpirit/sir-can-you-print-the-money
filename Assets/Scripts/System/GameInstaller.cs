@@ -3,6 +3,7 @@ using NovemberProject.Buildings;
 using NovemberProject.CoreGameplay;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
+using NovemberProject.Input;
 using NovemberProject.MovingResources;
 using NovemberProject.TechTree;
 using NovemberProject.Time;
@@ -42,6 +43,12 @@ namespace NovemberProject.System
         [SerializeField]
         private CoreGameplay.CoreGameplay _coreGameplay = null!;
 
+        [SerializeField]
+        private CombatController _combatController = null!;
+
+        [SerializeField]
+        private InputSystem _inputSystem = null!;
+
         public override void InstallBindings()
         {
             Container.Bind<FolkManager>().AsSingle();
@@ -65,6 +72,8 @@ namespace NovemberProject.System
             Container.Bind<Game>().FromInstance(Game.Instance);
             Container.Bind<TimeSystem>().FromInstance(_timeSystem);
             Container.Bind<CoreGameplay.CoreGameplay>().FromInstance(_coreGameplay);
+            Container.Bind<CombatController>().FromInstance(_combatController);
+            Container.Bind<InputSystem>().FromInstance(_inputSystem);
         }
 
         private void InstallSettingsBindings()

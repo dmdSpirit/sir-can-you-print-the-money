@@ -1,14 +1,13 @@
 ﻿#nullable enable
 using NovemberProject.System;
-using UnityEngine;
 
-namespace NovemberProject.InputSystem
+namespace NovemberProject.Input
 {
     public sealed class ToggleCheatMenuInputHandler : InputHandler
     {
         public override void HandleInput()
         {
-            if (!Input.GetKeyDown(InputKeys.TOGGLE_CHEAT_MENU))
+            if (!UnityEngine.Input.GetKeyDown(InputKeys.TOGGLE_CHEAT_MENU))
             {
                 return;
             }

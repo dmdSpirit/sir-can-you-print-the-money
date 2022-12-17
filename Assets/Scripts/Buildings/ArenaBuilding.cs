@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
@@ -7,14 +8,17 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
     public sealed class ArenaBuilding : Building, IConstructableBuilding
     {
         private readonly ReactiveProperty<ConstructableState> _constructableState = new();
+
+        private MessageBroker _messageBroker = null!;
+        private GameStateMachine _gameStateMachine = null!;
         private Timer? _constructionTimer;
-        
         private Vector3 _initialPosition;
 
         [SerializeField]
@@ -42,24 +46,22 @@ namespace NovemberProject.Buildings
         public Sprite ResourceImage => _stoneResourceImage;
         public IReadOnlyTimer? ConstructionTimer => _constructionTimer;
 
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine, MessageBroker messageBroker)
+        {
+            _gameStateMachine = gameStateMachine;
+            _messageBroker = messageBroker;
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
             _initialPosition = transform.position;
-            Game.Instance.MessageBroker.Receive<NewGameMessage>()
-                .TakeUntilDisable(this)
+            _messageBroker.Receive<NewGameMessage>()
                 .Subscribe(OnNewGame);
             Game.Instance.StoneController.Stone
                 .TakeUntilDisable(this)
                 .Subscribe(OnStoneCountChanged);
-            Game.Instance.MessageBroker.Receive<NewGameMessage>()
-                .TakeUntilDisable(this)
-                .Subscribe(ResetPosition);
-        }
-
-        private void ResetPosition(NewGameMessage _)
-        {
-            transform.position = _initialPosition;
         }
 
         public void StartConstruction()
@@ -78,6 +80,7 @@ namespace NovemberProject.Buildings
             _constructableState.Value = Buildings.ConstructableState.NotConstructed;
             _panel.SetActive(true);
             _panelImage.sprite = _stoneResourceImage;
+            transform.position = _initialPosition;
         }
 
         private void OnConstructionFinished(Timer _)
@@ -86,7 +89,7 @@ namespace NovemberProject.Buildings
             _constructableState.Value = Buildings.ConstructableState.Constructed;
             _constructionTimer = null;
             _panel.SetActive(false);
-            Game.Instance.GameStateMachine.Victory();
+            _gameStateMachine.Victory();
         }
 
         private void OnStoneCountChanged(int stone)

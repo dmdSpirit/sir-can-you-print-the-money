@@ -7,7 +7,14 @@ namespace NovemberProject.GameStates
 {
     public sealed class RoundEndState : State
     {
+        private readonly GameStateMachine _gameStateMachine;
+        
         private IDisposable? _sub;
+
+        public RoundEndState(GameStateMachine gameStateMachine)
+        {
+            _gameStateMachine = gameStateMachine;
+        }
 
         protected override void OnEnter()
         {
@@ -35,7 +42,7 @@ namespace NovemberProject.GameStates
             Game.Instance.CoreGameplay.EndRound();
             if (Game.Instance.CoreGameplay.IsGameOver())
             {
-                Game.Instance.GameStateMachine.GameOver();
+                _gameStateMachine.GameOver();
                 return;
             }
 

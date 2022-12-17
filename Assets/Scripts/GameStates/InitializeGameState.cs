@@ -1,11 +1,20 @@
 ﻿#nullable enable
-using NovemberProject.InputSystem;
+using NovemberProject.Input;
 using NovemberProject.System;
 
 namespace NovemberProject.GameStates
 {
     public sealed class InitializeGameState : State
     {
+        private readonly InputSystem _inputSystem;
+        private readonly GameStateMachine _gameStateMachine;
+
+        public InitializeGameState(InputSystem inputSystem, GameStateMachine gameStateMachine)
+        {
+            _inputSystem = inputSystem;
+            _gameStateMachine = gameStateMachine;
+        }
+
         protected override void OnEnter()
         {
             Game.Instance.UIManager.HideEndOfRoundPanel();
@@ -24,14 +33,14 @@ namespace NovemberProject.GameStates
             Game.Instance.UIManager.HideNotificationsPanel();
             Game.Instance.BuildingNameHover.HidePanel();
 #if UNITY_EDITOR || DEV_BUILD
-            Game.Instance.InputSystem.AddGlobalInputHandler<ToggleCheatMenuInputHandler>();
-            Game.Instance.InputSystem.AddGlobalInputHandler<ToggleSystemPanelInputHandler>();
+            _inputSystem.AddGlobalInputHandler<ToggleCheatMenuInputHandler>();
+            _inputSystem.AddGlobalInputHandler<ToggleSystemPanelInputHandler>();
 #endif
             Game.Instance.UIManager.HideSystemInfoPanel();
             Game.Instance.UIManager.HideCheatPanel();
             Game.Instance.TimeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
-            Game.Instance.GameStateMachine.MainMenu();
+            _gameStateMachine.MainMenu();
         }
 
         protected override void OnExit()

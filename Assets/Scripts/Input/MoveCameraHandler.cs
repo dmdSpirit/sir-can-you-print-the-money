@@ -3,7 +3,7 @@ using NovemberProject.CameraSystem;
 using NovemberProject.System;
 using UnityEngine;
 
-namespace NovemberProject.InputSystem
+namespace NovemberProject.Input
 {
     public sealed class MoveCameraHandler : InputHandler
     {
@@ -27,15 +27,15 @@ namespace NovemberProject.InputSystem
         private static Vector2 GetRigMovementDirection()
         {
             Vector2 direction = GetKeyboardMovement();
-            if (!Input.GetMouseButton(RIGHT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
+            if (!UnityEngine.Input.GetMouseButton(RIGHT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
             {
                 return direction.normalized;
             }
 
             CameraController cameraController = Game.Instance.CameraController;
             float mouseMoveSpeed = cameraController.MouseMoveSpeed;
-            direction.x -= Input.GetAxis("Mouse X") * mouseMoveSpeed;
-            direction.y -= Input.GetAxis("Mouse Y") * mouseMoveSpeed;
+            direction.x -= UnityEngine.Input.GetAxis("Mouse X") * mouseMoveSpeed;
+            direction.y -= UnityEngine.Input.GetAxis("Mouse Y") * mouseMoveSpeed;
 
             return direction.normalized;
         }
@@ -43,22 +43,22 @@ namespace NovemberProject.InputSystem
         private static Vector2 GetKeyboardMovement()
         {
             Vector2 direction = Vector2.zero;
-            if (Input.GetKey(InputKeys.CAMERA_FORWARD_KEY))
+            if (UnityEngine.Input.GetKey(InputKeys.CAMERA_FORWARD_KEY))
             {
                 direction.y++;
             }
 
-            if (Input.GetKey(InputKeys.CAMERA_LEFT_KEY))
+            if (UnityEngine.Input.GetKey(InputKeys.CAMERA_LEFT_KEY))
             {
                 direction.x--;
             }
 
-            if (Input.GetKey(InputKeys.CAMERA_BACKWARD_KEY))
+            if (UnityEngine.Input.GetKey(InputKeys.CAMERA_BACKWARD_KEY))
             {
                 direction.y--;
             }
 
-            if (Input.GetKey(InputKeys.CAMERA_RIGHT_KEY))
+            if (UnityEngine.Input.GetKey(InputKeys.CAMERA_RIGHT_KEY))
             {
                 direction.x++;
             }
@@ -68,13 +68,13 @@ namespace NovemberProject.InputSystem
 
         private static float GetZoom()
         {
-            float zoom = Input.GetAxis("Mouse ScrollWheel");
-            if (Input.GetKey(InputKeys.CAMERA_ZOOM_IN_KEY))
+            float zoom = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+            if (UnityEngine.Input.GetKey(InputKeys.CAMERA_ZOOM_IN_KEY))
             {
                 zoom += Game.Instance.CameraController.KeysZoomModifier;
             }
 
-            if (Input.GetKey(InputKeys.CAMERA_ZOOM_OUT_KEY))
+            if (UnityEngine.Input.GetKey(InputKeys.CAMERA_ZOOM_OUT_KEY))
             {
                 zoom -= Game.Instance.CameraController.KeysZoomModifier;
             }

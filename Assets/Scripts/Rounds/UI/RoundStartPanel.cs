@@ -1,16 +1,20 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
     public sealed class RoundStartPanel : UIElement<object?>
     {
+        private GameStateMachine _gameStateMachine = null!;
+
         [SerializeField]
         private TMP_Text _title = null!;
 
@@ -26,12 +30,15 @@ namespace NovemberProject.Rounds.UI
         [SerializeField]
         private RoundStartConfigs _roundStartConfigs = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
 
+        private void Start()
+        {
             _nextRound.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnNextRound);
         }
 
@@ -48,9 +55,9 @@ namespace NovemberProject.Rounds.UI
         {
         }
 
-        private static void OnNextRound(Unit _)
+        private void OnNextRound(Unit _)
         {
-            Game.Instance.GameStateMachine.Round();
+            _gameStateMachine.Round();
         }
     }
 }

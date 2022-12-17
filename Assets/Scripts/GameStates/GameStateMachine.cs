@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CoreGameplay;
-using NovemberProject.InputSystem;
+using NovemberProject.Input;
 using NovemberProject.System;
 using UniRx;
 
@@ -24,6 +24,9 @@ namespace NovemberProject.GameStates
 
         private readonly Subject<State> _onStateChanged = new();
 
+        private readonly InputSystem _inputSystem;
+        private readonly MessageBroker _messageBroker;
+
         private ExpeditionFinishedState? _expeditionFinishedState;
         private AttackState? _attackState;
         private State? _currentState;
@@ -31,20 +34,21 @@ namespace NovemberProject.GameStates
         public IObservable<State> OnStateChanged => _onStateChanged;
         public State CurrentState => _currentState;
 
-        public GameStateMachine()
+        public GameStateMachine(InputSystem inputSystem, MessageBroker messageBroker)
         {
-            InputSystem.InputSystem inputSystem = Game.Instance.InputSystem;
+            _inputSystem = inputSystem;
+            _messageBroker = messageBroker;
             _exitGameState = new ExitGameState();
             _mainMenuState = new MainMenuState();
-            _mainMenuState.AddInputHandler(inputSystem.GetInputHandler<EscapeToExitGameHandler>());
-            _newGameState = new NewGameState();
+            _mainMenuState.AddInputHandler(_inputSystem.GetInputHandler<EscapeToExitGameHandler>());
+            _newGameState = new NewGameState(this, _messageBroker);
             _roundState = new RoundState();
-            _roundState.AddInputHandler(inputSystem.GetInputHandler<MoveCameraHandler>());
-            _roundState.AddInputHandler(inputSystem.GetInputHandler<TimeControlsHandler>());
-            _roundState.AddInputHandler(inputSystem.GetInputHandler<MouseSelectionHandler>());
-            _roundEndState = new RoundEndState();
-            _roundEndState.AddInputHandler(inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
-            _initializeGameState = new InitializeGameState();
+            _roundState.AddInputHandler(_inputSystem.GetInputHandler<MoveCameraHandler>());
+            _roundState.AddInputHandler(_inputSystem.GetInputHandler<TimeControlsHandler>());
+            _roundState.AddInputHandler(_inputSystem.GetInputHandler<MouseSelectionHandler>());
+            _roundEndState = new RoundEndState(this);
+            _roundEndState.AddInputHandler(_inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
+            _initializeGameState = new InitializeGameState(_inputSystem, this);
             _roundStartState = new RoundStartState();
             _gameOverState = new GameOverState();
             _victoryState = new VictoryState();
@@ -52,7 +56,7 @@ namespace NovemberProject.GameStates
             _tutorialState = new TutorialState();
             _techTreeState = new TechTreeState();
 
-            Game.Instance.InputSystem.OnHandleInput.Subscribe(_ => HandleInput());
+            _inputSystem.OnHandleInput.Subscribe(HandleInput);
         }
 
         public void NewGame() => ChangeState(_newGameState);
@@ -94,7 +98,7 @@ namespace NovemberProject.GameStates
             _onStateChanged.OnNext(_currentState);
         }
 
-        private void HandleInput()
+        private void HandleInput(Unit _)
         {
             _currentState?.HandleInput();
         }

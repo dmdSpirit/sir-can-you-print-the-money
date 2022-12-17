@@ -1,10 +1,13 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.GameStates;
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.Rounds
 {
@@ -16,6 +19,9 @@ namespace NovemberProject.Rounds
         private readonly Subject<Unit> _onRoundEnded = new();
         private readonly Subject<Unit> _onRoundTimerStarted = new();
 
+        private GameStateMachine _gameStateMachine = null!;
+        private MessageBroker _messageBroker = null!;
+
         private Timer? _roundTimer;
 
         [SerializeField]
@@ -26,7 +32,15 @@ namespace NovemberProject.Rounds
         public IObservable<Unit> OnRoundTimerStarted => _onRoundTimerStarted;
         public IReadOnlyTimer? RoundTimer => _roundTimer;
 
-        public void ResetRounds()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine, MessageBroker messageBroker)
+        {
+            _gameStateMachine = gameStateMachine;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+        }
+
+        private void OnNewGame(NewGameMessage message)
         {
             _round.Value = ROUND_TO_START_FROM;
             if (_roundTimer == null)
@@ -59,7 +73,7 @@ namespace NovemberProject.Rounds
         private void OnRoundTimerFinished(IReadOnlyTimer timer)
         {
             Assert.IsTrue(timer == _roundTimer);
-            Game.Instance.GameStateMachine.FinishRound();
+            _gameStateMachine.FinishRound();
         }
     }
 }

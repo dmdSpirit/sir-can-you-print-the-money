@@ -19,7 +19,6 @@ namespace NovemberProject.CoreGameplay
         private readonly FoodController _foodController;
         private readonly MoneyController _moneyController;
         private readonly MessageBroker _messageBroker;
-        private readonly CoreGameplay _coreGameplay;
 
         private bool _explorersLeftToExpedition;
 
@@ -29,13 +28,12 @@ namespace NovemberProject.CoreGameplay
         public IReactiveProperty<int> Salary => _salary;
 
         public ArmyManager(ArmyManagerSettings armyManagerSettings, FoodController foodController,
-            MoneyController moneyController, CoreGameplay coreGameplay,
+            MoneyController moneyController,
             MessageBroker messageBroker)
         {
             _settings = armyManagerSettings;
             _foodController = foodController;
             _moneyController = moneyController;
-            _coreGameplay = coreGameplay;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
@@ -138,7 +136,7 @@ namespace NovemberProject.CoreGameplay
             }
 
             // TODO (Stas): Turn into event for notification system and week-end logger
-            _coreGameplay.OnArmyStarved(starvedArmy);
+            _messageBroker.Publish(new ArmyStarvedMessage(starvedArmy));
             ReduceArmy(starvedArmy);
         }
 
@@ -171,7 +169,7 @@ namespace NovemberProject.CoreGameplay
             }
 
             // TODO (Stas): Turn into event for notification system and week-end logger
-            _coreGameplay.OnArmyDeserted(numberToDesert);
+            _messageBroker.Publish(new ArmyDesertedMessage(numberToDesert));
             ReduceArmy(numberToDesert);
         }
 

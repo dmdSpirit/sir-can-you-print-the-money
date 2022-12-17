@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.TechTree;
 using UniRx;
@@ -19,7 +18,6 @@ namespace NovemberProject.CoreGameplay.FolkManagement
         private readonly FoodController _foodController;
         private readonly TechController _techController;
         private readonly MoneyController _moneyController;
-        private readonly CoreGameplay _coreGameplay;
         private readonly MessageBroker _messageBroker;
 
         public IReadOnlyReactiveProperty<int> FolkCount => _folkCount;
@@ -31,14 +29,13 @@ namespace NovemberProject.CoreGameplay.FolkManagement
         public int MaxMarkerWorkers => _settings.MaxMarketWorkers;
 
         public FolkManager(FolkManagerSettings settings, FoodController foodController,
-            TechController techController, MoneyController moneyController, CoreGameplay coreGameplay,
+            TechController techController, MoneyController moneyController,
             MessageBroker messageBroker)
         {
             _settings = settings;
             _foodController = foodController;
             _techController = techController;
             _moneyController = moneyController;
-            _coreGameplay = coreGameplay;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
@@ -160,7 +157,7 @@ namespace NovemberProject.CoreGameplay.FolkManagement
             }
 
             // TODO (Stas): Turn into event for notification system and week-end logger
-            _coreGameplay.OnFolkStarved(starvedFolk);
+            _messageBroker.Publish(new FolkStarvedMessage(starvedFolk));
             KillFolk(starvedFolk);
         }
 
@@ -173,7 +170,7 @@ namespace NovemberProject.CoreGameplay.FolkManagement
             }
 
             // TODO (Stas): Turn into event for notification system and week-end logger
-            _coreGameplay.OnFolkExecuted(executedFolk);
+            _messageBroker.Publish(new FolkExecutedMessage(executedFolk));
             KillFolk(executedFolk);
         }
 

@@ -1,16 +1,20 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
     public sealed class TechTreeScreen : UIElement<object?>
     {
         private readonly CompositeDisposable _sub = new();
+
+        private GameStateMachine _gameStateMachine = null!;
 
         [SerializeField]
         private TMP_Text _treasuresCount = null!;
@@ -75,35 +79,31 @@ namespace NovemberProject.Rounds.UI
         [SerializeField]
         private string _inventedText = "Invented";
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
             _closeButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnClose);
             _raiseSalaryButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnRaiseSalary);
             _lowerSalaryButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnLowerSalary);
             _raiseTaxButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnRaiseTax);
             _lowerTaxButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnLowerTax);
             _printMoneyButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnPrintMoney);
             _burnMoneyButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnBurnMoney);
             _buildArenaButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnBuildArena);
             _useMineButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnUseMine);
         }
 
@@ -173,7 +173,7 @@ namespace NovemberProject.Rounds.UI
 
         private void OnClose(Unit _)
         {
-            Game.Instance.GameStateMachine.HideTechTree();
+            _gameStateMachine.HideTechTree();
         }
 
         private void OnRaiseSalary(Unit _)

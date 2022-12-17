@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ namespace NovemberProject.Cheats
         private readonly List<CheatButton> _generatedButtons = new();
 
         private MoneyController _moneyController = null!;
+        private GameStateMachine _gameStateMachine = null!;
 
         [SerializeField]
         private CheatButton _buttonPrefab = null!;
@@ -26,9 +28,10 @@ namespace NovemberProject.Cheats
         private bool _isSizeFitterRefreshNeeded;
 
         [Inject]
-        private void Construct(MoneyController moneyController)
+        private void Construct(MoneyController moneyController, GameStateMachine gameStateMachine)
         {
             _moneyController = moneyController;
+            _gameStateMachine = gameStateMachine;
         }
 
         private void Start()
@@ -78,7 +81,7 @@ namespace NovemberProject.Cheats
 
         private void Win()
         {
-            Game.Instance.GameStateMachine.Victory();
+            _gameStateMachine.Victory();
         }
 
         private void GenerateButtons()

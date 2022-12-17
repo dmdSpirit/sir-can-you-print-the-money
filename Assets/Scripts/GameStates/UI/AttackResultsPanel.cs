@@ -1,33 +1,37 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
-using NovemberProject.System;
 using UniRx;
 using UnityEngine;
-using Observable = UniRx.Observable;
+using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
     public sealed class AttackResultsPanel : UIElement<AttackData>
     {
+        private GameStateMachine _gameStateMachine = null!;
         private AttackData _attackData;
 
         [SerializeField]
         private AttackResultPanel _defendersWonPanel = null!;
+
         [SerializeField]
         private AttackResultPanel _guardsKilledPanel = null!;
+
         [SerializeField]
         private AttackResultPanel _folkKilledPanel = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
-            Observable.TakeUntilDisable(_defendersWonPanel.OnClose, this)
-                .Subscribe(OnClose);
-            Observable.TakeUntilDisable(_guardsKilledPanel.OnClose, this)
-                .Subscribe(OnClose);
-            Observable.TakeUntilDisable(_folkKilledPanel.OnClose, this)
-                .Subscribe(OnClose);
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
+            _defendersWonPanel.OnClose.Subscribe(OnClose);
+            _guardsKilledPanel.OnClose.Subscribe(OnClose);
+            _folkKilledPanel.OnClose.Subscribe(OnClose);
         }
 
         protected override void OnShow(AttackData attackData)
@@ -40,6 +44,7 @@ namespace NovemberProject.GameStates.UI
             {
                 _defendersWonPanel.Hide();
             }
+
             if (attackData.AttackStatus == AttackStatus.GuardsKilled)
             {
                 _guardsKilledPanel.Show(attackData);
@@ -48,6 +53,7 @@ namespace NovemberProject.GameStates.UI
             {
                 _guardsKilledPanel.Hide();
             }
+
             if (attackData.AttackStatus == AttackStatus.FolkKilled)
             {
                 _folkKilledPanel.Show(attackData);
@@ -67,7 +73,7 @@ namespace NovemberProject.GameStates.UI
 
         private void OnClose(Unit _)
         {
-            Game.Instance.GameStateMachine.HideAttackResult();
+            _gameStateMachine.HideAttackResult();
         }
     }
 }

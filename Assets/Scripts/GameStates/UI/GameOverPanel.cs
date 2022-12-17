@@ -4,11 +4,14 @@ using NovemberProject.System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
     public sealed class GameOverPanel : UIElement<GameOverType>
     {
+        private GameStateMachine _gameStateMachine = null!;
+
         [SerializeField]
         private GameObject _noArmyPanel = null!;
 
@@ -17,6 +20,12 @@ namespace NovemberProject.GameStates.UI
 
         [SerializeField]
         private Button _toMainMenuButton = null!;
+
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
+        {
+            _gameStateMachine = gameStateMachine;
+        }
 
         private void Start()
         {
@@ -36,9 +45,9 @@ namespace NovemberProject.GameStates.UI
             _noFolkPanel.SetActive(false);
         }
 
-        private static void ToMainMenuClicked()
+        private void ToMainMenuClicked()
         {
-            Game.Instance.GameStateMachine.MainMenu();
+            _gameStateMachine.MainMenu();
         }
     }
 }

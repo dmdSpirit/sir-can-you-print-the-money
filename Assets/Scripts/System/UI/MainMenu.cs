@@ -1,13 +1,17 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.System.UI
 {
     public sealed class MainMenu : UIElement<object?>
     {
+        private GameStateMachine _gameStateMachine = null!;
+
         [SerializeField]
         private Button _newGame = null!;
 
@@ -20,21 +24,21 @@ namespace NovemberProject.System.UI
         [SerializeField]
         private Button _continue = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
 
+        private void Start()
+        {
             _newGame.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnNewGame);
             _exitGame.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnExitGame);
             _continue.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnExitGame);
             _credits.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnCredits);
         }
 
@@ -46,19 +50,8 @@ namespace NovemberProject.System.UI
         {
         }
 
-        private static void OnNewGame(Unit _)
-        {
-            Game.Instance.GameStateMachine.NewGame();
-        }
-
-        private static void OnExitGame(Unit _)
-        {
-            Game.Instance.GameStateMachine.ExitGame();
-        }
-
-        private static void OnCredits(Unit _)
-        {
-            Game.Instance.GameStateMachine.Credits();
-        }
+        private void OnNewGame(Unit _) => _gameStateMachine.NewGame();
+        private void OnExitGame(Unit _) => _gameStateMachine.ExitGame();
+        private void OnCredits(Unit _) => _gameStateMachine.Credits();
     }
 }
