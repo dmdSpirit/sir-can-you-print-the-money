@@ -15784,6 +15784,18 @@ PrefabInstance:
       value: Game
       objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _timeSystem
+      value: 
+      objectReference: {fileID: 1629718558}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _armyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _coreGameplay
+      value: 
+      objectReference: {fileID: 1985125195}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _techController
       value: 
       objectReference: {fileID: 1985125199}
@@ -15810,6 +15822,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaf9fab76544418c956257051c39d3ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1629718558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2243828583067338666, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+  m_PrefabInstance: {fileID: 1629718552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d157f3b662f34f4f82f0600fc0662d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1648232669
@@ -18399,7 +18422,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1985125198}
-  - component: {fileID: 1985125196}
   - component: {fileID: 1985125195}
   - component: {fileID: 1985125199}
   - component: {fileID: 1985125200}
@@ -18422,27 +18444,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9215b4d4e7544579bf97bedb26cd4eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodPerPerson: 1
-  _newArmyForFoodCost: 5
   _folkEatTime: 40
   _folkPayTime: 30
   _armyEatTime: 20
   _armyPayTime: 10
---- !u!114 &1985125196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985125194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8acefdeb233a419aa7b5dcffb1e12cac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingArmySalary: 8
-  _startingGuardsCount: 2
-  _startingExplorersCount: 0
 --- !u!4 &1985125198
 Transform:
   m_ObjectHideFlags: 0

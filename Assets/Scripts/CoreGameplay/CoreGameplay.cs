@@ -5,13 +5,14 @@ using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
 using NovemberProject.Rounds.UI;
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using NovemberProject.Time;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace NovemberProject.CoreGameplay
 {
-    [RequireComponent(typeof(ArmyManager))]
     public sealed class CoreGameplay : InitializableBehaviour
     {
         private readonly RoundResult _roundResult = new();
@@ -19,14 +20,10 @@ namespace NovemberProject.CoreGameplay
 
         private FolkManager _folkManager = null!;
         private FoodController _foodController = null!;
+        private ArmyManager _armyManager = null!;
+        private MessageBroker _messageBroker = null!;
 
         private GameOverType _gameOverType;
-
-        [SerializeField]
-        private int _foodPerPerson = 2;
-
-        [SerializeField]
-        private int _newArmyForFoodCost = 10;
 
         [SerializeField]
         private float _folkEatTime = 20f;
@@ -40,28 +37,22 @@ namespace NovemberProject.CoreGameplay
         [SerializeField]
         private float _armyPayTime = 20f;
 
-        public int FoodPerPerson => _foodPerPerson;
-        public int NewArmyForFoodCost => _newArmyForFoodCost;
-
-        public ArmyManager ArmyManager { get; private set; } = null!;
         public GameOverType GameOverType => _gameOverType;
         public RoundResult RoundResult => _roundResult;
 
         [Inject]
-        private void Construct(FolkManager folkManager, FoodController foodController)
+        private void Construct(FolkManager folkManager, FoodController foodController, ArmyManager armyManager,
+            MessageBroker messageBroker)
         {
             _folkManager = folkManager;
             _foodController = foodController;
+            _armyManager = armyManager;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
 
-        private void Awake()
+        private void OnNewGame(NewGameMessage message)
         {
-            ArmyManager = GetComponent<ArmyManager>();
-        }
-
-        public void InitializeGameData()
-        {
-            ArmyManager.InitializeGameData();
             _gameOverType = GameOverType.None;
         }
 
@@ -99,7 +90,7 @@ namespace NovemberProject.CoreGameplay
         private void OnArmyEat(Timer timer)
         {
             _timers.Remove(timer);
-            Game.Instance.ArmyManager.EatFood();
+            _armyManager.EatFood();
         }
 
         private void OnFolkPay(Timer timer)
@@ -111,7 +102,7 @@ namespace NovemberProject.CoreGameplay
         private void OnArmyPay(Timer timer)
         {
             _timers.Remove(timer);
-            Game.Instance.ArmyManager.PaySalary();
+            _armyManager.PaySalary();
         }
 
         private void StopTimers()
@@ -188,13 +179,6 @@ namespace NovemberProject.CoreGameplay
         }
 
         private bool IsNoFolkLeft() => _folkManager.IsNoFolkLeft();
-
-        private bool IsNoArmyLeft()
-        {
-            var armyCount = ArmyManager.GuardsCount;
-            return armyCount.Value == 0
-                   && ArmyManager.ExplorersCount.Value == 0
-                   && _foodController.ArmyFood.Value < _newArmyForFoodCost;
-        }
+        private bool IsNoArmyLeft() => _armyManager.IsNoArmyLeft();
     }
 }

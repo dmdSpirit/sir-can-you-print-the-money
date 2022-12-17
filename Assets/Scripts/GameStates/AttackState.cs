@@ -12,13 +12,13 @@ namespace NovemberProject.GameStates
         {
             _attackData = attackData;
         }
+
         protected override void OnEnter()
         {
             Game.Instance.UIManager.ShowAttackResultsPanel(_attackData);
             Game.Instance.TimeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
             Game.Instance.BuildingSelector.Unselect();
-            Game.Instance.ArmyManager.ReturnExplorersToGuard();
         }
 
         protected override void OnExit()

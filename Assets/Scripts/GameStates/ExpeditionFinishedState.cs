@@ -19,7 +19,6 @@ namespace NovemberProject.GameStates
             Game.Instance.TimeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
             Game.Instance.BuildingSelector.Unselect();
-            Game.Instance.ArmyManager.ReturnExplorersToGuard();
         }
 
         protected override void OnExit()

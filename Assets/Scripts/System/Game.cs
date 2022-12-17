@@ -28,6 +28,7 @@ namespace NovemberProject.System
         private static Game _instance = null!;
 
         private MessageBroker _messageBroker = null!;
+        private GameStateMachine _gameStateMachine = null!;
 
         public static Game Instance => GetInstance();
 
@@ -45,7 +46,6 @@ namespace NovemberProject.System
         public TechController TechController { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
-        public ArmyManager ArmyManager => CoreGameplay.ArmyManager;
         public AudioManager AudioManager { get; private set; } = null!;
         public BuildingNameHover BuildingNameHover { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
@@ -55,9 +55,10 @@ namespace NovemberProject.System
         public MessageBroker MessageBroker =>_messageBroker;
 
         [Inject]
-        private void Construct(MessageBroker messageBroker)
+        private void Construct(MessageBroker messageBroker, GameStateMachine gameStateMachine)
         {
             _messageBroker = messageBroker;
+            _gameStateMachine = gameStateMachine;
         }
 
         private void Start()
@@ -109,7 +110,6 @@ namespace NovemberProject.System
         private void Initialize()
         {
             ClicheBible = new ClicheBible(CLICHE_BIBLE_FILE);
-            GameStateMachine = new GameStateMachine();
             _onInitialized.OnNext(Unit.Default);
             IsInitialized = true;
         }

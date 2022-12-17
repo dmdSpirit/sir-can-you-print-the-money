@@ -12,6 +12,7 @@ namespace NovemberProject.Buildings
     public sealed class ArmyTreasuryBuilding : Building, IResourceStorage, ISalaryController
     {
         private MoneyController _moneyController = null!;
+        private ArmyManager _armyManager = null!;
 
         [SerializeField]
         private TMP_Text _moneyText = null!;
@@ -30,9 +31,10 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<bool> CanLowerSalary => Game.Instance.TechController.CanLowerSalary;
 
         [Inject]
-        private void Construct(MoneyController moneyController)
+        private void Construct(MoneyController moneyController, ArmyManager armyManager)
         {
             _moneyController = moneyController;
+            _armyManager = armyManager;
             _moneyController.ArmyMoney.Subscribe(OnMoneyChanged);
         }
 
@@ -40,8 +42,8 @@ namespace NovemberProject.Buildings
         {
             _moneyText.text = money.ToString();
         }
-        
-        public void RaiseSalary() => Game.Instance.ArmyManager.RaiseSalary();
-        public void LowerSalary() => Game.Instance.ArmyManager.LowerSalary();
+
+        public void RaiseSalary() => _armyManager.RaiseSalary();
+        public void LowerSalary() => _armyManager.LowerSalary();
     }
 }

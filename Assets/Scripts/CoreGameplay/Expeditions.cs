@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.Buildings;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
@@ -18,6 +19,10 @@ namespace NovemberProject.CoreGameplay
         private readonly BuildingsController _buildingsController;
         private readonly MessageBroker _messageBroker;
         private readonly ExpeditionSettings _settings;
+        private readonly ArmyManager _armyManager;
+        private readonly CombatController _combatController;
+        private readonly TimeSystem _timeSystem;
+        private readonly GameStateMachine _gameStateMachine;
 
         private Timer? _expeditionTimer;
         private int _explorersLeftForExpedition;
@@ -29,12 +34,20 @@ namespace NovemberProject.CoreGameplay
         public Expeditions(ExpeditionSettings expeditionSettings, FoodController foodController,
             MoneyController moneyController,
             BuildingsController buildingsController,
+            ArmyManager armyManager,
+            CombatController combatController,
+            TimeSystem timeSystem,
+            GameStateMachine gameStateMachine,
             MessageBroker messageBroker)
         {
             _settings = expeditionSettings;
             _foodController = foodController;
             _moneyController = moneyController;
             _buildingsController = buildingsController;
+            _armyManager = armyManager;
+            _combatController = combatController;
+            _timeSystem = timeSystem;
+            _gameStateMachine = gameStateMachine;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
@@ -42,8 +55,8 @@ namespace NovemberProject.CoreGameplay
         public float GetExpeditionWinProbability()
         {
             ExpeditionData data = GetCurrentExpeditionData();
-            return Game.Instance.CombatController.GetAttackersWinProbability(
-                Game.Instance.ArmyManager.ExplorersCount.Value,
+            return _combatController.GetAttackersWinProbability(
+                _armyManager.ExplorersCount.Value,
                 data.Defenders);
         }
 
@@ -69,11 +82,12 @@ namespace NovemberProject.CoreGameplay
         {
             Assert.IsFalse(_isExpeditionActive.Value);
             var expeditionsBuilding = _buildingsController.GetBuilding<ExpeditionsBuilding>();
-            _explorersLeftForExpedition = Game.Instance.ArmyManager.ExplorersCount.Value;
+            _explorersLeftForExpedition = _armyManager.ExplorersCount.Value;
             PayFood(expeditionsBuilding, _explorersLeftForExpedition);
             PayMoney(expeditionsBuilding, _explorersLeftForExpedition);
-            _expeditionTimer = Game.Instance.TimeSystem.CreateTimer(_settings.ExpeditionDuration, OnExpeditionFinished);
+            _expeditionTimer = _timeSystem.CreateTimer(_settings.ExpeditionDuration, OnExpeditionFinished);
             _expeditionTimer.Start();
+            _armyManager.OnExpeditionStart();
             _isExpeditionActive.Value = true;
         }
 
@@ -106,12 +120,13 @@ namespace NovemberProject.CoreGameplay
             int reward = isSuccess ? GetCurrentExpeditionData().Reward : 0;
             var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, reward, isSuccess,
                 GetCurrentExpeditionData().Defenders);
-            Game.Instance.GameStateMachine.ExpeditionFinished(expeditionResult);
+            _gameStateMachine.ExpeditionFinished(expeditionResult);
             if (isSuccess)
             {
                 Game.Instance.TreasureController.AddTreasures(reward);
                 _expeditionIndex++;
             }
+            _armyManager.ReturnExplorersToGuard();
         }
 
         private void OnNewGame(NewGameMessage _)

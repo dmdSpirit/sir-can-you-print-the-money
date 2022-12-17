@@ -34,6 +34,7 @@ namespace NovemberProject.CoreGameplay
         private readonly ReactiveProperty<bool> _isActive = new();
 
         private FolkManager _folkManager = null!;
+        private ArmyManager _armyManager = null!;
 
         private Timer? _attackTimer;
         private int _attackIndex;
@@ -52,14 +53,14 @@ namespace NovemberProject.CoreGameplay
         public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
 
         [Inject]
-        private void Construct(FolkManager folkManager)
+        private void Construct(FolkManager folkManager, ArmyManager armyManager)
         {
             _folkManager = folkManager;
+            _armyManager = armyManager;
         }
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             Game.Instance.RoundSystem.Round
                 .TakeUntilDisable(this)
                 .Subscribe(OnRoundChanged);
@@ -92,7 +93,7 @@ namespace NovemberProject.CoreGameplay
 
         private void OnAttack(Timer _)
         {
-            int defenders = Game.Instance.ArmyManager.GuardsCount.Value;
+            int defenders = _armyManager.GuardsCount.Value;
             int attackers = NextAttackersCount();
             bool attackersWon = CalculateAttackResult(attackers, defenders);
             AttackStatus attackStatus = AttackStatus.DefendersWon;
@@ -100,7 +101,7 @@ namespace NovemberProject.CoreGameplay
             {
                 if (defenders > 0)
                 {
-                    Game.Instance.ArmyManager.KillGuards(attackers);
+                    _armyManager.KillGuards(attackers);
                     attackStatus = AttackStatus.GuardsKilled;
                 }
                 else if (_folkManager.FolkCount.Value > 0)

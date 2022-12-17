@@ -7,16 +7,16 @@ namespace NovemberProject.CoreGameplay.FolkManagement
     public sealed class FolkManagerSettings : ScriptableObject
     {
         [SerializeField]
-        private int _startingTax = 6;
+        private int _tax = 6;
 
         [SerializeField]
-        private int _startingFarmWorkers = 1;
+        private int _farmWorkers = 1;
 
         [SerializeField]
-        private int _startingMarketWorkers = 1;
+        private int _marketWorkers = 1;
 
         [SerializeField]
-        private int _startingMineWorkers = 0;
+        private int _mineWorkers = 0;
 
         [SerializeField]
         private int _maxMarketWorkers = 5;
@@ -27,10 +27,10 @@ namespace NovemberProject.CoreGameplay.FolkManagement
         [SerializeField]
         private int _foodUpkeep = 2;
 
-        public int StartingFolkTax => _startingTax;
-        public int StartingFarmWorkers => _startingFarmWorkers;
-        public int StartingMarketWorkers => _startingMarketWorkers;
-        public int StartingMineWorkers => _startingMineWorkers;
+        public int FolkTax => _tax;
+        public int FarmWorkers => _farmWorkers;
+        public int MarketWorkers => _marketWorkers;
+        public int MineWorkers => _mineWorkers;
         public int MaxMarketWorkers => _maxMarketWorkers;
         public int NewUnitFoodCost => _newUnitFoodCost;
         public int FoodUpkeep => _foodUpkeep;

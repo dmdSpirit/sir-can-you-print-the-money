@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44d29774f2f4fcfa3f638f04a22aa27, type: 3}
+  m_Name: ArmyManagerSettings
+  m_EditorClassIdentifier: 
+  _armySalary: 8
+  _guardsCount: 2
+  _explorersCount: 0
+  _newUnitFoodCost: 5
+  _foodUpkeep: 2

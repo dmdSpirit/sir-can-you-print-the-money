@@ -19,6 +19,7 @@ namespace NovemberProject.CoreGameplay.FolkManagement
         private readonly FoodController _foodController;
         private readonly TechController _techController;
         private readonly MoneyController _moneyController;
+        private readonly CoreGameplay _coreGameplay;
         private readonly MessageBroker _messageBroker;
 
         public IReadOnlyReactiveProperty<int> FolkCount => _folkCount;
@@ -30,22 +31,24 @@ namespace NovemberProject.CoreGameplay.FolkManagement
         public int MaxMarkerWorkers => _settings.MaxMarketWorkers;
 
         public FolkManager(FolkManagerSettings settings, FoodController foodController,
-            TechController techController, MoneyController moneyController, MessageBroker messageBroker)
+            TechController techController, MoneyController moneyController, CoreGameplay coreGameplay,
+            MessageBroker messageBroker)
         {
             _settings = settings;
             _foodController = foodController;
             _techController = techController;
             _moneyController = moneyController;
+            _coreGameplay = coreGameplay;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
 
         private void OnNewGame(NewGameMessage message)
         {
-            _tax.Value = _settings.StartingFolkTax;
-            _farmFolk.Value = _settings.StartingFarmWorkers;
-            _marketFolk.Value = _settings.StartingMarketWorkers;
-            _mineFolk.Value = _settings.StartingMineWorkers;
+            _tax.Value = _settings.FolkTax;
+            _farmFolk.Value = _settings.FarmWorkers;
+            _marketFolk.Value = _settings.MarketWorkers;
+            _mineFolk.Value = _settings.MineWorkers;
             // TODO (Stas): refactor folk counter into some kind of container 
             _folkCount.Value = _farmFolk.Value + _marketFolk.Value + _mineFolk.Value;
         }
@@ -138,7 +141,8 @@ namespace NovemberProject.CoreGameplay.FolkManagement
             _moneyController.TransferMoneyFromFolkToGovernment(taxesToPay);
         }
 
-        public bool IsNoFolkLeft() => _folkCount.Value == 0 && _foodController.FolkFood.Value < _settings.NewUnitFoodCost;
+        public bool IsNoFolkLeft() =>
+            _folkCount.Value == 0 && _foodController.FolkFood.Value < _settings.NewUnitFoodCost;
 
         public void EatFood()
         {
@@ -156,7 +160,7 @@ namespace NovemberProject.CoreGameplay.FolkManagement
             }
 
             // TODO (Stas): Turn into event for notification system and week-end logger
-            Game.Instance.CoreGameplay.OnFolkStarved(starvedFolk);
+            _coreGameplay.OnFolkStarved(starvedFolk);
             KillFolk(starvedFolk);
         }
 
@@ -169,7 +173,7 @@ namespace NovemberProject.CoreGameplay.FolkManagement
             }
 
             // TODO (Stas): Turn into event for notification system and week-end logger
-            Game.Instance.CoreGameplay.OnFolkExecuted(executedFolk);
+            _coreGameplay.OnFolkExecuted(executedFolk);
             KillFolk(executedFolk);
         }
 

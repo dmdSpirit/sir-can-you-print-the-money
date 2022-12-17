@@ -11,6 +11,7 @@ namespace NovemberProject.Buildings
     public sealed class ArmyFoodStorageBuilding : Building, IResourceStorage, IBuyUnit
     {
         private FoodController _foodController = null!;
+        private ArmyManager _armyManager = null!;
 
         [SerializeField]
         private TMP_Text _foodText = null!;
@@ -32,16 +33,16 @@ namespace NovemberProject.Buildings
         public string ResourceTitle => _foodTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => _foodController.ArmyFood;
 
-        public bool CanBuyUnit =>
-            _foodController.ArmyFood.Value >= Game.Instance.CoreGameplay.NewArmyForFoodCost;
+        public bool CanBuyUnit =>_armyManager.IsEnoughFoodForNewArmy();
 
         public string BuyUnitTitle => _buyUnitTitle;
         public string BuyUnitButtonText => _buyUnitButtonText;
 
         [Inject]
-        private void Construct(FoodController foodController)
+        private void Construct(FoodController foodController, ArmyManager armyManager)
         {
             _foodController = foodController;
+            _armyManager = armyManager;
             _foodController.ArmyFood.Subscribe(OnFoodChanged);
         }
 
@@ -52,7 +53,7 @@ namespace NovemberProject.Buildings
                 return;
             }
 
-            Game.Instance.ArmyManager.BuyArmyForFood();
+            _armyManager.BuyArmyForFood();
         }
 
         private void OnFoodChanged(int food)

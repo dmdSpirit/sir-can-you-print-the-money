@@ -17,8 +17,7 @@ namespace NovemberProject.Buildings
         private FoodController _foodController = null!;
         private MoneyController _moneyController = null!;
         private Expeditions _expeditions = null!;
-
-        private static ArmyManager ArmyManager => Game.Instance.ArmyManager;
+        private ArmyManager _armyManager = null!;
 
         [SerializeField]
         private string _workerTitle = "Explorers";
@@ -36,8 +35,8 @@ namespace NovemberProject.Buildings
         private int _activeFromWeek = 3;
 
         public override BuildingType BuildingType => BuildingType.Expeditions;
-        public IReadOnlyReactiveProperty<int> WorkerCount => ArmyManager.ExplorersCount;
-        public IReadOnlyReactiveProperty<int> PotentialWorkerCount => ArmyManager.GuardsCount;
+        public IReadOnlyReactiveProperty<int> WorkerCount => _armyManager.ExplorersCount;
+        public IReadOnlyReactiveProperty<int> PotentialWorkerCount => _armyManager.GuardsCount;
         public int MaxWorkerCount => 0;
         public bool HasMaxWorkerCount => false;
         public string WorkersTitle => _workerTitle;
@@ -56,11 +55,13 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<bool> IsActive => _expeditionsActive;
 
         [Inject]
-        private void Construct(FoodController foodController, MoneyController moneyController, Expeditions expeditions)
+        private void Construct(FoodController foodController, MoneyController moneyController, Expeditions expeditions,
+            ArmyManager armyManager)
         {
             _foodController = foodController;
             _moneyController = moneyController;
             _expeditions = expeditions;
+            _armyManager = armyManager;
             _foodController.ArmyFood.Subscribe(_ => UpdateCanBeSentStatus());
             _moneyController.ArmyMoney.Subscribe(_ => UpdateCanBeSentStatus());
             _expeditions.IsExpeditionActive.Subscribe(_ => UpdateCanBeSentStatus());
@@ -69,7 +70,7 @@ namespace NovemberProject.Buildings
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            ArmyManager.ExplorersCount
+            _armyManager.ExplorersCount
                 .TakeUntilDisable(this)
                 .Subscribe(OnExplorersCountChanged);
             Game.Instance.RoundSystem.Round
@@ -82,25 +83,13 @@ namespace NovemberProject.Buildings
             _expeditionsActive.Value = round >= _activeFromWeek;
         }
 
-        public void AddWorker()
-        {
-            ArmyManager.AddArmyToExplorers();
-        }
+        public void AddWorker() => _armyManager.AddArmyToExplorers();
 
-        public void RemoveWorker()
-        {
-            ArmyManager.RemoveArmyFromExplorers();
-        }
+        public void RemoveWorker() => _armyManager.RemoveArmyFromExplorers();
 
-        public bool CanAddWorker()
-        {
-            return ArmyManager.GuardsCount.Value > 0;
-        }
+        public bool CanAddWorker() => _armyManager.GuardsCount.Value > 0;
 
-        public bool CanRemoveWorker()
-        {
-            return ArmyManager.ExplorersCount.Value > 0;
-        }
+        public bool CanRemoveWorker() => _armyManager.ExplorersCount.Value > 0;
 
         private void UpdateCanBeSentStatus()
         {
@@ -114,7 +103,7 @@ namespace NovemberProject.Buildings
                 return;
             }
 
-            int workersCount = ArmyManager.ExplorersCount.Value;
+            int workersCount = _armyManager.ExplorersCount.Value;
             _canBeSentToExpedition.Value =
                 workersCount > 0
                 && IsEnoughMoneyForExpedition()
