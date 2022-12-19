@@ -18,6 +18,7 @@ namespace NovemberProject.Buildings
 
         private FolkManager _folkManager = null!;
         private FoodController _foodController = null!;
+        private TimeSystem _timeSystem = null!;
         private Timer? _productionTimer;
 
         private int _folkProducing;
@@ -48,10 +49,11 @@ namespace NovemberProject.Buildings
         public string ResourceTitle => _farmerTitle;
 
         [Inject]
-        private void Construct(FolkManager folkManager, FoodController foodController)
+        private void Construct(FolkManager folkManager, FoodController foodController, TimeSystem timeSystem)
         {
             _folkManager = folkManager;
             _foodController = foodController;
+            _timeSystem = timeSystem;
             _folkManager.FarmFolk.Subscribe(OnFarmCountChanged);
         }
 
@@ -82,7 +84,7 @@ namespace NovemberProject.Buildings
             int folkCount = _folkManager.FarmFolk.Value;
             Assert.IsTrue(folkCount > 0);
             Assert.IsTrue(_productionTimer == null);
-            _productionTimer = Game.Instance.TimeSystem.CreateTimer(_productionTime, OnFoodProduced);
+            _productionTimer = _timeSystem.CreateTimer(_productionTime, OnFoodProduced);
             _folkProducing = folkCount;
             _producedValue.Value = _folkProducing * _productionPerFolk;
             _productionTimer.Start();
@@ -113,6 +115,5 @@ namespace NovemberProject.Buildings
             _isProducing.Value = false;
             StartProduction();
         }
-
     }
 }

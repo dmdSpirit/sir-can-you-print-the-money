@@ -19,8 +19,8 @@ namespace NovemberProject.CoreGameplay
         private readonly List<Timer> _timers = new();
 
         private FolkManager _folkManager = null!;
-        private FoodController _foodController = null!;
         private ArmyManager _armyManager = null!;
+        private TimeSystem _timeSystem = null!;
         private MessageBroker _messageBroker = null!;
 
         private GameOverType _gameOverType;
@@ -41,12 +41,12 @@ namespace NovemberProject.CoreGameplay
         public RoundResult RoundResult => _roundResult;
 
         [Inject]
-        private void Construct(FolkManager folkManager, FoodController foodController, ArmyManager armyManager,
+        private void Construct(FolkManager folkManager, ArmyManager armyManager, TimeSystem timeSystem,
             MessageBroker messageBroker)
         {
             _folkManager = folkManager;
-            _foodController = foodController;
             _armyManager = armyManager;
+            _timeSystem = timeSystem;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
             _messageBroker.Receive<ArmyStarvedMessage>().Subscribe(OnArmyStarved);
@@ -69,17 +69,16 @@ namespace NovemberProject.CoreGameplay
 
         private void StartTimers()
         {
-            TimeSystem timeSystem = Game.Instance.TimeSystem;
-            Timer folkEatTimer = timeSystem.CreateTimer(_folkEatTime, OnFolkEat);
+            Timer folkEatTimer = _timeSystem.CreateTimer(_folkEatTime, OnFolkEat);
             folkEatTimer.Start();
             _timers.Add(folkEatTimer);
-            Timer armyEatTimer = timeSystem.CreateTimer(_armyEatTime, OnArmyEat);
+            Timer armyEatTimer = _timeSystem.CreateTimer(_armyEatTime, OnArmyEat);
             armyEatTimer.Start();
             _timers.Add(armyEatTimer);
-            Timer folkPayTimer = timeSystem.CreateTimer(_folkPayTime, OnFolkPay);
+            Timer folkPayTimer = _timeSystem.CreateTimer(_folkPayTime, OnFolkPay);
             folkPayTimer.Start();
             _timers.Add(folkPayTimer);
-            Timer armyPayTimer = timeSystem.CreateTimer(_armyPayTime, OnArmyPay);
+            Timer armyPayTimer = _timeSystem.CreateTimer(_armyPayTime, OnArmyPay);
             armyPayTimer.Start();
             _timers.Add(armyPayTimer);
             folkEatTimer.Start();

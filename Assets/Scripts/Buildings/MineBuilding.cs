@@ -16,9 +16,10 @@ namespace NovemberProject.Buildings
         private readonly ReactiveProperty<int> _producedValue = new();
         private readonly ReactiveProperty<bool> _isProducing = new();
 
+        private FolkManager _folkManager = null!;
+        private TimeSystem _timeSystem = null!;
         private Timer? _productionTimer;
         private int _minersProducing;
-        private FolkManager _folkManager = null!;
 
         [SerializeField]
         private string _minersTitle = "Miners";
@@ -43,16 +44,15 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
         [Inject]
-        private void Construct(FolkManager folkManager)
+        private void Construct(FolkManager folkManager, TimeSystem timeSystem)
         {
             _folkManager = folkManager;
+            _timeSystem = timeSystem;
         }
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _folkManager.MineFolk
-                .TakeUntilDisable(this)
                 .Subscribe(OnMinersCountChanged);
         }
 
@@ -90,7 +90,7 @@ namespace NovemberProject.Buildings
             int miners = _folkManager.MineFolk.Value;
             Assert.IsTrue(miners > 0);
             Assert.IsTrue(_productionTimer == null);
-            _productionTimer = Game.Instance.TimeSystem.CreateTimer(_productionTime, OnStoneProduced);
+            _productionTimer = _timeSystem.CreateTimer(_productionTime, OnStoneProduced);
             _minersProducing = miners;
             _producedValue.Value = _minersProducing * _productionPerMiner;
             _productionTimer.Start();

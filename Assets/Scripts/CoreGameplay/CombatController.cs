@@ -37,6 +37,7 @@ namespace NovemberProject.CoreGameplay
         private FolkManager _folkManager = null!;
         private ArmyManager _armyManager = null!;
         private GameStateMachine _gameStateMachine = null!;
+        private TimeSystem _timeSystem = null!;
 
         private Timer? _attackTimer;
         private int _attackIndex;
@@ -55,10 +56,12 @@ namespace NovemberProject.CoreGameplay
         public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
 
         [Inject]
-        private void Construct(FolkManager folkManager, ArmyManager armyManager)
+        private void Construct(FolkManager folkManager, ArmyManager armyManager, GameStateMachine gameStateMachine, TimeSystem timeSystem)
         {
             _folkManager = folkManager;
             _armyManager = armyManager;
+            _gameStateMachine = gameStateMachine;
+            _timeSystem = timeSystem;
         }
 
         private void Start()
@@ -88,7 +91,7 @@ namespace NovemberProject.CoreGameplay
 
         public void PlanNextAttack()
         {
-            _attackTimer = Game.Instance.TimeSystem.CreateTimer(_attackDuration, OnAttack);
+            _attackTimer = _timeSystem.CreateTimer(_attackDuration, OnAttack);
             _attackTimer.Start();
             _onNewAttack.OnNext(Unit.Default);
         }

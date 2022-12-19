@@ -3,6 +3,7 @@ using System;
 using NovemberProject.CoreGameplay;
 using NovemberProject.Input;
 using NovemberProject.System;
+using NovemberProject.Time;
 using UniRx;
 
 namespace NovemberProject.GameStates
@@ -26,6 +27,7 @@ namespace NovemberProject.GameStates
 
         private readonly InputSystem _inputSystem;
         private readonly MessageBroker _messageBroker;
+        private readonly TimeSystem _timeSystem;
 
         private ExpeditionFinishedState? _expeditionFinishedState;
         private AttackState? _attackState;
@@ -34,27 +36,27 @@ namespace NovemberProject.GameStates
         public IObservable<State> OnStateChanged => _onStateChanged;
         public State CurrentState => _currentState;
 
-        public GameStateMachine(InputSystem inputSystem, MessageBroker messageBroker)
+        public GameStateMachine(InputSystem inputSystem, TimeSystem timeSystem, MessageBroker messageBroker)
         {
             _inputSystem = inputSystem;
             _messageBroker = messageBroker;
+            _timeSystem = timeSystem;
             _exitGameState = new ExitGameState();
-            _mainMenuState = new MainMenuState();
+            _mainMenuState = new MainMenuState(_timeSystem);
             _mainMenuState.AddInputHandler(_inputSystem.GetInputHandler<EscapeToExitGameHandler>());
-            _newGameState = new NewGameState(this, _messageBroker);
-            _roundState = new RoundState();
+            _newGameState = new NewGameState(this, _timeSystem, _messageBroker);
+            _roundState = new RoundState(_timeSystem);
             _roundState.AddInputHandler(_inputSystem.GetInputHandler<MoveCameraHandler>());
-            _roundState.AddInputHandler(_inputSystem.GetInputHandler<TimeControlsHandler>());
+            _roundState.AddInputHandler(_inputSystem.GetTimeControlsHandler(_timeSystem));
             _roundState.AddInputHandler(_inputSystem.GetInputHandler<MouseSelectionHandler>());
-            _roundEndState = new RoundEndState(this);
-            _roundEndState.AddInputHandler(_inputSystem.GetInputHandler<EscapeToMainMenuHandler>());
-            _initializeGameState = new InitializeGameState(_inputSystem, this);
+            _roundEndState = new RoundEndState(this, _timeSystem);
+            _initializeGameState = new InitializeGameState(_inputSystem, this, _timeSystem);
             _roundStartState = new RoundStartState();
             _gameOverState = new GameOverState();
-            _victoryState = new VictoryState();
+            _victoryState = new VictoryState(_timeSystem);
             _creditsScreenState = new CreditsScreenState();
             _tutorialState = new TutorialState();
-            _techTreeState = new TechTreeState();
+            _techTreeState = new TechTreeState(_timeSystem);
 
             _inputSystem.OnHandleInput.Subscribe(HandleInput);
         }
@@ -74,7 +76,7 @@ namespace NovemberProject.GameStates
         // FIXME (Stas): Ugly
         public void ExpeditionFinished(ExpeditionResult expeditionResult)
         {
-            _expeditionFinishedState = new ExpeditionFinishedState(expeditionResult);
+            _expeditionFinishedState = new ExpeditionFinishedState(expeditionResult, _timeSystem);
             _expeditionFinishedState.Enter();
         }
 
@@ -84,7 +86,7 @@ namespace NovemberProject.GameStates
 
         public void ShowAttackResult(AttackData attackData)
         {
-            _attackState = new AttackState(attackData);
+            _attackState = new AttackState(attackData, _timeSystem);
             _attackState.Enter();
         }
 

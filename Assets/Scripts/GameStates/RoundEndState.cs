@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.System;
+using NovemberProject.Time;
 using UniRx;
 
 namespace NovemberProject.GameStates
@@ -8,18 +9,20 @@ namespace NovemberProject.GameStates
     public sealed class RoundEndState : State
     {
         private readonly GameStateMachine _gameStateMachine;
+        private readonly TimeSystem _timeSystem;
         
         private IDisposable? _sub;
 
-        public RoundEndState(GameStateMachine gameStateMachine)
+        public RoundEndState(GameStateMachine gameStateMachine, TimeSystem timeSystem)
         {
             _gameStateMachine = gameStateMachine;
+            _timeSystem = timeSystem;
         }
 
         protected override void OnEnter()
         {
             Game.Instance.RoundSystem.EndRound();
-            Game.Instance.TimeSystem.PauseTime();
+            _timeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
             if (Game.Instance.ResourceMoveEffectSpawner.MoveEffects.Count == 0)
             {

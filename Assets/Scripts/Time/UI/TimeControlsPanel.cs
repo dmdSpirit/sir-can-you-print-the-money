@@ -4,6 +4,7 @@ using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Time.UI
 {
@@ -13,25 +14,29 @@ namespace NovemberProject.Time.UI
         private const int PLAY_BUTTON_INDEX = 1;
         private const int SPEED_UP_BUTTON_INDEX = 2;
 
+        private TimeSystem _timeSystem = null!;
         private bool _isLocked;
         private IDisposable? _timeStatusSub;
 
         [SerializeField]
         private RadioButtonGroup _buttonsGroup = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
         {
-            base.OnInitialized();
+            _timeSystem = timeSystem;
+        }
 
+        private void Start()
+        {
             _buttonsGroup.OnButtonClicked
-                .TakeUntilDisable(this)
                 .Subscribe(OnButtonClicked);
         }
 
         protected override void OnShow(object? value)
         {
             _timeStatusSub?.Dispose();
-            _timeStatusSub = Game.Instance.TimeSystem.Status
+            _timeStatusSub = _timeSystem.Status
                 .Subscribe(OnTimeSystemStatusChanged);
         }
 
@@ -78,13 +83,13 @@ namespace NovemberProject.Time.UI
             switch (buttonIndex)
             {
                 case PAUSE_BUTTON_INDEX:
-                    Game.Instance.TimeSystem.PauseTime();
+                    _timeSystem.PauseTime();
                     break;
                 case PLAY_BUTTON_INDEX:
-                    Game.Instance.TimeSystem.ResetTimeScale();
+                    _timeSystem.ResetTimeScale();
                     break;
                 case SPEED_UP_BUTTON_INDEX:
-                    Game.Instance.TimeSystem.SpeedUp();
+                    _timeSystem.SpeedUp();
                     break;
             }
         }

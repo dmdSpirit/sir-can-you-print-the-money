@@ -21,6 +21,7 @@ namespace NovemberProject.Rounds
 
         private GameStateMachine _gameStateMachine = null!;
         private MessageBroker _messageBroker = null!;
+        private TimeSystem _timeSystem = null!;
 
         private Timer? _roundTimer;
 
@@ -33,9 +34,10 @@ namespace NovemberProject.Rounds
         public IReadOnlyTimer? RoundTimer => _roundTimer;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine, MessageBroker messageBroker)
+        private void Construct(GameStateMachine gameStateMachine,TimeSystem timeSystem, MessageBroker messageBroker)
         {
             _gameStateMachine = gameStateMachine;
+            _timeSystem = timeSystem;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
@@ -59,7 +61,7 @@ namespace NovemberProject.Rounds
 
         public void StartRound()
         {
-            _roundTimer = Game.Instance.TimeSystem.CreateTimer(_roundDuration, OnRoundTimerFinished);
+            _roundTimer = _timeSystem.CreateTimer(_roundDuration, OnRoundTimerFinished);
             _roundTimer.Start();
 
             _onRoundTimerStarted.OnNext(Unit.Default);

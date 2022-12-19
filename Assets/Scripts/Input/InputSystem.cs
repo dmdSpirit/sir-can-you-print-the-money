@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 
@@ -23,6 +24,9 @@ namespace NovemberProject.Input
         }
 
         public T GetInputHandler<T>() where T : InputHandler, new() => _inputHandlersFactory.GetInputHandler<T>();
+
+        public TimeControlsHandler GetTimeControlsHandler(TimeSystem timeSystem) =>
+            _inputHandlersFactory.GetTimeControlsHandler(timeSystem);
 
         public void AddGlobalInputHandler<T>() where T : InputHandler, new()
         {

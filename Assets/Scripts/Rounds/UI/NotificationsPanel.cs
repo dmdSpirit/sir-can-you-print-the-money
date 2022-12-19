@@ -4,12 +4,15 @@ using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
 using NovemberProject.Time;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
     public sealed class NotificationsPanel : UIElement<object?>
     {
         private Timer? _showTimer;
+
+        private TimeSystem _timeSystem = null!;
 
         [SerializeField]
         private Notification _folkStarvedNotification = null!;
@@ -25,6 +28,12 @@ namespace NovemberProject.Rounds.UI
 
         [SerializeField]
         private float _showDuration = 5f;
+
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
+        {
+            _timeSystem = timeSystem;
+        }
 
         protected override void OnShow(object? value)
         {
@@ -57,7 +66,7 @@ namespace NovemberProject.Rounds.UI
                     break;
             }
 
-            _showTimer = Game.Instance.TimeSystem.CreateUnscaledTimer(_showDuration, OnNotificationExpire);
+            _showTimer = _timeSystem.CreateUnscaledTimer(_showDuration, OnNotificationExpire);
             _showTimer.Start();
         }
 

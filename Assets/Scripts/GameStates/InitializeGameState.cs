@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using NovemberProject.Input;
 using NovemberProject.System;
+using NovemberProject.Time;
 
 namespace NovemberProject.GameStates
 {
@@ -8,11 +9,13 @@ namespace NovemberProject.GameStates
     {
         private readonly InputSystem _inputSystem;
         private readonly GameStateMachine _gameStateMachine;
+        private readonly TimeSystem _timeSystem;
 
-        public InitializeGameState(InputSystem inputSystem, GameStateMachine gameStateMachine)
+        public InitializeGameState(InputSystem inputSystem, GameStateMachine gameStateMachine, TimeSystem timeSystem)
         {
             _inputSystem = inputSystem;
             _gameStateMachine = gameStateMachine;
+            _timeSystem = timeSystem;
         }
 
         protected override void OnEnter()
@@ -38,7 +41,7 @@ namespace NovemberProject.GameStates
 #endif
             Game.Instance.UIManager.HideSystemInfoPanel();
             Game.Instance.UIManager.HideCheatPanel();
-            Game.Instance.TimeSystem.PauseTime();
+            _timeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
             _gameStateMachine.MainMenu();
         }

@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.MovingResources
 {
@@ -13,6 +15,8 @@ namespace NovemberProject.MovingResources
     {
         private readonly List<MoveEffect> _moveEffects = new();
         private readonly Subject<Unit> _onEffectsFinished = new();
+
+        private TimeSystem _timeSystem = null!;
 
         [SerializeField]
         private ResourceObjectFactory _resourceObjectFactory = null!;
@@ -29,11 +33,17 @@ namespace NovemberProject.MovingResources
         public IReadOnlyList<MoveEffect> MoveEffects => _moveEffects;
         public IObservable<Unit> OnEffectsFinished => _onEffectsFinished;
 
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
+        {
+            _timeSystem = timeSystem;
+        }
+
         public MoveEffect ShowMovingStone(Vector3 start, Vector3 finish)
         {
             return ShowMovingEffect(start, finish, _resourceObjectFactory.Stone());
         }
-        
+
         public MoveEffect ShowMovingCoin(Vector3 start, Vector3 finish)
         {
             return ShowMovingEffect(start, finish, _resourceObjectFactory.Coin());
@@ -48,7 +58,7 @@ namespace NovemberProject.MovingResources
         {
             start.y += _height;
             finish.y += _height;
-            var effect = new MoveEffect(movingObject, start, finish, _moveDuration);
+            var effect = new MoveEffect(_timeSystem, movingObject, start, finish, _moveDuration);
             _moveEffects.Add(effect);
             effect.SetEase(_movingEase);
             effect.OnReadyToDestroy.Subscribe(OnEffectReadyToDestroy);

@@ -4,11 +4,13 @@ using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.ClicheSpeech
 {
     public sealed class RandomClicheTrigger : InitializableBehaviour
     {
+        private TimeSystem _timeSystem = null!;
         private Timer? _timer;
 
         [SerializeField]
@@ -20,12 +22,15 @@ namespace NovemberProject.ClicheSpeech
         [SerializeField]
         private Vector2 _cooldown;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
         {
-            base.OnInitialized();
+            _timeSystem = timeSystem;
+        }
 
+        private void Start()
+        {
             _showClicheBubble.OnHidden
-                .TakeUntilDisable(this)
                 .Subscribe(_ => OnBubbleHidden());
             float warmupTime = Random.Range(_warmUp.x, _warmUp.y);
             ShowBubbleAfterDelay(warmupTime);
@@ -44,7 +49,7 @@ namespace NovemberProject.ClicheSpeech
 
         private void ShowBubbleAfterDelay(float delay)
         {
-            _timer = Game.Instance.TimeSystem.CreateTimer(delay, _ => ShowNextBubble());
+            _timer = _timeSystem.CreateTimer(delay, _ => ShowNextBubble());
             _timer.Start();
         }
 

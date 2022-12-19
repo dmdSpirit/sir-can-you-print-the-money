@@ -2,14 +2,18 @@
 using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
+using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Pops
 {
     public sealed class Wobble : InitializableBehaviour
     {
         private const float TOLERANCE = 0.001f;
+
+        private TimeSystem _timeSystem = null!;
 
         private int _direction = 1;
 
@@ -22,13 +26,15 @@ namespace NovemberProject.Pops
         [SerializeField]
         private float _maxValue;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
         {
-            base.OnInitialized();
+            _timeSystem = timeSystem;
+        }
 
-            Game.Instance.TimeSystem.OnUpdate
-                .Where(deltaTime => deltaTime != 0)
-                .Subscribe(OnUpdate);
+        private void Start()
+        {
+            _timeSystem.OnUpdate.Where(deltaTime => deltaTime != 0).Subscribe(OnUpdate);
         }
 
         private void OnUpdate(float deltaTime)

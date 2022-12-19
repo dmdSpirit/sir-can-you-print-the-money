@@ -5,11 +5,13 @@ using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.ClicheSpeech
 {
     public sealed class ShowClicheBubble : MonoBehaviour
     {
+        private TimeSystem _timeSystem = null!;
         private bool _isShown;
         private readonly Subject<Unit> _onHidden = new();
         private Timer? _displayTimer;
@@ -22,6 +24,12 @@ namespace NovemberProject.ClicheSpeech
 
         public IObservable<Unit> OnHidden => _onHidden;
 
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
+        {
+            _timeSystem = timeSystem;
+        }
+
         public void ShowBubble()
         {
             ClicheBible clicheBible = Game.Instance.ClicheBible;
@@ -31,7 +39,7 @@ namespace NovemberProject.ClicheSpeech
             _speechBubble.Show(text);
             _isShown = true;
             float duration = _perCharShowDuration * text.Length;
-            _displayTimer = Game.Instance.TimeSystem.CreateTimer(duration, _ => HideBubble());
+            _displayTimer = _timeSystem.CreateTimer(duration, _ => HideBubble());
             _displayTimer.Start();
         }
 

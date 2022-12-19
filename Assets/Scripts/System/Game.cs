@@ -4,12 +4,9 @@ using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.CoreGameplay;
-using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
-using NovemberProject.Input;
 using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
-using NovemberProject.System.Messages;
 using NovemberProject.System.UI;
 using NovemberProject.TechTree;
 using NovemberProject.Time;
@@ -28,14 +25,12 @@ namespace NovemberProject.System
 
         private static Game _instance = null!;
 
-        private MessageBroker _messageBroker = null!;
         private GameStateMachine _gameStateMachine = null!;
 
         public static Game Instance => GetInstance();
 
         public ClicheBible ClicheBible { get; private set; } = null!;
         public RoundSystem RoundSystem { get; private set; } = null!;
-        public TimeSystem TimeSystem { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
@@ -52,9 +47,8 @@ namespace NovemberProject.System
         public IObservable<Unit> OnInitialized => _onInitialized;
 
         [Inject]
-        private void Construct(MessageBroker messageBroker, GameStateMachine gameStateMachine)
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            _messageBroker = messageBroker;
             _gameStateMachine = gameStateMachine;
         }
 
@@ -87,7 +81,6 @@ namespace NovemberProject.System
         private void CreateComponents()
         {
             RoundSystem = GetComponent<RoundSystem>();
-            TimeSystem = gameObject.AddComponent<TimeSystem>();
             UIManager = FindObjectOfType<UIManager>();
             CameraController = FindObjectOfType<CameraController>();
             BuildingSelector = FindObjectOfType<BuildingSelector>();

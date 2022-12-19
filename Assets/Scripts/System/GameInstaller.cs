@@ -30,15 +30,15 @@ namespace NovemberProject.System
         [SerializeField]
         private ArmyManagerSettings _armyManagerSettings = null!;
 
+        [SerializeField]
+        private TimeSystemSettings _timeSystemSettings = null!;
+
         // Temporary references.
         [SerializeField]
         private TechController _techController = null!;
 
         [SerializeField]
         private ResourceMoveEffectSpawner _resourceMoveEffectSpawner = null!;
-
-        [SerializeField]
-        private TimeSystem _timeSystem = null!;
 
         [SerializeField]
         private CoreGameplay.CoreGameplay _coreGameplay = null!;
@@ -48,6 +48,9 @@ namespace NovemberProject.System
 
         [SerializeField]
         private InputSystem _inputSystem = null!;
+
+        [SerializeField]
+        private TimeSystemUpdater _timeSystemUpdater = null!;
 
         public override void InstallBindings()
         {
@@ -59,6 +62,7 @@ namespace NovemberProject.System
             Container.Bind<Expeditions>().AsSingle();
             Container.Bind<GameStateMachine>().AsSingle();
             Container.Bind<ArmyManager>().AsSingle();
+            Container.Bind<TimeSystem>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -70,9 +74,9 @@ namespace NovemberProject.System
             Container.Bind<TechController>().FromInstance(_techController);
             Container.Bind<ResourceMoveEffectSpawner>().FromInstance(_resourceMoveEffectSpawner);
             Container.Bind<Game>().FromInstance(Game.Instance);
-            Container.Bind<TimeSystem>().FromInstance(_timeSystem);
             Container.Bind<CoreGameplay.CoreGameplay>().FromInstance(_coreGameplay);
             Container.Bind<CombatController>().FromInstance(_combatController);
+            Container.Bind<TimeSystemUpdater>().FromInstance(_timeSystemUpdater);
             Container.Bind<InputSystem>().FromInstance(_inputSystem);
         }
 
@@ -83,6 +87,7 @@ namespace NovemberProject.System
             Container.Bind<MoneyControllerSettings>().FromInstance(_moneyControllerSettings);
             Container.Bind<ExpeditionSettings>().FromInstance(_expeditionSettings);
             Container.Bind<ArmyManagerSettings>().FromInstance(_armyManagerSettings);
+            Container.Bind<TimeSystemSettings>().FromInstance(_timeSystemSettings);
         }
     }
 }

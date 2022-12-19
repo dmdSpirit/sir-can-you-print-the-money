@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using NovemberProject.Time;
 
 namespace NovemberProject.Input
 {
@@ -16,6 +17,16 @@ namespace NovemberProject.Input
             }
 
             return (T)_inputHandlers[typeof(T)];
+        }
+
+        public TimeControlsHandler GetTimeControlsHandler(TimeSystem timeSystem)
+        {
+            if (!_inputHandlers.ContainsKey(typeof(TimeControlsHandler)))
+            {
+                _inputHandlers.Add(typeof(TimeControlsHandler), new TimeControlsHandler(timeSystem));
+            }
+
+            return (TimeControlsHandler)_inputHandlers[typeof(TimeControlsHandler)];
         }
     }
 }

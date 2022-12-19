@@ -1,22 +1,25 @@
 ﻿#nullable enable
 using NovemberProject.CoreGameplay;
 using NovemberProject.System;
+using NovemberProject.Time;
 
 namespace NovemberProject.GameStates
 {
     public sealed class ExpeditionFinishedState : State
     {
         private readonly ExpeditionResult _expeditionResult;
+        private readonly TimeSystem _timeSystem;
 
-        public ExpeditionFinishedState(ExpeditionResult expeditionResult)
+        public ExpeditionFinishedState(ExpeditionResult expeditionResult, TimeSystem timeSystem)
         {
             _expeditionResult = expeditionResult;
+            _timeSystem = timeSystem;
         }
 
         protected override void OnEnter()
         {
             Game.Instance.UIManager.ShowExpeditionResult(_expeditionResult);
-            Game.Instance.TimeSystem.PauseTime();
+            _timeSystem.PauseTime();
             Game.Instance.UIManager.LockTimeControls();
             Game.Instance.BuildingSelector.Unselect();
         }
@@ -24,7 +27,7 @@ namespace NovemberProject.GameStates
         protected override void OnExit()
         {
             Game.Instance.UIManager.HideExpeditionResult();
-            Game.Instance.TimeSystem.RestoreAfterPause();
+            _timeSystem.RestoreAfterPause();
             Game.Instance.UIManager.UnlockTimeControls();
         }
     }

@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using NovemberProject.System;
 using NovemberProject.System.Messages;
+using NovemberProject.Time;
 using UniRx;
 
 namespace NovemberProject.GameStates
@@ -9,18 +10,20 @@ namespace NovemberProject.GameStates
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly MessageBroker _messageBroker;
+        private readonly TimeSystem _timeSystem;
 
-        public NewGameState(GameStateMachine gameStateMachine, MessageBroker messageBroker)
+        public NewGameState(GameStateMachine gameStateMachine, TimeSystem timeSystem, MessageBroker messageBroker)
         {
             _messageBroker = messageBroker;
+            _timeSystem = timeSystem;
             _gameStateMachine = gameStateMachine;
         }
 
         protected override void OnEnter()
         {
-            Game.Instance.TimeSystem.ResetTimers();
-            Game.Instance.TimeSystem.ResetTimeScale();
-            Game.Instance.TimeSystem.PauseTime();
+            _timeSystem.ResetTimers();
+            _timeSystem.ResetTimeScale();
+            _timeSystem.PauseTime();
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
             Game.Instance.TechController.InitializeGameData();

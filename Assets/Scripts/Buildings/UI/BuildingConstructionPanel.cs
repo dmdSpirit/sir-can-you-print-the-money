@@ -1,10 +1,12 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
+using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
@@ -12,6 +14,7 @@ namespace NovemberProject.Buildings.UI
     {
         private readonly CompositeDisposable _sub = new();
 
+        private TimeSystem _timeSystem = null!;
         private IConstructableBuilding _building = null!;
 
         [SerializeField]
@@ -38,11 +41,15 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private string _lockedText = "Not learned";
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
         {
-            base.OnInitialized();
+            _timeSystem = timeSystem;
+        }
+
+        private void Start()
+        {
             _startConstructionButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnStartConstructionClicked);
         }
 
@@ -69,7 +76,7 @@ namespace NovemberProject.Buildings.UI
             }
 
             _constructionTimerText.text =
-                Game.Instance.TimeSystem.EstimateSecondsLeftUnscaled(_building.ConstructionTimer) + "s";
+                _timeSystem.EstimateSecondsLeftUnscaled(_building.ConstructionTimer) + "s";
 
             bool IsConstructing() => IsShown && _building.ConstructableState.Value == ConstructableState.IsConstructing;
         }
@@ -124,8 +131,8 @@ namespace NovemberProject.Buildings.UI
         {
             bool constructLearned = Game.Instance.TechController.CanBuildArena.Value;
             _constructButtonText.text = constructLearned ? _constructText : _lockedText;
-            _startConstructionButton.interactable = Game.Instance.StoneController.Stone.Value >= _building.ConstructionCost && constructLearned;
+            _startConstructionButton.interactable =
+                Game.Instance.StoneController.Stone.Value >= _building.ConstructionCost && constructLearned;
         }
-        
     }
 }

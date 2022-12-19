@@ -19,6 +19,7 @@ namespace NovemberProject.Buildings
         private FolkManager _folkManager = null!;
         private FoodController _foodController = null!;
         private MoneyController _moneyController = null!;
+        private TimeSystem _timeSystem = null!;
         
         private Timer? _productionTimer;
 
@@ -49,11 +50,13 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
         [Inject]
-        private void Construct(FolkManager folkManager, FoodController foodController, MoneyController moneyController)
+        private void Construct(FolkManager folkManager, FoodController foodController, MoneyController moneyController,
+            TimeSystem timeSystem)
         {
             _folkManager = folkManager;
             _foodController = foodController;
             _moneyController = moneyController;
+            _timeSystem = timeSystem;
             _folkManager.MarketFolk.Subscribe(_ => UpdateProduction());
             _foodController.FolkFood.Subscribe(_ => UpdateProduction());
             _moneyController.ArmyMoney.Subscribe(_ => UpdateProduction());
@@ -99,7 +102,7 @@ namespace NovemberProject.Buildings
         {
             Assert.IsTrue(_folkManager.MarketFolk.Value > 0);
             Assert.IsTrue(_productionTimer == null);
-            _productionTimer = Game.Instance.TimeSystem.CreateTimer(_tradeDuration, OnTradeFinished);
+            _productionTimer = _timeSystem.CreateTimer(_tradeDuration, OnTradeFinished);
             _productionTimer.Start();
             _producedValue.Value = _foodChangedPerTrade * _folkManager.MarketFolk.Value;
             _isProducing.Value = true;

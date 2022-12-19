@@ -1,10 +1,8 @@
 ﻿#nullable enable
 using System;
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Core.PathCore;
-using DG.Tweening.Plugins.Options;
 using NovemberProject.System;
+using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 
@@ -18,6 +16,7 @@ namespace NovemberProject.MovingResources
         private readonly Vector3 _start;
         private readonly Vector3 _finish;
         private readonly float _time;
+        private readonly TimeSystem _timeSystem;
 
         private Ease _ease = Ease.Linear;
         private Tweener _tweener;
@@ -28,8 +27,9 @@ namespace NovemberProject.MovingResources
         public IObservable<MoveEffect> OnReadyToDestroy => _onReadyToDestroy;
 
         // ReSharper disable once TooManyDependencies
-        public MoveEffect(GameObject movingObject, Vector3 start, Vector3 finish, float time = 1f)
+        public MoveEffect(TimeSystem timeSystem, GameObject movingObject, Vector3 start, Vector3 finish, float time = 1f)
         {
+            _timeSystem = timeSystem;
             MovingObject = movingObject;
             _start = start;
             _finish = finish;
@@ -46,7 +46,7 @@ namespace NovemberProject.MovingResources
             _tweener = MovingObject.transform.DOPath(new[] { _start, medianPoint, _finish }, _time, PathType.CatmullRom)
                 .SetEase(_ease)
                 .OnComplete(MoveFinished);
-            _timeScaleSub = Game.Instance.TimeSystem.TimeScale.Subscribe(OnTimeScaleChanged);
+            _timeScaleSub = _timeSystem.TimeScale.Subscribe(OnTimeScaleChanged);
         }
 
         private void OnTimeScaleChanged(float timeScale)

@@ -18,6 +18,7 @@ namespace NovemberProject.Buildings
 
         private MessageBroker _messageBroker = null!;
         private GameStateMachine _gameStateMachine = null!;
+        private TimeSystem _timeSystem = null!;
         private Timer? _constructionTimer;
         private Vector3 _initialPosition;
 
@@ -47,9 +48,10 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ConstructionTimer => _constructionTimer;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine, MessageBroker messageBroker)
+        private void Construct(GameStateMachine gameStateMachine, TimeSystem timeSystem, MessageBroker messageBroker)
         {
             _gameStateMachine = gameStateMachine;
+            _timeSystem = timeSystem;
             _messageBroker = messageBroker;
         }
 
@@ -68,7 +70,7 @@ namespace NovemberProject.Buildings
         {
             Assert.IsTrue(Game.Instance.StoneController.Stone.Value >= _constructionCost);
             Assert.IsTrue(ConstructableState.Value == Buildings.ConstructableState.NotConstructed);
-            _constructionTimer = Game.Instance.TimeSystem.CreateTimer(_constructionDuration, OnConstructionFinished);
+            _constructionTimer = _timeSystem.CreateTimer(_constructionDuration, OnConstructionFinished);
             Game.Instance.StoneController.SpendStone(_constructionCost);
             _constructionTimer.Start();
             _constructableState.Value = Buildings.ConstructableState.IsConstructing;
