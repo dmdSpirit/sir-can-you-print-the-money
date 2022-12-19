@@ -5,6 +5,7 @@ using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
 using NovemberProject.Input;
 using NovemberProject.MovingResources;
+using NovemberProject.Rounds;
 using NovemberProject.TechTree;
 using NovemberProject.Time;
 using UniRx;
@@ -32,6 +33,9 @@ namespace NovemberProject.System
 
         [SerializeField]
         private TimeSystemSettings _timeSystemSettings = null!;
+
+        [SerializeField]
+        private RoundSystemSettings _roundSystemSettings = null!;
 
         // Temporary references.
         [SerializeField]
@@ -64,6 +68,7 @@ namespace NovemberProject.System
             Container.Bind<ArmyManager>().AsSingle();
             Container.Bind<TimeSystem>().AsSingle();
             Container.Bind<TechController>().AsSingle();
+            Container.Bind<RoundSystem>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -88,6 +93,7 @@ namespace NovemberProject.System
             Container.Bind<ExpeditionSettings>().FromInstance(_expeditionSettings);
             Container.Bind<ArmyManagerSettings>().FromInstance(_armyManagerSettings);
             Container.Bind<TimeSystemSettings>().FromInstance(_timeSystemSettings);
+            Container.Bind<RoundSystemSettings>().FromInstance(_roundSystemSettings);
         }
     }
 }

@@ -2,7 +2,6 @@
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
 using NovemberProject.GameStates;
-using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -14,6 +13,7 @@ namespace NovemberProject.Rounds.UI
     public sealed class RoundStartPanel : UIElement<object?>
     {
         private GameStateMachine _gameStateMachine = null!;
+        private RoundSystem _roundSystem = null!;
 
         [SerializeField]
         private TMP_Text _title = null!;
@@ -31,9 +31,10 @@ namespace NovemberProject.Rounds.UI
         private RoundStartConfigs _roundStartConfigs = null!;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine)
+        private void Construct(GameStateMachine gameStateMachine, RoundSystem roundSystem)
         {
             _gameStateMachine = gameStateMachine;
+            _roundSystem = roundSystem;
         }
 
         private void Start()
@@ -44,7 +45,7 @@ namespace NovemberProject.Rounds.UI
 
         protected override void OnShow(object? _)
         {
-            int round = Game.Instance.RoundSystem.Round.Value;
+            int round = _roundSystem.Round.Value;
             RoundStartConfig config = _roundStartConfigs.GetRoundStartConfig(round);
             _title.text = config.Title;
             _description.text = config.Description;

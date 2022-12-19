@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CoreGameplay;
-using NovemberProject.System;
+using NovemberProject.Rounds;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
@@ -18,6 +18,7 @@ namespace NovemberProject.Buildings
         private MoneyController _moneyController = null!;
         private Expeditions _expeditions = null!;
         private ArmyManager _armyManager = null!;
+        private RoundSystem _roundSystem = null!;
 
         [SerializeField]
         private string _workerTitle = "Explorers";
@@ -56,26 +57,18 @@ namespace NovemberProject.Buildings
 
         [Inject]
         private void Construct(FoodController foodController, MoneyController moneyController, Expeditions expeditions,
-            ArmyManager armyManager)
+            ArmyManager armyManager, RoundSystem roundSystem)
         {
             _foodController = foodController;
             _moneyController = moneyController;
             _expeditions = expeditions;
             _armyManager = armyManager;
+            _roundSystem = roundSystem;
             _foodController.ArmyFood.Subscribe(_ => UpdateCanBeSentStatus());
             _moneyController.ArmyMoney.Subscribe(_ => UpdateCanBeSentStatus());
             _expeditions.IsExpeditionActive.Subscribe(_ => UpdateCanBeSentStatus());
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            _armyManager.ExplorersCount
-                .TakeUntilDisable(this)
-                .Subscribe(OnExplorersCountChanged);
-            Game.Instance.RoundSystem.Round
-                .TakeUntilDisable(this)
-                .Subscribe(OnRoundChanged);
+            _armyManager.ExplorersCount.Subscribe(OnExplorersCountChanged);
+            _roundSystem.Round.Subscribe(OnRoundChanged);
         }
 
         private void OnRoundChanged(int round)

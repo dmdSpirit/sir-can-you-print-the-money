@@ -7,12 +7,14 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
     public sealed class RoundTimer : UIElement<object?>
     {
         private IDisposable? _sub;
+        private RoundSystem _roundSystem = null!;
 
         [SerializeField]
         private TMP_Text _roundNumber = null!;
@@ -20,10 +22,16 @@ namespace NovemberProject.Rounds.UI
         [SerializeField]
         private TimerProgressBar _timerProgressBar = null!;
 
+        [Inject]
+        private void Construct(RoundSystem roundSystem)
+        {
+            _roundSystem = roundSystem;
+        }
+
         protected override void OnShow(object? value)
         {
             _sub?.Dispose();
-            _sub= Game.Instance.RoundSystem.OnRoundTimerStarted.Subscribe(_ => OnRoundStarted());
+            _sub= _roundSystem.OnRoundTimerStarted.Subscribe(_ => OnRoundStarted());
             OnRoundStarted();
         }
 
@@ -34,8 +42,8 @@ namespace NovemberProject.Rounds.UI
 
         private void OnRoundStarted()
         {
-            _roundNumber.text = Game.Instance.RoundSystem.Round.Value.ToString();
-            RoundSystem roundSystem = Game.Instance.RoundSystem;
+            _roundNumber.text = _roundSystem.Round.Value.ToString();
+            RoundSystem roundSystem = _roundSystem;
             IReadOnlyTimer? roundTimer = roundSystem.RoundTimer;
             Assert.IsTrue(roundTimer != null);
             _timerProgressBar.Show(roundTimer!);

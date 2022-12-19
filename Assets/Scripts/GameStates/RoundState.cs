@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.Rounds;
 using NovemberProject.System;
 using NovemberProject.Time;
 
@@ -7,15 +8,17 @@ namespace NovemberProject.GameStates
     public sealed class RoundState : State
     {
         private readonly TimeSystem _timeSystem;
+        private readonly RoundSystem _roundSystem;
 
-        public RoundState(TimeSystem timeSystem)
+        public RoundState(TimeSystem timeSystem, RoundSystem roundSystem)
         {
             _timeSystem = timeSystem;
+            _roundSystem = roundSystem;
         }
 
         protected override void OnEnter()
         {
-            Game.Instance.RoundSystem.StartRound();
+            _roundSystem.StartRound();
             Game.Instance.UIManager.ShowRoundTimer();
             Game.Instance.UIManager.UnlockTimeControls();
             _timeSystem.RestoreAfterPause();

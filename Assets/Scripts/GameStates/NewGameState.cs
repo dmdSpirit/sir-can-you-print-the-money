@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.Rounds;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
@@ -26,7 +27,6 @@ namespace NovemberProject.GameStates
             _timeSystem.PauseTime();
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
-            Game.Instance.CombatController.InitializeGameData();
             _messageBroker.Publish(new NewGameMessage());
             _gameStateMachine.Tutorial();
         }

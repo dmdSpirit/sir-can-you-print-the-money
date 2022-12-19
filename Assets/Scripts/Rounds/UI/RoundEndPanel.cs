@@ -13,6 +13,7 @@ namespace NovemberProject.Rounds.UI
     public sealed class RoundEndPanel : UIElement<RoundResult>
     {
         private GameStateMachine _gameStateMachine = null!;
+        private RoundSystem _roundSystem = null!;
 
         [SerializeField]
         private TMP_Text _title = null!;
@@ -27,9 +28,10 @@ namespace NovemberProject.Rounds.UI
         private RoundResultPanel _roundResultPanel = null!;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine)
+        private void Construct(GameStateMachine gameStateMachine, RoundSystem roundSystem)
         {
             _gameStateMachine = gameStateMachine;
+            _roundSystem = roundSystem;
         }
 
         private void Start()
@@ -46,7 +48,7 @@ namespace NovemberProject.Rounds.UI
                 return;
             }
 
-            _title.text = _titleText.Replace("[value]", Game.Instance.RoundSystem.Round.Value.ToString());
+            _title.text = _titleText.Replace("[value]", _roundSystem.Round.Value.ToString());
             _roundResultPanel.Show(roundResult);
         }
 

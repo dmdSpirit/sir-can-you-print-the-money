@@ -28,7 +28,6 @@ namespace NovemberProject.System
         public static Game Instance => GetInstance();
 
         public ClicheBible ClicheBible { get; private set; } = null!;
-        public RoundSystem RoundSystem { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
@@ -37,7 +36,6 @@ namespace NovemberProject.System
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
-        public AudioManager AudioManager { get; private set; } = null!;
         public BuildingNameHover BuildingNameHover { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
@@ -77,7 +75,6 @@ namespace NovemberProject.System
 
         private void CreateComponents()
         {
-            RoundSystem = GetComponent<RoundSystem>();
             UIManager = FindObjectOfType<UIManager>();
             CameraController = FindObjectOfType<CameraController>();
             BuildingSelector = FindObjectOfType<BuildingSelector>();
@@ -86,7 +83,6 @@ namespace NovemberProject.System
             StoneController = FindObjectOfType<StoneController>();
             TreasureController = FindObjectOfType<TreasureController>();
             CombatController = FindObjectOfType<CombatController>();
-            AudioManager = FindObjectOfType<AudioManager>();
             BuildingNameHover = FindObjectOfType<BuildingNameHover>();
         }
 

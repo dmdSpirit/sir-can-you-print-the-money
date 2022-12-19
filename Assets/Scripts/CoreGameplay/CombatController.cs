@@ -3,7 +3,9 @@ using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
+using NovemberProject.Rounds;
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
@@ -38,6 +40,8 @@ namespace NovemberProject.CoreGameplay
         private ArmyManager _armyManager = null!;
         private GameStateMachine _gameStateMachine = null!;
         private TimeSystem _timeSystem = null!;
+        private RoundSystem _roundSystem = null!;
+        private MessageBroker _messageBroker = null!;
 
         private Timer? _attackTimer;
         private int _attackIndex;
@@ -56,22 +60,20 @@ namespace NovemberProject.CoreGameplay
         public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
 
         [Inject]
-        private void Construct(FolkManager folkManager, ArmyManager armyManager, GameStateMachine gameStateMachine, TimeSystem timeSystem)
+        private void Construct(FolkManager folkManager, ArmyManager armyManager, GameStateMachine gameStateMachine,
+            TimeSystem timeSystem, RoundSystem roundSystem, MessageBroker messageBroker)
         {
             _folkManager = folkManager;
             _armyManager = armyManager;
             _gameStateMachine = gameStateMachine;
             _timeSystem = timeSystem;
+            _roundSystem = roundSystem;
+            _messageBroker = messageBroker;
+            _roundSystem.Round.Subscribe(OnRoundChanged);
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
 
-        private void Start()
-        {
-            Game.Instance.RoundSystem.Round
-                .TakeUntilDisable(this)
-                .Subscribe(OnRoundChanged);
-        }
-
-        public void InitializeGameData()
+        private void OnNewGame(NewGameMessage message)
         {
             _attackIndex = 0;
             _attackTimer?.Cancel();

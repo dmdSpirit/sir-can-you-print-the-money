@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.GameStates;
-using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
 using UniRx;
@@ -11,7 +10,7 @@ using Zenject;
 
 namespace NovemberProject.Rounds
 {
-    public sealed class RoundSystem : MonoBehaviour
+    public sealed class RoundSystem
     {
         private const int ROUND_TO_START_FROM = 0;
 
@@ -19,14 +18,11 @@ namespace NovemberProject.Rounds
         private readonly Subject<Unit> _onRoundEnded = new();
         private readonly Subject<Unit> _onRoundTimerStarted = new();
 
-        private GameStateMachine _gameStateMachine = null!;
-        private MessageBroker _messageBroker = null!;
-        private TimeSystem _timeSystem = null!;
+        private readonly MessageBroker _messageBroker;
+        private readonly RoundSystemSettings _settings;
+        private readonly TimeSystem _timeSystem;
 
         private Timer? _roundTimer;
-
-        [SerializeField]
-        private float _roundDuration;
 
         public IReadOnlyReactiveProperty<int> Round => _round;
         public IObservable<Unit> OnRoundEnded => _onRoundEnded;
@@ -34,9 +30,10 @@ namespace NovemberProject.Rounds
         public IReadOnlyTimer? RoundTimer => _roundTimer;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine,TimeSystem timeSystem, MessageBroker messageBroker)
+        public RoundSystem(RoundSystemSettings roundSystemSettings,
+            TimeSystem timeSystem, MessageBroker messageBroker)
         {
-            _gameStateMachine = gameStateMachine;
+            _settings = roundSystemSettings;
             _timeSystem = timeSystem;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
@@ -61,21 +58,16 @@ namespace NovemberProject.Rounds
 
         public void StartRound()
         {
-            _roundTimer = _timeSystem.CreateTimer(_roundDuration, OnRoundTimerFinished);
+            _roundTimer = _timeSystem.CreateTimer(_settings.RoundDuration, OnRoundTimerFinished);
             _roundTimer.Start();
 
             _onRoundTimerStarted.OnNext(Unit.Default);
         }
 
-        public void EndRound()
-        {
-            _onRoundEnded.OnNext(Unit.Default);
-        }
-
         private void OnRoundTimerFinished(IReadOnlyTimer timer)
         {
             Assert.IsTrue(timer == _roundTimer);
-            _gameStateMachine.FinishRound();
+            _onRoundEnded.OnNext(Unit.Default);
         }
     }
 }

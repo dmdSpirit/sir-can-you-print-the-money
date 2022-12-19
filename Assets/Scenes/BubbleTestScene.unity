@@ -15812,10 +15812,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1985125200}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
-      propertyPath: _timeSystemSettings
-      value: 
-      objectReference: {fileID: 11400000, guid: 87b22825e93b5ae4090a25103855b137, type: 2}
-    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _buildingsController
       value: 
       objectReference: {fileID: 0}
@@ -15825,6 +15821,7 @@ PrefabInstance:
       objectReference: {fileID: 1445167903}
     m_RemovedComponents:
     - {fileID: 2243828583067338666, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+    - {fileID: 2445315342722928152, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
 --- !u!114 &1629718553 stripped
 MonoBehaviour:
