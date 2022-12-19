@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using NovemberProject.CameraSystem;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Time;
 using UniRx;
@@ -27,6 +28,12 @@ namespace NovemberProject.Input
 
         public TimeControlsHandler GetTimeControlsHandler(TimeSystem timeSystem) =>
             _inputHandlersFactory.GetTimeControlsHandler(timeSystem);
+
+        public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController) =>
+            _inputHandlersFactory.GetMoveCameraHandler(cameraController);
+
+        public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController) =>
+            _inputHandlersFactory.GetMouseSelectionHandler(cameraController);
 
         public void AddGlobalInputHandler<T>() where T : InputHandler, new()
         {

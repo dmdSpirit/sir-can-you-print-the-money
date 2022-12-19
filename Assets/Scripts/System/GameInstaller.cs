@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.Buildings;
+using NovemberProject.CameraSystem;
 using NovemberProject.CoreGameplay;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.GameStates;
@@ -63,6 +64,9 @@ namespace NovemberProject.System
         [SerializeField]
         private TimeSystemUpdater _timeSystemUpdater = null!;
 
+        [SerializeField]
+        private CameraController _cameraController = null!;
+
         public override void InstallBindings()
         {
             Container.Bind<FolkManager>().AsSingle();
@@ -92,6 +96,7 @@ namespace NovemberProject.System
             Container.Bind<CombatController>().FromInstance(_combatController);
             Container.Bind<TimeSystemUpdater>().FromInstance(_timeSystemUpdater);
             Container.Bind<InputSystem>().FromInstance(_inputSystem);
+            Container.Bind<CameraController>().FromInstance(_cameraController);
         }
 
         private void InstallSettingsBindings()

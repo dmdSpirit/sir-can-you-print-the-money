@@ -59,6 +59,7 @@ namespace NovemberProject.Buildings
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
             _stoneController.Stone.Subscribe(OnStoneCountChanged);
+            _initialPosition = transform.position;
         }
 
         public void StartConstruction()

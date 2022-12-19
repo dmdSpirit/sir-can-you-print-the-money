@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CameraSystem;
 using NovemberProject.System;
 using NovemberProject.Time;
 
@@ -6,16 +7,18 @@ namespace NovemberProject.GameStates
 {
     public sealed class MainMenuState : State
     {
-        private TimeSystem _timeSystem;
+        private readonly TimeSystem _timeSystem;
+        private readonly CameraController _cameraController;
 
-        public MainMenuState(TimeSystem timeSystem)
+        public MainMenuState(TimeSystem timeSystem,CameraController cameraController)
         {
             _timeSystem = timeSystem;
+            _cameraController = cameraController;
         }
 
         protected override void OnEnter()
         {
-            Game.Instance.CameraController.TurnCameraOff();
+            _cameraController.TurnCameraOff();
             Game.Instance.UIManager.HideRoundTimer();
             Game.Instance.UIManager.HideTimeControls();
             Game.Instance.UIManager.ShowMainMenu();
@@ -24,7 +27,7 @@ namespace NovemberProject.GameStates
 
         protected override void OnExit()
         {
-            Game.Instance.CameraController.TurnCameraOn();
+            _cameraController.TurnCameraOn();
             Game.Instance.UIManager.HideMainMenu();
         }
     }

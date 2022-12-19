@@ -29,7 +29,6 @@ namespace NovemberProject.System
 
         public ClicheBible ClicheBible { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
-        public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
@@ -74,7 +73,6 @@ namespace NovemberProject.System
         private void CreateComponents()
         {
             UIManager = FindObjectOfType<UIManager>();
-            CameraController = FindObjectOfType<CameraController>();
             BuildingSelector = FindObjectOfType<BuildingSelector>();
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();

@@ -12,6 +12,13 @@ namespace NovemberProject.Input
         private const int LEFT_MOUSE_BUTTON = 0;
         private const float RAYCAST_MAX_DISTANCE = 1000f;
 
+        private readonly CameraController _cameraController;
+
+        public MouseSelectionHandler(CameraController cameraController)
+        {
+            _cameraController = cameraController;
+        }
+
         public override void HandleInput()
         {
             if (Game.Instance.UIManager.IsMouseOver.Value)
@@ -24,9 +31,8 @@ namespace NovemberProject.Input
                 return;
             }
 
-            CameraController cameraController = Game.Instance.CameraController;
             BuildingSelector buildingSelector = Game.Instance.BuildingSelector;
-            RaycastBuildingSelection(cameraController, buildingSelector);
+            RaycastBuildingSelection(_cameraController, buildingSelector);
         }
 
         private static void RaycastBuildingSelection(CameraController cameraController,

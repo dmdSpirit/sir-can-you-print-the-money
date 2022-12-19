@@ -1,21 +1,27 @@
 ﻿#nullable enable
 using System.Linq;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.CameraSystem
 {
     public sealed class CameraBounds : InitializableBehaviour
     {
         private const int VALID_NUMBER_OF_BOUNDS = 4;
+        private CameraController _cameraController = null!;
 
         [SerializeField]
         private GameObject[] _bounds = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(CameraController cameraController)
         {
-            base.OnInitialized();
+            _cameraController = cameraController;
+        }
+
+        private void Start()
+        {
             if (_bounds.Length != VALID_NUMBER_OF_BOUNDS)
             {
                 return;
@@ -26,7 +32,7 @@ namespace NovemberProject.CameraSystem
             float minY = GetMinY();
             float height = GetMaxY() - minY;
             var rect = new Rect(minX, minY, width, height);
-            Game.Instance.CameraController.SetBounds(rect);
+            _cameraController.SetBounds(rect);
         }
 
         private float GetMinX() => _bounds.Select(bound => bound.transform.position.x).Min();

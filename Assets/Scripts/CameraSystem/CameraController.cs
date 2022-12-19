@@ -1,8 +1,7 @@
 #nullable enable
+using System;
 using DG.Tweening;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.GameStates;
-using NovemberProject.System;
 using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
@@ -34,12 +33,12 @@ namespace NovemberProject.CameraSystem
         {
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+            _cameraMovement = GetComponent<CameraMovement>();
+            _cameraZoom = GetComponent<CameraZoom>();
         }
 
         private void Start()
         {
-            _cameraMovement = GetComponent<CameraMovement>();
-            _cameraZoom = GetComponent<CameraZoom>();
             _cameraZoom.SetCamera(_mainCamera);
             _initialPosition = transform.position;
         }

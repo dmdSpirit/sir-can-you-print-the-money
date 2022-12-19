@@ -15748,6 +15748,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _cameraController
+      value: 
+      objectReference: {fileID: 1998926441}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _combatController
       value: 
       objectReference: {fileID: 1985125200}
@@ -18666,6 +18670,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97c221f0ef03a774e940ff885773d510, type: 3}
   m_PrefabInstance: {fileID: 1994541731}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1998926441 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4707874977462090420, guid: ad78ff934a378d5448f962e3c8e25c50, type: 3}
+  m_PrefabInstance: {fileID: 1764124194107880451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ddbd79a00c843d98e96f313ac1c3548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2002373037
 PrefabInstance:
   m_ObjectHideFlags: 0

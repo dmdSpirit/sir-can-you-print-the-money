@@ -1,9 +1,9 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.CameraSystem;
 using NovemberProject.CoreGameplay;
 using NovemberProject.Input;
 using NovemberProject.Rounds;
-using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 
@@ -30,6 +30,7 @@ namespace NovemberProject.GameStates
         private readonly MessageBroker _messageBroker;
         private readonly TimeSystem _timeSystem;
         private readonly RoundSystem _roundSystem;
+        private readonly CameraController _cameraController;
 
         private ExpeditionFinishedState? _expeditionFinishedState;
         private AttackState? _attackState;
@@ -39,20 +40,22 @@ namespace NovemberProject.GameStates
         public State CurrentState => _currentState;
 
         public GameStateMachine(InputSystem inputSystem, TimeSystem timeSystem, RoundSystem roundSystem,
+            CameraController cameraController,
             MessageBroker messageBroker)
         {
             _inputSystem = inputSystem;
             _messageBroker = messageBroker;
             _timeSystem = timeSystem;
             _roundSystem = roundSystem;
+            _cameraController = cameraController;
             _exitGameState = new ExitGameState();
-            _mainMenuState = new MainMenuState(_timeSystem);
+            _mainMenuState = new MainMenuState(_timeSystem, _cameraController);
             _mainMenuState.AddInputHandler(_inputSystem.GetInputHandler<EscapeToExitGameHandler>());
-            _newGameState = new NewGameState(this, _timeSystem, _messageBroker);
+            _newGameState = new NewGameState(this, _timeSystem, _cameraController, _messageBroker);
             _roundState = new RoundState(_timeSystem, _roundSystem);
-            _roundState.AddInputHandler(_inputSystem.GetInputHandler<MoveCameraHandler>());
+            _roundState.AddInputHandler(_inputSystem.GetMoveCameraHandler(_cameraController));
             _roundState.AddInputHandler(_inputSystem.GetTimeControlsHandler(_timeSystem));
-            _roundState.AddInputHandler(_inputSystem.GetInputHandler<MouseSelectionHandler>());
+            _roundState.AddInputHandler(_inputSystem.GetMouseSelectionHandler(_cameraController));
             _roundEndState = new RoundEndState(this, _timeSystem, _roundSystem);
             _initializeGameState = new InitializeGameState(_inputSystem, this, _timeSystem);
             _roundStartState = new RoundStartState(_roundSystem);

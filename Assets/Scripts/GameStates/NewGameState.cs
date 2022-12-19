@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CameraSystem;
 using NovemberProject.Rounds;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
@@ -13,12 +14,15 @@ namespace NovemberProject.GameStates
         private readonly GameStateMachine _gameStateMachine;
         private readonly MessageBroker _messageBroker;
         private readonly TimeSystem _timeSystem;
+        private readonly CameraController _cameraController;
 
-        public NewGameState(GameStateMachine gameStateMachine, TimeSystem timeSystem, MessageBroker messageBroker)
+        public NewGameState(GameStateMachine gameStateMachine, TimeSystem timeSystem, CameraController cameraController,
+            MessageBroker messageBroker)
         {
-            _messageBroker = messageBroker;
             _timeSystem = timeSystem;
             _gameStateMachine = gameStateMachine;
+            _cameraController = cameraController;
+            _messageBroker = messageBroker;
         }
 
         protected override void OnEnter()
@@ -26,7 +30,7 @@ namespace NovemberProject.GameStates
             _timeSystem.ResetTimers();
             _timeSystem.ResetTimeScale();
             _timeSystem.PauseTime();
-            Game.Instance.CameraController.InitializeGameData();
+            _cameraController.InitializeGameData();
             _messageBroker.Publish(new NewGameMessage());
             _gameStateMachine.Tutorial();
         }

@@ -1,23 +1,24 @@
 ﻿#nullable enable
+using NovemberProject.CameraSystem;
 using NovemberProject.System;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.CommonUIStuff
 {
     public sealed class Billboard : InitializableBehaviour
     {
-        private Camera _camera = null!;
+        private Transform _cameraTransform = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(CameraController cameraController)
         {
-            base.OnInitialized();
-
-            _camera = Game.Instance.CameraController.MainCamera;
+            _cameraTransform = cameraController.MainCamera.transform;
         }
 
         private void Update()
         {
-            Quaternion cameraRotation = _camera.transform.localRotation;
+            Quaternion cameraRotation = _cameraTransform.localRotation;
             float cameraXEulerRotation = cameraRotation.eulerAngles.x;
             Quaternion rotation = transform.localRotation;
             Vector3 eulerRotation = rotation.eulerAngles;

@@ -9,22 +9,29 @@ namespace NovemberProject.Input
     {
         private const int RIGHT_MOUSE_BUTTON = 1;
 
+        private readonly CameraController _cameraController;
+
+        public MoveCameraHandler(CameraController cameraController)
+        {
+            _cameraController = cameraController;
+        }
+
         public override void HandleInput()
         {
             Vector2 direction = GetRigMovementDirection();
             if (direction != Vector2.zero)
             {
-                Game.Instance.CameraController.MoveCamera(direction);
+                _cameraController.MoveCamera(direction);
             }
 
             float zoom = GetZoom();
             if (zoom != 0)
             {
-                Game.Instance.CameraController.ZoomCamera(zoom);
+                _cameraController.ZoomCamera(zoom);
             }
         }
 
-        private static Vector2 GetRigMovementDirection()
+        private Vector2 GetRigMovementDirection()
         {
             Vector2 direction = GetKeyboardMovement();
             if (!UnityEngine.Input.GetMouseButton(RIGHT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
@@ -32,8 +39,7 @@ namespace NovemberProject.Input
                 return direction.normalized;
             }
 
-            CameraController cameraController = Game.Instance.CameraController;
-            float mouseMoveSpeed = cameraController.MouseMoveSpeed;
+            float mouseMoveSpeed = _cameraController.MouseMoveSpeed;
             direction.x -= UnityEngine.Input.GetAxis("Mouse X") * mouseMoveSpeed;
             direction.y -= UnityEngine.Input.GetAxis("Mouse Y") * mouseMoveSpeed;
 
@@ -66,17 +72,17 @@ namespace NovemberProject.Input
             return direction;
         }
 
-        private static float GetZoom()
+        private float GetZoom()
         {
             float zoom = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
             if (UnityEngine.Input.GetKey(InputKeys.CAMERA_ZOOM_IN_KEY))
             {
-                zoom += Game.Instance.CameraController.KeysZoomModifier;
+                zoom += _cameraController.KeysZoomModifier;
             }
 
             if (UnityEngine.Input.GetKey(InputKeys.CAMERA_ZOOM_OUT_KEY))
             {
-                zoom -= Game.Instance.CameraController.KeysZoomModifier;
+                zoom -= _cameraController.KeysZoomModifier;
             }
 
             return Mathf.Clamp(zoom, -1, 1);
