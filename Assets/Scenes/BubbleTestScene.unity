@@ -15802,7 +15802,7 @@ PrefabInstance:
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _techController
       value: 
-      objectReference: {fileID: 1985125199}
+      objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _moneyController
       value: 
@@ -18436,7 +18436,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985125198}
   - component: {fileID: 1985125195}
-  - component: {fileID: 1985125199}
   - component: {fileID: 1985125200}
   m_Layer: 0
   m_Name: CareGameplay
@@ -18476,18 +18475,6 @@ Transform:
   m_Father: {fileID: 119136397}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1985125199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985125194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b60475f9d94917915feb5455f7d39b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1985125200
 MonoBehaviour:
   m_ObjectHideFlags: 0

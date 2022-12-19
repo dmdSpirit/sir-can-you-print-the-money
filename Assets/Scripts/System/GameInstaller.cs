@@ -63,6 +63,7 @@ namespace NovemberProject.System
             Container.Bind<GameStateMachine>().AsSingle();
             Container.Bind<ArmyManager>().AsSingle();
             Container.Bind<TimeSystem>().AsSingle();
+            Container.Bind<TechController>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -71,7 +72,6 @@ namespace NovemberProject.System
         private void InstallTemporaryBindings()
         {
             // Unfinished.
-            Container.Bind<TechController>().FromInstance(_techController);
             Container.Bind<ResourceMoveEffectSpawner>().FromInstance(_resourceMoveEffectSpawner);
             Container.Bind<Game>().FromInstance(Game.Instance);
             Container.Bind<CoreGameplay.CoreGameplay>().FromInstance(_coreGameplay);

@@ -2,6 +2,7 @@
 using NovemberProject.CommonUIStuff;
 using NovemberProject.GameStates;
 using NovemberProject.System;
+using NovemberProject.TechTree;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace NovemberProject.Rounds.UI
         private readonly CompositeDisposable _sub = new();
 
         private GameStateMachine _gameStateMachine = null!;
+        private TechController _techController = null!;
 
         [SerializeField]
         private TMP_Text _treasuresCount = null!;
@@ -80,9 +82,10 @@ namespace NovemberProject.Rounds.UI
         private string _inventedText = "Invented";
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine)
+        private void Construct(GameStateMachine gameStateMachine, TechController techController)
         {
             _gameStateMachine = gameStateMachine;
+            _techController = techController;
         }
 
         private void Start()
@@ -110,7 +113,7 @@ namespace NovemberProject.Rounds.UI
         protected override void OnShow(object? value)
         {
             _sub.Clear();
-            Game.Instance.TechController.OnTechUnlocked.Subscribe(_ => UpdateButtons()).AddTo(_sub);
+            _techController.OnTechUnlocked.Subscribe(_ => UpdateButtons()).AddTo(_sub);
             Game.Instance.TreasureController.Treasures.Subscribe(OnTreasuresCountChanged).AddTo(_sub);
         }
 
@@ -127,38 +130,38 @@ namespace NovemberProject.Rounds.UI
 
         private void UpdateButtons()
         {
-            _raiseSalaryButton.interactable = !Game.Instance.TechController.CanRaiseSalary.Value
+            _raiseSalaryButton.interactable = !_techController.CanRaiseSalary.Value
                                               && Game.Instance.TreasureController.Treasures.Value >= _raiseSalaryCost;
-            UpdateButtonText(_raiseSalaryButton, Game.Instance.TechController.CanRaiseSalary.Value, _raiseSalaryCost);
-            _lowerSalaryButton.interactable = !Game.Instance.TechController.CanLowerSalary.Value
-                                              && Game.Instance.TechController.CanRaiseSalary.Value
+            UpdateButtonText(_raiseSalaryButton, _techController.CanRaiseSalary.Value, _raiseSalaryCost);
+            _lowerSalaryButton.interactable = !_techController.CanLowerSalary.Value
+                                              && _techController.CanRaiseSalary.Value
                                               && Game.Instance.TreasureController.Treasures.Value >= _lowerSalaryCost;
-            UpdateButtonText(_lowerSalaryButton, Game.Instance.TechController.CanLowerSalary.Value, _lowerSalaryCost);
-            _raiseTaxButton.interactable = !Game.Instance.TechController.CanRaiseTax.Value
-                                           && Game.Instance.TechController.CanRaiseSalary.Value
+            UpdateButtonText(_lowerSalaryButton, _techController.CanLowerSalary.Value, _lowerSalaryCost);
+            _raiseTaxButton.interactable = !_techController.CanRaiseTax.Value
+                                           && _techController.CanRaiseSalary.Value
                                            && Game.Instance.TreasureController.Treasures.Value >= _raiseTaxCost;
-            UpdateButtonText(_raiseTaxButton, Game.Instance.TechController.CanRaiseTax.Value, _raiseTaxCost);
-            _lowerTaxButton.interactable = !Game.Instance.TechController.CanLowerTax.Value
-                                           && Game.Instance.TechController.CanRaiseTax.Value
+            UpdateButtonText(_raiseTaxButton, _techController.CanRaiseTax.Value, _raiseTaxCost);
+            _lowerTaxButton.interactable = !_techController.CanLowerTax.Value
+                                           && _techController.CanRaiseTax.Value
                                            && Game.Instance.TreasureController.Treasures.Value >= _lowerTaxCost;
-            UpdateButtonText(_lowerTaxButton, Game.Instance.TechController.CanLowerTax.Value, _lowerTaxCost);
-            _printMoneyButton.interactable = !Game.Instance.TechController.CanPrintMoney.Value
-                                             && Game.Instance.TechController.CanRaiseTax.Value
+            UpdateButtonText(_lowerTaxButton, _techController.CanLowerTax.Value, _lowerTaxCost);
+            _printMoneyButton.interactable = !_techController.CanPrintMoney.Value
+                                             && _techController.CanRaiseTax.Value
                                              && Game.Instance.TreasureController.Treasures.Value >= _printMoneyCost;
-            UpdateButtonText(_printMoneyButton, Game.Instance.TechController.CanPrintMoney.Value, _printMoneyCost);
-            _burnMoneyButton.interactable = !Game.Instance.TechController.CanBurnMoney.Value
-                                            && Game.Instance.TechController.CanPrintMoney.Value
+            UpdateButtonText(_printMoneyButton, _techController.CanPrintMoney.Value, _printMoneyCost);
+            _burnMoneyButton.interactable = !_techController.CanBurnMoney.Value
+                                            && _techController.CanPrintMoney.Value
                                             && Game.Instance.TreasureController.Treasures.Value >= _burnMoneyCost;
-            UpdateButtonText(_burnMoneyButton, Game.Instance.TechController.CanBurnMoney.Value, _burnMoneyCost);
-            _useMineButton.interactable = !Game.Instance.TechController.CanUseMine.Value
-                                          && Game.Instance.TechController.CanPrintMoney.Value
+            UpdateButtonText(_burnMoneyButton, _techController.CanBurnMoney.Value, _burnMoneyCost);
+            _useMineButton.interactable = !_techController.CanUseMine.Value
+                                          && _techController.CanPrintMoney.Value
                                           && Game.Instance.TreasureController.Treasures.Value >= _useMineCost;
 
-            UpdateButtonText(_useMineButton, Game.Instance.TechController.CanUseMine.Value, _useMineCost);
-            _buildArenaButton.interactable = !Game.Instance.TechController.CanBuildArena.Value
-                                             && Game.Instance.TechController.CanUseMine.Value
+            UpdateButtonText(_useMineButton, _techController.CanUseMine.Value, _useMineCost);
+            _buildArenaButton.interactable = !_techController.CanBuildArena.Value
+                                             && _techController.CanUseMine.Value
                                              && Game.Instance.TreasureController.Treasures.Value >= _buildArenaCost;
-            UpdateButtonText(_buildArenaButton, Game.Instance.TechController.CanBuildArena.Value, _buildArenaCost);
+            UpdateButtonText(_buildArenaButton, _techController.CanBuildArena.Value, _buildArenaCost);
         }
 
         private void UpdateButtonText(Button button, bool isInvented, int cost)
@@ -179,49 +182,49 @@ namespace NovemberProject.Rounds.UI
         private void OnRaiseSalary(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_raiseSalaryCost);
-            Game.Instance.TechController.UnlockRaiseSalary();
+            _techController.UnlockRaiseSalary();
         }
 
         private void OnLowerSalary(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_lowerSalaryCost);
-            Game.Instance.TechController.UnlockLowerSalary();
+            _techController.UnlockLowerSalary();
         }
 
         private void OnRaiseTax(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_raiseTaxCost);
-            Game.Instance.TechController.UnlockRaiseTax();
+            _techController.UnlockRaiseTax();
         }
 
         private void OnLowerTax(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_lowerTaxCost);
-            Game.Instance.TechController.UnlockLowerTax();
+            _techController.UnlockLowerTax();
         }
 
         private void OnPrintMoney(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_printMoneyCost);
-            Game.Instance.TechController.UnlockPrintMoney();
+            _techController.UnlockPrintMoney();
         }
 
         private void OnBurnMoney(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_burnMoneyCost);
-            Game.Instance.TechController.UnlockBurnMoney();
+            _techController.UnlockBurnMoney();
         }
 
         private void OnBuildArena(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_buildArenaCost);
-            Game.Instance.TechController.UnlockBuildArena();
+            _techController.UnlockBuildArena();
         }
 
         private void OnUseMine(Unit _)
         {
             Game.Instance.TreasureController.SpendTreasures(_useMineCost);
-            Game.Instance.TechController.UnlockMine();
+            _techController.UnlockMine();
         }
     }
 }

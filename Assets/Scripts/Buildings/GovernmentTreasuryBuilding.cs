@@ -2,6 +2,7 @@
 using NovemberProject.Buildings.UI;
 using NovemberProject.CoreGameplay;
 using NovemberProject.System;
+using NovemberProject.TechTree;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace NovemberProject.Buildings
     public sealed class GovernmentTreasuryBuilding : Building, IMoneyPrinter
     {
         private MoneyController _moneyController = null!;
+        private TechController _techController = null!;
 
         [SerializeField]
         private TMP_Text _moneyText = null!;
@@ -20,13 +22,14 @@ namespace NovemberProject.Buildings
         private int _moneyToPrint = 10;
 
         public override BuildingType BuildingType => BuildingType.GovernmentTreasury;
-        public IReadOnlyReactiveProperty<bool> CanPrintMoney => Game.Instance.TechController.CanPrintMoney;
-        public IReadOnlyReactiveProperty<bool> CanBurnMoney => Game.Instance.TechController.CanBurnMoney;
+        public IReadOnlyReactiveProperty<bool> CanPrintMoney => _techController.CanPrintMoney;
+        public IReadOnlyReactiveProperty<bool> CanBurnMoney => _techController.CanBurnMoney;
 
         [Inject]
-        private void Construct(MoneyController moneyController)
+        private void Construct(MoneyController moneyController, TechController techController)
         {
             _moneyController = moneyController;
+            _techController = techController;
             _moneyController.GovernmentMoney.Subscribe(OnMoneyChanged);
         }
 

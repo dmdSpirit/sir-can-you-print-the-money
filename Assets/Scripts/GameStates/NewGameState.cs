@@ -26,7 +26,6 @@ namespace NovemberProject.GameStates
             _timeSystem.PauseTime();
             Game.Instance.CameraController.InitializeGameData();
             Game.Instance.TreasureController.InitializeGameData();
-            Game.Instance.TechController.InitializeGameData();
             Game.Instance.CombatController.InitializeGameData();
             _messageBroker.Publish(new NewGameMessage());
             _gameStateMachine.Tutorial();

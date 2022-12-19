@@ -2,6 +2,7 @@
 using NovemberProject.CoreGameplay;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
+using NovemberProject.TechTree;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
@@ -18,6 +19,7 @@ namespace NovemberProject.Buildings
 
         private FolkManager _folkManager = null!;
         private TimeSystem _timeSystem = null!;
+        private TechController _techController = null!;
         private Timer? _productionTimer;
         private int _minersProducing;
 
@@ -35,7 +37,7 @@ namespace NovemberProject.Buildings
 
         public override BuildingType BuildingType => BuildingType.Mine;
 
-        public IReadOnlyReactiveProperty<bool> CanUseMine => Game.Instance.TechController.CanUseMine;
+        public IReadOnlyReactiveProperty<bool> CanUseMine => _techController.CanUseMine;
         public IReadOnlyReactiveProperty<int> WorkerCount => _folkManager.MineFolk;
         public string WorkersTitle => _minersTitle;
         public bool ShowProducedValue => true;
@@ -44,10 +46,11 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
         [Inject]
-        private void Construct(FolkManager folkManager, TimeSystem timeSystem)
+        private void Construct(FolkManager folkManager, TimeSystem timeSystem, TechController techController)
         {
             _folkManager = folkManager;
             _timeSystem = timeSystem;
+            _techController = techController;
         }
 
         private void Start()

@@ -3,6 +3,7 @@ using NovemberProject.Buildings.UI;
 using NovemberProject.CoreGameplay;
 using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
+using NovemberProject.TechTree;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace NovemberProject.Buildings
     {
         private FolkManager _folkManager = null!;
         private MoneyController _moneyController = null!;
+        private TechController _techController = null!;
 
         [SerializeField]
         private TMP_Text _moneyText = null!;
@@ -28,14 +30,15 @@ namespace NovemberProject.Buildings
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => _moneyController.FolkMoney;
-        public IReadOnlyReactiveProperty<bool> CanRaiseTax => Game.Instance.TechController.CanRaiseTax;
-        public IReadOnlyReactiveProperty<bool> CanLowerTax => Game.Instance.TechController.CanLowerTax;
+        public IReadOnlyReactiveProperty<bool> CanRaiseTax => _techController.CanRaiseTax;
+        public IReadOnlyReactiveProperty<bool> CanLowerTax => _techController.CanLowerTax;
 
         [Inject]
-        private void Construct(FolkManager folkManager, MoneyController moneyController)
+        private void Construct(FolkManager folkManager, MoneyController moneyController, TechController techController)
         {
             _folkManager = folkManager;
             _moneyController = moneyController;
+            _techController = techController;
             _moneyController.FolkMoney.Subscribe(OnMoneyChanged);
         }
 

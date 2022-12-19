@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
+using NovemberProject.TechTree;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
@@ -15,6 +16,7 @@ namespace NovemberProject.Buildings.UI
         private readonly CompositeDisposable _sub = new();
 
         private TimeSystem _timeSystem = null!;
+        private TechController _techController = null!;
         private IConstructableBuilding _building = null!;
 
         [SerializeField]
@@ -42,9 +44,10 @@ namespace NovemberProject.Buildings.UI
         private string _lockedText = "Not learned";
 
         [Inject]
-        private void Construct(TimeSystem timeSystem)
+        private void Construct(TimeSystem timeSystem, TechController techController)
         {
             _timeSystem = timeSystem;
+            _techController = techController;
         }
 
         private void Start()
@@ -59,7 +62,7 @@ namespace NovemberProject.Buildings.UI
             _building = building;
             _building.ConstructableState.Subscribe(UpdateState).AddTo(_sub);
             Game.Instance.StoneController.Stone.Subscribe(OnStoneCountChanged).AddTo(_sub);
-            Game.Instance.TechController.CanBuildArena.Subscribe(OnCanBuildArenaChanged).AddTo(_sub);
+            _techController.CanBuildArena.Subscribe(OnCanBuildArenaChanged).AddTo(_sub);
         }
 
         protected override void OnHide()
@@ -129,7 +132,7 @@ namespace NovemberProject.Buildings.UI
 
         private void UpdateConstructionButton()
         {
-            bool constructLearned = Game.Instance.TechController.CanBuildArena.Value;
+            bool constructLearned = _techController.CanBuildArena.Value;
             _constructButtonText.text = constructLearned ? _constructText : _lockedText;
             _startConstructionButton.interactable =
                 Game.Instance.StoneController.Stone.Value >= _building.ConstructionCost && constructLearned;

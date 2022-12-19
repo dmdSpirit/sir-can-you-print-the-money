@@ -8,8 +8,6 @@ using NovemberProject.GameStates;
 using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
 using NovemberProject.System.UI;
-using NovemberProject.TechTree;
-using NovemberProject.Time;
 using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
@@ -37,7 +35,6 @@ namespace NovemberProject.System
         public StoneController StoneController { get; private set; } = null!;
         public TreasureController TreasureController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
-        public TechController TechController { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
         public AudioManager AudioManager { get; private set; } = null!;
@@ -88,7 +85,6 @@ namespace NovemberProject.System
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
             StoneController = FindObjectOfType<StoneController>();
             TreasureController = FindObjectOfType<TreasureController>();
-            TechController = FindObjectOfType<TechController>();
             CombatController = FindObjectOfType<CombatController>();
             AudioManager = FindObjectOfType<AudioManager>();
             BuildingNameHover = FindObjectOfType<BuildingNameHover>();
