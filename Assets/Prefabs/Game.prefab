@@ -188,6 +188,7 @@ MonoBehaviour:
   _armyManagerSettings: {fileID: 11400000, guid: 8c6e1c72fa52f064689b377b9071e616, type: 2}
   _timeSystemSettings: {fileID: 11400000, guid: 87b22825e93b5ae4090a25103855b137, type: 2}
   _roundSystemSettings: {fileID: 11400000, guid: bb426a30ab6d61742a8c6a89067d939f, type: 2}
+  _stoneControllerSettings: {fileID: 11400000, guid: 7995e4f21042aa54bbeaca23773268e8, type: 2}
   _resourceMoveEffectSpawner: {fileID: 0}
   _coreGameplay: {fileID: 0}
   _combatController: {fileID: 0}

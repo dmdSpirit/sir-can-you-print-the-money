@@ -1,40 +1,38 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.Buildings;
-using NovemberProject.CommonUIStuff;
 using NovemberProject.MovingResources;
-using NovemberProject.System;
 using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using Zenject;
 
 namespace NovemberProject.CoreGameplay
 {
-    public sealed class StoneController : InitializableBehaviour
+    public sealed class StoneController
     {
         private readonly ReactiveProperty<int> _stone = new();
 
-        private BuildingsController _buildingsController = null!;
-        private MessageBroker _messageBroker = null!;
-
-        [SerializeField]
-        private int _startingStone = 0;
+        private readonly StoneControllerSettings _settings;
+        private readonly BuildingsController _buildingsController;
+        private readonly ResourceMoveEffectSpawner _resourceMoveEffectSpawner;
+        private readonly MessageBroker _messageBroker;
 
         public IReadOnlyReactiveProperty<int> Stone => _stone;
 
-        [Inject]
-        private void Construct(BuildingsController buildingsController, MessageBroker messageBroker)
+        public StoneController(StoneControllerSettings stoneControllerSettings, BuildingsController buildingsController,
+            ResourceMoveEffectSpawner resourceMoveEffectSpawner, MessageBroker messageBroker)
         {
+            _settings = stoneControllerSettings;
             _buildingsController = buildingsController;
+            _resourceMoveEffectSpawner = resourceMoveEffectSpawner;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
 
         private void OnNewGame(NewGameMessage message)
         {
-            _stone.Value = _startingStone;
+            _stone.Value = _settings.StatingStone;
         }
 
         public void AddStone(int stone)
@@ -58,8 +56,7 @@ namespace NovemberProject.CoreGameplay
 
         private void ShowStoneMove(Transform start, Transform finish, Action callback)
         {
-            ResourceMoveEffectSpawner moveEffectSpawner = Game.Instance.ResourceMoveEffectSpawner;
-            MoveEffect effect = moveEffectSpawner.ShowMovingCoin(start.position, finish.position);
+            MoveEffect effect = _resourceMoveEffectSpawner.ShowMovingCoin(start.position, finish.position);
             effect.OnFinished.Subscribe(_ => callback.Invoke());
         }
     }

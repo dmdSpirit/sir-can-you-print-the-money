@@ -20,6 +20,7 @@ namespace NovemberProject.Buildings
         private FolkManager _folkManager = null!;
         private TimeSystem _timeSystem = null!;
         private TechController _techController = null!;
+        private StoneController _stoneController = null!;
         private Timer? _productionTimer;
         private int _minersProducing;
 
@@ -46,11 +47,13 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
 
         [Inject]
-        private void Construct(FolkManager folkManager, TimeSystem timeSystem, TechController techController)
+        private void Construct(FolkManager folkManager, TimeSystem timeSystem, TechController techController,
+            StoneController stoneController)
         {
             _folkManager = folkManager;
             _timeSystem = timeSystem;
             _techController = techController;
+            _stoneController = stoneController;
         }
 
         private void Start()
@@ -119,7 +122,7 @@ namespace NovemberProject.Buildings
             Assert.IsTrue(_isProducing.Value);
             Assert.IsTrue(_folkManager.MineFolk.Value > 0);
             Assert.IsTrue(_minersProducing > 0);
-            Game.Instance.StoneController.MineStone(_productionPerMiner * _minersProducing);
+            _stoneController.MineStone(_productionPerMiner * _minersProducing);
             _productionTimer = null;
             _isProducing.Value = false;
             StartProduction();

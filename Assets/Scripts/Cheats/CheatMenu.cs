@@ -18,6 +18,7 @@ namespace NovemberProject.Cheats
 
         private MoneyController _moneyController = null!;
         private GameStateMachine _gameStateMachine = null!;
+        private StoneController _stoneController = null!;
 
         [SerializeField]
         private CheatButton _buttonPrefab = null!;
@@ -28,10 +29,12 @@ namespace NovemberProject.Cheats
         private bool _isSizeFitterRefreshNeeded;
 
         [Inject]
-        private void Construct(MoneyController moneyController, GameStateMachine gameStateMachine)
+        private void Construct(MoneyController moneyController, GameStateMachine gameStateMachine,
+            StoneController stoneController)
         {
             _moneyController = moneyController;
             _gameStateMachine = gameStateMachine;
+            _stoneController = stoneController;
         }
 
         private void Start()
@@ -71,7 +74,7 @@ namespace NovemberProject.Cheats
 
         private void Add10Stone()
         {
-            Game.Instance.StoneController.AddStone(10);
+            _stoneController.AddStone(10);
         }
 
         private void AddTreasure()

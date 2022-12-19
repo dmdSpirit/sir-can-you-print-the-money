@@ -37,6 +37,9 @@ namespace NovemberProject.System
         [SerializeField]
         private RoundSystemSettings _roundSystemSettings = null!;
 
+        [SerializeField]
+        private StoneControllerSettings _stoneControllerSettings = null!;
+
         // Temporary references.
         [SerializeField]
         private TechController _techController = null!;
@@ -69,6 +72,7 @@ namespace NovemberProject.System
             Container.Bind<TimeSystem>().AsSingle();
             Container.Bind<TechController>().AsSingle();
             Container.Bind<RoundSystem>().AsSingle();
+            Container.Bind<StoneController>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -94,6 +98,7 @@ namespace NovemberProject.System
             Container.Bind<ArmyManagerSettings>().FromInstance(_armyManagerSettings);
             Container.Bind<TimeSystemSettings>().FromInstance(_timeSystemSettings);
             Container.Bind<RoundSystemSettings>().FromInstance(_roundSystemSettings);
+            Container.Bind<StoneControllerSettings>().FromInstance(_stoneControllerSettings);
         }
     }
 }

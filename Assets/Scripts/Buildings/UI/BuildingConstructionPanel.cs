@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using NovemberProject.TechTree;
 using NovemberProject.Time;
@@ -17,6 +18,7 @@ namespace NovemberProject.Buildings.UI
 
         private TimeSystem _timeSystem = null!;
         private TechController _techController = null!;
+        private StoneController _stoneController = null!;
         private IConstructableBuilding _building = null!;
 
         [SerializeField]
@@ -44,10 +46,11 @@ namespace NovemberProject.Buildings.UI
         private string _lockedText = "Not learned";
 
         [Inject]
-        private void Construct(TimeSystem timeSystem, TechController techController)
+        private void Construct(TimeSystem timeSystem, TechController techController, StoneController stoneController)
         {
             _timeSystem = timeSystem;
             _techController = techController;
+            _stoneController = stoneController;
         }
 
         private void Start()
@@ -61,7 +64,7 @@ namespace NovemberProject.Buildings.UI
             _sub.Clear();
             _building = building;
             _building.ConstructableState.Subscribe(UpdateState).AddTo(_sub);
-            Game.Instance.StoneController.Stone.Subscribe(OnStoneCountChanged).AddTo(_sub);
+            _stoneController.Stone.Subscribe(OnStoneCountChanged).AddTo(_sub);
             _techController.CanBuildArena.Subscribe(OnCanBuildArenaChanged).AddTo(_sub);
         }
 
@@ -104,7 +107,7 @@ namespace NovemberProject.Buildings.UI
         {
             _constructionTimerPanel.SetActive(false);
             _stoneCountText.text =
-                $"{Game.Instance.StoneController.Stone.Value}/{_building.ConstructionCost.ToString()}";
+                $"{_stoneController.Stone.Value}/{_building.ConstructionCost.ToString()}";
             _resourceImage.sprite = _building.ResourceImage;
         }
 
@@ -121,7 +124,7 @@ namespace NovemberProject.Buildings.UI
         private void OnStoneCountChanged(int stone)
         {
             _stoneCountText.text =
-                $"{Game.Instance.StoneController.Stone.Value}/{_building.ConstructionCost.ToString()}";
+                $"{_stoneController.Stone.Value}/{_building.ConstructionCost.ToString()}";
             UpdateConstructionButton();
         }
 
@@ -135,7 +138,7 @@ namespace NovemberProject.Buildings.UI
             bool constructLearned = _techController.CanBuildArena.Value;
             _constructButtonText.text = constructLearned ? _constructText : _lockedText;
             _startConstructionButton.interactable =
-                Game.Instance.StoneController.Stone.Value >= _building.ConstructionCost && constructLearned;
+                _stoneController.Stone.Value >= _building.ConstructionCost && constructLearned;
         }
     }
 }

@@ -31,7 +31,6 @@ namespace NovemberProject.System
         public UIManager UIManager { get; private set; } = null!;
         public CameraController CameraController { get; private set; } = null!;
         public BuildingSelector BuildingSelector { get; private set; } = null!;
-        public StoneController StoneController { get; private set; } = null!;
         public TreasureController TreasureController { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
@@ -80,7 +79,6 @@ namespace NovemberProject.System
             BuildingSelector = FindObjectOfType<BuildingSelector>();
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
-            StoneController = FindObjectOfType<StoneController>();
             TreasureController = FindObjectOfType<TreasureController>();
             CombatController = FindObjectOfType<CombatController>();
             BuildingNameHover = FindObjectOfType<BuildingNameHover>();

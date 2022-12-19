@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using NovemberProject.CoreGameplay;
 using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
@@ -19,6 +20,7 @@ namespace NovemberProject.Buildings
         private MessageBroker _messageBroker = null!;
         private GameStateMachine _gameStateMachine = null!;
         private TimeSystem _timeSystem = null!;
+        private StoneController _stoneController = null!;
         private Timer? _constructionTimer;
         private Vector3 _initialPosition;
 
@@ -48,30 +50,23 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ConstructionTimer => _constructionTimer;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine, TimeSystem timeSystem, MessageBroker messageBroker)
+        private void Construct(GameStateMachine gameStateMachine, TimeSystem timeSystem,
+            StoneController stoneController, MessageBroker messageBroker)
         {
             _gameStateMachine = gameStateMachine;
             _timeSystem = timeSystem;
+            _stoneController = stoneController;
             _messageBroker = messageBroker;
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            _initialPosition = transform.position;
-            _messageBroker.Receive<NewGameMessage>()
-                .Subscribe(OnNewGame);
-            Game.Instance.StoneController.Stone
-                .TakeUntilDisable(this)
-                .Subscribe(OnStoneCountChanged);
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+            _stoneController.Stone.Subscribe(OnStoneCountChanged);
         }
 
         public void StartConstruction()
         {
-            Assert.IsTrue(Game.Instance.StoneController.Stone.Value >= _constructionCost);
+            Assert.IsTrue(_stoneController.Stone.Value >= _constructionCost);
             Assert.IsTrue(ConstructableState.Value == Buildings.ConstructableState.NotConstructed);
             _constructionTimer = _timeSystem.CreateTimer(_constructionDuration, OnConstructionFinished);
-            Game.Instance.StoneController.SpendStone(_constructionCost);
+            _stoneController.SpendStone(_constructionCost);
             _constructionTimer.Start();
             _constructableState.Value = Buildings.ConstructableState.IsConstructing;
             _panel.SetActive(false);
