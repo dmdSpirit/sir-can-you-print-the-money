@@ -3,6 +3,7 @@ using NovemberProject.Rounds;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
+using NovemberProject.Treasures;
 using UniRx;
 
 namespace NovemberProject.GameStates
@@ -26,7 +27,6 @@ namespace NovemberProject.GameStates
             _timeSystem.ResetTimeScale();
             _timeSystem.PauseTime();
             Game.Instance.CameraController.InitializeGameData();
-            Game.Instance.TreasureController.InitializeGameData();
             _messageBroker.Publish(new NewGameMessage());
             _gameStateMachine.Tutorial();
         }

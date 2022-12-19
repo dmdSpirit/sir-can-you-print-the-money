@@ -8,6 +8,7 @@ using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
 using NovemberProject.TechTree;
 using NovemberProject.Time;
+using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -39,6 +40,9 @@ namespace NovemberProject.System
 
         [SerializeField]
         private StoneControllerSettings _stoneControllerSettings = null!;
+
+        [SerializeField]
+        private TreasureControllerSettings _treasureControllerSettings = null!;
 
         // Temporary references.
         [SerializeField]
@@ -73,6 +77,7 @@ namespace NovemberProject.System
             Container.Bind<TechController>().AsSingle();
             Container.Bind<RoundSystem>().AsSingle();
             Container.Bind<StoneController>().AsSingle();
+            Container.Bind<TreasureController>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -99,6 +104,7 @@ namespace NovemberProject.System
             Container.Bind<TimeSystemSettings>().FromInstance(_timeSystemSettings);
             Container.Bind<RoundSystemSettings>().FromInstance(_roundSystemSettings);
             Container.Bind<StoneControllerSettings>().FromInstance(_stoneControllerSettings);
+            Container.Bind<TreasureControllerSettings>().FromInstance(_treasureControllerSettings);
         }
     }
 }

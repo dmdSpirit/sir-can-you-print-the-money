@@ -1,23 +1,28 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
+using NovemberProject.System.Messages;
 using UniRx;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NovemberProject.Treasures
 {
-    public sealed class TreasureController : InitializableBehaviour
+    public sealed class TreasureController
     {
         private readonly ReactiveProperty<int> _treasures = new();
-
-        [SerializeField]
-        private int _startingTreasures = 0;
+        private readonly TreasureControllerSettings _settings;
+        private readonly MessageBroker _messageBroker;
 
         public IReadOnlyReactiveProperty<int> Treasures => _treasures;
 
-        public void InitializeGameData()
+        public TreasureController(TreasureControllerSettings treasureControllerSettings, MessageBroker messageBroker)
         {
-            _treasures.Value = _startingTreasures;
+            _settings = treasureControllerSettings;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+        }
+
+        private void OnNewGame(NewGameMessage message)
+        {
+            _treasures.Value = _settings.StartingTreasures;
         }
 
         public void AddTreasures(int treasures)
@@ -27,7 +32,7 @@ namespace NovemberProject.Treasures
 
         public void SpendTreasures(int cost)
         {
-            Assert.IsTrue(_treasures.Value>=cost);
+            Assert.IsTrue(_treasures.Value >= cost);
             _treasures.Value -= cost;
         }
     }

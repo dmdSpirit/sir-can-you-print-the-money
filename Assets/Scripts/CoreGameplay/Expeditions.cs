@@ -4,6 +4,7 @@ using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
+using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -23,6 +24,7 @@ namespace NovemberProject.CoreGameplay
         private readonly CombatController _combatController;
         private readonly TimeSystem _timeSystem;
         private readonly GameStateMachine _gameStateMachine;
+        private readonly TreasureController _treasureController;
 
         private Timer? _expeditionTimer;
         private int _explorersLeftForExpedition;
@@ -38,6 +40,7 @@ namespace NovemberProject.CoreGameplay
             CombatController combatController,
             TimeSystem timeSystem,
             GameStateMachine gameStateMachine,
+            TreasureController treasureController,
             MessageBroker messageBroker)
         {
             _settings = expeditionSettings;
@@ -48,6 +51,7 @@ namespace NovemberProject.CoreGameplay
             _combatController = combatController;
             _timeSystem = timeSystem;
             _gameStateMachine = gameStateMachine;
+            _treasureController = treasureController;
             _messageBroker = messageBroker;
             _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
@@ -123,7 +127,7 @@ namespace NovemberProject.CoreGameplay
             _gameStateMachine.ExpeditionFinished(expeditionResult);
             if (isSuccess)
             {
-                Game.Instance.TreasureController.AddTreasures(reward);
+                _treasureController.AddTreasures(reward);
                 _expeditionIndex++;
             }
             _armyManager.ReturnExplorersToGuard();

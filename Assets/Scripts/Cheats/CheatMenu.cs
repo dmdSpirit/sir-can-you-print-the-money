@@ -4,6 +4,7 @@ using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
 using NovemberProject.GameStates;
 using NovemberProject.System;
+using NovemberProject.Treasures;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -19,6 +20,7 @@ namespace NovemberProject.Cheats
         private MoneyController _moneyController = null!;
         private GameStateMachine _gameStateMachine = null!;
         private StoneController _stoneController = null!;
+        private TreasureController _treasureController = null!;
 
         [SerializeField]
         private CheatButton _buttonPrefab = null!;
@@ -30,11 +32,12 @@ namespace NovemberProject.Cheats
 
         [Inject]
         private void Construct(MoneyController moneyController, GameStateMachine gameStateMachine,
-            StoneController stoneController)
+            StoneController stoneController, TreasureController treasureController)
         {
             _moneyController = moneyController;
             _gameStateMachine = gameStateMachine;
             _stoneController = stoneController;
+            _treasureController = treasureController;
         }
 
         private void Start()
@@ -79,7 +82,7 @@ namespace NovemberProject.Cheats
 
         private void AddTreasure()
         {
-            Game.Instance.TreasureController.AddTreasures(1);
+            _treasureController.AddTreasures(1);
         }
 
         private void Win()
