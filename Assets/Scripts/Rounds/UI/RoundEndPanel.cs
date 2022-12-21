@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.GameStates;
-using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -10,10 +9,17 @@ using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class RoundEndPanel : UIElement<RoundResult>
+    public interface IRoundEndPanel : IUIScreen
+    {
+        public void SetRoundResult(RoundResult roundResult);
+    }
+
+    public sealed class RoundEndPanel : UIScreen, IRoundEndPanel
     {
         private GameStateMachine _gameStateMachine = null!;
         private RoundSystem _roundSystem = null!;
+
+        private RoundResult? _roundResult;
 
         [SerializeField]
         private TMP_Text _title = null!;
@@ -40,21 +46,33 @@ namespace NovemberProject.Rounds.UI
                 .Subscribe(OnNextRound);
         }
 
-        protected override void OnShow(RoundResult roundResult)
+        protected override void OnShow()
         {
-            if (roundResult.NothingHappened())
+            if (_roundResult == null)
+            {
+                Debug.LogError($"{nameof(_roundResult)} should be set before showing {nameof(RoundEndPanel)}.");
+                return;
+            }
+
+            if (_roundResult.NothingHappened())
             {
                 _gameStateMachine.StartRound();
                 return;
             }
 
             _title.text = _titleText.Replace("[value]", _roundSystem.Round.Value.ToString());
-            _roundResultPanel.Show(roundResult);
+            _roundResultPanel.Show(_roundResult);
         }
 
         protected override void OnHide()
         {
+            _roundResult = null;
             _roundResultPanel.Hide();
+        }
+
+        public void SetRoundResult(RoundResult roundResult)
+        {
+            _roundResult = roundResult;
         }
 
         private void OnNextRound(Unit _)

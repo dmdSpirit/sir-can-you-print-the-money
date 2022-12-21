@@ -10,7 +10,11 @@ using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class RoundStartPanel : UIElement<object?>
+    public interface IRoundStartPanel : IUIScreen
+    {
+    }
+
+    public sealed class RoundStartPanel : UIScreen, IRoundStartPanel
     {
         private GameStateMachine _gameStateMachine = null!;
         private RoundSystem _roundSystem = null!;
@@ -43,7 +47,7 @@ namespace NovemberProject.Rounds.UI
                 .Subscribe(OnNextRound);
         }
 
-        protected override void OnShow(object? _)
+        protected override void OnShow()
         {
             int round = _roundSystem.Round.Value;
             RoundStartConfig config = _roundStartConfigs.GetRoundStartConfig(round);

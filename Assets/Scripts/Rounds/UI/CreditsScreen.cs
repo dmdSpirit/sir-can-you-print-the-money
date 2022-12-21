@@ -8,7 +8,11 @@ using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class CreditsScreen : UIElement<object?>
+    public interface ICreditsScreen : IUIScreen
+    {
+    }
+
+    public sealed class CreditsScreen : UIScreen, ICreditsScreen
     {
         private GameStateMachine _gameStateMachine = null!;
 
@@ -27,7 +31,7 @@ namespace NovemberProject.Rounds.UI
                 .Subscribe(OnBackButtonClicked);
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
         }
 

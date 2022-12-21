@@ -1,8 +1,12 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.Buildings;
 using NovemberProject.CoreGameplay;
+using NovemberProject.Rounds.UI;
 using NovemberProject.System;
+using NovemberProject.System.UI;
 using NovemberProject.Time;
+using NovemberProject.Time.UI;
 using UniRx;
 using Object = UnityEngine.Object;
 
@@ -10,20 +14,27 @@ namespace NovemberProject.GameStates
 {
     public sealed class VictoryState : State
     {
-        private IDisposable? _sub;
-        private TimeSystem _timeSystem;
+        private readonly TimeSystem _timeSystem;
+        private readonly UIManager _uiManager;
+        private readonly BuildingSelector _buildingSelector;
 
-        public VictoryState(TimeSystem timeSystem)
+        private IDisposable? _sub;
+        private IVictoryScreen _victoryScreen = null!;
+
+        public VictoryState(TimeSystem timeSystem, UIManager uiManager, BuildingSelector buildingSelector)
         {
             _timeSystem = timeSystem;
+            _uiManager = uiManager;
         }
 
         protected override void OnEnter()
         {
-            Game.Instance.UIManager.HideRoundTimer();
-            Game.Instance.UIManager.HideTimeControls();
+            var roundTimer = _uiManager.GetScreen<IRoundTimer>();
+            roundTimer.Hide();
+            var timeControlsPanel = _uiManager.GetScreen<ITimeControlsPanel>();
+            timeControlsPanel.Hide();
             _timeSystem.PauseTime();
-            Game.Instance.BuildingSelector.Unselect();
+            _buildingSelector.Unselect();
             SpaceShipFlightDirector spaceShipFlightDirector = Object.FindObjectOfType<SpaceShipFlightDirector>();
             _sub = spaceShipFlightDirector.OnFinishedPlaying.Subscribe(OnFinishedPlaying);
             spaceShipFlightDirector.StartSequence();
@@ -31,13 +42,14 @@ namespace NovemberProject.GameStates
 
         private void OnFinishedPlaying(Unit _)
         {
-            Game.Instance.UIManager.ShowVictoryScreen();
+            _victoryScreen = _uiManager.GetScreen<IVictoryScreen>();
+            _victoryScreen.Show();
         }
 
         protected override void OnExit()
         {
             _sub?.Dispose();
-            Game.Instance.UIManager.HideVictoryScreen();
+            _victoryScreen.Hide();
         }
     }
 }

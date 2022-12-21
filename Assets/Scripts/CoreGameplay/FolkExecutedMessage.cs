@@ -1,9 +1,7 @@
 ﻿#nullable enable
-using NovemberProject.System.Messages;
-
 namespace NovemberProject.CoreGameplay
 {
-    public sealed class FolkExecutedMessage : IMessage
+    public sealed class FolkExecutedMessage : INotificationMessage
     {
         public readonly int Count;
 

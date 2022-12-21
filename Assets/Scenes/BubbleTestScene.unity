@@ -15756,6 +15756,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1985125200}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _buildingNameHover
+      value: 
+      objectReference: {fileID: 1681028055}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _buildingsController
       value: 
       objectReference: {fileID: 0}
@@ -16853,6 +16857,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+--- !u!114 &1681028055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3201445098784826101, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+  m_PrefabInstance: {fileID: 1681028054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65da4eeccb854bfc8c77415ca4018094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1682924405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20485,7 +20500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6306632799143875812, guid: f051a132ba6a7434890322453402330d, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6306632799143875812, guid: f051a132ba6a7434890322453402330d, type: 3}
       propertyPath: m_LocalPosition.x

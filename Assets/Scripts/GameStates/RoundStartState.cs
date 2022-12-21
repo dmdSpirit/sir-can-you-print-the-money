@@ -1,28 +1,36 @@
 ﻿#nullable enable
 using NovemberProject.Rounds;
-using NovemberProject.System;
+using NovemberProject.Rounds.UI;
+using NovemberProject.System.UI;
+using NovemberProject.Time.UI;
 
 namespace NovemberProject.GameStates
 {
     public sealed class RoundStartState : State
     {
         private readonly RoundSystem _roundSystem;
+        private readonly UIManager _uiManager;
 
-        public RoundStartState(RoundSystem roundSystem)
+        private IRoundStartPanel _roundStartPanel = null!;
+
+        public RoundStartState(RoundSystem roundSystem, UIManager uiManager)
         {
             _roundSystem = roundSystem;
+            _uiManager = uiManager;
         }
 
         protected override void OnEnter()
         {
             _roundSystem.IncrementRound();
-            Game.Instance.UIManager.ShowTimeControls();
-            Game.Instance.UIManager.ShowRoundStartPanel();
+            _roundStartPanel = _uiManager.GetScreen<IRoundStartPanel>();
+            _roundStartPanel.Show();
+            var timeControlsPanel = _uiManager.GetScreen<ITimeControlsPanel>();
+            timeControlsPanel.Show();
         }
 
         protected override void OnExit()
         {
-            Game.Instance.UIManager.HideRoundStartPanel();
+            _roundStartPanel.Hide();
         }
     }
 }

@@ -13,34 +13,37 @@ namespace NovemberProject.Input
         private const float RAYCAST_MAX_DISTANCE = 1000f;
 
         private readonly CameraController _cameraController;
+        private readonly BuildingNameHover _buildingNameHover;
+        private readonly BuildingSelector _buildingSelector;
 
-        public MouseSelectionHandler(CameraController cameraController)
+        public MouseSelectionHandler(CameraController cameraController, BuildingNameHover buildingNameHover,
+            BuildingSelector buildingSelector)
         {
             _cameraController = cameraController;
+            _buildingNameHover = buildingNameHover;
+            _buildingSelector = buildingSelector;
         }
 
         public override void HandleInput()
         {
             if (Game.Instance.UIManager.IsMouseOver.Value)
             {
-                if (Game.Instance.BuildingNameHover.IsShowing)
+                if (_buildingNameHover.IsShowing)
                 {
-                    Game.Instance.BuildingNameHover.HidePanel();
+                    _buildingNameHover.HidePanel();
                 }
 
                 return;
             }
 
-            BuildingSelector buildingSelector = Game.Instance.BuildingSelector;
-            RaycastBuildingSelection(_cameraController, buildingSelector);
+            RaycastBuildingSelection();
         }
 
-        private static void RaycastBuildingSelection(CameraController cameraController,
-            BuildingSelector buildingSelector)
+        private void RaycastBuildingSelection()
         {
-            Ray ray = cameraController.MainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
+            Ray ray = _cameraController.MainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
             UIManager uiManager = Game.Instance.UIManager;
-            LayerMask layerMask = buildingSelector.LayerMask | uiManager.LayerMask;
+            LayerMask layerMask = _buildingSelector.LayerMask | uiManager.LayerMask;
             if (Physics.Raycast(ray, out RaycastHit hit, RAYCAST_MAX_DISTANCE, layerMask: layerMask))
             {
                 GameObject hitObject = hit.transform.gameObject;
@@ -49,19 +52,19 @@ namespace NovemberProject.Input
                 {
                     if (UnityEngine.Input.GetMouseButton(LEFT_MOUSE_BUTTON))
                     {
-                        Game.Instance.BuildingSelector.Select(building);
+                        _buildingSelector.Select(building);
                     }
 
-                    Game.Instance.BuildingNameHover.ShowName(building);
+                    _buildingNameHover.ShowName(building);
                 }
 
                 return;
             }
 
-            Game.Instance.BuildingNameHover.HidePanel();
+            _buildingNameHover.HidePanel();
             if (UnityEngine.Input.GetMouseButton(LEFT_MOUSE_BUTTON))
             {
-                Game.Instance.BuildingSelector.Unselect();
+                _buildingSelector.Unselect();
             }
         }
     }

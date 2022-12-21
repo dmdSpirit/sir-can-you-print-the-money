@@ -24,14 +24,11 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private TMP_Text _title = null!;
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _addWorkerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(AddWorkerHandler);
             _removeWorkerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(RemoveWorkerHandler);
         }
 

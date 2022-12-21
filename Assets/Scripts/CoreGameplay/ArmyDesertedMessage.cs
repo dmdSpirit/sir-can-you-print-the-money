@@ -1,9 +1,7 @@
 ﻿#nullable enable
-using NovemberProject.System.Messages;
-
 namespace NovemberProject.CoreGameplay
 {
-    public sealed class ArmyDesertedMessage : IMessage
+    public sealed class ArmyDesertedMessage : INotificationMessage
     {
         public readonly int Count;
 

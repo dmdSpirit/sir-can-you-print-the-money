@@ -1,8 +1,10 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System.UI;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
@@ -32,8 +34,45 @@ namespace NovemberProject.Input
         public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController) =>
             _inputHandlersFactory.GetMoveCameraHandler(cameraController);
 
-        public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController) =>
-            _inputHandlersFactory.GetMouseSelectionHandler(cameraController);
+        public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController,
+            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector) =>
+            _inputHandlersFactory.GetMouseSelectionHandler(cameraController, buildingNameHover, buildingSelector);
+
+        private ToggleCheatMenuInputHandler GetToggleCheatMenuInputHandler(UIManager uiManager) =>
+            _inputHandlersFactory.GetToggleCheatMenuInputHandler(uiManager);
+
+        private ToggleSystemPanelInputHandler GetToggleSystemPanelInputHandler(UIManager uiManager) =>
+            _inputHandlersFactory.GetToggleSystemPanelInputHandler(uiManager);
+
+        public void AddToggleCheatMenuInputHandlerToGlobal(UIManager uiManager)
+        {
+            foreach (InputHandler globalInputHandler in _globalInputHandlers)
+            {
+                if (globalInputHandler is ToggleCheatMenuInputHandler)
+                {
+                    Debug.LogError(
+                        $"Trying to add global handler of type {nameof(ToggleCheatMenuInputHandler)}, but there is already one active");
+                    return;
+                }
+            }
+
+            _globalInputHandlers.Add(GetToggleCheatMenuInputHandler(uiManager));
+        }
+
+        public void AddToggleSystemPanelInputHandlerToGlobal(UIManager uiManager)
+        {
+            foreach (InputHandler globalInputHandler in _globalInputHandlers)
+            {
+                if (globalInputHandler is ToggleSystemPanelInputHandler)
+                {
+                    Debug.LogError(
+                        $"Trying to add global handler of type {nameof(ToggleSystemPanelInputHandler)}, but there is already one active");
+                    return;
+                }
+            }
+
+            _globalInputHandlers.Add(GetToggleSystemPanelInputHandler(uiManager));
+        }
 
         public void AddGlobalInputHandler<T>() where T : InputHandler, new()
         {

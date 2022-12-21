@@ -1,7 +1,10 @@
 ﻿#nullable enable
+using NovemberProject.Buildings;
 using NovemberProject.CoreGameplay;
-using NovemberProject.System;
+using NovemberProject.GameStates.UI;
+using NovemberProject.System.UI;
 using NovemberProject.Time;
+using NovemberProject.Time.UI;
 
 namespace NovemberProject.GameStates
 {
@@ -9,26 +12,37 @@ namespace NovemberProject.GameStates
     {
         private readonly AttackData _attackData;
         private readonly TimeSystem _timeSystem;
+        private readonly UIManager _uiManager;
+        private readonly BuildingSelector _buildingSelector;
 
-        public AttackState(AttackData attackData, TimeSystem timeSystem)
+        private ITimeControlsPanel _timeControlsPanel = null!;
+        private IAttackResultsPanel _attackResultsPanel = null!;
+
+        public AttackState(AttackData attackData, TimeSystem timeSystem, UIManager uiManager,
+            BuildingSelector buildingSelector)
         {
             _attackData = attackData;
             _timeSystem = timeSystem;
+            _uiManager = uiManager;
+            _buildingSelector = buildingSelector;
         }
 
         protected override void OnEnter()
         {
-            Game.Instance.UIManager.ShowAttackResultsPanel(_attackData);
+            _attackResultsPanel = _uiManager.GetScreen<IAttackResultsPanel>();
+            _attackResultsPanel.SetAttackData(_attackData);
+            _attackResultsPanel.Show();
             _timeSystem.PauseTime();
-            Game.Instance.UIManager.LockTimeControls();
-            Game.Instance.BuildingSelector.Unselect();
+            _timeControlsPanel = _uiManager.GetScreen<ITimeControlsPanel>();
+            _timeControlsPanel.Lock();
+            _buildingSelector.Unselect();
         }
 
         protected override void OnExit()
         {
-            Game.Instance.UIManager.HideAttackResultsPanel();
+            _attackResultsPanel.Hide();
             _timeSystem.RestoreAfterPause();
-            Game.Instance.UIManager.UnlockTimeControls();
+            _timeControlsPanel.Unlock();
         }
     }
 }

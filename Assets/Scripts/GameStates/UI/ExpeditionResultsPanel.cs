@@ -1,18 +1,21 @@
 ﻿#nullable enable
-using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
-using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
-    public sealed class ExpeditionResultsPanel : UIElement<ExpeditionResult>
+    public interface IExpeditionResultsPanel : IUIScreen
+    {
+        public void SetExpeditionResult(ExpeditionResult expeditionResult);
+    }
+
+    public sealed class ExpeditionResultsPanel : UIScreen, IExpeditionResultsPanel
     {
         private GameStateMachine _gameStateMachine = null!;
-        private ExpeditionResult _expeditionResult;
+        private ExpeditionResult? _expeditionResult;
 
         [SerializeField]
         private ExpeditionResultPanel _successPanel = null!;
@@ -34,19 +37,29 @@ namespace NovemberProject.GameStates.UI
                 .Subscribe(OnCloseClicked);
         }
 
-        protected override void OnShow(ExpeditionResult expeditionResult)
+        protected override void OnShow()
         {
-            _expeditionResult = expeditionResult;
-            if (_expeditionResult.IsSuccess)
+            if (_expeditionResult == null)
             {
-                _successPanel.Show(expeditionResult);
+                Debug.LogError($"{nameof(_expeditionResult)} should be set before showing {nameof(ExpeditionResultPanel)}.");
+                return;
+            }
+
+            if (_expeditionResult.Value.IsSuccess)
+            {
+                _successPanel.Show(_expeditionResult.Value);
                 _failPanel.Hide();
             }
             else
             {
-                _failPanel.Show(expeditionResult);
+                _failPanel.Show(_expeditionResult.Value);
                 _successPanel.Hide();
             }
+        }
+        
+        public void SetExpeditionResult(ExpeditionResult expeditionResult)
+        {
+            _expeditionResult = expeditionResult;
         }
 
         protected override void OnHide()

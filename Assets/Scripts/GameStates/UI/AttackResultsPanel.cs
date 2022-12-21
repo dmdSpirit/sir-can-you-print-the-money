@@ -7,10 +7,15 @@ using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
-    public sealed class AttackResultsPanel : UIElement<AttackData>
+    public interface IAttackResultsPanel : IUIScreen
+    {
+        public void SetAttackData(AttackData attackData);
+    }
+
+    public sealed class AttackResultsPanel : UIScreen, IAttackResultsPanel
     {
         private GameStateMachine _gameStateMachine = null!;
-        private AttackData _attackData;
+        private AttackData? _attackData;
 
         [SerializeField]
         private AttackResultPanel _defendersWonPanel = null!;
@@ -34,29 +39,35 @@ namespace NovemberProject.GameStates.UI
             _folkKilledPanel.OnClose.Subscribe(OnClose);
         }
 
-        protected override void OnShow(AttackData attackData)
+        protected override void OnShow()
         {
-            if (attackData.AttackStatus == AttackStatus.DefendersWon)
+            if (_attackData == null)
             {
-                _defendersWonPanel.Show(attackData);
+                Debug.LogError($"{nameof(_attackData)} should be set before showing {nameof(AttackResultsPanel)}.");
+                return;
+            }
+            
+            if (_attackData.Value.AttackStatus == AttackStatus.DefendersWon)
+            {
+                _defendersWonPanel.Show(_attackData.Value);
             }
             else
             {
                 _defendersWonPanel.Hide();
             }
 
-            if (attackData.AttackStatus == AttackStatus.GuardsKilled)
+            if (_attackData.Value.AttackStatus == AttackStatus.GuardsKilled)
             {
-                _guardsKilledPanel.Show(attackData);
+                _guardsKilledPanel.Show(_attackData.Value);
             }
             else
             {
                 _guardsKilledPanel.Hide();
             }
 
-            if (attackData.AttackStatus == AttackStatus.FolkKilled)
+            if (_attackData.Value.AttackStatus == AttackStatus.FolkKilled)
             {
-                _folkKilledPanel.Show(attackData);
+                _folkKilledPanel.Show(_attackData.Value);
             }
             else
             {
@@ -69,6 +80,11 @@ namespace NovemberProject.GameStates.UI
             _defendersWonPanel.Hide();
             _guardsKilledPanel.Hide();
             _folkKilledPanel.Hide();
+        }
+        
+        public void SetAttackData(AttackData attackData)
+        {
+            _attackData = attackData;
         }
 
         private void OnClose(Unit _)

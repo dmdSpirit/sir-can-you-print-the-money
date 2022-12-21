@@ -8,9 +8,15 @@ using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
-    public sealed class GameOverPanel : UIElement<GameOverType>
+    public interface IGameOverPanel : IUIScreen
+    {
+        public void SetGameOverType(GameOverType gameOverType);
+    }
+
+    public sealed class GameOverPanel : UIScreen, IGameOverPanel
     {
         private GameStateMachine _gameStateMachine = null!;
+        private GameOverType? _gameOverType;
 
         [SerializeField]
         private GameObject _noArmyPanel = null!;
@@ -32,17 +38,28 @@ namespace NovemberProject.GameStates.UI
             _toMainMenuButton.onClick.AddListener(ToMainMenuClicked);
         }
 
-        protected override void OnShow(GameOverType gameOverType)
+        protected override void OnShow()
         {
-            Assert.IsTrue(gameOverType is GameOverType.NoArmy or GameOverType.NoFolk);
-            _noArmyPanel.SetActive(gameOverType == GameOverType.NoArmy);
-            _noFolkPanel.SetActive(gameOverType == GameOverType.NoFolk);
+            if (_gameOverType == null)
+            {
+                Debug.LogError($"{nameof(_gameOverType)} should be set before showing {nameof(GameOverPanel)}.");
+                return;
+            }
+
+            _noArmyPanel.SetActive(_gameOverType == GameOverType.NoArmy);
+            _noFolkPanel.SetActive(_gameOverType == GameOverType.NoFolk);
         }
 
         protected override void OnHide()
         {
             _noArmyPanel.SetActive(false);
             _noFolkPanel.SetActive(false);
+            _gameOverType = null!;
+        }
+
+        public void SetGameOverType(GameOverType gameOverType)
+        {
+            _gameOverType = gameOverType;
         }
 
         private void ToMainMenuClicked()

@@ -1,14 +1,11 @@
 #nullable enable
 using System;
 using NovemberProject.Buildings;
-using NovemberProject.CameraSystem;
 using NovemberProject.ClicheSpeech;
 using NovemberProject.CoreGameplay;
 using NovemberProject.GameStates;
 using NovemberProject.MovingResources;
-using NovemberProject.Rounds;
 using NovemberProject.System.UI;
-using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -29,11 +26,9 @@ namespace NovemberProject.System
 
         public ClicheBible ClicheBible { get; private set; } = null!;
         public UIManager UIManager { get; private set; } = null!;
-        public BuildingSelector BuildingSelector { get; private set; } = null!;
         public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
         public CombatController CombatController { get; private set; } = null!;
         public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
-        public BuildingNameHover BuildingNameHover { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
@@ -73,11 +68,9 @@ namespace NovemberProject.System
         private void CreateComponents()
         {
             UIManager = FindObjectOfType<UIManager>();
-            BuildingSelector = FindObjectOfType<BuildingSelector>();
             ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
             CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
             CombatController = FindObjectOfType<CombatController>();
-            BuildingNameHover = FindObjectOfType<BuildingNameHover>();
         }
 
         private void Initialize()

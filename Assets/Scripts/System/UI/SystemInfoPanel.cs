@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace NovemberProject.System.UI
 {
-    public sealed class SystemInfoPanel : UIElement<object?>
+    public interface ISystemInfoPanel : IUIScreen{}
+    
+    public sealed class SystemInfoPanel : UIScreen, ISystemInfoPanel
     {
         [SerializeField]
         private TimeScalePanel _timeScalePanel = null!;
@@ -15,7 +17,7 @@ namespace NovemberProject.System.UI
         [SerializeField]
         private FPSPanel _fpsPanel = null!;
 
-        protected override void OnShow(object? _)
+        protected override void OnShow()
         {
             _timeScalePanel.Show(null);
             _gameStatePanel.Show(null);

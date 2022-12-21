@@ -1,9 +1,12 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
 using NovemberProject.CoreGameplay;
 using NovemberProject.Input;
+using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
+using NovemberProject.System.UI;
 using NovemberProject.Time;
 using UniRx;
 
@@ -31,6 +34,11 @@ namespace NovemberProject.GameStates
         private readonly TimeSystem _timeSystem;
         private readonly RoundSystem _roundSystem;
         private readonly CameraController _cameraController;
+        private readonly UIManager _uiManager;
+        private readonly BuildingSelector _buildingSelector;
+        private readonly BuildingNameHover _buildingNameHover;
+        private readonly CoreGameplay.CoreGameplay _coreGameplay;
+        private readonly ResourceMoveEffectSpawner _resourceMoveEffectSpawner;
 
         private ExpeditionFinishedState? _expeditionFinishedState;
         private AttackState? _attackState;
@@ -41,6 +49,11 @@ namespace NovemberProject.GameStates
 
         public GameStateMachine(InputSystem inputSystem, TimeSystem timeSystem, RoundSystem roundSystem,
             CameraController cameraController,
+            UIManager uiManager,
+            BuildingSelector buildingSelector,
+            BuildingNameHover buildingNameHover,
+            CoreGameplay.CoreGameplay coreGameplay,
+            ResourceMoveEffectSpawner resourceMoveEffectSpawner,
             MessageBroker messageBroker)
         {
             _inputSystem = inputSystem;
@@ -48,22 +61,31 @@ namespace NovemberProject.GameStates
             _timeSystem = timeSystem;
             _roundSystem = roundSystem;
             _cameraController = cameraController;
+            _uiManager = uiManager;
+            _buildingSelector = buildingSelector;
+            _buildingNameHover = buildingNameHover;
+            _coreGameplay = coreGameplay;
+            _resourceMoveEffectSpawner = resourceMoveEffectSpawner;
             _exitGameState = new ExitGameState();
-            _mainMenuState = new MainMenuState(_timeSystem, _cameraController);
+            _mainMenuState = new MainMenuState(_timeSystem, _cameraController, _uiManager);
             _mainMenuState.AddInputHandler(_inputSystem.GetInputHandler<EscapeToExitGameHandler>());
             _newGameState = new NewGameState(this, _timeSystem, _cameraController, _messageBroker);
-            _roundState = new RoundState(_timeSystem, _roundSystem);
+            _roundState = new RoundState(_timeSystem, _roundSystem, _uiManager, _coreGameplay, _buildingSelector,
+                buildingNameHover);
             _roundState.AddInputHandler(_inputSystem.GetMoveCameraHandler(_cameraController));
             _roundState.AddInputHandler(_inputSystem.GetTimeControlsHandler(_timeSystem));
-            _roundState.AddInputHandler(_inputSystem.GetMouseSelectionHandler(_cameraController));
-            _roundEndState = new RoundEndState(this, _timeSystem, _roundSystem);
-            _initializeGameState = new InitializeGameState(_inputSystem, this, _timeSystem);
-            _roundStartState = new RoundStartState(_roundSystem);
-            _gameOverState = new GameOverState();
-            _victoryState = new VictoryState(_timeSystem);
-            _creditsScreenState = new CreditsScreenState();
-            _tutorialState = new TutorialState();
-            _techTreeState = new TechTreeState(_timeSystem);
+            _roundState.AddInputHandler(
+                _inputSystem.GetMouseSelectionHandler(_cameraController, _buildingNameHover, _buildingSelector));
+            _roundEndState = new RoundEndState(this, _timeSystem, _roundSystem, _uiManager, _resourceMoveEffectSpawner,
+                _coreGameplay);
+            _initializeGameState =
+                new InitializeGameState(_inputSystem, this, _timeSystem, _uiManager, _buildingNameHover);
+            _roundStartState = new RoundStartState(_roundSystem, _uiManager);
+            _gameOverState = new GameOverState(_uiManager);
+            _victoryState = new VictoryState(_timeSystem, _uiManager, _buildingSelector);
+            _creditsScreenState = new CreditsScreenState(_uiManager);
+            _tutorialState = new TutorialState(_uiManager);
+            _techTreeState = new TechTreeState(_timeSystem, _uiManager, _buildingSelector);
 
             _inputSystem.OnHandleInput.Subscribe(HandleInput);
             _roundSystem.OnRoundEnded.Subscribe(FinishRound);
@@ -84,7 +106,8 @@ namespace NovemberProject.GameStates
         // FIXME (Stas): Ugly
         public void ExpeditionFinished(ExpeditionResult expeditionResult)
         {
-            _expeditionFinishedState = new ExpeditionFinishedState(expeditionResult, _timeSystem);
+            _expeditionFinishedState =
+                new ExpeditionFinishedState(expeditionResult, _timeSystem, _uiManager, _buildingSelector);
             _expeditionFinishedState.Enter();
         }
 
@@ -94,7 +117,7 @@ namespace NovemberProject.GameStates
 
         public void ShowAttackResult(AttackData attackData)
         {
-            _attackState = new AttackState(attackData, _timeSystem);
+            _attackState = new AttackState(attackData, _timeSystem, _uiManager, _buildingSelector);
             _attackState.Enter();
         }
 

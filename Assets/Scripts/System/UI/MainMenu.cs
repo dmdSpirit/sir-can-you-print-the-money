@@ -8,7 +8,11 @@ using Zenject;
 
 namespace NovemberProject.System.UI
 {
-    public sealed class MainMenu : UIElement<object?>
+    public interface IMainMenu : IUIScreen
+    {
+    }
+
+    public sealed class MainMenu : UIScreen, IMainMenu
     {
         private GameStateMachine _gameStateMachine = null!;
 
@@ -42,7 +46,7 @@ namespace NovemberProject.System.UI
                 .Subscribe(OnCredits);
         }
 
-        protected override void OnShow(object? _)
+        protected override void OnShow()
         {
         }
 

@@ -9,7 +9,9 @@ using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class TutorialScreen : UIElement<object?>
+    public interface ITutorialScreen : IUIScreen{}
+    
+    public sealed class TutorialScreen: UIScreen, ITutorialScreen
     {
         private GameStateMachine _gameStateMachine = null!;
         private int _currentStep;
@@ -34,7 +36,7 @@ namespace NovemberProject.Rounds.UI
             }
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
             _currentStep = 0;
             Assert.IsTrue(_tutorialStepScreens.Length > 0);

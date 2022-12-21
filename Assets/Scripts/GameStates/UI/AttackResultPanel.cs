@@ -11,8 +11,6 @@ namespace NovemberProject.GameStates.UI
 {
     public sealed class AttackResultPanel : UIElement<AttackData>
     {
-        private AttackData _attackData;
-
         [SerializeField]
         private TMP_Text _attackersCount = null!;
 
@@ -36,5 +34,6 @@ namespace NovemberProject.GameStates.UI
         protected override void OnHide()
         {
         }
+
     }
 }

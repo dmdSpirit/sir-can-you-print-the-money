@@ -47,14 +47,11 @@ namespace NovemberProject.Buildings.UI
             _folkManager = folkManager;
         }
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _raiseButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnRaise);
             _lowerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnLower);
         }
 

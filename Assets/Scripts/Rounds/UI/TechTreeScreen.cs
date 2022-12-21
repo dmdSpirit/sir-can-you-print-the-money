@@ -11,7 +11,11 @@ using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class TechTreeScreen : UIElement<object?>
+    public interface ITechTreeScreen : IUIScreen
+    {
+    }
+
+    public sealed class TechTreeScreen : UIScreen, ITechTreeScreen
     {
         private readonly CompositeDisposable _sub = new();
 
@@ -113,7 +117,7 @@ namespace NovemberProject.Rounds.UI
                 .Subscribe(OnUseMine);
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
             _sub.Clear();
             _techController.OnTechUnlocked.Subscribe(_ => UpdateButtons()).AddTo(_sub);

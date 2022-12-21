@@ -11,8 +11,10 @@ using Zenject;
 
 namespace NovemberProject.Cheats
 {
+    public interface ICheatMenu : IUIScreen{}
+    
     [RequireComponent(typeof(ContentSizeFitter))]
-    public sealed class CheatMenu : UIElement<object?>
+    public sealed class CheatMenu : UIScreen, ICheatMenu
     {
         private readonly List<CheatButtonInfo> _cheatButtons = new();
         private readonly List<CheatButton> _generatedButtons = new();
@@ -47,7 +49,7 @@ namespace NovemberProject.Cheats
             GenerateButtons();
         }
 
-        protected override void OnShow(object? _)
+        protected override void OnShow()
         {
             if (_generatedButtons.Count != 0)
             {

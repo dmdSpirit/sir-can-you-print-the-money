@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2243828583067338665}
   - component: {fileID: 2243828583067338664}
   - component: {fileID: 2243828583067338671}
-  - component: {fileID: 1641860681010415540}
   - component: {fileID: 7054615164634619179}
   - component: {fileID: 3816534093925266686}
   - component: {fileID: 5467176881471319152}
@@ -146,21 +145,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1641860681010415540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2243828583067338670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b22ed4dfdf4444ed9cbe513d636b7f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!81 &7054615164634619179
 AudioListener:
   m_ObjectHideFlags: 0
@@ -190,11 +174,14 @@ MonoBehaviour:
   _roundSystemSettings: {fileID: 11400000, guid: bb426a30ab6d61742a8c6a89067d939f, type: 2}
   _stoneControllerSettings: {fileID: 11400000, guid: 7995e4f21042aa54bbeaca23773268e8, type: 2}
   _treasureControllerSettings: {fileID: 11400000, guid: 1a0d046368b49154c94efa4974313c57, type: 2}
+  _buildingSelectorSettings: {fileID: 11400000, guid: e8990e0ef3d3b94439f118d994846fe1, type: 2}
   _resourceMoveEffectSpawner: {fileID: 0}
   _coreGameplay: {fileID: 0}
   _combatController: {fileID: 0}
   _inputSystem: {fileID: 0}
   _timeSystemUpdater: {fileID: 1770773090717228517}
+  _cameraController: {fileID: 0}
+  _buildingNameHover: {fileID: 0}
 --- !u!114 &5467176881471319152
 MonoBehaviour:
   m_ObjectHideFlags: 0

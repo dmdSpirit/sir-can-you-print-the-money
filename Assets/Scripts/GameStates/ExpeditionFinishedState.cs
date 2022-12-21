@@ -1,7 +1,10 @@
 ﻿#nullable enable
+using NovemberProject.Buildings;
 using NovemberProject.CoreGameplay;
-using NovemberProject.System;
+using NovemberProject.GameStates.UI;
+using NovemberProject.System.UI;
 using NovemberProject.Time;
+using NovemberProject.Time.UI;
 
 namespace NovemberProject.GameStates
 {
@@ -9,26 +12,37 @@ namespace NovemberProject.GameStates
     {
         private readonly ExpeditionResult _expeditionResult;
         private readonly TimeSystem _timeSystem;
+        private readonly UIManager _uiManager;
+        private readonly BuildingSelector _buildingSelector;
 
-        public ExpeditionFinishedState(ExpeditionResult expeditionResult, TimeSystem timeSystem)
+        private IExpeditionResultsPanel _expeditionResultsPanel = null!;
+        private ITimeControlsPanel _timeControlsPanel = null!;
+
+        public ExpeditionFinishedState(ExpeditionResult expeditionResult, TimeSystem timeSystem, UIManager uiManager,
+            BuildingSelector buildingSelector)
         {
             _expeditionResult = expeditionResult;
             _timeSystem = timeSystem;
+            _uiManager = uiManager;
+            _buildingSelector = buildingSelector;
         }
 
         protected override void OnEnter()
         {
-            Game.Instance.UIManager.ShowExpeditionResult(_expeditionResult);
+            _expeditionResultsPanel = _uiManager.GetScreen<IExpeditionResultsPanel>();
+            _expeditionResultsPanel.SetExpeditionResult(_expeditionResult);
+            _expeditionResultsPanel.Show();
             _timeSystem.PauseTime();
-            Game.Instance.UIManager.LockTimeControls();
-            Game.Instance.BuildingSelector.Unselect();
+            _timeControlsPanel = _uiManager.GetScreen<ITimeControlsPanel>();
+            _timeControlsPanel.Lock();
+            _buildingSelector.Unselect();
         }
 
         protected override void OnExit()
         {
-            Game.Instance.UIManager.HideExpeditionResult();
+            _expeditionResultsPanel.Hide();
             _timeSystem.RestoreAfterPause();
-            Game.Instance.UIManager.UnlockTimeControls();
+            _timeControlsPanel.Unlock();
         }
     }
 }

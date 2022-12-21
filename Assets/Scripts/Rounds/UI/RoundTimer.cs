@@ -1,17 +1,19 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Assertions;
 using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class RoundTimer : UIElement<object?>
+    public interface IRoundTimer : IUIScreen
+    {
+    }
+
+    public sealed class RoundTimer : UIScreen, IRoundTimer
     {
         private IDisposable? _sub;
         private RoundSystem _roundSystem = null!;
@@ -28,10 +30,10 @@ namespace NovemberProject.Rounds.UI
             _roundSystem = roundSystem;
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
             _sub?.Dispose();
-            _sub= _roundSystem.OnRoundTimerStarted.Subscribe(_ => OnRoundStarted());
+            _sub = _roundSystem.OnRoundTimerStarted.Subscribe(_ => OnRoundStarted());
             OnRoundStarted();
         }
 
@@ -43,9 +45,7 @@ namespace NovemberProject.Rounds.UI
         private void OnRoundStarted()
         {
             _roundNumber.text = _roundSystem.Round.Value.ToString();
-            RoundSystem roundSystem = _roundSystem;
-            IReadOnlyTimer? roundTimer = roundSystem.RoundTimer;
-            Assert.IsTrue(roundTimer != null);
+            IReadOnlyTimer? roundTimer = _roundSystem.RoundTimer;
             _timerProgressBar.Show(roundTimer!);
         }
     }

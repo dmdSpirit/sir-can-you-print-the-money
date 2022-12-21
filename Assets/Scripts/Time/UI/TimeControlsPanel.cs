@@ -1,14 +1,19 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace NovemberProject.Time.UI
 {
-    public sealed class TimeControlsPanel : UIElement<object?>
+    public interface ITimeControlsPanel : IUIScreen
+    {
+        public void Lock();
+        public void Unlock();
+    }
+
+    public sealed class TimeControlsPanel : UIScreen, ITimeControlsPanel
     {
         private const int PAUSE_BUTTON_INDEX = 0;
         private const int PLAY_BUTTON_INDEX = 1;
@@ -33,7 +38,7 @@ namespace NovemberProject.Time.UI
                 .Subscribe(OnButtonClicked);
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
             _timeStatusSub?.Dispose();
             _timeStatusSub = _timeSystem.Status

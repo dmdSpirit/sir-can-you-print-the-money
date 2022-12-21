@@ -1,7 +1,9 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
+using NovemberProject.System.UI;
 using NovemberProject.Time;
 
 namespace NovemberProject.Input
@@ -30,11 +32,13 @@ namespace NovemberProject.Input
             return (TimeControlsHandler)_inputHandlers[typeof(TimeControlsHandler)];
         }
 
-        public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController)
+        public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController,
+            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector)
         {
             if (!_inputHandlers.ContainsKey(typeof(MouseSelectionHandler)))
             {
-                _inputHandlers.Add(typeof(MouseSelectionHandler), new MouseSelectionHandler(cameraController));
+                _inputHandlers.Add(typeof(MouseSelectionHandler),
+                    new MouseSelectionHandler(cameraController, buildingNameHover, buildingSelector));
             }
 
             return (MouseSelectionHandler)_inputHandlers[typeof(MouseSelectionHandler)];
@@ -48,6 +52,26 @@ namespace NovemberProject.Input
             }
 
             return (MoveCameraHandler)_inputHandlers[typeof(MoveCameraHandler)];
+        }
+
+        public ToggleCheatMenuInputHandler GetToggleCheatMenuInputHandler(UIManager uiManager)
+        {
+            if (!_inputHandlers.ContainsKey(typeof(ToggleCheatMenuInputHandler)))
+            {
+                _inputHandlers.Add(typeof(ToggleCheatMenuInputHandler), new ToggleCheatMenuInputHandler(uiManager));
+            }
+
+            return (ToggleCheatMenuInputHandler)_inputHandlers[typeof(ToggleCheatMenuInputHandler)];
+        }
+
+        public ToggleSystemPanelInputHandler GetToggleSystemPanelInputHandler(UIManager uiManager)
+        {
+            if (!_inputHandlers.ContainsKey(typeof(ToggleSystemPanelInputHandler)))
+            {
+                _inputHandlers.Add(typeof(ToggleSystemPanelInputHandler), new ToggleSystemPanelInputHandler(uiManager));
+            }
+
+            return (ToggleSystemPanelInputHandler)_inputHandlers[typeof(ToggleSystemPanelInputHandler)];
         }
     }
 }

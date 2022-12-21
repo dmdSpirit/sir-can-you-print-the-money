@@ -20,11 +20,9 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private TMP_Text _buyButtonText = null!;
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _buyButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnBuyButtonClicked);
         }
 

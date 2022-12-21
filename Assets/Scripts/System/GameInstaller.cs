@@ -45,10 +45,10 @@ namespace NovemberProject.System
         [SerializeField]
         private TreasureControllerSettings _treasureControllerSettings = null!;
 
-        // Temporary references.
         [SerializeField]
-        private TechController _techController = null!;
+        private BuildingSelectorSettings _buildingSelectorSettings = null!;
 
+        // Temporary references.
         [SerializeField]
         private ResourceMoveEffectSpawner _resourceMoveEffectSpawner = null!;
 
@@ -67,6 +67,9 @@ namespace NovemberProject.System
         [SerializeField]
         private CameraController _cameraController = null!;
 
+        [SerializeField]
+        private BuildingNameHover _buildingNameHover = null!;
+
         public override void InstallBindings()
         {
             Container.Bind<FolkManager>().AsSingle();
@@ -82,6 +85,7 @@ namespace NovemberProject.System
             Container.Bind<RoundSystem>().AsSingle();
             Container.Bind<StoneController>().AsSingle();
             Container.Bind<TreasureController>().AsSingle();
+            Container.Bind<BuildingSelector>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -97,6 +101,7 @@ namespace NovemberProject.System
             Container.Bind<TimeSystemUpdater>().FromInstance(_timeSystemUpdater);
             Container.Bind<InputSystem>().FromInstance(_inputSystem);
             Container.Bind<CameraController>().FromInstance(_cameraController);
+            Container.Bind<BuildingNameHover>().FromInstance(_buildingNameHover);
         }
 
         private void InstallSettingsBindings()
@@ -110,6 +115,7 @@ namespace NovemberProject.System
             Container.Bind<RoundSystemSettings>().FromInstance(_roundSystemSettings);
             Container.Bind<StoneControllerSettings>().FromInstance(_stoneControllerSettings);
             Container.Bind<TreasureControllerSettings>().FromInstance(_treasureControllerSettings);
+            Container.Bind<BuildingSelectorSettings>().FromInstance(_buildingSelectorSettings);
         }
     }
 }

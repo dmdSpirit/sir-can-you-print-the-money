@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.GameStates;
-using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +8,9 @@ using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class VictoryScreen : UIElement<object?>
+    public interface IVictoryScreen : IUIScreen{}
+    
+    public sealed class VictoryScreen : UIScreen, IVictoryScreen
     {
         private GameStateMachine _gameStateMachine = null!;
 
@@ -28,7 +29,7 @@ namespace NovemberProject.Rounds.UI
                 .Subscribe(OnToMainMenuButtonClicked);
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
         }
 
