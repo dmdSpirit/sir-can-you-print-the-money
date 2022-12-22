@@ -2298,6 +2298,8 @@ GameObject:
   - component: {fileID: 1463002588990908002}
   - component: {fileID: 8825925524278119109}
   - component: {fileID: 5789111285950045991}
+  - component: {fileID: 2845349978169818145}
+  - component: {fileID: 6658925988216478617}
   m_Layer: 5
   m_Name: attack_result_panel
   m_TagString: Untagged
@@ -2383,6 +2385,30 @@ MonoBehaviour:
   _defendersWonPanel: {fileID: 6533581583914900673}
   _guardsKilledPanel: {fileID: 4673507028041396318}
   _folkKilledPanel: {fileID: 626309086374934255}
+--- !u!114 &2845349978169818145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683637549114998275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6658925988216478617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683637549114998275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4972846564545138213
 GameObject:
   m_ObjectHideFlags: 0

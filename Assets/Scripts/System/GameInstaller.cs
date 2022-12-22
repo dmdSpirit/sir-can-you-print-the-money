@@ -7,6 +7,7 @@ using NovemberProject.GameStates;
 using NovemberProject.Input;
 using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
+using NovemberProject.System.UI;
 using NovemberProject.TechTree;
 using NovemberProject.Time;
 using NovemberProject.Treasures;
@@ -70,6 +71,9 @@ namespace NovemberProject.System
         [SerializeField]
         private BuildingNameHover _buildingNameHover = null!;
 
+        [SerializeField]
+        private UIManager _uiManager = null!;
+
         public override void InstallBindings()
         {
             Container.Bind<FolkManager>().AsSingle();
@@ -102,6 +106,7 @@ namespace NovemberProject.System
             Container.Bind<InputSystem>().FromInstance(_inputSystem);
             Container.Bind<CameraController>().FromInstance(_cameraController);
             Container.Bind<BuildingNameHover>().FromInstance(_buildingNameHover);
+            Container.Bind<UIManager>().FromInstance(_uiManager);
         }
 
         private void InstallSettingsBindings()

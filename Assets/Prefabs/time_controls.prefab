@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 3361269401721949566}
   - component: {fileID: 2955606316229570339}
   - component: {fileID: 7636242470648317540}
+  - component: {fileID: 4915242034828347836}
+  - component: {fileID: 111462409046652872}
   m_Layer: 5
   m_Name: time_controls
   m_TagString: Untagged
@@ -152,6 +154,30 @@ MonoBehaviour:
   - {fileID: 5242952537286952794}
   - {fileID: 7703415221379554625}
   - {fileID: 440904001060822068}
+--- !u!114 &4915242034828347836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514206715070945428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &111462409046652872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514206715070945428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &141082204483585505
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -65,6 +65,11 @@ namespace NovemberProject.GameStates
             }
 
             _roundEndPanel = _uiManager.GetScreen<IRoundEndPanel>();
+            if (_coreGameplay.RoundResult.NothingHappened())
+            {
+                _gameStateMachine.StartRound();
+                return;
+            }
             _roundEndPanel.SetRoundResult(_coreGameplay.RoundResult);
             _roundEndPanel.Show();
         }

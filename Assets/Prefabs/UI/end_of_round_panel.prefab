@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5883157400969006772}
   - component: {fileID: 4581130481786348051}
   - component: {fileID: 1026899614622393345}
+  - component: {fileID: 6284240766184425715}
+  - component: {fileID: 4201136488611194205}
   m_Layer: 5
   m_Name: end_of_round_panel
   m_TagString: Untagged
@@ -99,6 +101,30 @@ MonoBehaviour:
   _titleText: How did you do on Week [value]
   _nextRound: {fileID: 384691281602080920}
   _roundResultPanel: {fileID: 261340989479289817}
+--- !u!114 &6284240766184425715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366782713025156821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4201136488611194205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366782713025156821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &663624432059704182
 GameObject:
   m_ObjectHideFlags: 0

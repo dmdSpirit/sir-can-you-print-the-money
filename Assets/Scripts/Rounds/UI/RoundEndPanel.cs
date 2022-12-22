@@ -54,12 +54,6 @@ namespace NovemberProject.Rounds.UI
                 return;
             }
 
-            if (_roundResult.NothingHappened())
-            {
-                _gameStateMachine.StartRound();
-                return;
-            }
-
             _title.text = _titleText.Replace("[value]", _roundSystem.Round.Value.ToString());
             _roundResultPanel.Show(_roundResult);
         }

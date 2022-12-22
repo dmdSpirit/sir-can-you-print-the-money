@@ -29,8 +29,8 @@ namespace NovemberProject.CommonUIStuff
             }
 
             _isShown = true;
-            OnShow();
             HandleShowTransitions();
+            OnShow();
         }
 
         public void Hide()

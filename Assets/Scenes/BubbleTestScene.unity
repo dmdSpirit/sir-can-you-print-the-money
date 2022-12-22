@@ -15724,6 +15724,10 @@ PrefabInstance:
       value: Game
       objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _uiManager
+      value: 
+      objectReference: {fileID: 1681028058}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _timeSystem
       value: 
       objectReference: {fileID: 0}
@@ -16866,6 +16870,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65da4eeccb854bfc8c77415ca4018094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1681028058 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8200100831098426286, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+  m_PrefabInstance: {fileID: 1681028054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3f7bbd1f044b32b3bf781b23603a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1682924405
