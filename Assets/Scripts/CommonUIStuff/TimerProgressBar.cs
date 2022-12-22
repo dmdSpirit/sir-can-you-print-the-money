@@ -5,11 +5,13 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.CommonUIStuff
 {
     public sealed class TimerProgressBar : UIElement<IReadOnlyTimer>
     {
+        private TimeSystem _timeSystem = null!;
         private readonly CompositeDisposable _timerSubs = new();
 
         private IReadOnlyTimer _timer = null!;
@@ -17,11 +19,17 @@ namespace NovemberProject.CommonUIStuff
         [SerializeField]
         private Image _barImage = null!;
 
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
+        {
+            _timeSystem = timeSystem;
+        }
+
         protected override void OnShow(IReadOnlyTimer timer)
         {
             _timerSubs.Clear();
             _timer = timer;
-            Game.Instance.TimeSystem.OnUpdate.Subscribe(OnUpdate).AddTo(_timerSubs);
+            _timeSystem.OnUpdate.Subscribe(OnUpdate).AddTo(_timerSubs);
             _timer.OnTimerCanceled.Subscribe(OnTimerCanceled).AddTo(_timerSubs);
             _timer.OnTimerFinished.Subscribe(OnTimerFinished).AddTo(_timerSubs);
             OnUpdate(0);

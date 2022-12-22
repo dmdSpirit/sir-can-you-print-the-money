@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using NovemberProject.InputSystem;
+using NovemberProject.Input;
 using UniRx;
 
 namespace NovemberProject.GameStates

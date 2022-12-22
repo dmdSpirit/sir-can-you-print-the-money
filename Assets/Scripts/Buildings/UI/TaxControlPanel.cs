@@ -1,10 +1,12 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
@@ -12,6 +14,8 @@ namespace NovemberProject.Buildings.UI
     {
         private readonly CompositeDisposable _sub = new();
         private ITaxController _taxController = null!;
+
+        private FolkManager _folkManager = null!;
 
         [SerializeField]
         private TMP_Text _tax = null!;
@@ -37,14 +41,17 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private string _lowerText = "Lower";
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(FolkManager folkManager)
         {
-            base.OnInitialized();
+            _folkManager = folkManager;
+        }
+
+        private void Start()
+        {
             _raiseButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnRaise);
             _lowerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnLower);
         }
 
@@ -54,7 +61,7 @@ namespace NovemberProject.Buildings.UI
             _taxController = salaryController;
             _taxController.CanLowerTax.Subscribe(UpdateLowerButtonState).AddTo(_sub);
             _taxController.CanRaiseTax.Subscribe(UpdateRaiseButtonState).AddTo(_sub);
-            Game.Instance.FolkManager.Tax.Subscribe(OnTaxChanged).AddTo(_sub);
+            _folkManager.Tax.Subscribe(OnTaxChanged).AddTo(_sub);
         }
 
         protected override void OnHide()

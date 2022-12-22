@@ -1,17 +1,22 @@
 ﻿#nullable enable
 using NovemberProject.Buildings.UI;
 using NovemberProject.CoreGameplay;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
+using NovemberProject.TechTree;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
     public sealed class FolkTreasuryBuilding : Building, IResourceStorage, ITaxController
     {
+        private FolkManager _folkManager = null!;
         private MoneyController _moneyController = null!;
-        
+        private TechController _techController = null!;
+
         [SerializeField]
         private TMP_Text _moneyText = null!;
 
@@ -24,25 +29,25 @@ namespace NovemberProject.Buildings
         public override BuildingType BuildingType => BuildingType.FolkTreasury;
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
-        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.MoneyController.FolkMoney;
-        public IReadOnlyReactiveProperty<bool> CanRaiseTax => Game.Instance.TechController.CanRaiseTax;
-        public IReadOnlyReactiveProperty<bool> CanLowerTax => Game.Instance.TechController.CanLowerTax;
+        public IReadOnlyReactiveProperty<int> ResourceCount => _moneyController.FolkMoney;
+        public IReadOnlyReactiveProperty<bool> CanRaiseTax => _techController.CanRaiseTax;
+        public IReadOnlyReactiveProperty<bool> CanLowerTax => _techController.CanLowerTax;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(FolkManager folkManager, MoneyController moneyController, TechController techController)
         {
-            base.OnInitialized();
-            _moneyController = Game.Instance.MoneyController;
-            _moneyController.FolkMoney
-                .TakeUntilDisable(this)
-                .Subscribe(OnMoneyChanged);
+            _folkManager = folkManager;
+            _moneyController = moneyController;
+            _techController = techController;
+            _moneyController.FolkMoney.Subscribe(OnMoneyChanged);
         }
 
         private void OnMoneyChanged(int money)
         {
             _moneyText.text = money.ToString();
         }
-        
-        public void RaiseTax() => Game.Instance.FolkManager.RaiseTax();
-        public void LowerTax() => Game.Instance.FolkManager.LowerTax();
+
+        public void RaiseTax() => _folkManager.RaiseTax();
+        public void LowerTax() => _folkManager.LowerTax();
     }
 }

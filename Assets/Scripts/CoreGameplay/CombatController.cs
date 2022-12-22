@@ -1,11 +1,16 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay.FolkManagement;
+using NovemberProject.GameStates;
+using NovemberProject.Rounds;
 using NovemberProject.System;
+using NovemberProject.System.Messages;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace NovemberProject.CoreGameplay
@@ -31,6 +36,13 @@ namespace NovemberProject.CoreGameplay
         private readonly Subject<Unit> _onNewAttack = new();
         private readonly ReactiveProperty<bool> _isActive = new();
 
+        private FolkManager _folkManager = null!;
+        private ArmyManager _armyManager = null!;
+        private GameStateMachine _gameStateMachine = null!;
+        private TimeSystem _timeSystem = null!;
+        private RoundSystem _roundSystem = null!;
+        private MessageBroker _messageBroker = null!;
+
         private Timer? _attackTimer;
         private int _attackIndex;
 
@@ -47,15 +59,21 @@ namespace NovemberProject.CoreGameplay
         public IObservable<Unit> OnNewAttack => _onNewAttack;
         public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(FolkManager folkManager, ArmyManager armyManager, GameStateMachine gameStateMachine,
+            TimeSystem timeSystem, RoundSystem roundSystem, MessageBroker messageBroker)
         {
-            base.OnInitialized();
-            Game.Instance.RoundSystem.Round
-                .TakeUntilDisable(this)
-                .Subscribe(OnRoundChanged);
+            _folkManager = folkManager;
+            _armyManager = armyManager;
+            _gameStateMachine = gameStateMachine;
+            _timeSystem = timeSystem;
+            _roundSystem = roundSystem;
+            _messageBroker = messageBroker;
+            _roundSystem.Round.Subscribe(OnRoundChanged);
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
 
-        public void InitializeGameData()
+        private void OnNewGame(NewGameMessage message)
         {
             _attackIndex = 0;
             _attackTimer?.Cancel();
@@ -75,14 +93,14 @@ namespace NovemberProject.CoreGameplay
 
         public void PlanNextAttack()
         {
-            _attackTimer = Game.Instance.TimeSystem.CreateTimer(_attackDuration, OnAttack);
+            _attackTimer = _timeSystem.CreateTimer(_attackDuration, OnAttack);
             _attackTimer.Start();
             _onNewAttack.OnNext(Unit.Default);
         }
 
         private void OnAttack(Timer _)
         {
-            int defenders = Game.Instance.ArmyManager.GuardsCount.Value;
+            int defenders = _armyManager.GuardsCount.Value;
             int attackers = NextAttackersCount();
             bool attackersWon = CalculateAttackResult(attackers, defenders);
             AttackStatus attackStatus = AttackStatus.DefendersWon;
@@ -90,13 +108,13 @@ namespace NovemberProject.CoreGameplay
             {
                 if (defenders > 0)
                 {
-                    Game.Instance.ArmyManager.KillGuards(attackers);
+                    _armyManager.KillGuards(attackers);
                     attackStatus = AttackStatus.GuardsKilled;
                 }
-                else if (Game.Instance.FolkManager.FolkCount.Value > 0)
+                else if (_folkManager.FolkCount.Value > 0)
                 {
                     attackStatus = AttackStatus.FolkKilled;
-                    Game.Instance.FolkManager.KillFolk(1);
+                    _folkManager.KillFolk(1);
                 }
 
                 _attackIndex = 0;
@@ -106,7 +124,7 @@ namespace NovemberProject.CoreGameplay
                 _attackIndex++;
             }
 
-            Game.Instance.GameStateMachine.ShowAttackResult(new AttackData(defenders, attackers, attackStatus));
+            _gameStateMachine.ShowAttackResult(new AttackData(defenders, attackers, attackStatus));
             PlanNextAttack();
         }
 

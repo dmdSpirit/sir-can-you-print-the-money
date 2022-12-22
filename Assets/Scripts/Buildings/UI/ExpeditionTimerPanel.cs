@@ -4,17 +4,26 @@ using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
     public sealed class ExpeditionTimerPanel : UIElement<IExpeditionSender>
     {
+        private TimeSystem _timeSystem = null!;
         private IReadOnlyTimer _timer = null!;
 
         [SerializeField]
         private TMP_Text _timeLeft = null!;
+
         [SerializeField]
         private TMP_Text _explorersCountText = null!;
+
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
+        {
+            _timeSystem = timeSystem;
+        }
 
         protected override void OnShow(IExpeditionSender expeditionSender)
         {
@@ -34,7 +43,7 @@ namespace NovemberProject.Buildings.UI
                 return;
             }
 
-            _timeLeft.text = Game.Instance.TimeSystem.EstimateSecondsLeftUnscaled(_timer)+"s";
+            _timeLeft.text = _timeSystem.EstimateSecondsLeftUnscaled(_timer) + "s";
         }
     }
 }

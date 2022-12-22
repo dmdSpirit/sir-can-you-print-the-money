@@ -29,7 +29,7 @@ namespace NovemberProject.Buildings
                 IsShowing = true;
             }
 
-            _panel.position = Input.mousePosition + _offset;
+            _panel.position = UnityEngine.Input.mousePosition + _offset;
             if (_building == null || _building != building)
             {
                 _text.text = building.Title;

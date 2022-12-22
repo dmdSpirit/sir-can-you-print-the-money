@@ -1,15 +1,23 @@
 ﻿#nullable enable
-using System;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
+using NovemberProject.CoreGameplay;
 using NovemberProject.Time;
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class NotificationsPanel : UIElement<object?>
+    public interface INotificationsPanel : IUIScreen
+    {
+    }
+
+    public sealed class NotificationsPanel : UIScreen, INotificationsPanel
     {
         private Timer? _showTimer;
+
+        private TimeSystem _timeSystem = null!;
+        private MessageBroker _messageBroker = null!;
 
         [SerializeField]
         private Notification _folkStarvedNotification = null!;
@@ -26,7 +34,18 @@ namespace NovemberProject.Rounds.UI
         [SerializeField]
         private float _showDuration = 5f;
 
-        protected override void OnShow(object? value)
+        [Inject]
+        private void Construct(TimeSystem timeSystem, MessageBroker messageBroker)
+        {
+            _timeSystem = timeSystem;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<FolkStarvedMessage>().Subscribe(ShowNotification);
+            _messageBroker.Receive<ArmyStarvedMessage>().Subscribe(ShowNotification);
+            _messageBroker.Receive<FolkExecutedMessage>().Subscribe(ShowNotification);
+            _messageBroker.Receive<ArmyDesertedMessage>().Subscribe(ShowNotification);
+        }
+
+        protected override void OnShow()
         {
         }
 
@@ -35,29 +54,27 @@ namespace NovemberProject.Rounds.UI
             HideAll();
         }
 
-        public void ShowNotification(NotificationType notificationType, int count)
+        private void ShowNotification(INotificationMessage message)
         {
             _showTimer?.Cancel();
             HideAll();
-            switch (notificationType)
+            switch (message)
             {
-                case NotificationType.None:
-                    return;
-                case NotificationType.FolkStarved:
-                    _folkStarvedNotification.Show(count);
+                case FolkStarvedMessage folkStarvedMessage:
+                    _folkStarvedNotification.Show(folkStarvedMessage.Count);
                     break;
-                case NotificationType.ArmyStarved:
-                    _armyStarvedNotification.Show(count);
+                case ArmyStarvedMessage armyStarvedMessage:
+                    _armyStarvedNotification.Show(armyStarvedMessage.Count);
                     break;
-                case NotificationType.FolkExecuted:
-                    _folkExecutedNotification.Show(count);
+                case FolkExecutedMessage folkExecuted:
+                    _folkExecutedNotification.Show(folkExecuted.Count);
                     break;
-                case NotificationType.ArmyDeserted:
-                    _armyDesertedNotification.Show(count);
+                case ArmyDesertedMessage armyDeserted:
+                    _armyDesertedNotification.Show(armyDeserted.Count);
                     break;
             }
 
-            _showTimer = Game.Instance.TimeSystem.CreateUnscaledTimer(_showDuration, OnNotificationExpire);
+            _showTimer = _timeSystem.CreateUnscaledTimer(_showDuration, OnNotificationExpire);
             _showTimer.Start();
         }
 

@@ -1,56 +1,73 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
-using NovemberProject.System;
 using UniRx;
 using UnityEngine;
-using Observable = UniRx.Observable;
+using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
-    public sealed class AttackResultsPanel : UIElement<AttackData>
+    public interface IAttackResultsPanel : IUIScreen
     {
-        private AttackData _attackData;
+        public void SetAttackData(AttackData attackData);
+    }
+
+    public sealed class AttackResultsPanel : UIScreen, IAttackResultsPanel
+    {
+        private GameStateMachine _gameStateMachine = null!;
+        private AttackData? _attackData;
 
         [SerializeField]
         private AttackResultPanel _defendersWonPanel = null!;
+
         [SerializeField]
         private AttackResultPanel _guardsKilledPanel = null!;
+
         [SerializeField]
         private AttackResultPanel _folkKilledPanel = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
-            Observable.TakeUntilDisable(_defendersWonPanel.OnClose, this)
-                .Subscribe(OnClose);
-            Observable.TakeUntilDisable(_guardsKilledPanel.OnClose, this)
-                .Subscribe(OnClose);
-            Observable.TakeUntilDisable(_folkKilledPanel.OnClose, this)
-                .Subscribe(OnClose);
+            _gameStateMachine = gameStateMachine;
         }
 
-        protected override void OnShow(AttackData attackData)
+        private void Start()
         {
-            if (attackData.AttackStatus == AttackStatus.DefendersWon)
+            _defendersWonPanel.OnClose.Subscribe(OnClose);
+            _guardsKilledPanel.OnClose.Subscribe(OnClose);
+            _folkKilledPanel.OnClose.Subscribe(OnClose);
+        }
+
+        protected override void OnShow()
+        {
+            if (_attackData == null)
             {
-                _defendersWonPanel.Show(attackData);
+                Debug.LogError($"{nameof(_attackData)} should be set before showing {nameof(AttackResultsPanel)}.");
+                return;
+            }
+            
+            if (_attackData.Value.AttackStatus == AttackStatus.DefendersWon)
+            {
+                _defendersWonPanel.Show(_attackData.Value);
             }
             else
             {
                 _defendersWonPanel.Hide();
             }
-            if (attackData.AttackStatus == AttackStatus.GuardsKilled)
+
+            if (_attackData.Value.AttackStatus == AttackStatus.GuardsKilled)
             {
-                _guardsKilledPanel.Show(attackData);
+                _guardsKilledPanel.Show(_attackData.Value);
             }
             else
             {
                 _guardsKilledPanel.Hide();
             }
-            if (attackData.AttackStatus == AttackStatus.FolkKilled)
+
+            if (_attackData.Value.AttackStatus == AttackStatus.FolkKilled)
             {
-                _folkKilledPanel.Show(attackData);
+                _folkKilledPanel.Show(_attackData.Value);
             }
             else
             {
@@ -64,10 +81,15 @@ namespace NovemberProject.GameStates.UI
             _guardsKilledPanel.Hide();
             _folkKilledPanel.Hide();
         }
+        
+        public void SetAttackData(AttackData attackData)
+        {
+            _attackData = attackData;
+        }
 
         private void OnClose(Unit _)
         {
-            Game.Instance.GameStateMachine.HideAttackResult();
+            _gameStateMachine.HideAttackResult();
         }
     }
 }

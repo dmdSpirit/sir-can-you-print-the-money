@@ -1,18 +1,22 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
     public sealed class ExpeditionSenderPanel : UIElement<IExpeditionSender>
     {
-        private IExpeditionSender _expeditionSender = null!;
         private readonly CompositeDisposable _panelSub = new();
+
+        private IExpeditionSender _expeditionSender = null!;
+        private Expeditions _expeditions = null!;
 
         [SerializeField]
         private Button _addWorkerButton = null!;
@@ -42,17 +46,19 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private TMP_Text _title = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(Expeditions expeditions)
         {
-            base.OnInitialized();
+            _expeditions = expeditions;
+        }
+
+        private void Start()
+        {
             _addWorkerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(AddWorkerHandler);
             _removeWorkerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(RemoveWorkerHandler);
             _sendToExpeditionButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(SendExpeditionHandler);
         }
 
@@ -113,7 +119,7 @@ namespace NovemberProject.Buildings.UI
 
         private void SendExpeditionHandler(Unit _)
         {
-            Game.Instance.Expeditions.StartExpedition();
+            _expeditions.StartExpedition();
         }
 
         private void OnExpeditionStatusChanged(bool isExpeditionActive)
@@ -122,7 +128,7 @@ namespace NovemberProject.Buildings.UI
             {
                 Assert.IsTrue(_expeditionSender.ExpeditionTimer != null);
                 _expeditionTimerPanel.Show(_expeditionSender);
-                
+
                 return;
             }
 

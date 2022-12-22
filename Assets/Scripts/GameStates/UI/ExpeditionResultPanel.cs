@@ -12,8 +12,6 @@ namespace NovemberProject.GameStates.UI
 {
     public sealed class ExpeditionResultPanel : UIElement<ExpeditionResult>
     {
-        private ExpeditionResult _expeditionResult;
-
         [SerializeField]
         private TMP_Text _explorersCount = null!;
 
@@ -27,7 +25,6 @@ namespace NovemberProject.GameStates.UI
 
         protected override void OnShow(ExpeditionResult expeditionResult)
         {
-            _expeditionResult = expeditionResult;
             _explorersCount.text = expeditionResult.Explorers.ToString();
             if (_rewardsCount != null)
             {

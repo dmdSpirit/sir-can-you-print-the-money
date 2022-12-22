@@ -9,9 +9,16 @@ using UnityEngine.UI;
 
 namespace NovemberProject.Buildings.UI
 {
-    public sealed class BuildingInfoPanel : UIElement<Building>
+    public interface IBuildingInfoPanel : IUIScreen
+    {
+        public void SetBuilding(Building building);
+    }
+
+    public sealed class BuildingInfoPanel : UIScreen, IBuildingInfoPanel
     {
         private readonly CompositeDisposable _subs = new();
+
+        private Building? _building;
 
         [SerializeField]
         private TMP_Text _title = null!;
@@ -52,16 +59,20 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private IncomingAttackPanel _incomingAttack = null!;
 
-        public Building Building { get; private set; } = null!;
 
-        protected override void OnShow(Building building)
+        protected override void OnShow()
         {
             _subs.Clear();
-            Building = building;
-            _title.text = Building.Title;
-            _description.text = Building.Description;
-            _image.sprite = Building.Image;
-            if (building is IConstructableBuilding constructableBuilding &&
+            if (_building == null)
+            {
+                Debug.LogError($"{nameof(_building)} should be set before showing {nameof(BuildingInfoPanel)}.");
+                return;
+            }
+
+            _title.text = _building.Title;
+            _description.text = _building.Description;
+            _image.sprite = _building.Image;
+            if (_building is IConstructableBuilding constructableBuilding &&
                 constructableBuilding.ConstructableState.Value != ConstructableState.Constructed)
             {
                 ShowBuildingConstructionPanel(constructableBuilding);
@@ -69,14 +80,14 @@ namespace NovemberProject.Buildings.UI
             else
             {
                 _buildingConstructionPanel.Hide();
-                ShowWorkerManagement(building);
-                ShowResourceStorage(building);
-                ShowBuyUnit(building);
-                ShowSalaryController(building);
-                ShowTaxController(building);
-                ShowMoneyPrinter(building);
-                ShowMineWorkers(building);
-                ShowIncomingAttack(building);
+                ShowWorkerManagement(_building);
+                ShowResourceStorage(_building);
+                ShowBuyUnit(_building);
+                ShowSalaryController(_building);
+                ShowTaxController(_building);
+                ShowMoneyPrinter(_building);
+                ShowMineWorkers(_building);
+                ShowIncomingAttack(_building);
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
@@ -95,6 +106,7 @@ namespace NovemberProject.Buildings.UI
             _moneyPrinterPanel.Hide();
             _mineWorkerManagementPanel.Hide();
             _incomingAttack.Hide();
+            _building = null;
         }
 
         private void ShowBuyUnit(Building building)
@@ -107,6 +119,11 @@ namespace NovemberProject.Buildings.UI
             {
                 _buyUnitPanel.Hide();
             }
+        }
+
+        public void SetBuilding(Building building)
+        {
+            _building = building;
         }
 
         private void ShowSalaryController(Building building)
@@ -200,10 +217,9 @@ namespace NovemberProject.Buildings.UI
                 return;
             }
 
-            Assert.IsTrue(Building is IIncomingAttack);
-            var incomingAttack = (IIncomingAttack)Building;
+            Assert.IsTrue(_building is IIncomingAttack);
+            var incomingAttack = (IIncomingAttack)_building;
             _incomingAttack.Show(incomingAttack);
-            
         }
 
         private void ShowWorkerManagement(Building building)
@@ -248,8 +264,8 @@ namespace NovemberProject.Buildings.UI
                 return;
             }
 
-            Assert.IsTrue(Building is IExpeditionSender);
-            var expeditionSender = (IExpeditionSender)Building;
+            Assert.IsTrue(_building is IExpeditionSender);
+            var expeditionSender = (IExpeditionSender)_building;
             _expeditionSenderPanel.Show(expeditionSender);
         }
 

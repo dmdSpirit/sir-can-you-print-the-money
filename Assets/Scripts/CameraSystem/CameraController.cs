@@ -1,11 +1,11 @@
 #nullable enable
+using System;
 using DG.Tweening;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
+using Zenject;
 
 namespace NovemberProject.CameraSystem
 {
@@ -13,6 +13,7 @@ namespace NovemberProject.CameraSystem
     [RequireComponent(typeof(CameraZoom))]
     public sealed class CameraController : InitializableBehaviour
     {
+        private MessageBroker _messageBroker = null!;
         private Vector3 _initialPosition;
         private CameraMovement _cameraMovement = null!;
         private CameraZoom _cameraZoom = null!;
@@ -27,23 +28,22 @@ namespace NovemberProject.CameraSystem
         public float MouseMoveSpeed => _cameraMovement.MouseMoveSpeed;
         public Camera MainCamera => _mainCamera;
 
-        private void Awake()
+        [Inject]
+        private void Construct(MessageBroker messageBroker)
         {
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
             _cameraMovement = GetComponent<CameraMovement>();
             _cameraZoom = GetComponent<CameraZoom>();
         }
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _cameraZoom.SetCamera(_mainCamera);
             _initialPosition = transform.position;
-            Game.Instance.MessageBroker.Receive<NewGameMessage>()
-                .TakeUntilDisable(this)
-                .Subscribe(ResetPosition);
         }
 
-        private void ResetPosition(NewGameMessage _)
+        private void OnNewGame(NewGameMessage message)
         {
             transform.position = _initialPosition;
         }
@@ -61,13 +61,13 @@ namespace NovemberProject.CameraSystem
         {
             _mainCamera.enabled = false;
         }
-        
+
         public void TurnCameraOn()
         {
             _mainCamera.enabled = true;
         }
 
-        public Tween MoveTo(Transform cameraPosition,float cameraMoveDuration, float cameraZoom)
+        public Tween MoveTo(Transform cameraPosition, float cameraMoveDuration, float cameraZoom)
         {
             _cameraZoom.TweenZoom(cameraZoom, cameraMoveDuration);
             return transform.DOMove(cameraPosition.position, cameraMoveDuration);

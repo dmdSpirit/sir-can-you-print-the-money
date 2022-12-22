@@ -1,11 +1,13 @@
 ﻿#nullable enable
 using NovemberProject.CoreGameplay;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
@@ -15,6 +17,8 @@ namespace NovemberProject.Buildings
         private readonly ReactiveProperty<int> _producedValue = new();
 
         private FolkManager _folkManager = null!;
+        private FoodController _foodController = null!;
+        private TimeSystem _timeSystem = null!;
         private Timer? _productionTimer;
 
         private int _folkProducing;
@@ -41,16 +45,16 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ProductionTimer => _productionTimer;
         public bool ShowProducedValue => true;
         public Sprite SpriteIcon => _farmerImage;
-        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.FolkManager.FarmFolk;
+        public IReadOnlyReactiveProperty<int> ResourceCount => _folkManager.FarmFolk;
         public string ResourceTitle => _farmerTitle;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(FolkManager folkManager, FoodController foodController, TimeSystem timeSystem)
         {
-            base.OnInitialized();
-            _folkManager = Game.Instance.FolkManager;
-            _folkManager.FarmFolk
-                .TakeUntilDisable(this)
-                .Subscribe(OnFarmCountChanged);
+            _folkManager = folkManager;
+            _foodController = foodController;
+            _timeSystem = timeSystem;
+            _folkManager.FarmFolk.Subscribe(OnFarmCountChanged);
         }
 
         private void OnFarmCountChanged(int farmWorkers)
@@ -80,7 +84,7 @@ namespace NovemberProject.Buildings
             int folkCount = _folkManager.FarmFolk.Value;
             Assert.IsTrue(folkCount > 0);
             Assert.IsTrue(_productionTimer == null);
-            _productionTimer = Game.Instance.TimeSystem.CreateTimer(_productionTime, OnFoodProduced);
+            _productionTimer = _timeSystem.CreateTimer(_productionTime, OnFoodProduced);
             _folkProducing = folkCount;
             _producedValue.Value = _folkProducing * _productionPerFolk;
             _productionTimer.Start();
@@ -106,11 +110,10 @@ namespace NovemberProject.Buildings
             Assert.IsTrue(_isProducing.Value);
             Assert.IsTrue(_folkManager.FarmFolk.Value > 0);
             Assert.IsTrue(_folkProducing > 0);
-            Game.Instance.FoodController.ProduceFoodFromFarm(_productionPerFolk * _folkProducing);
+            _foodController.ProduceFoodFromFarm(_productionPerFolk * _folkProducing);
             _productionTimer = null;
             _isProducing.Value = false;
             StartProduction();
         }
-
     }
 }

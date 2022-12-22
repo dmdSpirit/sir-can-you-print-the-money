@@ -1,14 +1,20 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.CoreGameplay;
+using NovemberProject.CoreGameplay.FolkManagement;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
     public sealed class FolkFoodStorageBuilding : Building, IResourceStorage, IBuyUnit
     {
+        private FolkManager _folkManager = null!;
+        private FoodController _foodController = null!;
+        
         [SerializeField]
         private TMP_Text _foodText = null!;
 
@@ -27,20 +33,19 @@ namespace NovemberProject.Buildings
         public override BuildingType BuildingType => BuildingType.FolkFoodStorage;
         public Sprite SpriteIcon => _foodSprite;
         public string ResourceTitle => _foodTitle;
-        public IReadOnlyReactiveProperty<int> ResourceCount => Game.Instance.FoodController.FolkFood;
+        public IReadOnlyReactiveProperty<int> ResourceCount => _foodController.FolkFood;
 
-        public bool CanBuyUnit =>
-            Game.Instance.FoodController.FolkFood.Value >= Game.Instance.CoreGameplay.NewFolkForFoodCost;
+        public bool CanBuyUnit => _folkManager.IsEnoughFoodForNewFolk();
 
         public string BuyUnitTitle => _buyUnitTitle;
         public string BuyUnitButtonText => _buyUnitButtonText;
-
-        protected override void OnInitialized()
+        
+        [Inject]
+        private void Construct(FolkManager folkManager, FoodController foodController)
         {
-            base.OnInitialized();
-            Game.Instance.FoodController.FolkFood
-                .TakeUntilDisable(this)
-                .Subscribe(OnFoodChanged);
+            _folkManager = folkManager;
+            _foodController = foodController;
+            _foodController.FolkFood.Subscribe(OnFoodChanged);
         }
 
         public void BuyUnit()
@@ -49,7 +54,7 @@ namespace NovemberProject.Buildings
             {
                 return;
             }
-            Game.Instance.FolkManager.BuyFolkForFood();
+            _folkManager.BuyFolkForFood();
         }
 
         private void OnFoodChanged(int money)

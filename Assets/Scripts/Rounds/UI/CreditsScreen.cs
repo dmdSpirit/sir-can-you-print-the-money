@@ -1,26 +1,37 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
+using NovemberProject.GameStates;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class CreditsScreen : UIElement<object?>
+    public interface ICreditsScreen : IUIScreen
     {
-        [SerializeField]
-        private Button _backButton=null!;
+    }
 
-        protected override void OnInitialized()
+    public sealed class CreditsScreen : UIScreen, ICreditsScreen
+    {
+        private GameStateMachine _gameStateMachine = null!;
+
+        [SerializeField]
+        private Button _backButton = null!;
+
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
             _backButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnBackButtonClicked);
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
         }
 
@@ -30,7 +41,7 @@ namespace NovemberProject.Rounds.UI
 
         private void OnBackButtonClicked(Unit _)
         {
-            Game.Instance.GameStateMachine.MainMenu();
+            _gameStateMachine.MainMenu();
         }
     }
 }

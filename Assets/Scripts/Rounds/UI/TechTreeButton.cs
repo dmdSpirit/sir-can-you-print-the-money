@@ -5,30 +5,37 @@ using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
     public sealed class TechTreeButton : InitializableBehaviour
     {
+        private GameStateMachine _gameStateMachine = null!;
+
         [SerializeField]
         private Button _button = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
             _button.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnButton);
         }
 
         private void OnButton(Unit _)
         {
-            if (Game.Instance.GameStateMachine.CurrentState is not RoundState)
+            if (_gameStateMachine.CurrentState is not RoundState)
             {
                 return;
             }
 
-            Game.Instance.GameStateMachine.ShowTechTree();
+            _gameStateMachine.ShowTechTree();
         }
     }
 }

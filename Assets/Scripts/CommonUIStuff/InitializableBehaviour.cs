@@ -28,7 +28,6 @@ namespace NovemberProject.CommonUIStuff
         private void Initialize()
         {
             OnInitialized();
-            Game.PublishMessage(new BehaviourIsInitializedMessage(this));
         }
     }
 }

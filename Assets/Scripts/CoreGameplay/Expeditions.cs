@@ -1,56 +1,78 @@
 ﻿#nullable enable
 using NovemberProject.Buildings;
-using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;
+using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NovemberProject.CoreGameplay
 {
-    public sealed class Expeditions : InitializableBehaviour
+    public sealed class Expeditions
     {
-        private Timer? _expeditionTimer;
         private readonly ReactiveProperty<bool> _isExpeditionActive = new();
+
+        private readonly FoodController _foodController;
+        private readonly MoneyController _moneyController;
+        private readonly BuildingsController _buildingsController;
+        private readonly MessageBroker _messageBroker;
+        private readonly ExpeditionSettings _settings;
+        private readonly ArmyManager _armyManager;
+        private readonly CombatController _combatController;
+        private readonly TimeSystem _timeSystem;
+        private readonly GameStateMachine _gameStateMachine;
+        private readonly TreasureController _treasureController;
+
+        private Timer? _expeditionTimer;
         private int _explorersLeftForExpedition;
         private int _expeditionIndex;
-
-        [SerializeField]
-        private int _expeditionDuration = 20;
-
-        [SerializeField]
-        private ExpeditionData[] _expeditionDatas = null!;
 
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive => _isExpeditionActive;
         public IReadOnlyTimer? Timer => _expeditionTimer;
 
-        protected override void OnInitialized()
+        public Expeditions(ExpeditionSettings expeditionSettings, FoodController foodController,
+            MoneyController moneyController,
+            BuildingsController buildingsController,
+            ArmyManager armyManager,
+            CombatController combatController,
+            TimeSystem timeSystem,
+            GameStateMachine gameStateMachine,
+            TreasureController treasureController,
+            MessageBroker messageBroker)
         {
-            base.OnInitialized();
-            Game.Instance.MessageBroker.Receive<NewGameMessage>()
-                .TakeUntilDisable(this)
-                .Subscribe(OnNewGame);
+            _settings = expeditionSettings;
+            _foodController = foodController;
+            _moneyController = moneyController;
+            _buildingsController = buildingsController;
+            _armyManager = armyManager;
+            _combatController = combatController;
+            _timeSystem = timeSystem;
+            _gameStateMachine = gameStateMachine;
+            _treasureController = treasureController;
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
         }
 
         public float GetExpeditionWinProbability()
         {
             ExpeditionData data = GetCurrentExpeditionData();
-            return Game.Instance.CombatController.GetAttackersWinProbability(
-                Game.Instance.ArmyManager.ExplorersCount.Value,
+            return _combatController.GetAttackersWinProbability(
+                _armyManager.ExplorersCount.Value,
                 data.Defenders);
         }
 
         public ExpeditionData GetCurrentExpeditionData()
         {
-            int maxIndex = _expeditionDatas.Length - 1;
+            int maxIndex = _settings.ExpeditionDatas.Count - 1;
             if (_expeditionIndex < maxIndex)
             {
-                return _expeditionDatas[_expeditionIndex];
+                return _settings.ExpeditionDatas[_expeditionIndex];
             }
 
-            return _expeditionDatas[maxIndex];
+            return _settings.ExpeditionDatas[maxIndex];
         }
 
         private bool RollExpeditionResult()
@@ -63,12 +85,13 @@ namespace NovemberProject.CoreGameplay
         public void StartExpedition()
         {
             Assert.IsFalse(_isExpeditionActive.Value);
-            var expeditionsBuilding = Game.Instance.BuildingsController.GetBuilding<ExpeditionsBuilding>();
-            _explorersLeftForExpedition = Game.Instance.ArmyManager.ExplorersCount.Value;
+            var expeditionsBuilding = _buildingsController.GetBuilding<ExpeditionsBuilding>();
+            _explorersLeftForExpedition = _armyManager.ExplorersCount.Value;
             PayFood(expeditionsBuilding, _explorersLeftForExpedition);
             PayMoney(expeditionsBuilding, _explorersLeftForExpedition);
-            _expeditionTimer = Game.Instance.TimeSystem.CreateTimer(_expeditionDuration, OnExpeditionFinished);
+            _expeditionTimer = _timeSystem.CreateTimer(_settings.ExpeditionDuration, OnExpeditionFinished);
             _expeditionTimer.Start();
+            _armyManager.OnExpeditionStart();
             _isExpeditionActive.Value = true;
         }
 
@@ -80,8 +103,7 @@ namespace NovemberProject.CoreGameplay
                 return;
             }
 
-            FoodController foodController = Game.Instance.FoodController;
-            foodController.SpendArmyFood(foodCost);
+            _foodController.SpendArmyFood(foodCost);
         }
 
         private void PayMoney(ExpeditionsBuilding building, int explorers)
@@ -92,8 +114,7 @@ namespace NovemberProject.CoreGameplay
                 return;
             }
 
-            MoneyController moneyController = Game.Instance.MoneyController;
-            moneyController.SpedArmyMoney(moneyCost);
+            _moneyController.SpedArmyMoney(moneyCost);
         }
 
         private void OnExpeditionFinished(Timer timer)
@@ -101,13 +122,15 @@ namespace NovemberProject.CoreGameplay
             _isExpeditionActive.Value = false;
             bool isSuccess = RollExpeditionResult();
             int reward = isSuccess ? GetCurrentExpeditionData().Reward : 0;
-            var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, reward, isSuccess, GetCurrentExpeditionData().Defenders);
-            Game.Instance.GameStateMachine.ExpeditionFinished(expeditionResult);
+            var expeditionResult = new ExpeditionResult(_explorersLeftForExpedition, reward, isSuccess,
+                GetCurrentExpeditionData().Defenders);
+            _gameStateMachine.ExpeditionFinished(expeditionResult);
             if (isSuccess)
             {
-                Game.Instance.TreasureController.AddTreasures(reward);
+                _treasureController.AddTreasures(reward);
                 _expeditionIndex++;
             }
+            _armyManager.ReturnExplorersToGuard();
         }
 
         private void OnNewGame(NewGameMessage _)

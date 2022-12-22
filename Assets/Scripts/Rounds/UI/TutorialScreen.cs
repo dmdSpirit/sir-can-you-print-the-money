@@ -1,34 +1,42 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.GameStates;
 using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class TutorialScreen : UIElement<object?>
+    public interface ITutorialScreen : IUIScreen{}
+    
+    public sealed class TutorialScreen: UIScreen, ITutorialScreen
     {
+        private GameStateMachine _gameStateMachine = null!;
         private int _currentStep;
 
         [SerializeField]
         private TutorialStepScreen[] _tutorialStepScreens = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
             foreach (TutorialStepScreen tutorialStepScreen in _tutorialStepScreens)
             {
                 tutorialStepScreen.OnNext
-                    .TakeUntilDisable(this)
                     .Subscribe(OnNext);
                 tutorialStepScreen.OnPrevious?
-                    .TakeUntilDisable(this)
                     .Subscribe(OnPrevious);
             }
         }
 
-        protected override void OnShow(object? value)
+        protected override void OnShow()
         {
             _currentStep = 0;
             Assert.IsTrue(_tutorialStepScreens.Length > 0);
@@ -54,7 +62,7 @@ namespace NovemberProject.Rounds.UI
             _currentStep++;
             if (_tutorialStepScreens.Length <= _currentStep)
             {
-                Game.Instance.GameStateMachine.StartRound();
+                _gameStateMachine.StartRound();
                 return;
             }
 

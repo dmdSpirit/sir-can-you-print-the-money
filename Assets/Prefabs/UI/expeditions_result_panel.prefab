@@ -1185,6 +1185,8 @@ GameObject:
   - component: {fileID: 7499414728877672838}
   - component: {fileID: 442786992732185889}
   - component: {fileID: 2445486829187775633}
+  - component: {fileID: 7383593038091953029}
+  - component: {fileID: 8959465955716039250}
   m_Layer: 5
   m_Name: expeditions_result_panel
   m_TagString: Untagged
@@ -1268,6 +1270,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _successPanel: {fileID: 4791319765010923530}
   _failPanel: {fileID: 4985676818293928016}
+--- !u!114 &7383593038091953029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4368908787784847847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8959465955716039250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4368908787784847847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4851579264229063990
 GameObject:
   m_ObjectHideFlags: 0

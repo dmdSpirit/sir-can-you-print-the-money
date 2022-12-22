@@ -2487,6 +2487,8 @@ GameObject:
   - component: {fileID: 2812834940567911718}
   - component: {fileID: 5278060310840365441}
   - component: {fileID: 2766800341486607330}
+  - component: {fileID: 5105318027591207722}
+  - component: {fileID: 3374227261026689559}
   m_Layer: 5
   m_Name: tech_tree_panel
   m_TagString: Untagged
@@ -2589,6 +2591,30 @@ MonoBehaviour:
   _toInventMultipleTrophyText: Invent for [value] trophies
   _toInventSingleTrophyText: Invent for 1 trophy
   _inventedText: Invented
+--- !u!114 &5105318027591207722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339273338223519047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3374227261026689559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339273338223519047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8340914069496171754
 GameObject:
   m_ObjectHideFlags: 0

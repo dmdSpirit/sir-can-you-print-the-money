@@ -1,12 +1,15 @@
 #nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.System.Messages;
 using UniRx;
 
 namespace NovemberProject.TechTree
 {
-    public class TechController : InitializableBehaviour
+    public class TechController
     {
+        private readonly MessageBroker _messageBroker;
+
         private readonly Subject<Unit> _onTechUnlocked = new();
         private readonly ReactiveProperty<bool> _canRaiseSalary = new();
         private readonly ReactiveProperty<bool> _canLowerSalary = new();
@@ -27,7 +30,13 @@ namespace NovemberProject.TechTree
         public IReadOnlyReactiveProperty<bool> CanBuildArena => _canBuildArena;
         public IObservable<Unit> OnTechUnlocked => _onTechUnlocked;
 
-        public void InitializeGameData()
+        public TechController(MessageBroker messageBroker)
+        {
+            _messageBroker = messageBroker;
+            _messageBroker.Receive<NewGameMessage>().Subscribe(OnNewGame);
+        }
+
+        private void OnNewGame(NewGameMessage message)
         {
             _canRaiseSalary.Value = false;
             _canLowerSalary.Value = false;

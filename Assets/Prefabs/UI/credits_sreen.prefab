@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8759835409117024303}
   - component: {fileID: 8554164451542978558}
   - component: {fileID: 1872352707640030680}
+  - component: {fileID: 4024370221081843791}
+  - component: {fileID: 3102155466254046229}
   m_Layer: 5
   m_Name: credits_sreen
   m_TagString: Untagged
@@ -91,6 +93,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backButton: {fileID: 4693062798982416151}
+--- !u!114 &4024370221081843791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688207083378770916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3102155466254046229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688207083378770916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2742072761551149962
 GameObject:
   m_ObjectHideFlags: 0

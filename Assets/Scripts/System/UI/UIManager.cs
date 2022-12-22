@@ -1,71 +1,18 @@
 ﻿#nullable enable
-using NovemberProject.Buildings;
-using NovemberProject.Buildings.UI;
-using NovemberProject.Cheats;
+using System.Collections.Generic;
+using System.Linq;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay;
-using NovemberProject.GameStates;
-using NovemberProject.GameStates.UI;
-using NovemberProject.Rounds.UI;
-using NovemberProject.Time.UI;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace NovemberProject.System.UI
 {
     [RequireComponent(typeof(MouseOverObserver))]
-    public sealed class UIManager : InitializableBehaviour
+    public sealed class UIManager : MonoBehaviour
     {
+        private readonly List<IUIScreen> _screens = new();
+
         private MouseOverObserver _mouseOverObserver = null!;
-
-        [SerializeField]
-        private MainMenu _mainMenu = null!;
-
-        [SerializeField]
-        private RoundTimer _roundTimer = null!;
-
-        [SerializeField]
-        private RoundEndPanel _roundEndPanel = null!;
-
-        [SerializeField]
-        private BuildingInfoPanel _buildingInfoPanel = null!;
-
-        [SerializeField]
-        private RoundStartPanel _roundStartPanel = null!;
-
-        [SerializeField]
-        private CheatMenu _cheatMenu = null!;
-
-        [SerializeField]
-        private SystemInfoPanel _systemInfoPanel = null!;
-
-        [SerializeField]
-        private TimeControlsPanel _timeControlsPanel = null!;
-
-        [SerializeField]
-        private GameOverPanel _gameOverPanel = null!;
-
-        [SerializeField]
-        private TechTreeScreen _techTreeScreen = null!;
-
-        [SerializeField]
-        private ExpeditionResultsPanel _expeditionResultsPanel = null!;
-
-        [SerializeField]
-        private VictoryScreen _victoryScreen = null!;
-
-        [SerializeField]
-        private CreditsScreen _creditsScreen = null!;
-
-        [SerializeField]
-        private TutorialScreen _tutorialScreen = null!;
-
-        [SerializeField]
-        private AttackResultsPanel _attackResultsPanel = null!;
-
-        [SerializeField]
-        private NotificationsPanel _notificationsPanel = null!;
 
         [SerializeField]
         private LayerMask _layerMask;
@@ -78,122 +25,20 @@ namespace NovemberProject.System.UI
             _mouseOverObserver = GetComponent<MouseOverObserver>();
         }
 
-        public void ShowMainMenu()
+        public void Register(IUIScreen screen)
         {
-            Assert.IsTrue(!_mainMenu.IsShown);
-            _mainMenu.Show(null);
+            _screens.Add(screen);
+            screen.Hide();
         }
 
-        public void HideMainMenu()
-        {
-            Assert.IsTrue(_mainMenu.IsShown || _mainMenu.gameObject.activeInHierarchy);
-            _mainMenu.Hide();
-        }
+        public T GetScreen<T>() where T : IUIScreen => (T)_screens.First(screen => screen is T);
 
-        public void ShowRoundTimer() => _roundTimer.Show(null);
-        public void HideRoundTimer() => _roundTimer.Hide();
-        public void LockTimeControls() => _timeControlsPanel.Lock();
-        public void UnlockTimeControls() => _timeControlsPanel.Unlock();
-        public void ShowTimeControls() => _timeControlsPanel.Show(null);
-        public void HideTimeControls() => _timeControlsPanel.Hide();
-        public void ShowRoundEndPanel(RoundResult roundResult) => _roundEndPanel.Show(roundResult);
-        public void HideEndOfRoundPanel() => _roundEndPanel.Hide();
-
-        public void ShowBuildingInfo(Building building)
+        public void HideAll()
         {
-            if (_buildingInfoPanel.IsShown && _buildingInfoPanel.Building == building)
+            foreach (IUIScreen uiScreen in _screens)
             {
-                return;
+                uiScreen.Hide();
             }
-
-            _buildingInfoPanel.Show(building);
-        }
-
-        public void HideBuildingInfo()
-        {
-            _buildingInfoPanel.Hide();
-        }
-
-        public void ToggleSystemInfoPanel()
-        {
-            if (_systemInfoPanel.IsShown)
-            {
-                _systemInfoPanel.Hide();
-            }
-            else
-            {
-                _systemInfoPanel.Show(null);
-            }
-        }
-
-        public void ToggleCheatMenu()
-        {
-            if (_cheatMenu.IsShown)
-            {
-                _cheatMenu.Hide();
-            }
-            else
-            {
-                _cheatMenu.Show(null);
-            }
-        }
-
-        public void ShowSystemInfoPanel() => _systemInfoPanel.Show(null);
-        public void HideCheatPanel() => _cheatMenu.Hide();
-        public void HideSystemInfoPanel() => _systemInfoPanel.Hide();
-        public void ShowRoundStartPanel() => _roundStartPanel.Show(null);
-        public void HideRoundStartPanel() => _roundStartPanel.Hide();
-        public void ShowGameOverPanel(GameOverType gameOverType) => _gameOverPanel.Show(gameOverType);
-        public void HideGameOverPanel() => _gameOverPanel.Hide();
-
-        public void HideTechTreeScreen()
-        {
-            _techTreeScreen.Hide();
-        }
-
-        public void ShowTechTreeScreen()
-        {
-            _techTreeScreen.Show(null);
-        }
-
-        public void ShowExpeditionResult(ExpeditionResult expeditionResult)
-        {
-            _expeditionResultsPanel.Show(expeditionResult);
-        }
-
-        public void HideExpeditionResult()
-        {
-            _expeditionResultsPanel.Hide();
-        }
-
-        public void ShowVictoryScreen()
-        {
-            _victoryScreen.Show(null);
-        }
-
-        public void ShowCreditsScreen()
-        {
-            _creditsScreen.Show(null);
-        }
-
-        public void HideVictoryScreen() => _victoryScreen.Hide();
-        public void HideCreditsScreen() => _creditsScreen.Hide();
-        public void ShowTutorialScreen() => _tutorialScreen.Show(null);
-        public void HideTutorialScreen() => _tutorialScreen.Hide();
-        public void ShowAttackResultsPanel(AttackData attackData) => _attackResultsPanel.Show(attackData);
-        public void HideAttackResultsPanel() => _attackResultsPanel.Hide();
-        public void HideNotificationsPanel() => _notificationsPanel.Hide();
-
-        public void ShowNotification(NotificationType notificationType, int count)
-        {
-            if (!_notificationsPanel.IsShown)
-            {
-                _notificationsPanel.Show(null);
-            }
-
-            _notificationsPanel.ShowNotification(notificationType, count);
         }
     }
 }
-
-// TODO (Stas): #idea Would be great to have Show<UIElement> Hide<UIElement> methods.

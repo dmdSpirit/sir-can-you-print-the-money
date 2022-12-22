@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2419887450840819445}
   - component: {fileID: 6260682208395551279}
   - component: {fileID: 5186846807858281982}
+  - component: {fileID: 5313785564691126225}
+  - component: {fileID: 6919747450533003350}
   m_Layer: 5
   m_Name: cheat_menu
   m_TagString: Untagged
@@ -131,3 +133,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &5313785564691126225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3694258986459832445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6919747450533003350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3694258986459832445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,14 +1,12 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using NovemberProject.CommonUIStuff;
 using UniRx;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NovemberProject.Time
 {
-    public sealed class TimeSystem : InitializableBehaviour
+    public sealed class TimeSystem
     {
         private const float DEFAULT_TIME_SCALE = 1f;
         private const float PAUSED_TIME_SCALE = 0f;
@@ -20,26 +18,24 @@ namespace NovemberProject.Time
         private readonly ReactiveProperty<TimeSystemStatus> _status = new();
         private readonly Subject<float> _onUpdate = new();
 
-        private TimeSystemStatus _statusBeforePause;
+        private readonly TimeSystemSettings _settings;
 
-        [SerializeField]
-        private float _speedUpScale = 8f;
+        private TimeSystemStatus _statusBeforePause;
 
         public IReadOnlyReactiveProperty<float> TimeScale => _timeScale;
         public IReadOnlyReactiveProperty<TimeSystemStatus> Status => _status;
         public IObservable<float> OnUpdate => _onUpdate;
 
-        protected override void OnInitialized()
+        public TimeSystem(TimeSystemSettings timeSystemSettings)
         {
-            base.OnInitialized();
-
+            _settings = timeSystemSettings;
             PauseTime();
         }
 
-        private void Update()
+        public void Update(float deltaTime)
         {
-            AddProgressToTimers(_unscaledTimers.ToArray(), UnityEngine.Time.deltaTime);
-            float deltaTime = UnityEngine.Time.deltaTime * _timeScale.Value;
+            AddProgressToTimers(_unscaledTimers.ToArray(), deltaTime);
+            deltaTime *= _timeScale.Value;
             if (deltaTime == 0)
             {
                 return;
@@ -48,11 +44,6 @@ namespace NovemberProject.Time
             AddProgressToTimers(_timers.ToArray(), deltaTime);
 
             _onUpdate.OnNext(deltaTime);
-        }
-
-        private void OnDestroy()
-        {
-            _timerSubs.Dispose();
         }
 
         public void ResetTimers()
@@ -91,7 +82,7 @@ namespace NovemberProject.Time
 
         public void SpeedUp()
         {
-            _timeScale.Value = _speedUpScale;
+            _timeScale.Value = _settings.SpeedUpScale;
             _status.Value = TimeSystemStatus.SpedUp;
         }
 

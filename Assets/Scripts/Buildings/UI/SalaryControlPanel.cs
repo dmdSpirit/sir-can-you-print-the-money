@@ -1,16 +1,21 @@
 ﻿#nullable enable
+using System;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
     public sealed class SalaryControlPanel : UIElement<ISalaryController>
     {
         private readonly CompositeDisposable _sub = new();
+
+        private ArmyManager _armyManager = null!;
         private ISalaryController _salaryController = null!;
 
         [SerializeField]
@@ -37,14 +42,17 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private TMP_Text _salary = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(ArmyManager armyManager)
         {
-            base.OnInitialized();
+            _armyManager = armyManager;
+        }
+
+        private void Start()
+        {
             _raiseButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnRaise);
             _lowerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(OnLower);
         }
 
@@ -54,7 +62,7 @@ namespace NovemberProject.Buildings.UI
             _salaryController = salaryController;
             _salaryController.CanLowerSalary.Subscribe(UpdateLowerButtonState).AddTo(_sub);
             _salaryController.CanRaiseSalary.Subscribe(UpdateRaiseButtonState).AddTo(_sub);
-            Game.Instance.ArmyManager.Salary.Subscribe(OnSalaryChanged).AddTo(_sub);
+            _armyManager.Salary.Subscribe(OnSalaryChanged).AddTo(_sub);
         }
 
         protected override void OnHide()

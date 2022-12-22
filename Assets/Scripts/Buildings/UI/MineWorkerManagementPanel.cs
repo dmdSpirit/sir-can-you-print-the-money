@@ -27,14 +27,11 @@ namespace NovemberProject.Buildings.UI
         [SerializeField]
         private GameObject _notLearnedPanel = null!;
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _addWorkerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(AddWorkerHandler);
             _removeWorkerButton.OnClickAsObservable()
-                .TakeUntilDisable(this)
                 .Subscribe(RemoveWorkerHandler);
         }
 

@@ -1,11 +1,10 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using NovemberProject.CommonUIStuff;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class BuildingsController : InitializableBehaviour
+    public sealed class BuildingsController
     {
         private readonly Dictionary<BuildingType, Building> _buildings = new();
 

@@ -1,19 +1,25 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
+using NovemberProject.Buildings.UI;
+using NovemberProject.System.UI;
 using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public class BuildingSelector : InitializableBehaviour
+    public class BuildingSelector
     {
+        private readonly BuildingSelectorSettings _settings;
+        private readonly UIManager _uiManager;
+
         private Building? _selectedBuilding;
         private bool _isSelected;
 
-        [SerializeField]
-        private LayerMask _layerMask;
-
-        public LayerMask LayerMask => _layerMask;
+        public LayerMask LayerMask => _settings.BuildingLayerMask;
+        
+        public BuildingSelector(BuildingSelectorSettings buildingSelectorSettings, UIManager uiManager)
+        {
+            _settings = buildingSelectorSettings;
+            _uiManager = uiManager;
+        }
 
         public void Select(Building building)
         {
@@ -26,6 +32,7 @@ namespace NovemberProject.Buildings
             {
                 previousSelectable.Unselect();
             }
+
             _selectedBuilding = building;
             _isSelected = true;
             if (building is ISelectable selectable)
@@ -33,7 +40,9 @@ namespace NovemberProject.Buildings
                 selectable.Select();
             }
 
-            Game.Instance.UIManager.ShowBuildingInfo(building);
+            var buildingInfoPanel = _uiManager.GetScreen<IBuildingInfoPanel>();
+            buildingInfoPanel.SetBuilding(building);
+            buildingInfoPanel.Show();
         }
 
         public void Unselect()
@@ -50,7 +59,8 @@ namespace NovemberProject.Buildings
 
             _selectedBuilding = null;
             _isSelected = false;
-            Game.Instance.UIManager.HideBuildingInfo();
+            var buildingInfoPanel = _uiManager.GetScreen<IBuildingInfoPanel>();
+            buildingInfoPanel.Hide();
         }
     }
 }

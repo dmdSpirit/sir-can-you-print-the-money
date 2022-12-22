@@ -1559,6 +1559,8 @@ GameObject:
   - component: {fileID: 2758994925076998445}
   - component: {fileID: 5224095161141740938}
   - component: {fileID: 2455771272588580322}
+  - component: {fileID: 3828988772823054787}
+  - component: {fileID: 8082238591891374792}
   m_Layer: 5
   m_Name: round panel
   m_TagString: Untagged
@@ -1648,6 +1650,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roundNumber: {fileID: 8874303432684967205}
   _timerProgressBar: {fileID: 9023509520384599061}
+--- !u!114 &3828988772823054787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8285451060948529484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8082238591891374792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8285451060948529484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8555916697924432906
 GameObject:
   m_ObjectHideFlags: 0

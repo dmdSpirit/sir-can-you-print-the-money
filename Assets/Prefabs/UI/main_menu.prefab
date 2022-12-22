@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 9058546926721417523}
   - component: {fileID: 8255446336600448738}
   - component: {fileID: 9062748723340732704}
+  - component: {fileID: 6136107591646485191}
+  - component: {fileID: 4792050822105573377}
   m_Layer: 5
   m_Name: main_menu
   m_TagString: Untagged
@@ -94,6 +96,30 @@ MonoBehaviour:
   _credits: {fileID: 5044279191556664231}
   _exitGame: {fileID: 2530858295999301965}
   _continue: {fileID: 3685031605215157687}
+--- !u!114 &6136107591646485191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390192741378937592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4792050822105573377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390192741378937592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2461937570211629718
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,21 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.CoreGameplay;
-using NovemberProject.System;
-using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.GameStates.UI
 {
-    public sealed class ExpeditionResultsPanel : UIElement<ExpeditionResult>
+    public interface IExpeditionResultsPanel : IUIScreen
     {
-        private ExpeditionResult _expeditionResult;
+        public void SetExpeditionResult(ExpeditionResult expeditionResult);
+    }
+
+    public sealed class ExpeditionResultsPanel : UIScreen, IExpeditionResultsPanel
+    {
+        private GameStateMachine _gameStateMachine = null!;
+        private ExpeditionResult? _expeditionResult;
 
         [SerializeField]
         private ExpeditionResultPanel _successPanel = null!;
@@ -19,30 +23,43 @@ namespace NovemberProject.GameStates.UI
         [SerializeField]
         private ExpeditionResultPanel _failPanel = null!;
 
-        protected override void OnInitialized()
+        [Inject]
+        private void Construct(GameStateMachine gameStateMachine)
         {
-            base.OnInitialized();
+            _gameStateMachine = gameStateMachine;
+        }
+
+        private void Start()
+        {
             _successPanel.OnClose
-                .TakeUntilDisable(this)
                 .Subscribe(OnCloseClicked);
             _failPanel.OnClose
-                .TakeUntilDisable(this)
                 .Subscribe(OnCloseClicked);
         }
 
-        protected override void OnShow(ExpeditionResult expeditionResult)
+        protected override void OnShow()
         {
-            _expeditionResult = expeditionResult;
-            if (_expeditionResult.IsSuccess)
+            if (_expeditionResult == null)
             {
-                _successPanel.Show(expeditionResult);
+                Debug.LogError($"{nameof(_expeditionResult)} should be set before showing {nameof(ExpeditionResultPanel)}.");
+                return;
+            }
+
+            if (_expeditionResult.Value.IsSuccess)
+            {
+                _successPanel.Show(_expeditionResult.Value);
                 _failPanel.Hide();
             }
             else
             {
-                _failPanel.Show(expeditionResult);
+                _failPanel.Show(_expeditionResult.Value);
                 _successPanel.Hide();
             }
+        }
+        
+        public void SetExpeditionResult(ExpeditionResult expeditionResult)
+        {
+            _expeditionResult = expeditionResult;
         }
 
         protected override void OnHide()
@@ -53,7 +70,7 @@ namespace NovemberProject.GameStates.UI
 
         private void OnCloseClicked(Unit _)
         {
-            Game.Instance.GameStateMachine.ExpeditionFinishedExit();
+            _gameStateMachine.ExpeditionFinishedExit();
         }
     }
 }

@@ -346,6 +346,8 @@ GameObject:
   - component: {fileID: 9166510004120777789}
   - component: {fileID: 1226001449294485658}
   - component: {fileID: 1185432804139502272}
+  - component: {fileID: 4855667029821741750}
+  - component: {fileID: 5668799080952333552}
   m_Layer: 5
   m_Name: round_start_panel
   m_TagString: Untagged
@@ -434,6 +436,30 @@ MonoBehaviour:
   _image: {fileID: 4881278125416212195}
   _nextRound: {fileID: 3154317004862507537}
   _roundStartConfigs: {fileID: 11400000, guid: 1d299d9488478f04584ff58a2ae471c8, type: 2}
+--- !u!114 &4855667029821741750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136689911680691292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21afe3c20973405a89cb2ca698d5f151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5668799080952333552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136689911680691292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab910557ac574a8891dded5540212371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4381592388432206313
 GameObject:
   m_ObjectHideFlags: 0

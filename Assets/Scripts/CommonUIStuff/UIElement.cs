@@ -1,10 +1,11 @@
 ﻿#nullable enable
 using System;
 using UniRx;
+using UnityEngine;
 
 namespace NovemberProject.CommonUIStuff
 {
-    public abstract class UIElement<T> : InitializableBehaviour
+    public abstract class UIElement<T> : MonoBehaviour
     {
         private readonly Subject<UIElement<T>> _onShown = new();
         private readonly Subject<UIElement<T>> _onHidden = new();

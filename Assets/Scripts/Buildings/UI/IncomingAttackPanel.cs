@@ -1,15 +1,19 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.System;
+using NovemberProject.Time;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
     public sealed class IncomingAttackPanel : UIElement<IIncomingAttack>
     {
         private readonly CompositeDisposable _sub = new();
+
+        private TimeSystem _timeSystem = null!;
         private IIncomingAttack _incomingAttack = null!;
 
         [SerializeField]
@@ -20,6 +24,12 @@ namespace NovemberProject.Buildings.UI
 
         [SerializeField]
         private TMP_Text _timeLeft = null!;
+
+        [Inject]
+        private void Construct(TimeSystem timeSystem)
+        {
+            _timeSystem = timeSystem;
+        }
 
         protected override void OnShow(IIncomingAttack incomingAttack)
         {
@@ -42,7 +52,7 @@ namespace NovemberProject.Buildings.UI
                 return;
             }
 
-            _timeLeft.text = Game.Instance.TimeSystem.EstimateSecondsLeftUnscaled(_incomingAttack.AttackTimer) + "s";
+            _timeLeft.text = _timeSystem.EstimateSecondsLeftUnscaled(_incomingAttack.AttackTimer) + "s";
         }
 
         private void UpdateInfo()
