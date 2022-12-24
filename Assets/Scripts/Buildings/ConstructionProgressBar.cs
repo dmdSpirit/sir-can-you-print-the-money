@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class ConstructionProgressBar : InitializableBehaviour
+    public sealed class ConstructionProgressBar : MonoBehaviour
     {
         private IDisposable? _productionSub;
         private bool _isProgressShown;
@@ -23,13 +23,11 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private Building _building = null!;
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _constructableBuilding = (IConstructableBuilding)_building;
             _progressBar.SetActive(false);
             _constructableBuilding.ConstructableState
-                .TakeUntilDisable(this)
                 .Subscribe(OnConstructableStateChanged);
         }
 

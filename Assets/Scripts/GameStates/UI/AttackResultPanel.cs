@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using TMPro;
 using UniRx;
 using UnityEngine;

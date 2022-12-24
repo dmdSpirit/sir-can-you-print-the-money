@@ -15,18 +15,20 @@ namespace NovemberProject.Input
         private readonly CameraController _cameraController;
         private readonly BuildingNameHover _buildingNameHover;
         private readonly BuildingSelector _buildingSelector;
+        private readonly UIManager _uiManager;
 
         public MouseSelectionHandler(CameraController cameraController, BuildingNameHover buildingNameHover,
-            BuildingSelector buildingSelector)
+            BuildingSelector buildingSelector, UIManager uiManager)
         {
             _cameraController = cameraController;
             _buildingNameHover = buildingNameHover;
             _buildingSelector = buildingSelector;
+            _uiManager = uiManager;
         }
 
         public override void HandleInput()
         {
-            if (Game.Instance.UIManager.IsMouseOver.Value)
+            if (_uiManager.IsMouseOver.Value)
             {
                 if (_buildingNameHover.IsShowing)
                 {
@@ -42,8 +44,7 @@ namespace NovemberProject.Input
         private void RaycastBuildingSelection()
         {
             Ray ray = _cameraController.MainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
-            UIManager uiManager = Game.Instance.UIManager;
-            LayerMask layerMask = _buildingSelector.LayerMask | uiManager.LayerMask;
+            LayerMask layerMask = _buildingSelector.LayerMask | _uiManager.LayerMask;
             if (Physics.Raycast(ray, out RaycastHit hit, RAYCAST_MAX_DISTANCE, layerMask: layerMask))
             {
                 GameObject hitObject = hit.transform.gameObject;

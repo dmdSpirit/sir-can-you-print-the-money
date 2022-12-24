@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.ClicheSpeech.UI;
-using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
@@ -12,6 +11,7 @@ namespace NovemberProject.ClicheSpeech
     public sealed class ShowClicheBubble : MonoBehaviour
     {
         private TimeSystem _timeSystem = null!;
+        private ClicheBible _clicheBible = null!;
         private bool _isShown;
         private readonly Subject<Unit> _onHidden = new();
         private Timer? _displayTimer;
@@ -25,15 +25,15 @@ namespace NovemberProject.ClicheSpeech
         public IObservable<Unit> OnHidden => _onHidden;
 
         [Inject]
-        private void Construct(TimeSystem timeSystem)
+        private void Construct(TimeSystem timeSystem, ClicheBible clicheBible)
         {
             _timeSystem = timeSystem;
+            _clicheBible = clicheBible;
         }
 
         public void ShowBubble()
         {
-            ClicheBible clicheBible = Game.Instance.ClicheBible;
-            string text = clicheBible.GetCliche();
+            string text = _clicheBible.GetCliche();
             _displayTimer?.Cancel();
 
             _speechBubble.Show(text);

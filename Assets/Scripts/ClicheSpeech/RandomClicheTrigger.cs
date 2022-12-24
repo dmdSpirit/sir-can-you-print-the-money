@@ -1,6 +1,4 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
@@ -8,7 +6,7 @@ using Zenject;
 
 namespace NovemberProject.ClicheSpeech
 {
-    public sealed class RandomClicheTrigger : InitializableBehaviour
+    public sealed class RandomClicheTrigger : MonoBehaviour
     {
         private TimeSystem _timeSystem = null!;
         private Timer? _timer;

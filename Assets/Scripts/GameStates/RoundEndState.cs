@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using NovemberProject.Core;
 using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
 using NovemberProject.Rounds.UI;
@@ -18,13 +19,13 @@ namespace NovemberProject.GameStates
         private readonly RoundSystem _roundSystem;
         private readonly UIManager _uiManager;
         private readonly ResourceMoveEffectSpawner _resourceMoveEffectSpawner;
-        private readonly CoreGameplay.CoreGameplay _coreGameplay;
+        private readonly CoreGameplay _coreGameplay;
 
         private IDisposable? _sub;
         private IRoundEndPanel _roundEndPanel = null!;
 
         public RoundEndState(GameStateMachine gameStateMachine, TimeSystem timeSystem, RoundSystem roundSystem,
-            UIManager uiManager, ResourceMoveEffectSpawner resourceMoveEffectSpawner, CoreGameplay.CoreGameplay coreGameplay)
+            UIManager uiManager, ResourceMoveEffectSpawner resourceMoveEffectSpawner, CoreGameplay coreGameplay)
         {
             _gameStateMachine = gameStateMachine;
             _timeSystem = timeSystem;

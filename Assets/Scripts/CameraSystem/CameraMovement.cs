@@ -1,10 +1,9 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
 namespace NovemberProject.CameraSystem
 {
-    public sealed class CameraMovement : InitializableBehaviour
+    public sealed class CameraMovement : MonoBehaviour
     {
         private Vector2 _direction;
         private bool _areBoundsSet;

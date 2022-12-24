@@ -2,7 +2,7 @@
 using System;
 using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.Input;
 using NovemberProject.MovingResources;
 using NovemberProject.Rounds;
@@ -37,7 +37,7 @@ namespace NovemberProject.GameStates
         private readonly UIManager _uiManager;
         private readonly BuildingSelector _buildingSelector;
         private readonly BuildingNameHover _buildingNameHover;
-        private readonly CoreGameplay.CoreGameplay _coreGameplay;
+        private readonly CoreGameplay _coreGameplay;
         private readonly ResourceMoveEffectSpawner _resourceMoveEffectSpawner;
 
         private ExpeditionFinishedState? _expeditionFinishedState;
@@ -52,7 +52,7 @@ namespace NovemberProject.GameStates
             UIManager uiManager,
             BuildingSelector buildingSelector,
             BuildingNameHover buildingNameHover,
-            CoreGameplay.CoreGameplay coreGameplay,
+            CoreGameplay coreGameplay,
             ResourceMoveEffectSpawner resourceMoveEffectSpawner,
             MessageBroker messageBroker)
         {
@@ -72,16 +72,16 @@ namespace NovemberProject.GameStates
             _newGameState = new NewGameState(this, _timeSystem, _cameraController, _messageBroker);
             _roundState = new RoundState(_timeSystem, _roundSystem, _uiManager, _coreGameplay, _buildingSelector,
                 buildingNameHover);
-            _roundState.AddInputHandler(_inputSystem.GetMoveCameraHandler(_cameraController));
+            _roundState.AddInputHandler(_inputSystem.GetMoveCameraHandler(_cameraController, _uiManager));
             _roundState.AddInputHandler(_inputSystem.GetTimeControlsHandler(_timeSystem));
             _roundState.AddInputHandler(
-                _inputSystem.GetMouseSelectionHandler(_cameraController, _buildingNameHover, _buildingSelector));
+                _inputSystem.GetMouseSelectionHandler(_cameraController, _buildingNameHover, _buildingSelector, _uiManager));
             _roundEndState = new RoundEndState(this, _timeSystem, _roundSystem, _uiManager, _resourceMoveEffectSpawner,
                 _coreGameplay);
             _initializeGameState =
                 new InitializeGameState(_inputSystem, this, _timeSystem, _uiManager, _buildingNameHover);
             _roundStartState = new RoundStartState(_roundSystem, _uiManager);
-            _gameOverState = new GameOverState(_uiManager);
+            _gameOverState = new GameOverState(_uiManager, _coreGameplay);
             _victoryState = new VictoryState(_timeSystem, _uiManager, _buildingSelector);
             _creditsScreenState = new CreditsScreenState(_uiManager);
             _tutorialState = new TutorialState(_uiManager);

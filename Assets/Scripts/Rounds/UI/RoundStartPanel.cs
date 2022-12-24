@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.GameStates;
 using TMPro;
 using UniRx;

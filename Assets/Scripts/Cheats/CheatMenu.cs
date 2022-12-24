@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.Treasures;
@@ -11,8 +11,10 @@ using Zenject;
 
 namespace NovemberProject.Cheats
 {
-    public interface ICheatMenu : IUIScreen{}
-    
+    public interface ICheatMenu : IUIScreen
+    {
+    }
+
     [RequireComponent(typeof(ContentSizeFitter))]
     public sealed class CheatMenu : UIScreen, ICheatMenu
     {
@@ -40,10 +42,7 @@ namespace NovemberProject.Cheats
             _gameStateMachine = gameStateMachine;
             _stoneController = stoneController;
             _treasureController = treasureController;
-        }
 
-        private void Start()
-        {
             ClearOldButtons();
             PrepareButtonsList();
             GenerateButtons();

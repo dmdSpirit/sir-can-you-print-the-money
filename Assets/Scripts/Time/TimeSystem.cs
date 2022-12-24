@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine.Assertions;
+using Zenject;
 
 namespace NovemberProject.Time
 {
-    public sealed class TimeSystem
+    public sealed class TimeSystem : ITickable
     {
         private const float DEFAULT_TIME_SCALE = 1f;
         private const float PAUSED_TIME_SCALE = 0f;
@@ -30,20 +31,6 @@ namespace NovemberProject.Time
         {
             _settings = timeSystemSettings;
             PauseTime();
-        }
-
-        public void Update(float deltaTime)
-        {
-            AddProgressToTimers(_unscaledTimers.ToArray(), deltaTime);
-            deltaTime *= _timeScale.Value;
-            if (deltaTime == 0)
-            {
-                return;
-            }
-
-            AddProgressToTimers(_timers.ToArray(), deltaTime);
-
-            _onUpdate.OnNext(deltaTime);
         }
 
         public void ResetTimers()
@@ -184,6 +171,21 @@ namespace NovemberProject.Time
             {
                 _unscaledTimers.Remove(timer);
             }
+        }
+
+        public void Tick()
+        {
+            float deltaTime = UnityEngine.Time.deltaTime;
+            AddProgressToTimers(_unscaledTimers.ToArray(), deltaTime);
+            deltaTime *= _timeScale.Value;
+            if (deltaTime == 0)
+            {
+                return;
+            }
+
+            AddProgressToTimers(_timers.ToArray(), deltaTime);
+
+            _onUpdate.OnNext(deltaTime);
         }
     }
 }

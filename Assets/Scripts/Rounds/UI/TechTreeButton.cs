@@ -1,7 +1,5 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
 using NovemberProject.GameStates;
-using NovemberProject.System;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +7,7 @@ using Zenject;
 
 namespace NovemberProject.Rounds.UI
 {
-    public sealed class TechTreeButton : InitializableBehaviour
+    public sealed class TechTreeButton : MonoBehaviour
     {
         private GameStateMachine _gameStateMachine = null!;
 

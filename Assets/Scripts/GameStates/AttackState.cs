@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.Buildings;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.GameStates.UI;
 using NovemberProject.System.UI;
 using NovemberProject.Time;

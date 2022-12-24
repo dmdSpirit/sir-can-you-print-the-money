@@ -1,12 +1,11 @@
 ﻿#nullable enable
 using System.Linq;
-using NovemberProject.CommonUIStuff;
 using UnityEngine;
 using Zenject;
 
 namespace NovemberProject.CameraSystem
 {
-    public sealed class CameraBounds : InitializableBehaviour
+    public sealed class CameraBounds : MonoBehaviour
     {
         private const int VALID_NUMBER_OF_BOUNDS = 4;
         private CameraController _cameraController = null!;

@@ -3,40 +3,34 @@ using System;
 using System.Collections.Generic;
 using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
-using NovemberProject.CommonUIStuff;
 using NovemberProject.System.UI;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Input
 {
-    public sealed class InputSystem : InitializableBehaviour
+    public sealed class InputSystem : ITickable
     {
         private readonly InputHandlersFactory _inputHandlersFactory = new();
         private readonly List<InputHandler> _globalInputHandlers = new();
         private readonly Subject<Unit> _onHandleInput = new();
 
-        private bool _isActive;
-
         public IObservable<Unit> OnHandleInput => _onHandleInput;
-
-        private void Start()
-        {
-            _isActive = true;
-        }
 
         public T GetInputHandler<T>() where T : InputHandler, new() => _inputHandlersFactory.GetInputHandler<T>();
 
         public TimeControlsHandler GetTimeControlsHandler(TimeSystem timeSystem) =>
             _inputHandlersFactory.GetTimeControlsHandler(timeSystem);
 
-        public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController) =>
-            _inputHandlersFactory.GetMoveCameraHandler(cameraController);
+        public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController, UIManager uiManager) =>
+            _inputHandlersFactory.GetMoveCameraHandler(cameraController, uiManager);
 
         public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController,
-            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector) =>
-            _inputHandlersFactory.GetMouseSelectionHandler(cameraController, buildingNameHover, buildingSelector);
+            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector, UIManager uiManager) =>
+            _inputHandlersFactory.GetMouseSelectionHandler(cameraController, buildingNameHover, buildingSelector,
+                uiManager);
 
         private ToggleCheatMenuInputHandler GetToggleCheatMenuInputHandler(UIManager uiManager) =>
             _inputHandlersFactory.GetToggleCheatMenuInputHandler(uiManager);
@@ -90,13 +84,8 @@ namespace NovemberProject.Input
             _globalInputHandlers.Add(handler);
         }
 
-        private void Update()
+        public void Tick()
         {
-            if (!_isActive)
-            {
-                return;
-            }
-
             foreach (InputHandler globalInputHandler in _globalInputHandlers)
             {
                 globalInputHandler.HandleInput();

@@ -8,14 +8,16 @@ namespace NovemberProject.ClicheSpeech
 {
     public sealed class ClicheBible
     {
+        private const string CLICHE_BIBLE_FILE = "cliche_bible";
+
         private readonly string[] _cliches;
 
-        public ClicheBible(string clicheBibleFile)
+        public ClicheBible()
         {
-            var asset = Resources.Load<TextAsset>(clicheBibleFile);
+            var asset = Resources.Load<TextAsset>(CLICHE_BIBLE_FILE);
             if (asset == null)
             {
-                throw new FileLoadException($"Could not load resource file {clicheBibleFile}");
+                throw new FileLoadException($"Could not load resource file {CLICHE_BIBLE_FILE}");
             }
 
             _cliches = asset.text.Split(Environment.NewLine);

@@ -1,42 +1,32 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using DG.Tweening;
-using NovemberProject.CommonUIStuff;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using Zenject;
+using Object = UnityEngine.Object;
 
 namespace NovemberProject.MovingResources
 {
-    public sealed class ResourceMoveEffectSpawner : InitializableBehaviour
+    public sealed class ResourceMoveEffectSpawner
     {
         private readonly List<MoveEffect> _moveEffects = new();
         private readonly Subject<Unit> _onEffectsFinished = new();
 
-        private TimeSystem _timeSystem = null!;
-
-        [SerializeField]
-        private ResourceObjectFactory _resourceObjectFactory = null!;
-
-        [SerializeField]
-        private float _height;
-
-        [SerializeField]
-        private float _moveDuration = .75f;
-
-        [SerializeField]
-        private Ease _movingEase;
+        private readonly ResourceMoveEffectSpawnerSettings _settings;
+        private readonly TimeSystem _timeSystem;
+        private readonly ResourceObjectFactory _resourceObjectFactory;
 
         public IReadOnlyList<MoveEffect> MoveEffects => _moveEffects;
         public IObservable<Unit> OnEffectsFinished => _onEffectsFinished;
 
-        [Inject]
-        private void Construct(TimeSystem timeSystem)
+        public ResourceMoveEffectSpawner(ResourceMoveEffectSpawnerSettings resourceMoveEffectSpawnerSettings,
+            TimeSystem timeSystem, ResourceObjectFactory resourceObjectFactory)
         {
+            _settings = resourceMoveEffectSpawnerSettings;
             _timeSystem = timeSystem;
+            _resourceObjectFactory = resourceObjectFactory;
         }
 
         public MoveEffect ShowMovingStone(Vector3 start, Vector3 finish)
@@ -56,11 +46,11 @@ namespace NovemberProject.MovingResources
 
         private MoveEffect ShowMovingEffect(Vector3 start, Vector3 finish, GameObject movingObject)
         {
-            start.y += _height;
-            finish.y += _height;
-            var effect = new MoveEffect(_timeSystem, movingObject, start, finish, _moveDuration);
+            start.y += _settings.Height;
+            finish.y += _settings.Height;
+            var effect = new MoveEffect(_timeSystem, movingObject, start, finish, _settings.MoveDuration);
             _moveEffects.Add(effect);
-            effect.SetEase(_movingEase);
+            effect.SetEase(_settings.MovingEase);
             effect.OnReadyToDestroy.Subscribe(OnEffectReadyToDestroy);
             effect.Start();
             return effect;
@@ -70,7 +60,7 @@ namespace NovemberProject.MovingResources
         {
             Assert.IsTrue(_moveEffects.Contains(effect));
             _moveEffects.Remove(effect);
-            Destroy(effect.MovingObject);
+            Object.Destroy(effect.MovingObject);
             if (_moveEffects.Count == 0)
             {
                 _onEffectsFinished.OnNext(Unit.Default);

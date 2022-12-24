@@ -1,15 +1,11 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
-using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;
 using Zenject;
-using NotImplementedException = System.NotImplementedException;
 
 namespace NovemberProject.Buildings
 {
-    public class Building : InitializableBehaviour, ISelectable
+    public class Building : MonoBehaviour, ISelectable
     {
         private readonly ReactiveProperty<bool> _isSelected = new();
 
@@ -37,8 +33,8 @@ namespace NovemberProject.Buildings
         private void Construct(BuildingsController buildingsController)
         {
             _buildingsController = buildingsController;
-            // TODO (Stas): I think this can also be done with DI.
             _buildingsController.RegisterBuilding(this);
+            _selectionBorder.SetActive(false);
         }
 
         public void Select()

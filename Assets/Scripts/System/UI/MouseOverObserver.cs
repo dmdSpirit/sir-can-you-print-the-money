@@ -1,12 +1,11 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace NovemberProject.System.UI
 {
-    public sealed class MouseOverObserver : InitializableBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public sealed class MouseOverObserver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private readonly ReactiveProperty<bool> _isMouseOver = new();
 

@@ -1,5 +1,5 @@
 ﻿#nullable enable
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.GameStates;
 using NovemberProject.System.Messages;
 using NovemberProject.Time;

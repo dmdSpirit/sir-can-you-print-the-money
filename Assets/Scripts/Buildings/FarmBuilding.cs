@@ -1,6 +1,6 @@
 ﻿#nullable enable
-using NovemberProject.CoreGameplay;
-using NovemberProject.CoreGameplay.FolkManagement;
+using NovemberProject.Core;
+using NovemberProject.Core.FolkManagement;
 using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
