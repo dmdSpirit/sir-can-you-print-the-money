@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2243828583067338671}
   - component: {fileID: 7054615164634619179}
   - component: {fileID: 3816534093925266686}
-  - component: {fileID: 1770773090717228517}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -178,21 +177,8 @@ MonoBehaviour:
   _combatControllerSettings: {fileID: 11400000, guid: f456861f261e72b4bb423d47816c2c73, type: 2}
   _coreGameplaySettings: {fileID: 11400000, guid: e8f33ee421685e748b5c267b300bc868, type: 2}
   _resourceMoveEffectSpawnerSettings: {fileID: 11400000, guid: 59e5ad3bfcecbda4586a14ecbe0e4fe6, type: 2}
-  _timeSystemUpdater: {fileID: 1770773090717228517}
   _cameraController: {fileID: 0}
   _buildingNameHover: {fileID: 0}
   _mouseOverObserver: {fileID: 0}
   _resourceObjectFactory: {fileID: 0}
   _gameStarter: {fileID: 0}
---- !u!114 &1770773090717228517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2243828583067338670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87897c68cc4c4de29eda87c3777a3514, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

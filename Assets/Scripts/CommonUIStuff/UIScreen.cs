@@ -23,11 +23,6 @@ namespace NovemberProject.CommonUIStuff
 
         public void Show()
         {
-            if (_isShown)
-            {
-                Debug.LogWarning($"Trying to show {name} but it is already shown.");
-            }
-
             _isShown = true;
             HandleShowTransitions();
             OnShow();
