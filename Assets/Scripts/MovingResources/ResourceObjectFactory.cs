@@ -1,10 +1,9 @@
 ﻿#nullable enable
-using NovemberProject.CommonUIStuff;
 using UnityEngine;
 
 namespace NovemberProject.MovingResources
 {
-    public sealed class ResourceObjectFactory : InitializableBehaviour
+    public sealed class ResourceObjectFactory : MonoBehaviour
     {
         [SerializeField]
         private GameObject _coinPrefab = null!;

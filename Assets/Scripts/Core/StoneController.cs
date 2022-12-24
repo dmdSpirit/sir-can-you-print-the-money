@@ -56,7 +56,7 @@ namespace NovemberProject.Core
 
         private void ShowStoneMove(Transform start, Transform finish, Action callback)
         {
-            MoveEffect effect = _resourceMoveEffectSpawner.ShowMovingCoin(start.position, finish.position);
+            MoveEffect effect = _resourceMoveEffectSpawner.ShowMovingStone(start.position, finish.position);
             effect.OnFinished.Subscribe(_ => callback.Invoke());
         }
     }

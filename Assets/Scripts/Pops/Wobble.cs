@@ -1,7 +1,5 @@
 ﻿#nullable enable
 using System;
-using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
@@ -9,7 +7,7 @@ using Zenject;
 
 namespace NovemberProject.Pops
 {
-    public sealed class Wobble : InitializableBehaviour
+    public sealed class Wobble : MonoBehaviour
     {
         private const float TOLERANCE = 0.001f;
 

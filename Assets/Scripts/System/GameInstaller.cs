@@ -82,7 +82,7 @@ namespace NovemberProject.System
         private ResourceObjectFactory _resourceObjectFactory = null!;
 
         [SerializeField]
-        private Game _game = null!;
+        private GameStarter _gameStarter = null!;
 
         public override void InstallBindings()
         {
@@ -113,7 +113,7 @@ namespace NovemberProject.System
         private void InstallTemporaryBindings()
         {
             // Unfinished.
-            Container.Bind<Game>().FromInstance(_game);
+            Container.Bind<GameStarter>().FromInstance(_gameStarter);
             Container.Bind<TimeSystemUpdater>().FromInstance(_timeSystemUpdater);
             Container.Bind<InputSystem>().FromInstance(_inputSystem);
             Container.Bind<CameraController>().FromInstance(_cameraController);

@@ -1,12 +1,11 @@
 ﻿#nullable enable
 using NovemberProject.CameraSystem;
-using NovemberProject.System;
 using UnityEngine;
 using Zenject;
 
 namespace NovemberProject.CommonUIStuff
 {
-    public sealed class Billboard : InitializableBehaviour
+    public sealed class Billboard : MonoBehaviour
     {
         private Transform _cameraTransform = null!;
 

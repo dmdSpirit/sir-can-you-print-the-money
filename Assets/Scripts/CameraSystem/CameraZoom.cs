@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NovemberProject.CameraSystem
 {
-    public sealed class CameraZoom : InitializableBehaviour
+    public sealed class CameraZoom : MonoBehaviour
     {
         private float _zoom;
         private float _zoomDif;

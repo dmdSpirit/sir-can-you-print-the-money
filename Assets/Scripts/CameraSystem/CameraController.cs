@@ -11,7 +11,7 @@ namespace NovemberProject.CameraSystem
 {
     [RequireComponent(typeof(CameraMovement))]
     [RequireComponent(typeof(CameraZoom))]
-    public sealed class CameraController : InitializableBehaviour
+    public sealed class CameraController : MonoBehaviour
     {
         private MessageBroker _messageBroker = null!;
         private Vector3 _initialPosition;

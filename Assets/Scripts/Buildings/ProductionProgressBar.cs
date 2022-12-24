@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System;
-using NovemberProject.CommonUIStuff;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -9,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class ProductionProgressBar : InitializableBehaviour
+    public sealed class ProductionProgressBar : MonoBehaviour
     {
         private IDisposable? _productionSub;
         private bool _isProgressShown;
@@ -27,13 +26,11 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private Building _building = null!;
 
-        protected override void OnInitialized()
+        private void Start()
         {
-            base.OnInitialized();
             _producer = (IProducer)_building;
             _progressBar.SetActive(false);
             _producer.IsProducing
-                .TakeUntilDisable(this)
                 .Subscribe(OnIsProducingChanged);
             _producedValue.gameObject.SetActive(_producer.ShowProducedValue);
         }

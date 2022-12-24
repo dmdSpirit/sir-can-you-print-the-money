@@ -3,7 +3,6 @@ using System;
 using NovemberProject.Buildings;
 using NovemberProject.Core;
 using NovemberProject.Rounds.UI;
-using NovemberProject.System;
 using NovemberProject.System.UI;
 using NovemberProject.Time;
 using NovemberProject.Time.UI;
@@ -25,6 +24,7 @@ namespace NovemberProject.GameStates
         {
             _timeSystem = timeSystem;
             _uiManager = uiManager;
+            _buildingSelector = buildingSelector;
         }
 
         protected override void OnEnter()

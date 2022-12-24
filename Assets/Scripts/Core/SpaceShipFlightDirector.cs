@@ -3,14 +3,13 @@ using System;
 using DG.Tweening;
 using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
-using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace NovemberProject.Core
 {
-    public sealed class SpaceShipFlightDirector : InitializableBehaviour
+    public sealed class SpaceShipFlightDirector : MonoBehaviour
     {
         private readonly Subject<Unit> _onFinishedPlaying = new();
 

@@ -1,12 +1,10 @@
 ﻿#nullable enable
-using System;
-using NovemberProject.CommonUIStuff;
 using TMPro;
 using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public class BuildingNameHover : InitializableBehaviour
+    public class BuildingNameHover : MonoBehaviour
     {
         private Building? _building;
 
