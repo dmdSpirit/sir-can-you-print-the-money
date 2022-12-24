@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.Buildings;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.Rounds.UI;
 using NovemberProject.System;
 using NovemberProject.System.UI;

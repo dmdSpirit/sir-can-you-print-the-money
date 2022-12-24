@@ -1,9 +1,6 @@
 #nullable enable
 using System;
-using NovemberProject.ClicheSpeech;
-using NovemberProject.CoreGameplay;
 using NovemberProject.GameStates;
-using NovemberProject.MovingResources;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -12,8 +9,6 @@ namespace NovemberProject.System
 {
     public sealed class Game : MonoBehaviour
     {
-        private const string CLICHE_BIBLE_FILE = "cliche_bible";
-
         private readonly Subject<Unit> _onInitialized = new();
 
         private static Game _instance = null!;
@@ -22,9 +17,6 @@ namespace NovemberProject.System
 
         public static Game Instance => GetInstance();
 
-        public ClicheBible ClicheBible { get; private set; } = null!;
-        public ResourceMoveEffectSpawner ResourceMoveEffectSpawner { get; private set; } = null!;
-        public CoreGameplay.CoreGameplay CoreGameplay { get; private set; } = null!;
         public bool IsInitialized { get; private set; }
 
         public IObservable<Unit> OnInitialized => _onInitialized;
@@ -38,7 +30,6 @@ namespace NovemberProject.System
         private void Start()
         {
             DontDestroyOnLoad(this);
-            CreateComponents();
             Initialize();
             _gameStateMachine.InitializeGame();
         }
@@ -61,15 +52,8 @@ namespace NovemberProject.System
             return _instance;
         }
 
-        private void CreateComponents()
-        {
-            ResourceMoveEffectSpawner = FindObjectOfType<ResourceMoveEffectSpawner>();
-            CoreGameplay = FindObjectOfType<CoreGameplay.CoreGameplay>();
-        }
-
         private void Initialize()
         {
-            ClicheBible = new ClicheBible(CLICHE_BIBLE_FILE);
             _onInitialized.OnNext(Unit.Default);
             IsInitialized = true;
         }

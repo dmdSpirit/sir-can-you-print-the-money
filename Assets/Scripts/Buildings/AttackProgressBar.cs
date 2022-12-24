@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.System;
 using NovemberProject.Time;
 using UnityEngine;

@@ -1382,7 +1382,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1985125198}
   - {fileID: 1445167904}
   - {fileID: 1832996815375187180}
   m_Father: {fileID: 0}
@@ -14023,7 +14022,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1445167904}
-  - component: {fileID: 1445167903}
   - component: {fileID: 1445167902}
   m_Layer: 0
   m_Name: resource_moving_effect_spawner
@@ -14047,22 +14045,6 @@ MonoBehaviour:
   _coinPrefab: {fileID: 6505860881507446878, guid: f8738fe8c550cc14ea2e8a0405c45708, type: 3}
   _foodPrefab: {fileID: 6505860881507446878, guid: 58e68cc06b72c6a4e828c4a849936715, type: 3}
   _stonePrefab: {fileID: 6505860881507446878, guid: 461620386f7a3e2479b262927a4f4afe, type: 3}
---- !u!114 &1445167903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445167901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18a98b2cdc440818aef50c71d3e0859, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _resourceObjectFactory: {fileID: 1445167902}
-  _height: 0
-  _moveDuration: 1.5
-  _movingEase: 7
 --- !u!4 &1445167904
 Transform:
   m_ObjectHideFlags: 0
@@ -14076,7 +14058,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 119136397}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1460864634
 PrefabInstance:
@@ -15742,7 +15724,7 @@ PrefabInstance:
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _coreGameplay
       value: 
-      objectReference: {fileID: 1985125195}
+      objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _techController
       value: 
@@ -15772,9 +15754,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _resourceObjectFactory
+      value: 
+      objectReference: {fileID: 1445167902}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _resourceMoveEffectSpawner
       value: 
-      objectReference: {fileID: 1445167903}
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2243828583067338666, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
     - {fileID: 2445315342722928152, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
@@ -18400,54 +18386,6 @@ Transform:
   - {fileID: 932687245}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1985125194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1985125198}
-  - component: {fileID: 1985125195}
-  m_Layer: 0
-  m_Name: CareGameplay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1985125195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985125194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9215b4d4e7544579bf97bedb26cd4eba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _folkEatTime: 40
-  _folkPayTime: 30
-  _armyEatTime: 20
-  _armyPayTime: 10
---- !u!4 &1985125198
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985125194}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 119136397}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1987735403
 PrefabInstance:

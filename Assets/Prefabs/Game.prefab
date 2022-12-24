@@ -177,13 +177,15 @@ MonoBehaviour:
   _buildingSelectorSettings: {fileID: 11400000, guid: e8990e0ef3d3b94439f118d994846fe1, type: 2}
   _uiManagerSettings: {fileID: 11400000, guid: 6ccb49dd0c5ba8a4787bf3e68507f55c, type: 2}
   _combatControllerSettings: {fileID: 11400000, guid: f456861f261e72b4bb423d47816c2c73, type: 2}
-  _resourceMoveEffectSpawner: {fileID: 0}
-  _coreGameplay: {fileID: 0}
+  _coreGameplaySettings: {fileID: 11400000, guid: e8f33ee421685e748b5c267b300bc868, type: 2}
+  _resourceMoveEffectSpawnerSettings: {fileID: 11400000, guid: 59e5ad3bfcecbda4586a14ecbe0e4fe6, type: 2}
   _inputSystem: {fileID: 0}
   _timeSystemUpdater: {fileID: 1770773090717228517}
   _cameraController: {fileID: 0}
   _buildingNameHover: {fileID: 0}
   _mouseOverObserver: {fileID: 0}
+  _resourceObjectFactory: {fileID: 0}
+  _game: {fileID: 0}
 --- !u!114 &5467176881471319152
 MonoBehaviour:
   m_ObjectHideFlags: 0

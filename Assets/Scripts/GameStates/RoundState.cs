@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.Buildings;
+using NovemberProject.Core;
 using NovemberProject.Rounds;
 using NovemberProject.Rounds.UI;
 using NovemberProject.System;
@@ -14,7 +15,7 @@ namespace NovemberProject.GameStates
         private readonly TimeSystem _timeSystem;
         private readonly RoundSystem _roundSystem;
         private readonly UIManager _uiManager;
-        private readonly CoreGameplay.CoreGameplay _coreGameplay;
+        private readonly CoreGameplay _coreGameplay;
         private readonly BuildingSelector _buildingSelector;
         private readonly BuildingNameHover _buildingNameHover;
 
@@ -22,7 +23,7 @@ namespace NovemberProject.GameStates
         private IRoundTimer _roundTimer = null!;
 
         public RoundState(TimeSystem timeSystem, RoundSystem roundSystem, UIManager uiManager,
-            CoreGameplay.CoreGameplay coreGameplay, BuildingSelector buildingSelector,
+            CoreGameplay coreGameplay, BuildingSelector buildingSelector,
             BuildingNameHover buildingNameHover)
         {
             _timeSystem = timeSystem;

@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.GameStates;
 using NovemberProject.System;
 using NovemberProject.Treasures;

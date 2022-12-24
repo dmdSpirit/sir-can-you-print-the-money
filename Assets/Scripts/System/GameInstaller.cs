@@ -1,8 +1,9 @@
 ﻿#nullable enable
 using NovemberProject.Buildings;
 using NovemberProject.CameraSystem;
-using NovemberProject.CoreGameplay;
-using NovemberProject.CoreGameplay.FolkManagement;
+using NovemberProject.ClicheSpeech;
+using NovemberProject.Core;
+using NovemberProject.Core.FolkManagement;
 using NovemberProject.GameStates;
 using NovemberProject.Input;
 using NovemberProject.MovingResources;
@@ -55,16 +56,13 @@ namespace NovemberProject.System
         [SerializeField]
         private CombatControllerSettings _combatControllerSettings = null!;
 
+        [SerializeField]
+        private CoreGameplaySettings _coreGameplaySettings = null!;
+
+        [SerializeField]
+        private ResourceMoveEffectSpawnerSettings _resourceMoveEffectSpawnerSettings = null!;
+
         // Temporary references.
-        [SerializeField]
-        private ResourceMoveEffectSpawner _resourceMoveEffectSpawner = null!;
-
-        [SerializeField]
-        private CoreGameplay.CoreGameplay _coreGameplay = null!;
-
-        [SerializeField]
-        private CombatController _combatController = null!;
-
         [SerializeField]
         private InputSystem _inputSystem = null!;
 
@@ -79,6 +77,12 @@ namespace NovemberProject.System
 
         [SerializeField]
         private MouseOverObserver _mouseOverObserver = null!;
+
+        [SerializeField]
+        private ResourceObjectFactory _resourceObjectFactory = null!;
+
+        [SerializeField]
+        private Game _game = null!;
 
         public override void InstallBindings()
         {
@@ -98,6 +102,9 @@ namespace NovemberProject.System
             Container.Bind<BuildingSelector>().AsSingle();
             Container.Bind<UIManager>().AsSingle();
             Container.Bind<CombatController>().AsSingle();
+            Container.Bind<CoreGameplay>().AsSingle();
+            Container.Bind<ResourceMoveEffectSpawner>().AsSingle();
+            Container.Bind<ClicheBible>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -106,14 +113,13 @@ namespace NovemberProject.System
         private void InstallTemporaryBindings()
         {
             // Unfinished.
-            Container.Bind<ResourceMoveEffectSpawner>().FromInstance(_resourceMoveEffectSpawner);
-            Container.Bind<Game>().FromInstance(Game.Instance);
-            Container.Bind<CoreGameplay.CoreGameplay>().FromInstance(_coreGameplay);
+            Container.Bind<Game>().FromInstance(_game);
             Container.Bind<TimeSystemUpdater>().FromInstance(_timeSystemUpdater);
             Container.Bind<InputSystem>().FromInstance(_inputSystem);
             Container.Bind<CameraController>().FromInstance(_cameraController);
             Container.Bind<BuildingNameHover>().FromInstance(_buildingNameHover);
             Container.Bind<MouseOverObserver>().FromInstance(_mouseOverObserver);
+            Container.Bind<ResourceObjectFactory>().FromInstance(_resourceObjectFactory);
         }
 
         private void InstallSettingsBindings()
@@ -130,6 +136,8 @@ namespace NovemberProject.System
             Container.Bind<BuildingSelectorSettings>().FromInstance(_buildingSelectorSettings);
             Container.Bind<UIManagerSettings>().FromInstance(_uiManagerSettings);
             Container.Bind<CombatControllerSettings>().FromInstance(_combatControllerSettings);
+            Container.Bind<CoreGameplaySettings>().FromInstance(_coreGameplaySettings);
+            Container.Bind<ResourceMoveEffectSpawnerSettings>().FromInstance(_resourceMoveEffectSpawnerSettings);
         }
     }
 }

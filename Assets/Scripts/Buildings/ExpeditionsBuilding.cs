@@ -1,5 +1,5 @@
 ﻿#nullable enable
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.Rounds;
 using NovemberProject.Time;
 using TMPro;

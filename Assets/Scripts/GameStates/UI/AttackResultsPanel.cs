@@ -1,6 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using UniRx;
 using UnityEngine;
 using Zenject;

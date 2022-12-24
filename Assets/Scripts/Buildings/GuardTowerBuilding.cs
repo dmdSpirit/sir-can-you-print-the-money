@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.Buildings.UI;
-using NovemberProject.CoreGameplay;
+using NovemberProject.Core;
 using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
