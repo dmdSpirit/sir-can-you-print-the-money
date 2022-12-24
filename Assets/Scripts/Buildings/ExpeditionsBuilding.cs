@@ -35,7 +35,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private int _activeFromWeek = 3;
 
-        public override BuildingType BuildingType => BuildingType.Expeditions;
+        // public override BuildingType BuildingType => BuildingType.Expeditions;
         public IReadOnlyReactiveProperty<int> WorkerCount => _armyManager.ExplorersCount;
         public IReadOnlyReactiveProperty<int> PotentialWorkerCount => _armyManager.GuardsCount;
         public int MaxWorkerCount => 0;

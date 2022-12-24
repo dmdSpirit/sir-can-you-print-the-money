@@ -12,7 +12,7 @@ using Zenject;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class ArenaBuilding : Building, IConstructableBuilding
+    public sealed class ArenaBuilding : MonoBehaviour, IConstructableBuilding
     {
         private readonly ReactiveProperty<ConstructableState> _constructableState = new();
 
@@ -40,8 +40,6 @@ namespace NovemberProject.Buildings
 
         [SerializeField]
         private GameObject _panel = null!;
-
-        public override BuildingType BuildingType => BuildingType.Arena;
 
         public IReadOnlyReactiveProperty<ConstructableState> ConstructableState => _constructableState;
         public int ConstructionCost => _constructionCost;

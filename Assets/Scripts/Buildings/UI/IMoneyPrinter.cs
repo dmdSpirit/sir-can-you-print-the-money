@@ -3,7 +3,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings.UI
 {
-    public interface IMoneyPrinter
+    public interface IMoneyPrinter: IBuildingFunction
     {
         public IReadOnlyReactiveProperty<bool> CanPrintMoney { get; }
         public IReadOnlyReactiveProperty<bool> CanBurnMoney { get; }

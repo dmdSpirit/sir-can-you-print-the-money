@@ -30,12 +30,12 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private string _buyUnitButtonText = "Buy";
 
-        public override BuildingType BuildingType => BuildingType.FolkFoodStorage;
+        // public override BuildingType BuildingType => BuildingType.FolkFoodStorage;
         public Sprite SpriteIcon => _foodSprite;
         public string ResourceTitle => _foodTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => _foodController.FolkFood;
 
-        public bool CanBuyUnit => _folkManager.IsEnoughFoodForNewFolk();
+        public bool CanBuyUnit => false;
 
         public string BuyUnitTitle => _buyUnitTitle;
         public string BuyUnitButtonText => _buyUnitButtonText;
@@ -54,7 +54,7 @@ namespace NovemberProject.Buildings
             {
                 return;
             }
-            _folkManager.BuyFolkForFood();
+            // _folkManager.BuyFolkForFood();
         }
 
         private void OnFoodChanged(int money)

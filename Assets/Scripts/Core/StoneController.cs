@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Linq;
 using NovemberProject.Buildings;
 using NovemberProject.MovingResources;
 using NovemberProject.System.Messages;
@@ -49,8 +50,9 @@ namespace NovemberProject.Core
         public void MineStone(int stone)
         {
             Building mine = _buildingsController.GetBuilding<MineBuilding>();
-            Building stoneStorage = _buildingsController.GetBuilding<ArenaBuilding>();
-            ShowStoneMove(mine.transform, stoneStorage.transform,
+            Building arena = _buildingsController.GetBuilding(BuildingType.Arena);
+            // TODO (Stas): Broken for now.
+            ShowStoneMove(mine.transform, arena.transform,
                 () => AddStone(stone));
         }
 

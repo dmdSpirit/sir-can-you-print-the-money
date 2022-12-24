@@ -120,6 +120,10 @@ PrefabInstance:
       value: It takes 6 seconds for 1 miner to produce some stone. 0 miners are working
         right now.
       objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingType
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -171,6 +175,18 @@ PrefabInstance:
     - target: {fileID: 5052747689841077150, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _image
+      value: 
+      objectReference: {fileID: 21300000, guid: ddf148f8baf6ec34594d39700de1f41c, type: 3}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _title
+      value: Mine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _description
+      value: Mining stone for your spaceship. Advanced technologies!
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
@@ -224,8 +240,7 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
 --- !u!4 &5576681593138059762 stripped
 Transform:
@@ -252,6 +267,8 @@ MonoBehaviour:
   _title: Mine
   _description: Mining stone for your spaceship. Advanced technologies!
   _image: {fileID: 21300000, guid: ddf148f8baf6ec34594d39700de1f41c, type: 3}
+  _buildingType: 0
+  _buildingInfo: {fileID: 0}
   _selectionBorder: {fileID: 8153115113176633908}
   _minersTitle: Miners
   _minersCount: {fileID: 5913699833776898865}

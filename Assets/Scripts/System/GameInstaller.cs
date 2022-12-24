@@ -15,6 +15,7 @@ using NovemberProject.Treasures;
 using UniRx;
 using UnityEngine;
 using Zenject;
+using ResourceProvider = NovemberProject.Buildings.ResourceProvider;
 
 namespace NovemberProject.System
 {
@@ -62,6 +63,9 @@ namespace NovemberProject.System
         [SerializeField]
         private ResourceMoveEffectSpawnerSettings _resourceMoveEffectSpawnerSettings = null!;
 
+        [SerializeField]
+        private ResourceProviderSettings _resourceProviderSettings = null!;
+
         // Temporary references.
         [SerializeField]
         private CameraController _cameraController = null!;
@@ -100,7 +104,8 @@ namespace NovemberProject.System
             Container.Bind<ResourceMoveEffectSpawner>().AsSingle();
             Container.Bind<ClicheBible>().AsSingle();
             Container.BindInterfacesAndSelfTo<InputSystem>().AsSingle();
-
+            Container.Bind<ResourceProvider>().AsSingle();
+            Container.Bind<UnitManagerProvider>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -132,6 +137,7 @@ namespace NovemberProject.System
             Container.Bind<CombatControllerSettings>().FromInstance(_combatControllerSettings);
             Container.Bind<CoreGameplaySettings>().FromInstance(_coreGameplaySettings);
             Container.Bind<ResourceMoveEffectSpawnerSettings>().FromInstance(_resourceMoveEffectSpawnerSettings);
+            Container.Bind<ResourceProviderSettings>().FromInstance(_resourceProviderSettings);
         }
     }
 }

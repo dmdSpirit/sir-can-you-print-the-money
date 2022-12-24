@@ -9,7 +9,7 @@ using Zenject;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class GovernmentTreasuryBuilding : Building, IMoneyPrinter
+    public sealed class GovernmentTreasuryBuilding : MonoBehaviour, IMoneyPrinter
     {
         private MoneyController _moneyController = null!;
         private TechController _techController = null!;
@@ -20,7 +20,6 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private int _moneyToPrint = 10;
 
-        public override BuildingType BuildingType => BuildingType.GovernmentTreasury;
         public IReadOnlyReactiveProperty<bool> CanPrintMoney => _techController.CanPrintMoney;
         public IReadOnlyReactiveProperty<bool> CanBurnMoney => _techController.CanBurnMoney;
 

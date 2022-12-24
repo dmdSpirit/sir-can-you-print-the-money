@@ -468,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 8359681683533975587, guid: ea9f2e48cfb5b574086e87ff876876ab, type: 3}
       propertyPath: _building
       value: 
-      objectReference: {fileID: 5050035396130562324}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea9f2e48cfb5b574086e87ff876876ab, type: 3}
 --- !u!224 &5566346256344893007 stripped
@@ -513,6 +513,18 @@ PrefabInstance:
         4 coins goes to govermnent fund, 6 coins goes to army fund. Each fight lasts
         for 4 seconds.
       objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingType
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingFunctions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingFunctions.Array.data[0]
+      value: 
+      objectReference: {fileID: 5050035396130562324}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -569,9 +581,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _image
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ca6c5c1263ddd34d930c5d2952dab0f, type: 3}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _title
+      value: Spaceship
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _description
+      value: Invent the spaceship, build it from stone and win the game!
+      objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
-      value: govt_arena
+      value: arena
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_RootOrder
@@ -621,14 +645,8 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
---- !u!1 &4736668533541048098 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7289910620209232537, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
-  m_PrefabInstance: {fileID: 2636560690358728123}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7099932209555539397 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5052747689133781118, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
@@ -673,11 +691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4340420cb42f40d5a3e8592cc15cea28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Spaceship
-  _description: Invent the spaceship, build it from stone and win the game!
-  _image: {fileID: 21300000, guid: 6ca6c5c1263ddd34d930c5d2952dab0f, type: 3}
-  _selectionBorder: {fileID: 4736668533541048098}
-  _initialPosition: {x: -2.58, y: 0, z: 0.5}
   _constructionCost: 20
   _stoneResourceImage: {fileID: 2016613285, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _constructionDuration: 30

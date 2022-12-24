@@ -1,12 +1,14 @@
 ﻿#nullable enable
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace NovemberProject.Buildings
 {
-    public class Building : MonoBehaviour, ISelectable, IBuildingInfo
+    public class Building : MonoBehaviour, ISelectable, IBuildingInfo, IBuildingFunctionsContainer
     {
+        private readonly List<IBuildingFunction> _buildingFunctions = new();
         private BuildingsController _buildingsController = null!;
 
         [SerializeField]
@@ -19,7 +21,11 @@ namespace NovemberProject.Buildings
         private Sprite _image = null!;
 
         [SerializeField]
+        private BuildingType _buildingType = BuildingType.None;
+
+        [SerializeField]
         private BuildingInfo _buildingInfo = null!;
+
         [SerializeField]
         private SelectionBorder _selectionBorder = null!;
 
@@ -27,13 +33,15 @@ namespace NovemberProject.Buildings
         public string Description => _buildingInfo.Description;
         public Sprite Image => _buildingInfo.Image;
 
-        public virtual BuildingType BuildingType => BuildingType.None;
+        public BuildingType BuildingType => _buildingType;
         public IReadOnlyReactiveProperty<bool> IsSelected => _selectionBorder.IsSelected;
+        public IReadOnlyList<IBuildingFunction> BuildingFunctions => _buildingFunctions;
 
         [Inject]
         private void Construct(BuildingsController buildingsController)
         {
             _buildingsController = buildingsController;
+            _buildingFunctions.AddRange(GetComponents<IBuildingFunction>());
             _buildingsController.RegisterBuilding(this);
         }
 

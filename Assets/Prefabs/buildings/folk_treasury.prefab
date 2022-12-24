@@ -25,11 +25,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Center.y
-      value: 0.38497382
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3389652019597639004, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Center.z
       value: -0.00791347
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
@@ -87,6 +91,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _image
+      value: 
+      objectReference: {fileID: 21300000, guid: 6de1eaa298ce4fa48a09cac6cae0cdaf, type: 3}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _title
+      value: Folk money
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _description
+      value: Money that folks use to pay taxes. If they can't, they'll "disappear".
+      objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
       value: folk_treasury
@@ -97,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.y
@@ -105,7 +121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalRotation.w
@@ -139,8 +155,7 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
 --- !u!114 &5144040263797057310 stripped
 MonoBehaviour:
@@ -173,6 +188,8 @@ MonoBehaviour:
   _title: Folk money
   _description: Money that folks use to pay taxes. If they can't, they'll "disappear".
   _image: {fileID: 21300000, guid: 6de1eaa298ce4fa48a09cac6cae0cdaf, type: 3}
+  _buildingType: 0
+  _buildingInfo: {fileID: 0}
   _selectionBorder: {fileID: 7230332426216683035}
   _moneyText: {fileID: 5144040263797057310}
   _moneySprite: {fileID: 1166264754, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
@@ -238,9 +255,89 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7392225327938827759, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7392225327938827759, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -3152767113427775985, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3152767113427775985, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -2331986720359856962, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2331986720359856962, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
       propertyPath: m_Name
       value: building_market
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 949896193735852763, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 949896193735852763, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356747781498473818, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356747781498473818, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602796114137605417, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602796114137605417, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1689809532885431694, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1689809532885431694, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681790978099765340, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681790978099765340, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327519614437959306, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327519614437959306, guid: c8f297483922ae24592e78f407e33ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f297483922ae24592e78f407e33ff0, type: 3}

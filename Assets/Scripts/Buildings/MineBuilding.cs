@@ -36,7 +36,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private float _productionTime = 6;
 
-        public override BuildingType BuildingType => BuildingType.Mine;
+        // public override BuildingType BuildingType => BuildingType.Mine;
 
         public IReadOnlyReactiveProperty<bool> CanUseMine => _techController.CanUseMine;
         public IReadOnlyReactiveProperty<int> WorkerCount => _folkManager.MineFolk;

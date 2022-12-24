@@ -38,7 +38,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private string _farmerTitle = "Farmers";
 
-        public override BuildingType BuildingType => BuildingType.Farm;
+        // public override BuildingType BuildingType => BuildingType.Farm;
 
         public IReadOnlyReactiveProperty<int> ProducedValue => _producedValue;
         public IReadOnlyReactiveProperty<bool> IsProducing => _isProducing;

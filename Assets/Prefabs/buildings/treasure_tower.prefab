@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: _description
       value: Sail away and earn some trophies.
       objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingType
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -111,6 +115,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _image
+      value: 
+      objectReference: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _title
+      value: Royal Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _description
+      value: Precious storage of your trophies. Use them in tech tree to invent something.
+      objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
       value: treasure_tower
@@ -163,8 +179,7 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
 --- !u!4 &4744559396415897465 stripped
 Transform:
@@ -192,6 +207,8 @@ MonoBehaviour:
   _description: Precious storage of your trophies. Use them in tech tree to invent
     something.
   _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
+  _buildingType: 0
+  _buildingInfo: {fileID: 0}
   _selectionBorder: {fileID: 9050540909009794239}
   _treasureIcon: {fileID: 1365771222, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
   _treasureCountText: {fileID: 6822385350810756538}

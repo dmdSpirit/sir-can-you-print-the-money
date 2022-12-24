@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Core
 {
-    public sealed class ArmyManager
+    public sealed class ArmyManager : IUnitManager
     {
         private const int MINIMAL_SALARY = 1;
 
@@ -47,9 +47,9 @@ namespace NovemberProject.Core
             _explorersLeftToExpedition = false;
         }
 
-        public bool IsEnoughFoodForNewArmy() => _foodController.ArmyFood.Value >= _settings.NewUnitFoodCost;
+        public bool CanBuyUnit() => _foodController.ArmyFood.Value >= _settings.NewUnitFoodCost;
 
-        public void BuyArmyForFood()
+        public void BuyUnit()
         {
             _foodController.SpendArmyFood(_settings.NewUnitFoodCost);
             _guardsCount.Value++;

@@ -1,7 +1,7 @@
 #nullable enable
 namespace NovemberProject.Buildings
 {
-    public interface IBuyUnit
+    public interface IBuyUnit : IBuildingFunction
     {
         public void BuyUnit();
         public bool CanBuyUnit { get; }

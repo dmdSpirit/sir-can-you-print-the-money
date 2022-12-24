@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: crop_pumpkin (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c756307c6b2fefc4295e1237462c3b94, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c756307c6b2fefc4295e1237462c3b94, type: 3}
 --- !u!1001 &3910354125005169958
@@ -135,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c756307c6b2fefc4295e1237462c3b94, type: 3}
       propertyPath: m_Name
       value: crop_pumpkin
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c756307c6b2fefc4295e1237462c3b94, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c756307c6b2fefc4295e1237462c3b94, type: 3}
@@ -205,6 +213,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: crop_melon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 258d0faa4252473489f040b0b5248d19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 258d0faa4252473489f040b0b5248d19, type: 3}
 --- !u!1001 &4412388035550183837
@@ -273,6 +285,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 258d0faa4252473489f040b0b5248d19, type: 3}
       propertyPath: m_Name
       value: crop_melon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 258d0faa4252473489f040b0b5248d19, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 258d0faa4252473489f040b0b5248d19, type: 3}
@@ -343,6 +359,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock_largeE
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9470d7b3990a8da44bae2280722fde88, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9470d7b3990a8da44bae2280722fde88, type: 3}
 --- !u!1001 &7743257892406953661
@@ -376,6 +396,22 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.13391265
       objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingFunctions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingFunctions.Array.data[0]
+      value: 
+      objectReference: {fileID: 9086076932692721376}
+    - target: {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _buildingFunctions.Array.data[1]
+      value: 
+      objectReference: {fileID: 6952313027698441744}
     - target: {fileID: 5052747689133781116, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -436,6 +472,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _image
+      value: 
+      objectReference: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _title
+      value: Food of knights
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045753769028513326, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+      propertyPath: _description
+      value: Buy some, eat some, store some.
+      objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_Name
       value: army_food_storage
@@ -446,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.44
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.y
@@ -454,7 +502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.254
       objectReference: {fileID: 0}
     - target: {fileID: 6443247775262716255, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
       propertyPath: m_LocalRotation.w
@@ -496,14 +544,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.154
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4206254701823307868, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
---- !u!1 &1035655372318391332 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7289910620209232537, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
-  m_PrefabInstance: {fileID: 7743257892406953661}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3272818714190228769 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
@@ -525,7 +567,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_PrefabInstance: {fileID: 7743257892406953661}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8884975085816616543
+--- !u!114 &6952313027698441744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,18 +576,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3611490740572796901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e38977d840bd42f1b707f158b703b12e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5658fdfb7da3409d87d0ad336f59bab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Food of knights
-  _description: Buy some, eat some, store some.
-  _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
-  _selectionBorder: {fileID: 1035655372318391332}
-  _foodText: {fileID: 3272818714190228769}
-  _foodSprite: {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
-  _foodTitle: Food
-  _buyUnitTitle: Buy knights
-  _buyUnitButtonText: Buy 1 for 5 food
+  _resourceType: 1
+  _countText: {fileID: 3272818714190228769}
+--- !u!114 &9086076932692721376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611490740572796901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0523eaa8acaa4d509eea1a20ea7ba5a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitType: 2
+  _buyUnitTitle: Buy army
+  _buyUnitButtonText: Buy
 --- !u!1001 &7867909130857463367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -612,6 +662,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ae15a039c1626b648b210f280355a34e, type: 3}
       propertyPath: m_Name
       value: tree_thin_dark
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ae15a039c1626b648b210f280355a34e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae15a039c1626b648b210f280355a34e, type: 3}

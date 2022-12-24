@@ -25,7 +25,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private string _guardTitle = "Guards";
 
-        public override BuildingType BuildingType => BuildingType.GuardTower;
+        // public override BuildingType BuildingType => BuildingType.GuardTower;
 
         public Sprite SpriteIcon => _guardImage;
         public IReadOnlyReactiveProperty<int> ResourceCount => _armyManager.GuardsCount;

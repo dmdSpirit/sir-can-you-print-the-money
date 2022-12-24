@@ -26,7 +26,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private string _moneyTitle = "Money";
 
-        public override BuildingType BuildingType => BuildingType.FolkTreasury;
+        // public override BuildingType BuildingType => BuildingType.FolkTreasury;
         public Sprite SpriteIcon => _moneySprite;
         public string ResourceTitle => _moneyTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => _moneyController.FolkMoney;

@@ -21,7 +21,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private string _treasureTitle = "Treasures";
 
-        public override BuildingType BuildingType => BuildingType.TreasureTower;
+        // public override BuildingType BuildingType => BuildingType.TreasureTower;
         public Sprite SpriteIcon => _treasureIcon;
         public IReadOnlyReactiveProperty<int> ResourceCount => _treasureController.Treasures;
         public string ResourceTitle => _treasureTitle;

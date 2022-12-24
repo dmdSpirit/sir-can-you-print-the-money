@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 
 namespace NovemberProject.Core.FolkManagement
 {
-    public sealed class FolkManager
+    public sealed class FolkManager : IUnitManager
     {
         private readonly ReactiveProperty<int> _folkCount = new();
         private readonly ReactiveProperty<int> _farmFolk = new();
@@ -50,7 +50,7 @@ namespace NovemberProject.Core.FolkManagement
             _folkCount.Value = _farmFolk.Value + _marketFolk.Value + _mineFolk.Value;
         }
 
-        public void BuyFolkForFood()
+        public void BuyUnit()
         {
             int newFolkCost = _settings.NewUnitFoodCost;
             _foodController.SpendFolkFood(newFolkCost);
@@ -230,7 +230,7 @@ namespace NovemberProject.Core.FolkManagement
             bool HasNoOneToKill(int numberToKill) => numberToKill <= 0 || folkCount.Value == 0;
         }
 
-        public bool IsEnoughFoodForNewFolk() => _foodController.FolkFood.Value >= _settings.NewUnitFoodCost;
+        public bool CanBuyUnit() => _foodController.FolkFood.Value >= _settings.NewUnitFoodCost;
 
         private bool ValidateTotalCount()
         {

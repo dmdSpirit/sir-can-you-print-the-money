@@ -38,7 +38,7 @@ namespace NovemberProject.Buildings
         [SerializeField]
         private string _workersTitle = "Traders";
 
-        public override BuildingType BuildingType => BuildingType.Market;
+        // public override BuildingType BuildingType => BuildingType.Market;
         public IReadOnlyReactiveProperty<int> WorkerCount => _folkManager.MarketFolk;
         public IReadOnlyReactiveProperty<int> PotentialWorkerCount => _folkManager.FarmFolk;
         public int MaxWorkerCount => _folkManager.MaxMarkerWorkers;

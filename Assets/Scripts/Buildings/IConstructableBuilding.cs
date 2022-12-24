@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NovemberProject.Buildings
 {
-    public interface IConstructableBuilding
+    public interface IConstructableBuilding : IBuildingFunction
     {
         public IReadOnlyReactiveProperty<ConstructableState> ConstructableState { get; }
         public int ConstructionCost { get; }
