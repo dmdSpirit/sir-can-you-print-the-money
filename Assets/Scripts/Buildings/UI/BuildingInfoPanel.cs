@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Core;
-using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -11,18 +10,13 @@ using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
-    public interface IBuildingInfoPanel : IUIScreen
-    {
-        public void SetBuilding(Building building);
-    }
-
     public sealed class BuildingInfoPanel : UIScreen, IBuildingInfoPanel
     {
         private readonly CompositeDisposable _subs = new();
 
-        private Building? _building;
+        private Building _building = null!;
 
-        private CombatController _combatController=null!;
+        private CombatController _combatController = null!;
 
         [SerializeField]
         private TMP_Text _title = null!;
@@ -69,7 +63,6 @@ namespace NovemberProject.Buildings.UI
             _combatController = combatController;
         }
 
-
         protected override void OnShow()
         {
             _subs.Clear();
@@ -79,9 +72,7 @@ namespace NovemberProject.Buildings.UI
                 return;
             }
 
-            _title.text = _building.Title;
-            _description.text = _building.Description;
-            _image.sprite = _building.Image;
+            FillBuildingInfo(_building);
             if (_building is IConstructableBuilding constructableBuilding &&
                 constructableBuilding.ConstructableState.Value != ConstructableState.Constructed)
             {
@@ -89,15 +80,7 @@ namespace NovemberProject.Buildings.UI
             }
             else
             {
-                _buildingConstructionPanel.Hide();
-                ShowWorkerManagement(_building);
-                ShowResourceStorage(_building);
-                ShowBuyUnit(_building);
-                ShowSalaryController(_building);
-                ShowTaxController(_building);
-                ShowMoneyPrinter(_building);
-                ShowMineWorkers(_building);
-                ShowIncomingAttack(_building);
+                ShowConstructedBuildingPanels();
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
@@ -116,7 +99,25 @@ namespace NovemberProject.Buildings.UI
             _moneyPrinterPanel.Hide();
             _mineWorkerManagementPanel.Hide();
             _incomingAttack.Hide();
-            _building = null;
+            _building = null!;
+        }
+
+        public void SetBuilding(Building building)
+        {
+            _building = building;
+        }
+
+        private void ShowConstructedBuildingPanels()
+        {
+            _buildingConstructionPanel.Hide();
+            ShowWorkerManagement(_building);
+            ShowResourceStorage(_building);
+            ShowBuyUnit(_building);
+            ShowSalaryController(_building);
+            ShowTaxController(_building);
+            ShowMoneyPrinter(_building);
+            ShowMineWorkers(_building);
+            ShowIncomingAttack(_building);
         }
 
         private void ShowBuyUnit(Building building)
@@ -131,9 +132,11 @@ namespace NovemberProject.Buildings.UI
             }
         }
 
-        public void SetBuilding(Building building)
+        private void FillBuildingInfo(IBuildingInfo buildingInfo)
         {
-            _building = building;
+            _title.text = buildingInfo.Title;
+            _description.text = buildingInfo.Description;
+            _image.sprite = buildingInfo.Image;
         }
 
         private void ShowSalaryController(Building building)
@@ -214,6 +217,7 @@ namespace NovemberProject.Buildings.UI
             }
         }
 
+        // ReSharper disable once FlagArgument
         private void UpdateIncomingAttack(bool isActive)
         {
             if (!isActive)
@@ -228,7 +232,7 @@ namespace NovemberProject.Buildings.UI
             }
 
             Assert.IsTrue(_building is IIncomingAttack);
-            var incomingAttack = (IIncomingAttack)_building;
+            var incomingAttack = (IIncomingAttack)_building!;
             _incomingAttack.Show(incomingAttack);
         }
 
@@ -261,6 +265,7 @@ namespace NovemberProject.Buildings.UI
             }
         }
 
+        // ReSharper disable once FlagArgument
         private void UpdateExpeditionSender(bool isActive)
         {
             if (!isActive)
@@ -275,7 +280,7 @@ namespace NovemberProject.Buildings.UI
             }
 
             Assert.IsTrue(_building is IExpeditionSender);
-            var expeditionSender = (IExpeditionSender)_building;
+            var expeditionSender = (IExpeditionSender)_building!;
             _expeditionSenderPanel.Show(expeditionSender);
         }
 

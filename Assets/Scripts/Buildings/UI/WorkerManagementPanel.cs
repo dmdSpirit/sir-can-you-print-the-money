@@ -48,14 +48,9 @@ namespace NovemberProject.Buildings.UI
 
         private void OnWorkerCountChanged(int workerCount)
         {
-            if (_workerManipulator.HasMaxWorkerCount)
-            {
-                _numberOfWorkersText.text = $"{workerCount}/{_workerManipulator.MaxWorkerCount}";
-            }
-            else
-            {
-                _numberOfWorkersText.text = workerCount.ToString();
-            }
+            _numberOfWorkersText.text = _workerManipulator.HasMaxWorkerCount
+                ? $"{workerCount}/{_workerManipulator.MaxWorkerCount}"
+                : workerCount.ToString();
 
             _addWorkerButton.interactable = _workerManipulator.CanAddWorker();
             _removeWorkerButton.interactable = _workerManipulator.CanRemoveWorker();

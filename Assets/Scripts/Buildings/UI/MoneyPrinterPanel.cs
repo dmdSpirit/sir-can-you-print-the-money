@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Core;
-using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -54,7 +53,6 @@ namespace NovemberProject.Buildings.UI
                 .Subscribe(OnBurn);
         }
 
-        // TODO (Stas): Move to DI.
         protected override void OnShow(IMoneyPrinter moneyPrinter)
         {
             _sub.Clear();

@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Core;
-using NovemberProject.System;
 using NovemberProject.TechTree;
 using NovemberProject.Time;
 using TMPro;
@@ -59,6 +58,21 @@ namespace NovemberProject.Buildings.UI
                 .Subscribe(OnStartConstructionClicked);
         }
 
+        private void Update()
+        {
+            if (!IsConstructing())
+            {
+                return;
+            }
+
+            _constructionTimerText.text =
+                _timeSystem.EstimateSecondsLeftUnscaled(_building.ConstructionTimer!) + "s";
+
+            bool IsConstructing() => IsShown &&
+                                     _building.ConstructableState.Value == ConstructableState.IsConstructing &&
+                                     _building.ConstructionTimer != null;
+        }
+
         protected override void OnShow(IConstructableBuilding building)
         {
             _sub.Clear();
@@ -72,19 +86,6 @@ namespace NovemberProject.Buildings.UI
         {
             _building = null!;
             _sub.Clear();
-        }
-
-        private void Update()
-        {
-            if (!IsConstructing())
-            {
-                return;
-            }
-
-            _constructionTimerText.text =
-                _timeSystem.EstimateSecondsLeftUnscaled(_building.ConstructionTimer) + "s";
-
-            bool IsConstructing() => IsShown && _building.ConstructableState.Value == ConstructableState.IsConstructing;
         }
 
         private void UpdateState(ConstructableState constructableState)

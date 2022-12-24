@@ -5,10 +5,8 @@ using Zenject;
 
 namespace NovemberProject.Buildings
 {
-    public class Building : MonoBehaviour, ISelectable
+    public class Building : MonoBehaviour, ISelectable, IBuildingInfo
     {
-        private readonly ReactiveProperty<bool> _isSelected = new();
-
         private BuildingsController _buildingsController = null!;
 
         [SerializeField]
@@ -21,32 +19,25 @@ namespace NovemberProject.Buildings
         private Sprite _image = null!;
 
         [SerializeField]
-        private GameObject _selectionBorder = null!;
+        private BuildingInfo _buildingInfo = null!;
+        [SerializeField]
+        private SelectionBorder _selectionBorder = null!;
 
-        public string Title => _title;
-        public string Description => _description;
-        public Sprite Image => _image;
-        public virtual BuildingType BuildingType { get; } = BuildingType.None;
-        public IReadOnlyReactiveProperty<bool> IsSelected => _isSelected;
+        public string Title => _buildingInfo.Title;
+        public string Description => _buildingInfo.Description;
+        public Sprite Image => _buildingInfo.Image;
+
+        public virtual BuildingType BuildingType => BuildingType.None;
+        public IReadOnlyReactiveProperty<bool> IsSelected => _selectionBorder.IsSelected;
 
         [Inject]
         private void Construct(BuildingsController buildingsController)
         {
             _buildingsController = buildingsController;
             _buildingsController.RegisterBuilding(this);
-            _selectionBorder.SetActive(false);
         }
 
-        public void Select()
-        {
-            _isSelected.Value = true;
-            _selectionBorder.SetActive(true);
-        }
-
-        public void Unselect()
-        {
-            _isSelected.Value = false;
-            _selectionBorder.SetActive(false);
-        }
+        public void Select() => _selectionBorder.Select();
+        public void Unselect() => _selectionBorder.Unselect();
     }
 }

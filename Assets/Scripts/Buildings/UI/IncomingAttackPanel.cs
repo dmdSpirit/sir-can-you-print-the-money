@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UniRx;
@@ -31,6 +30,16 @@ namespace NovemberProject.Buildings.UI
             _timeSystem = timeSystem;
         }
 
+        private void Update()
+        {
+            if (_incomingAttack.AttackTimer == null)
+            {
+                return;
+            }
+
+            _timeLeft.text = _timeSystem.EstimateSecondsLeftUnscaled(_incomingAttack.AttackTimer) + "s";
+        }
+
         protected override void OnShow(IIncomingAttack incomingAttack)
         {
             _sub.Clear();
@@ -43,16 +52,6 @@ namespace NovemberProject.Buildings.UI
         {
             _sub.Clear();
             _incomingAttack = null!;
-        }
-
-        private void Update()
-        {
-            if (_incomingAttack.AttackTimer == null)
-            {
-                return;
-            }
-
-            _timeLeft.text = _timeSystem.EstimateSecondsLeftUnscaled(_incomingAttack.AttackTimer) + "s";
         }
 
         private void UpdateInfo()

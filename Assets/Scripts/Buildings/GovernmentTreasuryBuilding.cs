@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.Buildings.UI;
 using NovemberProject.Core;
-using NovemberProject.System;
 using NovemberProject.TechTree;
 using TMPro;
 using UniRx;

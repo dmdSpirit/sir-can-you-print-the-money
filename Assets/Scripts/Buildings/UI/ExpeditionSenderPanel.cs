@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Core;
-using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -32,7 +31,6 @@ namespace NovemberProject.Buildings.UI
 
         [SerializeField]
         private ExpeditionTimerPanel _expeditionTimerPanel = null!;
-
 
         [SerializeField]
         private TMP_Text _winChance = null!;
@@ -80,14 +78,9 @@ namespace NovemberProject.Buildings.UI
 
         private void OnWorkerCountChanged(int workerCount)
         {
-            if (_expeditionSender.HasMaxWorkerCount)
-            {
-                _numberOfWorkersText.text = $"{workerCount}/{_expeditionSender.MaxWorkerCount}";
-            }
-            else
-            {
-                _numberOfWorkersText.text = workerCount.ToString();
-            }
+            _numberOfWorkersText.text = _expeditionSender.HasMaxWorkerCount
+                ? $"{workerCount}/{_expeditionSender.MaxWorkerCount}"
+                : workerCount.ToString();
 
             _addWorkerButton.interactable = _expeditionSender.CanAddWorker();
             _removeWorkerButton.interactable = _expeditionSender.CanRemoveWorker();
@@ -122,6 +115,7 @@ namespace NovemberProject.Buildings.UI
             _expeditions.StartExpedition();
         }
 
+        // ReSharper disable once FlagArgument
         private void OnExpeditionStatusChanged(bool isExpeditionActive)
         {
             if (isExpeditionActive)

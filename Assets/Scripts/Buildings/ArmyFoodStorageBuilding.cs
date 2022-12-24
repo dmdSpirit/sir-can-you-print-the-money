@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using NovemberProject.Core;
-using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -32,9 +31,7 @@ namespace NovemberProject.Buildings
         public Sprite SpriteIcon => _foodSprite;
         public string ResourceTitle => _foodTitle;
         public IReadOnlyReactiveProperty<int> ResourceCount => _foodController.ArmyFood;
-
-        public bool CanBuyUnit =>_armyManager.IsEnoughFoodForNewArmy();
-
+        public bool CanBuyUnit => _armyManager.IsEnoughFoodForNewArmy();
         public string BuyUnitTitle => _buyUnitTitle;
         public string BuyUnitButtonText => _buyUnitButtonText;
 

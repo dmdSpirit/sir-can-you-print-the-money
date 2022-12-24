@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6443247775262716255}
   - component: {fileID: 4206254701823307868}
   - component: {fileID: 3389652019597639004}
+  - component: {fileID: 6045753769028513326}
+  - component: {fileID: 4926571945623239226}
   m_Layer: 6
   m_Name: building
   m_TagString: Untagged
@@ -50,7 +52,8 @@ MonoBehaviour:
   _title: Castle
   _description: Castle description
   _image: {fileID: 21300000, guid: 8da54e9fb342bc6458c7b324660e77a8, type: 3}
-  _selectionBorder: {fileID: 7289910620209232537}
+  _buildingInfo: {fileID: 6045753769028513326}
+  _selectionBorder: {fileID: 4926571945623239226}
 --- !u!65 &3389652019597639004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64,6 +67,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2685363, y: 0.89059615, z: 1.0397831}
   m_Center: {x: 0.0049728155, y: 0.19394296, z: -0.00994581}
+--- !u!114 &6045753769028513326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443247775262716248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf21340ff4674426a8ddf545e216b397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: 
+  _description: 
+  _image: {fileID: 0}
+--- !u!114 &4926571945623239226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443247775262716248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f34030683894f1baff4999dd96319bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _borderObject: {fileID: 7289910620209232537}
 --- !u!1001 &555103257628553034
 PrefabInstance:
   m_ObjectHideFlags: 0

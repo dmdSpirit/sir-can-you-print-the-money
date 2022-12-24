@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
-using NovemberProject.System;
 using NovemberProject.Time;
 using TMPro;
 using UnityEngine;
@@ -25,17 +24,6 @@ namespace NovemberProject.Buildings.UI
             _timeSystem = timeSystem;
         }
 
-        protected override void OnShow(IExpeditionSender expeditionSender)
-        {
-            _timer = expeditionSender.ExpeditionTimer;
-            _explorersCountText.text = expeditionSender.WorkerCount.Value.ToString();
-        }
-
-        protected override void OnHide()
-        {
-            _timer = null!;
-        }
-
         private void Update()
         {
             if (!IsShown)
@@ -44,6 +32,23 @@ namespace NovemberProject.Buildings.UI
             }
 
             _timeLeft.text = _timeSystem.EstimateSecondsLeftUnscaled(_timer) + "s";
+        }
+
+        protected override void OnShow(IExpeditionSender expeditionSender)
+        {
+            if (expeditionSender.ExpeditionTimer == null)
+            {
+                Debug.LogError($"Should not show timer panel for null {nameof(expeditionSender.ExpeditionTimer)}");
+                return;
+            }
+
+            _timer = expeditionSender.ExpeditionTimer;
+            _explorersCountText.text = expeditionSender.WorkerCount.Value.ToString();
+        }
+
+        protected override void OnHide()
+        {
+            _timer = null!;
         }
     }
 }

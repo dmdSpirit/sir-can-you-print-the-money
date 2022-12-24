@@ -49,6 +49,7 @@ namespace NovemberProject.Buildings
         public IReadOnlyTimer? ConstructionTimer => _constructionTimer;
 
         [Inject]
+        // ReSharper disable once TooManyArguments
         private void Construct(GameStateMachine gameStateMachine, TimeSystem timeSystem,
             StoneController stoneController, MessageBroker messageBroker)
         {

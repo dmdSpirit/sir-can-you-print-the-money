@@ -9,8 +9,9 @@ namespace NovemberProject.Buildings.UI
 {
     public sealed class MineWorkerManagementPanel : UIElement<IMineWorkerManipulator>
     {
-        private IMineWorkerManipulator _mineWorkerManipulator = null!;
         private readonly CompositeDisposable _sub = new();
+
+        private IMineWorkerManipulator _mineWorkerManipulator = null!;
 
         [SerializeField]
         private Button _addWorkerButton = null!;

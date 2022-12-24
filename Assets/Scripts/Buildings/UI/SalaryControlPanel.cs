@@ -1,8 +1,6 @@
 ﻿#nullable enable
-using System;
 using NovemberProject.CommonUIStuff;
 using NovemberProject.Core;
-using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
