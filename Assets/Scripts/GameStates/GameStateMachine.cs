@@ -72,10 +72,10 @@ namespace NovemberProject.GameStates
             _newGameState = new NewGameState(this, _timeSystem, _cameraController, _messageBroker);
             _roundState = new RoundState(_timeSystem, _roundSystem, _uiManager, _coreGameplay, _buildingSelector,
                 buildingNameHover);
-            _roundState.AddInputHandler(_inputSystem.GetMoveCameraHandler(_cameraController));
+            _roundState.AddInputHandler(_inputSystem.GetMoveCameraHandler(_cameraController, _uiManager));
             _roundState.AddInputHandler(_inputSystem.GetTimeControlsHandler(_timeSystem));
             _roundState.AddInputHandler(
-                _inputSystem.GetMouseSelectionHandler(_cameraController, _buildingNameHover, _buildingSelector));
+                _inputSystem.GetMouseSelectionHandler(_cameraController, _buildingNameHover, _buildingSelector, _uiManager));
             _roundEndState = new RoundEndState(this, _timeSystem, _roundSystem, _uiManager, _resourceMoveEffectSpawner,
                 _coreGameplay);
             _initializeGameState =

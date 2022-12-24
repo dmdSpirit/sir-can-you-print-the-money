@@ -15726,7 +15726,7 @@ PrefabInstance:
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _uiManager
       value: 
-      objectReference: {fileID: 1681028058}
+      objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _timeSystem
       value: 
@@ -15758,11 +15758,15 @@ PrefabInstance:
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _combatController
       value: 
-      objectReference: {fileID: 1985125200}
+      objectReference: {fileID: 0}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _buildingNameHover
       value: 
       objectReference: {fileID: 1681028055}
+    - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
+      propertyPath: _mouseOverObserver
+      value: 
+      objectReference: {fileID: 1681028056}
     - target: {fileID: 3816534093925266686, guid: e0aab76725d474444a9dc80242329b7f, type: 3}
       propertyPath: _buildingsController
       value: 
@@ -16872,15 +16876,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65da4eeccb854bfc8c77415ca4018094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1681028058 stripped
+--- !u!114 &1681028056 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8200100831098426286, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
+  m_CorrespondingSourceObject: {fileID: 460231191894963418, guid: 54e50c82784885044a2e47ee63e7f332, type: 3}
   m_PrefabInstance: {fileID: 1681028054}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3f7bbd1f044b32b3bf781b23603a68, type: 3}
+  m_Script: {fileID: 11500000, guid: 32e9a8fdcdc74163bbaaad020fe5baa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1682924405
@@ -18407,7 +18411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985125198}
   - component: {fileID: 1985125195}
-  - component: {fileID: 1985125200}
   m_Layer: 0
   m_Name: CareGameplay
   m_TagString: Untagged
@@ -18446,21 +18449,6 @@ Transform:
   m_Father: {fileID: 119136397}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1985125200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985125194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1e0eabf8a3424b9cae6135d6f2c59f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackersCount: 01000000010000000100000002000000020000000200000003000000030000000400000004000000050000000500000006000000060000000700000007000000
-  _attackDuration: 57
-  _attacksFromWeek: 2
 --- !u!1001 &1987735403
 PrefabInstance:
   m_ObjectHideFlags: 0

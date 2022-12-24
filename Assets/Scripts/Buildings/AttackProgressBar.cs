@@ -1,10 +1,12 @@
 ﻿#nullable enable
 using System;
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using NovemberProject.Time;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings
 {
@@ -12,15 +14,23 @@ namespace NovemberProject.Buildings
     {
         private IDisposable? _productionSub;
 
+        private CombatController _combatController;
+
         [SerializeField]
         private Image _progressImage = null!;
 
         [SerializeField]
         private GameObject _progressBar = null!;
 
+        [Inject]
+        private void Construct(CombatController combatController)
+        {
+            _combatController = combatController;
+        }
+
         private void Update()
         {
-            IReadOnlyTimer? timer = Game.Instance.CombatController.AttackTimer;
+            IReadOnlyTimer? timer = _combatController.AttackTimer;
             if (timer == null)
             {
                 _progressBar.gameObject.SetActive(false);

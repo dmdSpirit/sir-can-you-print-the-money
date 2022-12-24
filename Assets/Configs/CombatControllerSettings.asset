@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64012a067cb49efa6d9511ab9af3fd0, type: 3}
+  m_Name: CombatControllerSettings
+  m_EditorClassIdentifier: 
+  _attackersCount: 01000000010000000100000002000000020000000200000003000000030000000400000004000000050000000500000006000000060000000700000007000000
+  _attackDuration: 57
+  _attacksFromWeek: 2

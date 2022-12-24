@@ -1,6 +1,7 @@
 #nullable enable
 using NovemberProject.CameraSystem;
 using NovemberProject.System;
+using NovemberProject.System.UI;
 using UnityEngine;
 
 namespace NovemberProject.Input
@@ -10,10 +11,12 @@ namespace NovemberProject.Input
         private const int RIGHT_MOUSE_BUTTON = 1;
 
         private readonly CameraController _cameraController;
+        private readonly UIManager _uiManager;
 
-        public MoveCameraHandler(CameraController cameraController)
+        public MoveCameraHandler(CameraController cameraController, UIManager uiManager)
         {
             _cameraController = cameraController;
+            _uiManager = uiManager;
         }
 
         public override void HandleInput()
@@ -34,7 +37,7 @@ namespace NovemberProject.Input
         private Vector2 GetRigMovementDirection()
         {
             Vector2 direction = GetKeyboardMovement();
-            if (!UnityEngine.Input.GetMouseButton(RIGHT_MOUSE_BUTTON) || Game.Instance.UIManager.IsMouseOver.Value)
+            if (!UnityEngine.Input.GetMouseButton(RIGHT_MOUSE_BUTTON) || _uiManager.IsMouseOver.Value)
             {
                 return direction.normalized;
             }

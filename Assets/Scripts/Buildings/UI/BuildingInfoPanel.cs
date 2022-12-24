@@ -1,11 +1,13 @@
 ﻿#nullable enable
 using NovemberProject.CommonUIStuff;
+using NovemberProject.CoreGameplay;
 using NovemberProject.System;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using Zenject;
 
 namespace NovemberProject.Buildings.UI
 {
@@ -19,6 +21,8 @@ namespace NovemberProject.Buildings.UI
         private readonly CompositeDisposable _subs = new();
 
         private Building? _building;
+
+        private CombatController _combatController=null!;
 
         [SerializeField]
         private TMP_Text _title = null!;
@@ -58,6 +62,12 @@ namespace NovemberProject.Buildings.UI
 
         [SerializeField]
         private IncomingAttackPanel _incomingAttack = null!;
+
+        [Inject]
+        private void Construct(CombatController combatController)
+        {
+            _combatController = combatController;
+        }
 
 
         protected override void OnShow()
@@ -190,13 +200,13 @@ namespace NovemberProject.Buildings.UI
         {
             if (building is IIncomingAttack incomingAttack)
             {
-                if (Game.Instance.CombatController.IsActive.Value)
+                if (_combatController.IsActive.Value)
                 {
                     _incomingAttack.Show(incomingAttack);
                     return;
                 }
 
-                Game.Instance.CombatController.IsActive.Subscribe(UpdateIncomingAttack).AddTo(_subs);
+                _combatController.IsActive.Subscribe(UpdateIncomingAttack).AddTo(_subs);
             }
             else
             {

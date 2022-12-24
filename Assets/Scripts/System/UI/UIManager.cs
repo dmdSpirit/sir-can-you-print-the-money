@@ -7,22 +7,20 @@ using UnityEngine;
 
 namespace NovemberProject.System.UI
 {
-    [RequireComponent(typeof(MouseOverObserver))]
-    public sealed class UIManager : MonoBehaviour
+    public sealed class UIManager
     {
         private readonly List<IUIScreen> _screens = new();
 
-        private MouseOverObserver _mouseOverObserver = null!;
+        private readonly MouseOverObserver _mouseOverObserver;
+        private readonly UIManagerSettings _settings;
 
-        [SerializeField]
-        private LayerMask _layerMask;
-
-        public LayerMask LayerMask => _layerMask;
         public IReadOnlyReactiveProperty<bool> IsMouseOver => _mouseOverObserver.IsMouseOver;
+        public LayerMask LayerMask => _settings.LayerMask;
 
-        private void Awake()
+        public UIManager(UIManagerSettings uiManagerSettings, MouseOverObserver mouseOverObserver)
         {
-            _mouseOverObserver = GetComponent<MouseOverObserver>();
+            _settings = uiManagerSettings;
+            _mouseOverObserver = mouseOverObserver;
         }
 
         public void Register(IUIScreen screen)

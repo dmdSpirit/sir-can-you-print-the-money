@@ -175,13 +175,15 @@ MonoBehaviour:
   _stoneControllerSettings: {fileID: 11400000, guid: 7995e4f21042aa54bbeaca23773268e8, type: 2}
   _treasureControllerSettings: {fileID: 11400000, guid: 1a0d046368b49154c94efa4974313c57, type: 2}
   _buildingSelectorSettings: {fileID: 11400000, guid: e8990e0ef3d3b94439f118d994846fe1, type: 2}
+  _uiManagerSettings: {fileID: 11400000, guid: 6ccb49dd0c5ba8a4787bf3e68507f55c, type: 2}
+  _combatControllerSettings: {fileID: 11400000, guid: f456861f261e72b4bb423d47816c2c73, type: 2}
   _resourceMoveEffectSpawner: {fileID: 0}
   _coreGameplay: {fileID: 0}
-  _combatController: {fileID: 0}
   _inputSystem: {fileID: 0}
   _timeSystemUpdater: {fileID: 1770773090717228517}
   _cameraController: {fileID: 0}
   _buildingNameHover: {fileID: 0}
+  _mouseOverObserver: {fileID: 0}
 --- !u!114 &5467176881471319152
 MonoBehaviour:
   m_ObjectHideFlags: 0

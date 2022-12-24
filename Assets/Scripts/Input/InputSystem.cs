@@ -31,12 +31,12 @@ namespace NovemberProject.Input
         public TimeControlsHandler GetTimeControlsHandler(TimeSystem timeSystem) =>
             _inputHandlersFactory.GetTimeControlsHandler(timeSystem);
 
-        public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController) =>
-            _inputHandlersFactory.GetMoveCameraHandler(cameraController);
+        public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController, UIManager uiManager) =>
+            _inputHandlersFactory.GetMoveCameraHandler(cameraController, uiManager);
 
         public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController,
-            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector) =>
-            _inputHandlersFactory.GetMouseSelectionHandler(cameraController, buildingNameHover, buildingSelector);
+            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector, UIManager uiManager) =>
+            _inputHandlersFactory.GetMouseSelectionHandler(cameraController, buildingNameHover, buildingSelector, uiManager);
 
         private ToggleCheatMenuInputHandler GetToggleCheatMenuInputHandler(UIManager uiManager) =>
             _inputHandlersFactory.GetToggleCheatMenuInputHandler(uiManager);

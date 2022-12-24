@@ -49,6 +49,12 @@ namespace NovemberProject.System
         [SerializeField]
         private BuildingSelectorSettings _buildingSelectorSettings = null!;
 
+        [SerializeField]
+        private UIManagerSettings _uiManagerSettings = null!;
+
+        [SerializeField]
+        private CombatControllerSettings _combatControllerSettings = null!;
+
         // Temporary references.
         [SerializeField]
         private ResourceMoveEffectSpawner _resourceMoveEffectSpawner = null!;
@@ -72,7 +78,7 @@ namespace NovemberProject.System
         private BuildingNameHover _buildingNameHover = null!;
 
         [SerializeField]
-        private UIManager _uiManager = null!;
+        private MouseOverObserver _mouseOverObserver = null!;
 
         public override void InstallBindings()
         {
@@ -90,6 +96,8 @@ namespace NovemberProject.System
             Container.Bind<StoneController>().AsSingle();
             Container.Bind<TreasureController>().AsSingle();
             Container.Bind<BuildingSelector>().AsSingle();
+            Container.Bind<UIManager>().AsSingle();
+            Container.Bind<CombatController>().AsSingle();
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -101,12 +109,11 @@ namespace NovemberProject.System
             Container.Bind<ResourceMoveEffectSpawner>().FromInstance(_resourceMoveEffectSpawner);
             Container.Bind<Game>().FromInstance(Game.Instance);
             Container.Bind<CoreGameplay.CoreGameplay>().FromInstance(_coreGameplay);
-            Container.Bind<CombatController>().FromInstance(_combatController);
             Container.Bind<TimeSystemUpdater>().FromInstance(_timeSystemUpdater);
             Container.Bind<InputSystem>().FromInstance(_inputSystem);
             Container.Bind<CameraController>().FromInstance(_cameraController);
             Container.Bind<BuildingNameHover>().FromInstance(_buildingNameHover);
-            Container.Bind<UIManager>().FromInstance(_uiManager);
+            Container.Bind<MouseOverObserver>().FromInstance(_mouseOverObserver);
         }
 
         private void InstallSettingsBindings()
@@ -121,6 +128,8 @@ namespace NovemberProject.System
             Container.Bind<StoneControllerSettings>().FromInstance(_stoneControllerSettings);
             Container.Bind<TreasureControllerSettings>().FromInstance(_treasureControllerSettings);
             Container.Bind<BuildingSelectorSettings>().FromInstance(_buildingSelectorSettings);
+            Container.Bind<UIManagerSettings>().FromInstance(_uiManagerSettings);
+            Container.Bind<CombatControllerSettings>().FromInstance(_combatControllerSettings);
         }
     }
 }

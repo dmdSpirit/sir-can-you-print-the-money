@@ -13,7 +13,8 @@ namespace NovemberProject.Buildings
 {
     public sealed class GuardTowerBuilding : Building, IResourceStorage, IIncomingAttack
     {
-        private ArmyManager _armyManager;
+        private ArmyManager _armyManager=null!;
+        private CombatController _combatController = null!;
 
         [SerializeField]
         private TMP_Text _armyText = null!;
@@ -30,18 +31,19 @@ namespace NovemberProject.Buildings
         public IReadOnlyReactiveProperty<int> ResourceCount => _armyManager.GuardsCount;
         public string ResourceTitle => _guardTitle;
         public IReadOnlyReactiveProperty<int> Defenders => _armyManager.GuardsCount;
-        public IReadOnlyTimer? AttackTimer => Game.Instance.CombatController.AttackTimer;
-        public int Attackers => Game.Instance.CombatController.NextAttackersCount();
+        public IReadOnlyTimer? AttackTimer => _combatController.AttackTimer;
+        public int Attackers => _combatController.NextAttackersCount;
 
         public float WinProbability =>
-            1 - Game.Instance.CombatController.GetAttackersWinProbability(Attackers, Defenders.Value);
+            1 - _combatController.GetAttackersWinProbability(Attackers, Defenders.Value);
 
-        public IObservable<Unit> OnNewAttack => Game.Instance.CombatController.OnNewAttack;
+        public IObservable<Unit> OnNewAttack => _combatController.OnNewAttack;
 
         [Inject]
-        private void Construct(ArmyManager armyManager)
+        private void Construct(ArmyManager armyManager, CombatController combatController)
         {
             _armyManager = armyManager;
+            _combatController = combatController;
             _armyManager.GuardsCount.Subscribe(OnArmyCountChanged);
         }
 

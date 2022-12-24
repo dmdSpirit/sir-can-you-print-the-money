@@ -33,22 +33,22 @@ namespace NovemberProject.Input
         }
 
         public MouseSelectionHandler GetMouseSelectionHandler(CameraController cameraController,
-            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector)
+            BuildingNameHover buildingNameHover, BuildingSelector buildingSelector, UIManager uiManager)
         {
             if (!_inputHandlers.ContainsKey(typeof(MouseSelectionHandler)))
             {
                 _inputHandlers.Add(typeof(MouseSelectionHandler),
-                    new MouseSelectionHandler(cameraController, buildingNameHover, buildingSelector));
+                    new MouseSelectionHandler(cameraController, buildingNameHover, buildingSelector, uiManager));
             }
 
             return (MouseSelectionHandler)_inputHandlers[typeof(MouseSelectionHandler)];
         }
 
-        public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController)
+        public MoveCameraHandler GetMoveCameraHandler(CameraController cameraController, UIManager uiManager)
         {
             if (!_inputHandlers.ContainsKey(typeof(MoveCameraHandler)))
             {
-                _inputHandlers.Add(typeof(MoveCameraHandler), new MoveCameraHandler(cameraController));
+                _inputHandlers.Add(typeof(MoveCameraHandler), new MoveCameraHandler(cameraController, uiManager));
             }
 
             return (MoveCameraHandler)_inputHandlers[typeof(MoveCameraHandler)];
