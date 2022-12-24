@@ -64,12 +64,6 @@ namespace NovemberProject.System
 
         // Temporary references.
         [SerializeField]
-        private InputSystem _inputSystem = null!;
-
-        [SerializeField]
-        private TimeSystemUpdater _timeSystemUpdater = null!;
-
-        [SerializeField]
         private CameraController _cameraController = null!;
 
         [SerializeField]
@@ -94,7 +88,7 @@ namespace NovemberProject.System
             Container.Bind<Expeditions>().AsSingle();
             Container.Bind<GameStateMachine>().AsSingle();
             Container.Bind<ArmyManager>().AsSingle();
-            Container.Bind<TimeSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TimeSystem>().AsSingle();
             Container.Bind<TechController>().AsSingle();
             Container.Bind<RoundSystem>().AsSingle();
             Container.Bind<StoneController>().AsSingle();
@@ -105,6 +99,8 @@ namespace NovemberProject.System
             Container.Bind<CoreGameplay>().AsSingle();
             Container.Bind<ResourceMoveEffectSpawner>().AsSingle();
             Container.Bind<ClicheBible>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InputSystem>().AsSingle();
+
 
             InstallSettingsBindings();
             InstallTemporaryBindings();
@@ -114,8 +110,6 @@ namespace NovemberProject.System
         {
             // Unfinished.
             Container.Bind<GameStarter>().FromInstance(_gameStarter);
-            Container.Bind<TimeSystemUpdater>().FromInstance(_timeSystemUpdater);
-            Container.Bind<InputSystem>().FromInstance(_inputSystem);
             Container.Bind<CameraController>().FromInstance(_cameraController);
             Container.Bind<BuildingNameHover>().FromInstance(_buildingNameHover);
             Container.Bind<MouseOverObserver>().FromInstance(_mouseOverObserver);

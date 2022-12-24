@@ -1,7 +1,5 @@
 #nullable enable
-using System;
 using DG.Tweening;
-using NovemberProject.CommonUIStuff;
 using NovemberProject.System.Messages;
 using UniRx;
 using UnityEngine;

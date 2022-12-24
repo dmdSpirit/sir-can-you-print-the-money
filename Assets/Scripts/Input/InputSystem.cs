@@ -7,10 +7,11 @@ using NovemberProject.System.UI;
 using NovemberProject.Time;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace NovemberProject.Input
 {
-    public sealed class InputSystem : MonoBehaviour
+    public sealed class InputSystem : ITickable
     {
         private readonly InputHandlersFactory _inputHandlersFactory = new();
         private readonly List<InputHandler> _globalInputHandlers = new();
@@ -83,7 +84,7 @@ namespace NovemberProject.Input
             _globalInputHandlers.Add(handler);
         }
 
-        private void Update()
+        public void Tick()
         {
             foreach (InputHandler globalInputHandler in _globalInputHandlers)
             {
