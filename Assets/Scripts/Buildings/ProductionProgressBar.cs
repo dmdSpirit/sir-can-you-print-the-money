@@ -28,7 +28,7 @@ namespace NovemberProject.Buildings
 
         private void Start()
         {
-            _producer = (IProducer)_building;
+            _producer = _building.GetBuildingFunction<IProducer>();
             _progressBar.SetActive(false);
             _producer.IsProducing
                 .Subscribe(OnIsProducingChanged);

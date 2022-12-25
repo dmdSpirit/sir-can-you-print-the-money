@@ -12,7 +12,7 @@ using Zenject;
 
 namespace NovemberProject.Buildings
 {
-    public sealed class MineBuilding : Building, IMineWorkerManipulator, IProducer
+    public sealed class MineBuilding : MonoBehaviour, IMineWorkerManipulator, IProducer
     {
         private readonly ReactiveProperty<int> _producedValue = new();
         private readonly ReactiveProperty<bool> _isProducing = new();
@@ -34,9 +34,7 @@ namespace NovemberProject.Buildings
         private int _productionPerMiner = 1;
 
         [SerializeField]
-        private float _productionTime = 6;
-
-        // public override BuildingType BuildingType => BuildingType.Mine;
+        private float _productionTime = 17;
 
         public IReadOnlyReactiveProperty<bool> CanUseMine => _techController.CanUseMine;
         public IReadOnlyReactiveProperty<int> WorkerCount => _folkManager.MineFolk;
@@ -89,7 +87,6 @@ namespace NovemberProject.Buildings
                 _producedValue.Value = _minersProducing * _productionPerMiner;
             }
         }
-
 
         private void StartProduction()
         {

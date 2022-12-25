@@ -106,7 +106,7 @@ namespace NovemberProject.System
             Container.BindInterfacesAndSelfTo<InputSystem>().AsSingle();
             Container.Bind<ResourceProvider>().AsSingle();
             Container.Bind<UnitManagerProvider>().AsSingle();
-
+            
             InstallSettingsBindings();
             InstallTemporaryBindings();
         }

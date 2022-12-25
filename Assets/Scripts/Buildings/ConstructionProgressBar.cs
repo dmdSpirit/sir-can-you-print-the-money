@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Linq;
 using NovemberProject.CommonUIStuff;
 using UniRx;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace NovemberProject.Buildings
 
         private void Start()
         {
-            _constructableBuilding = (IConstructableBuilding)_building;
+            _constructableBuilding = _building.GetBuildingFunction<IConstructableBuilding>();
             _progressBar.SetActive(false);
             _constructableBuilding.ConstructableState
                 .Subscribe(OnConstructableStateChanged);

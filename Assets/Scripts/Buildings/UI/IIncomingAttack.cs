@@ -5,7 +5,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings.UI
 {
-    public interface IIncomingAttack
+    public interface IIncomingAttack: IBuildingFunction
     {
         public IReadOnlyReactiveProperty<int> Defenders { get; }
         public IReadOnlyTimer? AttackTimer { get; }

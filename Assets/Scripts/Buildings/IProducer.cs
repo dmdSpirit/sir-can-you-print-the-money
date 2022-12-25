@@ -4,7 +4,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings
 {
-    public interface IProducer
+    public interface IProducer: IBuildingFunction
     {
         public bool ShowProducedValue { get; }
         public IReadOnlyReactiveProperty<int>? ProducedValue { get; }

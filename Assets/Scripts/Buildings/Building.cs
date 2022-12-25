@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -10,15 +11,6 @@ namespace NovemberProject.Buildings
     {
         private readonly List<IBuildingFunction> _buildingFunctions = new();
         private BuildingsController _buildingsController = null!;
-
-        [SerializeField]
-        private string _title = null!;
-
-        [SerializeField]
-        private string _description = null!;
-
-        [SerializeField]
-        private Sprite _image = null!;
 
         [SerializeField]
         private BuildingType _buildingType = BuildingType.None;
@@ -47,5 +39,10 @@ namespace NovemberProject.Buildings
 
         public void Select() => _selectionBorder.Select();
         public void Unselect() => _selectionBorder.Unselect();
+
+        public T? GetBuildingFunction<T>() where T : IBuildingFunction
+        {
+            return (T?)_buildingFunctions.FirstOrDefault(buildingFunction => buildingFunction is T);
+        }
     }
 }

@@ -4,7 +4,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings
 {
-    public interface IExpeditionSender : IWorkerManipulator
+    public interface IExpeditionSender : IWorkerManipulator, IBuildingFunction
     {
         public IReadOnlyReactiveProperty<bool> IsActive { get; }
         public IReadOnlyReactiveProperty<bool> IsExpeditionActive { get; }

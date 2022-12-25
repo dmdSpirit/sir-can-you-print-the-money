@@ -7,8 +7,8 @@ namespace NovemberProject.Core
     [Serializable]
     public sealed class RoundStartConfig
     {
-        public string Title;
-        public string Description;
-        public Sprite Image;
-    } 
+        public string Title = null!;
+        public string Description = null!;
+        public Sprite Image = null!;
+    }
 }

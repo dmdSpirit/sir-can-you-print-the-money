@@ -191,7 +191,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_PrefabInstance: {fileID: 1779779560519257638}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1722912313003261748
+--- !u!114 &4058527965451661151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,19 +200,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4744559396415897470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 246913711181426580e39b8698785ed1, type: 3}
+  m_Script: {fileID: 11500000, guid: 5658fdfb7da3409d87d0ad336f59bab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Royal Tower
-  _description: Precious storage of your trophies. Use them in tech tree to invent
-    something.
-  _image: {fileID: 21300000, guid: fcc2b41a1d9a6a5428a6df33e9eae4b2, type: 3}
-  _buildingType: 0
-  _buildingInfo: {fileID: 0}
-  _selectionBorder: {fileID: 9050540909009794239}
-  _treasureIcon: {fileID: 1365771222, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
-  _treasureCountText: {fileID: 6822385350810756538}
-  _treasureTitle: Trophies
+  _resourceType: 7
+  _countText: {fileID: 6822385350810756538}
 --- !u!114 &6822385350810756538 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
@@ -224,11 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &9050540909009794239 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7289910620209232537, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
-  m_PrefabInstance: {fileID: 1779779560519257638}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3084510110342774495
 PrefabInstance:
   m_ObjectHideFlags: 0

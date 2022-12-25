@@ -49,7 +49,7 @@ namespace NovemberProject.Core
 
         public void MineStone(int stone)
         {
-            Building mine = _buildingsController.GetBuilding<MineBuilding>();
+            Building mine = _buildingsController.GetBuilding(BuildingType.Mine);
             Building arena = _buildingsController.GetBuilding(BuildingType.Arena);
             // TODO (Stas): Broken for now.
             ShowStoneMove(mine.transform, arena.transform,

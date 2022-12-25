@@ -3,7 +3,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings
 {
-    public interface IWorkerManipulator
+    public interface IWorkerManipulator : IBuildingFunction
     {
         public void AddWorker();
         public void RemoveWorker();

@@ -45,7 +45,7 @@ namespace NovemberProject.GameStates
         private State? _currentState;
 
         public IObservable<State> OnStateChanged => _onStateChanged;
-        public State CurrentState => _currentState;
+        public State? CurrentState => _currentState;
 
         public GameStateMachine(InputSystem inputSystem, TimeSystem timeSystem, RoundSystem roundSystem,
             CameraController cameraController,
@@ -75,7 +75,8 @@ namespace NovemberProject.GameStates
             _roundState.AddInputHandler(_inputSystem.GetMoveCameraHandler(_cameraController, _uiManager));
             _roundState.AddInputHandler(_inputSystem.GetTimeControlsHandler(_timeSystem));
             _roundState.AddInputHandler(
-                _inputSystem.GetMouseSelectionHandler(_cameraController, _buildingNameHover, _buildingSelector, _uiManager));
+                _inputSystem.GetMouseSelectionHandler(_cameraController, _buildingNameHover, _buildingSelector,
+                    _uiManager));
             _roundEndState = new RoundEndState(this, _timeSystem, _roundSystem, _uiManager, _resourceMoveEffectSpawner,
                 _coreGameplay);
             _initializeGameState =

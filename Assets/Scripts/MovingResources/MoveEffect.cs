@@ -19,7 +19,7 @@ namespace NovemberProject.MovingResources
         private readonly TimeSystem _timeSystem;
 
         private Ease _ease = Ease.Linear;
-        private Tweener _tweener;
+        private Tweener _tweener = null!;
         private IDisposable? _timeScaleSub;
 
         public GameObject MovingObject { get; }
@@ -27,7 +27,8 @@ namespace NovemberProject.MovingResources
         public IObservable<MoveEffect> OnReadyToDestroy => _onReadyToDestroy;
 
         // ReSharper disable once TooManyDependencies
-        public MoveEffect(TimeSystem timeSystem, GameObject movingObject, Vector3 start, Vector3 finish, float time = 1f)
+        public MoveEffect(TimeSystem timeSystem, GameObject movingObject, Vector3 start, Vector3 finish,
+            float time = 1f)
         {
             _timeSystem = timeSystem;
             MovingObject = movingObject;

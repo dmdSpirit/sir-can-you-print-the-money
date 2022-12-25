@@ -3,7 +3,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings.UI
 {
-    public interface ITaxController
+    public interface ITaxController : IBuildingFunction
     {
         public IReadOnlyReactiveProperty<bool> CanRaiseTax { get; }
         public IReadOnlyReactiveProperty<bool> CanLowerTax { get; }

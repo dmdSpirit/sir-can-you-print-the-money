@@ -704,11 +704,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
---- !u!1 &1035655372318391332 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7289910620209232537, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
-  m_PrefabInstance: {fileID: 7743257892406953661}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3272818714190228769 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5052747689841077148, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
@@ -730,7 +725,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6443247775262716248, guid: 8293b60bf49647d4e865dd9a70d53c50, type: 3}
   m_PrefabInstance: {fileID: 7743257892406953661}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4045512814083976328
+--- !u!114 &-3713963154499498454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -739,20 +734,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3611490740572796901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5049a683efd4fc6ba4cf4c6baf65252, type: 3}
+  m_Script: {fileID: 11500000, guid: 5658fdfb7da3409d87d0ad336f59bab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: Folk food
-  _description: Farm some, eat some, sell some, store some.
-  _image: {fileID: 21300000, guid: 747a863ab9c770545b7fcc7bf4395650, type: 3}
-  _buildingType: 0
-  _buildingInfo: {fileID: 0}
-  _selectionBorder: {fileID: 1035655372318391332}
-  _foodText: {fileID: 3272818714190228769}
-  _foodSprite: {fileID: -700532128, guid: 16649fdc8492c30459851a85c95caad3, type: 3}
-  _foodTitle: Food
-  _buyUnitTitle: Buy more folks
-  _buyUnitButtonText: Buy 1 for 5 food
+  _resourceType: 2
+  _countText: {fileID: 3272818714190228769}
+--- !u!114 &-3242031804889759562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611490740572796901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0523eaa8acaa4d509eea1a20ea7ba5a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitType: 1
+  _buyUnitTitle: Buy folk
+  _buyUnitButtonText: Buy
 --- !u!1001 &7867909130857463367
 PrefabInstance:
   m_ObjectHideFlags: 0

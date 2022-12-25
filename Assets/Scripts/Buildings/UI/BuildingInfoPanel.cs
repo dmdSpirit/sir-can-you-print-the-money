@@ -73,17 +73,21 @@ namespace NovemberProject.Buildings.UI
             }
 
             FillBuildingInfo(_building);
-            if (_building is IConstructableBuilding constructableBuilding &&
-                constructableBuilding.ConstructableState.Value != ConstructableState.Constructed)
-            {
-                ShowBuildingConstructionPanel(constructableBuilding);
-            }
-            else
+            var constructableBuilding = _building.GetBuildingFunction<IConstructableBuilding>();
+            if (IsContracted(constructableBuilding))
             {
                 ShowConstructedBuildingPanels();
             }
+            else
+            {
+                ShowBuildingConstructionPanel(constructableBuilding);
+            }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
+
+            bool IsContracted(IConstructableBuilding? constructable) => constructable == null ||
+                                                                        constructable.ConstructableState.Value ==
+                                                                        ConstructableState.Constructed;
         }
 
         protected override void OnHide()
@@ -122,14 +126,14 @@ namespace NovemberProject.Buildings.UI
 
         private void ShowBuyUnit(Building building)
         {
-            if (building is IBuyUnit buyUnit)
-            {
-                _buyUnitPanel.Show(buyUnit);
-            }
-            else
+            var unitBuyer = building.GetBuildingFunction<IBuyUnit>();
+            if (unitBuyer == null)
             {
                 _buyUnitPanel.Hide();
+                return;
             }
+
+            _buyUnitPanel.Show(unitBuyer);
         }
 
         private void FillBuildingInfo(IBuildingInfo buildingInfo)
@@ -141,80 +145,80 @@ namespace NovemberProject.Buildings.UI
 
         private void ShowSalaryController(Building building)
         {
-            if (building is ISalaryController salaryController)
-            {
-                _salaryControlPanel.Show(salaryController);
-            }
-            else
+            var salaryController = building.GetBuildingFunction<ISalaryController>();
+            if (salaryController == null)
             {
                 _salaryControlPanel.Hide();
+                return;
             }
+
+            _salaryControlPanel.Show(salaryController);
         }
 
         private void ShowTaxController(Building building)
         {
-            if (building is ITaxController taxController)
-            {
-                _taxControlPanel.Show(taxController);
-            }
-            else
+            var taxController = building.GetBuildingFunction<ITaxController>();
+            if (taxController == null)
             {
                 _taxControlPanel.Hide();
+                return;
             }
+
+            _taxControlPanel.Show(taxController);
         }
 
         private void ShowMoneyPrinter(Building building)
         {
-            if (building is IMoneyPrinter moneyPrinter)
-            {
-                _moneyPrinterPanel.Show(moneyPrinter);
-            }
-            else
+            var moneyPrinter = building.GetBuildingFunction<IMoneyPrinter>();
+            if (moneyPrinter == null)
             {
                 _moneyPrinterPanel.Hide();
+                return;
             }
+
+            _moneyPrinterPanel.Show(moneyPrinter);
         }
 
         private void ShowResourceStorage(Building building)
         {
-            if (building is IResourceStorage resourceStorage)
-            {
-                _resourceStoragePanel.Show(resourceStorage);
-            }
-            else
+            var resourceStorage = building.GetBuildingFunction<IResourceStorage>();
+            if (resourceStorage == null)
             {
                 _resourceStoragePanel.Hide();
+                return;
             }
+
+            _resourceStoragePanel.Show(resourceStorage);
         }
 
         private void ShowMineWorkers(Building building)
         {
-            if (building is IMineWorkerManipulator mineWorkerManipulator)
-            {
-                _mineWorkerManagementPanel.Show(mineWorkerManipulator);
-            }
-            else
+            var mineWorkerManipulator = building.GetBuildingFunction<IMineWorkerManipulator>();
+            if (mineWorkerManipulator == null)
             {
                 _mineWorkerManagementPanel.Hide();
+                return;
             }
+
+            _mineWorkerManagementPanel.Show(mineWorkerManipulator);
         }
 
         private void ShowIncomingAttack(Building building)
         {
-            if (building is IIncomingAttack incomingAttack)
-            {
-                if (_combatController.IsActive.Value)
-                {
-                    _incomingAttack.Show(incomingAttack);
-                    return;
-                }
-
-                _combatController.IsActive.Subscribe(UpdateIncomingAttack).AddTo(_subs);
-            }
-            else
+            var incomingAttack = building.GetBuildingFunction<IIncomingAttack>();
+            if (incomingAttack == null)
             {
                 _incomingAttack.Hide();
+                return;
             }
+
+            if (_combatController.IsActive.Value)
+            {
+                _incomingAttack.Show(incomingAttack);
+                return;
+            }
+
+            _combatController.IsActive.Subscribe(UpdateIncomingAttack).AddTo(_subs);
         }
 
         // ReSharper disable once FlagArgument
@@ -238,7 +242,8 @@ namespace NovemberProject.Buildings.UI
 
         private void ShowWorkerManagement(Building building)
         {
-            if (building is IExpeditionSender expeditionSender)
+            var expeditionSender = building.GetBuildingFunction<IExpeditionSender>();
+            if (expeditionSender != null)
             {
                 _workerManagementPanel.Hide();
                 if (expeditionSender.IsActive.Value)
@@ -255,14 +260,14 @@ namespace NovemberProject.Buildings.UI
             }
 
             _expeditionSenderPanel.Hide();
-            if (building is IWorkerManipulator workerManipulator)
-            {
-                _workerManagementPanel.Show(workerManipulator);
-            }
-            else
+            var workerManipulator = building.GetBuildingFunction<IWorkerManipulator>();
+            if (workerManipulator == null)
             {
                 _workerManagementPanel.Hide();
+                return;
             }
+
+            _workerManagementPanel.Show(workerManipulator);
         }
 
         // ReSharper disable once FlagArgument

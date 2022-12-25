@@ -3,7 +3,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings.UI
 {
-    public interface ISalaryController
+    public interface ISalaryController : IBuildingFunction
     {
         public IReadOnlyReactiveProperty<bool> CanRaiseSalary { get; }
         public IReadOnlyReactiveProperty<bool> CanLowerSalary { get; }

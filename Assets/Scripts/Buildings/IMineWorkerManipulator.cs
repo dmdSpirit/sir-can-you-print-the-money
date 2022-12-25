@@ -3,7 +3,7 @@ using UniRx;
 
 namespace NovemberProject.Buildings
 {
-    public interface IMineWorkerManipulator
+    public interface IMineWorkerManipulator: IBuildingFunction
     {
         public IReadOnlyReactiveProperty<bool> CanUseMine { get; }
         public void AddWorker();
