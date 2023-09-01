@@ -21,4 +21,4 @@ The game is made in November 2022 for a GitHub Game Off 2022.
 ## Authors
 
 - [@mbkh](https://github.com/mbkh)
-- [@ttv-dev-spirit](https://github.com/ttv-dev-spirit)
+- [@dmdspirit](https://github.com/dmdspirit)
